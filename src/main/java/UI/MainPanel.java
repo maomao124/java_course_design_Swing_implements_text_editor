@@ -237,7 +237,7 @@ public class MainPanel
         delete.setBackground(Color.cyan);
         search.setBackground(Color.cyan);
         replace.setBackground(Color.cyan);
-        edit_mode.setBackground(Color.cyan);
+        edit_mode.setBackground(Color.green);
 
         font_setting = new JMenuItem("字体设置");
         cursor_color = new JMenuItem("光标颜色");
