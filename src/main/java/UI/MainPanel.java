@@ -30,6 +30,7 @@ public class MainPanel
     private static JFrame jFrame;                         //顶层面板
     private static JPanel jPanel;                         //主面板
     private static JPanel jPanel_FileInformation;         //文件信息面板
+    private static JPanel jPanel_ErrorLog;                //错误日志面板
     private JTextArea jTextArea;                           //文本域
     private JScrollPane jScrollPane;                      //滚动面板
     private final JLabel label_FilePath = new JLabel("所选文件路径：");  //路径显示
@@ -52,6 +53,16 @@ public class MainPanel
     public static void setButton_FileInformation(JButton button_FileInformation)
     {
         MainPanel.button_FileInformation = button_FileInformation;
+    }
+
+    public static JPanel getjPanel_ErrorLog()
+    {
+        return jPanel_ErrorLog;
+    }
+
+    public static void setjPanel_ErrorLog(JPanel jPanel_ErrorLog)
+    {
+        MainPanel.jPanel_ErrorLog = jPanel_ErrorLog;
     }
 
     public static JFrame getjFrame()

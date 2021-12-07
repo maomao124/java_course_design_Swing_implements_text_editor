@@ -1,5 +1,9 @@
 package io;
 
+import UI.MainPanel;
+
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -21,6 +25,31 @@ import java.util.Calendar;
 
 public class ErrorLog
 {
+    private static JTextArea jTextArea_ErrorLog;
+    private static JScrollPane jScrollPane;
+    private static JButton button_back;
+
+    public static void init_error_log_jPanel()                  //初始化错误日志面板
+    {
+        jTextArea_ErrorLog = new JTextArea(15, 55);
+        jTextArea_ErrorLog.setLineWrap(false);
+        jTextArea_ErrorLog.setEditable(false);
+        Font font = new Font("宋体", Font.PLAIN, 18);
+        jTextArea_ErrorLog.setFont(font);
+        jScrollPane = new JScrollPane(jTextArea_ErrorLog);
+        JPanel jPanel = new JPanel();
+        MainPanel.setjPanel_ErrorLog(jPanel);
+        jPanel.setLayout(new BorderLayout());
+        button_back=new JButton("<-返回");
+        jScrollPane.setBorder(new EmptyBorder(20, 100, 50, 100));
+        jPanel.add(jScrollPane, BorderLayout.CENTER);
+        JPanel jPanel2 = new JPanel();
+        jPanel2.setLayout(new FlowLayout());
+        jPanel2.add(button_back);
+        jPanel.add(jPanel2, BorderLayout.SOUTH);
+        button_back.setBackground(Color.cyan);
+    }
+
     public static void write(String message)
     {
         Calendar calendar = Calendar.getInstance();// 获取当前时间
