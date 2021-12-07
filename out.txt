@@ -1,6 +1,10 @@
 H:\����\��������\java�γ���� Swingʵ���ı��༭��\\src\\main\\java\\io\\ErrorLog.java
 package io;
 
+import UI.MainPanel;
+
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -22,6 +26,31 @@ import java.util.Calendar;
 
 public class ErrorLog
 {
+    private static JTextArea jTextArea_ErrorLog;
+    private static JScrollPane jScrollPane;
+    private static JButton button_back;
+
+    public static void init_error_log_jPanel()                  //初始化错误日志面板
+    {
+        jTextArea_ErrorLog = new JTextArea(15, 55);
+        jTextArea_ErrorLog.setLineWrap(false);
+        jTextArea_ErrorLog.setEditable(false);
+        Font font = new Font("宋体", Font.PLAIN, 18);
+        jTextArea_ErrorLog.setFont(font);
+        jScrollPane = new JScrollPane(jTextArea_ErrorLog);
+        JPanel jPanel = new JPanel();
+        MainPanel.setjPanel_ErrorLog(jPanel);
+        jPanel.setLayout(new BorderLayout());
+        button_back=new JButton("<-返回");
+        jScrollPane.setBorder(new EmptyBorder(20, 100, 50, 100));
+        jPanel.add(jScrollPane, BorderLayout.CENTER);
+        JPanel jPanel2 = new JPanel();
+        jPanel2.setLayout(new FlowLayout());
+        jPanel2.add(button_back);
+        jPanel.add(jPanel2, BorderLayout.SOUTH);
+        button_back.setBackground(Color.cyan);
+    }
+
     public static void write(String message)
     {
         Calendar calendar = Calendar.getInstance();// 获取当前时间
@@ -110,7 +139,7 @@ import java.io.*;
  * Date(创建日期)： 2021/12/7
  * Time(创建时间)： 13:52
  * Version(版本): 1.0
- * Description(描述)： 无
+ * Description(描述)： 文件读写类
  */
 
 public class File
@@ -325,7 +354,7 @@ import java.security.MessageDigest;
  * Date(创建日期)： 2021/12/7
  * Time(创建时间)： 12:50
  * Version(版本): 1.0
- * Description(描述)： 无
+ * Description(描述)： 散列算法 MD5
  */
 
 public class MD5
@@ -625,7 +654,7 @@ import java.io.Writer;
  * Date(创建日期)： 2021/12/7
  * Time(创建时间)： 12:58
  * Version(版本): 1.0
- * Description(描述)： 无
+ * Description(描述)： 从这里启动整个程序
  */
 
 public class Run
@@ -670,7 +699,7 @@ import java.util.Date;
  * Date(创建日期)： 2021/12/7
  * Time(创建时间)： 12:52
  * Version(版本): 1.0
- * Description(描述)： 无
+ * Description(描述)： 文件信息面板
  */
 
 public class FileInformation
@@ -802,7 +831,7 @@ import java.io.File;
  * Date(创建日期)： 2021/12/7
  * Time(创建时间)： 12:42
  * Version(版本): 1.0
- * Description(描述)： 无
+ * Description(描述)： 主面板类
  */
 
 public class MainPanel
@@ -810,6 +839,7 @@ public class MainPanel
     private static JFrame jFrame;                         //顶层面板
     private static JPanel jPanel;                         //主面板
     private static JPanel jPanel_FileInformation;         //文件信息面板
+    private static JPanel jPanel_ErrorLog;                //错误日志面板
     private JTextArea jTextArea;                           //文本域
     private JScrollPane jScrollPane;                      //滚动面板
     private final JLabel label_FilePath = new JLabel("所选文件路径：");  //路径显示
@@ -832,6 +862,16 @@ public class MainPanel
     public static void setButton_FileInformation(JButton button_FileInformation)
     {
         MainPanel.button_FileInformation = button_FileInformation;
+    }
+
+    public static JPanel getjPanel_ErrorLog()
+    {
+        return jPanel_ErrorLog;
+    }
+
+    public static void setjPanel_ErrorLog(JPanel jPanel_ErrorLog)
+    {
+        MainPanel.jPanel_ErrorLog = jPanel_ErrorLog;
     }
 
     public static JFrame getjFrame()
@@ -914,6 +954,11 @@ public class MainPanel
         jPanel.add(button_FileInformation);
         jPanel.add(jScrollPane);
         jPanel.add(label_Information);
+    }
+
+    private void init_menu()                                            //初始化菜单面板
+    {
+
     }
 
     private void init_Listener()                                        //初始化各种监听器
@@ -1071,6 +1116,7 @@ public class MainPanel
         jFrame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 
         this.init_mainPanel();                                           //初始化主面板
+        this.init_menu();                                                //初始化菜单面板
         FileInformation.init();                                          //初始化文件信息面板
 
         jFrame.add(jPanel);                                              //主面板加入到顶层面板
