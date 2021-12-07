@@ -1,0 +1,1301 @@
+H:\����\��������\java�γ���� Swingʵ���ı��༭��\\src\\main\\java\\io\\ErrorLog.java
+package io;
+
+import java.awt.*;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.text.DecimalFormat;
+import java.util.Calendar;
+
+/**
+ * Project name(项目名称)：java课程设计 Swing实现文本编辑器
+ * Package(包名): io
+ * Class(类名): ErrorLog
+ * Author(作者）: mao
+ * Author QQ：1296193245
+ * GitHub：https://github.com/maomao124/
+ * Date(创建日期)： 2021/12/7
+ * Time(创建时间)： 14:20
+ * Version(版本): 1.0
+ * Description(描述)： 错误日志类
+ */
+
+public class ErrorLog
+{
+    public static void write(String message)
+    {
+        Calendar calendar = Calendar.getInstance();// 获取当前时间
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        month = month + 1;                         //月份从 0 开始，所以加 1
+        int day = calendar.get(Calendar.DATE);
+        int week = calendar.get(Calendar.DAY_OF_WEEK);
+        week = week - 1;                             //星期日为第一天
+        int hour = calendar.get(Calendar.HOUR_OF_DAY); //时
+        int minute = calendar.get(Calendar.MINUTE);   //分
+        int second = calendar.get(Calendar.SECOND);   //秒
+        int millisecond = calendar.get(Calendar.MILLISECOND); //毫秒
+        int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH); // 获取今天是本月第几天
+        int dayOfWeekInMonth = calendar.get(Calendar.DAY_OF_WEEK_IN_MONTH); // 获取今天是本月第几周
+        int many = calendar.get(Calendar.DAY_OF_YEAR); // 获取今天是今年第几天
+        StringBuilder stringBuffer1 = new StringBuilder();
+        DecimalFormat decimalFormat1 = new DecimalFormat("00");
+        //stringBuffer1.append(year).append("年 ").append(month).append("月 ").append(day).append("日 ")
+        // .append(hour).append("时 ").append(minute).append("分 ").append(second).append("秒");
+        stringBuffer1.append("日期：");
+        stringBuffer1.append(decimalFormat1.format(year)).append("/").append(decimalFormat1.format(month)).append("/")
+                .append(decimalFormat1.format(day)).append("    时间：").append(decimalFormat1.format(hour))
+                .append(":").append(decimalFormat1.format(minute)).append(":").append(decimalFormat1.format(second));
+        //System.out.println(stringBuffer1);
+        stringBuffer1.append("        错误堆栈：\n");
+        stringBuffer1.append(message);
+        stringBuffer1.append("\n\n\n");
+
+        //写入
+        FileWriter fileWriter = null;
+        try                                  //文件流打开，文件读写
+        {
+            fileWriter = new FileWriter("error.log", true);
+            fileWriter.write(stringBuffer1.toString());
+        }
+        catch (FileNotFoundException e)      //文件未找到
+        {
+            Toolkit.getDefaultToolkit().beep();
+            System.err.println("文件未找到！！！  " + "\n错误内容：" + e.toString());
+        }
+        catch (Exception e)                  //其它异常
+        {
+            Toolkit.getDefaultToolkit().beep();
+            e.printStackTrace();
+        }
+        finally
+        {
+            try                              //关闭流
+            {
+                if (fileWriter != null)
+                {
+                    fileWriter.close();
+                }
+            }
+            catch (NullPointerException e)    //空指针异常
+            {
+                Toolkit.getDefaultToolkit().beep();
+                System.err.println("文件已经被关闭，无法再次关闭！！！");
+            }
+            catch (Exception e)              //其它异常
+            {
+                Toolkit.getDefaultToolkit().beep();
+                e.printStackTrace();
+            }
+        }
+    }
+}
+�
+H:\����\��������\java�γ���� Swingʵ���ı��༭��\\src\\main\\java\\io\\File.java
+package io;
+
+import UI.MainPanel;
+
+import javax.swing.*;
+import java.awt.*;
+import java.io.*;
+
+/**
+ * Project name(项目名称)：java课程设计 Swing实现文本编辑器
+ * Package(包名): io
+ * Class(类名): File
+ * Author(作者）: mao
+ * Author QQ：1296193245
+ * GitHub：https://github.com/maomao124/
+ * Date(创建日期)： 2021/12/7
+ * Time(创建时间)： 13:52
+ * Version(版本): 1.0
+ * Description(描述)： 无
+ */
+
+public class File
+{
+    public static void read(java.io.File file, JTextArea jTextArea, JLabel label_Information)
+    {
+        FileReader fileReader = null;
+        try                                  //文件流打开，文件读写
+        {
+
+            fileReader = new FileReader(file);
+            char[] buffer = new char[1024];
+            int count = 0;
+            while ((count = fileReader.read(buffer)) != -1)
+            {
+                jTextArea.append(new String(buffer, 0, count));
+                //System.out.println(new String(buffer, 0, count));
+            }
+            label_Information.setText("加载完成");
+
+        }
+        catch (FileNotFoundException e1)      //文件未找到
+        {
+            Toolkit.getDefaultToolkit().beep();
+            System.err.println("文件未找到！！！  " + "\n错误内容：" + e1.toString());
+            final Writer result = new StringWriter();
+            final PrintWriter printWriter = new PrintWriter(result);
+            e1.printStackTrace(printWriter);
+            String stackTraceStr = result.toString();
+            io.ErrorLog.write(stackTraceStr);
+        }
+        catch (Exception e1)                  //其它异常
+        {
+            Toolkit.getDefaultToolkit().beep();
+            e1.printStackTrace();
+            final Writer result = new StringWriter();
+            final PrintWriter printWriter = new PrintWriter(result);
+            e1.printStackTrace(printWriter);
+            String stackTraceStr = result.toString();
+            io.ErrorLog.write(stackTraceStr);
+        }
+        finally
+        {
+            try                              //关闭流
+            {
+                if (fileReader != null)
+                {
+                    fileReader.close();
+                }
+            }
+            catch (NullPointerException e1)    //空指针异常
+            {
+                Toolkit.getDefaultToolkit().beep();
+                System.err.println("文件已经被关闭，无法再次关闭！！！");
+                final Writer result = new StringWriter();
+                final PrintWriter printWriter = new PrintWriter(result);
+                e1.printStackTrace(printWriter);
+                String stackTraceStr = result.toString();
+                io.ErrorLog.write(stackTraceStr);
+            }
+            catch (Exception e1)              //其它异常
+            {
+                Toolkit.getDefaultToolkit().beep();
+                e1.printStackTrace();
+                final Writer result = new StringWriter();
+                final PrintWriter printWriter = new PrintWriter(result);
+                e1.printStackTrace(printWriter);
+                String stackTraceStr = result.toString();
+                io.ErrorLog.write(stackTraceStr);
+            }
+        }
+    }
+
+    public static void write(java.io.File file, JTextArea jTextArea, JLabel label_Information)
+    {
+        FileWriter fileWriter = null;
+        try                                  //文件流打开，文件读写
+        {
+            label_Information.setText("正在保存...");
+            fileWriter = new FileWriter(file);
+            fileWriter.write(jTextArea.getText());
+            label_Information.setText("保存成功");
+        }
+        catch (FileNotFoundException e1)      //文件未找到
+        {
+            Toolkit.getDefaultToolkit().beep();
+            System.err.println("文件未找到！！！  " + "\n错误内容：" + e1.toString());
+            final Writer result = new StringWriter();
+            final PrintWriter printWriter = new PrintWriter(result);
+            e1.printStackTrace(printWriter);
+            String stackTraceStr = result.toString();
+            io.ErrorLog.write(stackTraceStr);
+        }
+        catch (Exception e1)                  //其它异常
+        {
+            Toolkit.getDefaultToolkit().beep();
+            e1.printStackTrace();
+            final Writer result = new StringWriter();
+            final PrintWriter printWriter = new PrintWriter(result);
+            e1.printStackTrace(printWriter);
+            String stackTraceStr = result.toString();
+            io.ErrorLog.write(stackTraceStr);
+        }
+        finally
+        {
+            try                              //关闭流
+            {
+                if (fileWriter != null)
+                {
+                    fileWriter.close();
+                }
+            }
+            catch (NullPointerException e1)    //空指针异常
+            {
+                Toolkit.getDefaultToolkit().beep();
+                System.err.println("文件已经被关闭，无法再次关闭！！！");
+                final Writer result = new StringWriter();
+                final PrintWriter printWriter = new PrintWriter(result);
+                e1.printStackTrace(printWriter);
+                String stackTraceStr = result.toString();
+                io.ErrorLog.write(stackTraceStr);
+            }
+            catch (Exception e1)              //其它异常
+            {
+                Toolkit.getDefaultToolkit().beep();
+                e1.printStackTrace();
+                final Writer result = new StringWriter();
+                final PrintWriter printWriter = new PrintWriter(result);
+                e1.printStackTrace(printWriter);
+                String stackTraceStr = result.toString();
+                io.ErrorLog.write(stackTraceStr);
+            }
+        }
+    }
+    public static void write(JTextArea jTextArea,JLabel label_Information)
+    {
+        FileWriter fileWriter = null;
+        try                                  //文件流打开，文件读写
+        {
+            label_Information.setText("正在保存...");
+            fileWriter = new FileWriter(MainPanel.getFile());
+            fileWriter.write(jTextArea.getText());
+            label_Information.setText("保存成功");
+        }
+        catch (FileNotFoundException e1)      //文件未找到
+        {
+            Toolkit.getDefaultToolkit().beep();
+            System.err.println("文件未找到！！！  " + "\n错误内容：" + e1.toString());
+            final Writer result = new StringWriter();
+            final PrintWriter printWriter = new PrintWriter(result);
+            e1.printStackTrace(printWriter);
+            String stackTraceStr = result.toString();
+            io.ErrorLog.write(stackTraceStr);
+        }
+        catch (Exception e1)                  //其它异常
+        {
+            Toolkit.getDefaultToolkit().beep();
+            e1.printStackTrace();
+            final Writer result = new StringWriter();
+            final PrintWriter printWriter = new PrintWriter(result);
+            e1.printStackTrace(printWriter);
+            String stackTraceStr = result.toString();
+            io.ErrorLog.write(stackTraceStr);
+        }
+        finally
+        {
+            try                              //关闭流
+            {
+                if (fileWriter != null)
+                {
+                    fileWriter.close();
+                }
+            }
+            catch (NullPointerException e1)    //空指针异常
+            {
+                Toolkit.getDefaultToolkit().beep();
+                System.err.println("文件已经被关闭，无法再次关闭！！！");
+                final Writer result = new StringWriter();
+                final PrintWriter printWriter = new PrintWriter(result);
+                e1.printStackTrace(printWriter);
+                String stackTraceStr = result.toString();
+                io.ErrorLog.write(stackTraceStr);
+            }
+            catch (Exception e1)              //其它异常
+            {
+                Toolkit.getDefaultToolkit().beep();
+                e1.printStackTrace();
+                final Writer result = new StringWriter();
+                final PrintWriter printWriter = new PrintWriter(result);
+                e1.printStackTrace(printWriter);
+                String stackTraceStr = result.toString();
+                io.ErrorLog.write(stackTraceStr);
+            }
+        }
+    }
+}
+�
+H:\����\��������\java�γ���� Swingʵ���ı��༭��\\src\\main\\java\\io\\SHA\\MD5.java
+package io.SHA;
+
+import java.io.*;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+
+/**
+ * Project name(项目名称)：java课程设计 Swing实现文本编辑器
+ * Package(包名): io.SHA
+ * Class(类名): MD5
+ * Author(作者）: mao
+ * Author QQ：1296193245
+ * GitHub：https://github.com/maomao124/
+ * Date(创建日期)： 2021/12/7
+ * Time(创建时间)： 12:50
+ * Version(版本): 1.0
+ * Description(描述)： 无
+ */
+
+public class MD5
+{
+    //存储小组
+    //private long[] groups = null;
+    //存储结果
+    private String resultMessage = "";
+
+    //四个寄存器的初始向量IV,采用小端存储
+    private static final long A = 0x67452301L;
+    private static final long B = 0xefcdab89L;
+    private static final long C = 0x98badcfeL;
+    private static final long D = 0x10325476L;
+
+    //java不支持无符号的基本数据(unsigned),所以选用long数据类型
+    private long[] result = {A, B, C, D};
+
+    private static final long[][] T =
+            {
+                    {0xd76aa478, 0xe8c7b756, 0x242070db, 0xc1bdceee,
+                            0xf57c0faf, 0x4787c62a, 0xa8304613, 0xfd469501,
+                            0x698098d8, 0x8b44f7af, 0xffff5bb1, 0x895cd7be,
+                            0x6b901122, 0xfd987193, 0xa679438e, 0x49b40821},
+
+                    {0xf61e2562, 0xc040b340, 0x265e5a51, 0xe9b6c7aa,
+                            0xd62f105d, 0x02441453, 0xd8a1e681, 0xe7d3fbc8,
+                            0x21e1cde6, 0xc33707d6, 0xf4d50d87, 0x455a14ed,
+                            0xa9e3e905, 0xfcefa3f8, 0x676f02d9, 0x8d2a4c8a},
+
+                    {0xfffa3942, 0x8771f681, 0x6d9d6122, 0xfde5380c,
+                            0xa4beea44, 0x4bdecfa9, 0xf6bb4b60, 0xbebfbc70,
+                            0x289b7ec6, 0xeaa127fa, 0xd4ef3085, 0x04881d05,
+                            0xd9d4d039, 0xe6db99e5, 0x1fa27cf8, 0xc4ac5665},
+
+                    {0xf4292244, 0x432aff97, 0xab9423a7, 0xfc93a039,
+                            0x655b59c3, 0x8f0ccc92, 0xffeff47d, 0x85845dd1,
+                            0x6fa87e4f, 0xfe2ce6e0, 0xa3014314, 0x4e0811a1,
+                            0xf7537e82, 0xbd3af235, 0x2ad7d2bb, 0xeb86d391}
+            };
+    //表示X[k]中的的k取值，决定如何使用消息分组中的字
+    private static final int[][] k =
+            {
+                    {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15},
+                    {1, 6, 11, 0, 5, 10, 15, 4, 9, 14, 3, 8, 13, 2, 7, 12},
+                    {5, 8, 11, 14, 1, 4, 7, 10, 13, 0, 3, 6, 9, 12, 15, 2},
+                    {0, 7, 14, 5, 12, 3, 10, 1, 8, 15, 6, 13, 4, 11, 2, 9}
+            };
+
+    //各次迭代中采用的做循环移位的s值
+    private static final int[][] S =
+            {
+                    {7, 12, 17, 22},
+                    {5, 9, 14, 20},
+                    {4, 11, 16, 23},
+                    {6, 10, 15, 21}
+            };
+
+    //4轮循环中使用的生成函数(轮函数)g
+    private static long g(int i, long b, long c, long d)
+    {
+        switch (i)
+        {
+            case 0:
+                return (b & c) | ((~b) & d);
+            case 1:
+                return (b & d) | (c & (~d));
+            case 2:
+                return b ^ c ^ d;
+            case 3:
+                return c ^ (b | (~d));
+            default:
+                return 0;
+        }
+    }
+
+    //开始使用MD5加密
+    private String start(String message)
+    {
+        //转化为字节数组
+        byte[] inputBytes = message.getBytes();
+        //6A 61 6E 6b 69 6e 67
+        //获取字节数组的长度
+        int byteLen = inputBytes.length;
+        //得到K值（以bit作单位的message长度）
+        long K = (long) (byteLen << 3);
+        //完整小组(512bit)(64byte)的个数
+        int groupCount = byteLen / 64;
+
+        //分块
+        for (int i = 0; i < groupCount; i++)
+        {
+            //每次取512bit
+            //处理一个分组
+            H(divide(inputBytes, i * 64));
+        }
+
+        //填充
+        int rest = byteLen % 64;
+        //即将填充的一个分组
+        byte[] paddingBytes = new byte[64];
+        //原来的尾部数据
+        for (int i = 0; i < rest; i++)
+        {
+            paddingBytes[i] = inputBytes[byteLen - rest + i];
+        }
+        //即小于448bit的情况，先填充100...0再填充K值的低64位
+        //此时只会新增一个分组
+        if (rest <= 56)
+        {
+            //填充100...0
+            if (rest < 56)
+            {
+                //填充10000000
+                paddingBytes[rest] = (byte) (1 << 7);
+                //填充00000000
+                for (int i = 1; i < 56 - rest; i++)
+                {
+                    paddingBytes[rest + i] = 0;
+                }
+            }
+            //填充K值低64位
+            for (int i = 0; i < 8; i++)
+            {
+                paddingBytes[56 + i] = (byte) (K & 0xFFL);
+                K = K >> 8;
+            }
+            //处理分组
+            H(divide(paddingBytes, 0));
+            //即大于448bit的情况，先填充100...0再填充K值的低64位
+            //此时会新增两个分组
+        }
+        else
+        {
+            //填充10000000
+            paddingBytes[rest] = (byte) (1 << 7);
+            //填充00000000
+            for (int i = rest + 1; i < 64; i++)
+            {
+                paddingBytes[i] = 0;
+            }
+            //处理第一个尾部分组
+            H(divide(paddingBytes, 0));
+
+            //填充00000000
+            for (int i = 0; i < 56; i++)
+            {
+                paddingBytes[i] = 0;
+            }
+
+            //填充低64位
+            for (int i = 0; i < 8; i++)
+            {
+                //这里很关键，使用小端方式，即Byte数组先存储len的低位数据，然后右移len
+                paddingBytes[56 + i] = (byte) (K & 0xFFL);
+                K = K >> 8;
+            }
+            //处理第二个尾部分组
+            H(divide(paddingBytes, 0));
+        }
+        //将Hash值转换成十六进制的字符串
+        //小端方式!
+        for (int i = 0; i < 4; i++)
+        {
+            //解决缺少前置0的问题
+            resultMessage += String.format("%02x", result[i] & 0xFF) +
+                    String.format("%02x", (result[i] & 0xFF00) >> 8) +
+                    String.format("%02x", (result[i] & 0xFF0000) >> 16) +
+                    String.format("%02x", (result[i] & 0xFF000000) >> 24);
+
+        }
+        return resultMessage;
+    }
+
+    //从inputBytes的index开始取512位，作为新的512bit的分组
+    private static long[] divide(byte[] inputBytes, int start)
+    {
+        //存储一整个分组,就是512bit,数组里每个是32bit，就是4字节，为了消除符号位的影响，所以使用long
+        long[] group = new long[16];
+        for (int i = 0; i < 16; i++)
+        {
+            //每个32bit由4个字节拼接而来
+            //小端的从byte数组到bit恢复方法
+            group[i] = byte2unsign(inputBytes[4 * i + start]) |
+                    (byte2unsign(inputBytes[4 * i + 1 + start])) << 8 |
+                    (byte2unsign(inputBytes[4 * i + 2 + start])) << 16 |
+                    (byte2unsign(inputBytes[4 * i + 3 + start])) << 24;
+        }
+        return group;
+    }
+
+    //其实byte相当于一个字节的有符号整数，这里不需要符号位，所以把符号位去掉
+    private static long byte2unsign(byte b)
+    {
+        return b < 0 ? b & 0x7F + 128 : b;
+    }
+
+    // groups[] 中每一个分组512位（64字节）
+    // MD5压缩函数
+    private void H(long[] groups)
+    {
+        //缓冲区（寄存器）数组
+        long a = result[0], b = result[1], c = result[2], d = result[3];
+        //四轮循环
+        for (int n = 0; n < 4; n++)
+        {
+            //16轮迭代
+            for (int i = 0; i < 16; i++)
+            {
+                result[0] += (g(n, result[1], result[2], result[3]) & 0xFFFFFFFFL) + groups[k[n][i]] + T[n][i];
+                result[0] = result[1] + ((result[0] & 0xFFFFFFFFL) << S[n][i % 4] | ((result[0] & 0xFFFFFFFFL) >>> (32 - S[n][i % 4])));
+                //循环轮换
+                long temp = result[3];
+                result[3] = result[2];
+                result[2] = result[1];
+                result[1] = result[0];
+                result[0] = temp;
+            }
+        }
+        //加入之前计算的结果
+        result[0] += a;
+        result[1] += b;
+        result[2] += c;
+        result[3] += d;
+        //防止溢出
+        for (int n = 0; n < 4; n++)
+        {
+            result[n] &= 0xFFFFFFFFL;
+        }
+    }
+
+    public static String getMD5(String message)
+    {
+        String result = "";
+        MD5 md5 = new MD5();
+        result = md5.start(message);
+        md5 = null;
+        return result;
+    }
+
+    public static String getMD5toUpperCase(String message)
+    {
+        String result = "";
+        MD5 md5 = new MD5();
+        md5.start(message);
+        result = md5.resultMessage.toUpperCase();
+        md5 = null;
+        return result;
+    }
+
+    public static String getFileMD5(String filePath)  //获得文件的MD5值
+    {
+        try
+        {
+            InputStream fis = new FileInputStream(filePath);
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] buffer = new byte[1024];
+            int length = -1;
+            while ((length = fis.read(buffer, 0, 1024)) != -1)
+            {
+                md.update(buffer, 0, length);
+            }
+            fis.close();
+            //转换并返回包含16个元素字节数组,返回数值范围为-128到127
+            byte[] md5Bytes = md.digest();
+            BigInteger bigInt = new BigInteger(1, md5Bytes);
+            return bigInt.toString(16);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            final Writer result = new StringWriter();
+            final PrintWriter printWriter = new PrintWriter(result);
+            e.printStackTrace(printWriter);
+            String stackTraceStr = result.toString();
+            io.ErrorLog.write(stackTraceStr);
+            return "";
+        }
+    }
+}
+
+�
+H:\����\��������\java�γ���� Swingʵ���ı��༭��\\src\\main\\java\\Run.java
+import UI.MainPanel;
+
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.io.Writer;
+
+/**
+ * Project name(项目名称)：java课程设计 Swing实现文本编辑器
+ * Package(包名): PACKAGE_NAME
+ * Class(类名): Run
+ * Author(作者）: mao
+ * Author QQ：1296193245
+ * GitHub：https://github.com/maomao124/
+ * Date(创建日期)： 2021/12/7
+ * Time(创建时间)： 12:58
+ * Version(版本): 1.0
+ * Description(描述)： 无
+ */
+
+public class Run
+{
+    public static void main(String[] args)
+    {
+        try
+        {
+            new MainPanel();
+        }
+        catch (Exception e)
+        {
+            final Writer result = new StringWriter();
+            final PrintWriter printWriter = new PrintWriter(result);
+            e.printStackTrace(printWriter);
+            String stackTraceStr = result.toString();
+            io.ErrorLog.write(stackTraceStr);
+        }
+    }
+}
+�
+H:\����\��������\java�γ���� Swingʵ���ı��༭��\\src\\main\\java\\UI\\FileInformation.java
+package UI;
+
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+/**
+ * Project name(项目名称)：java课程设计 Swing实现文本编辑器
+ * Package(包名): UI
+ * Class(类名): FileInformation
+ * Author(作者）: mao
+ * Author QQ：1296193245
+ * GitHub：https://github.com/maomao124/
+ * Date(创建日期)： 2021/12/7
+ * Time(创建时间)： 12:52
+ * Version(版本): 1.0
+ * Description(描述)： 无
+ */
+
+public class FileInformation
+{
+    private static JTextArea jTextArea_FileInformation;
+    private static JScrollPane jScrollPane;
+
+    public static void init()
+    {
+        jTextArea_FileInformation = new JTextArea(15, 55);
+        jTextArea_FileInformation.setLineWrap(true);
+        jTextArea_FileInformation.setEditable(false);
+        Font font = new Font("宋体", Font.PLAIN, 22);
+        jTextArea_FileInformation.setFont(font);
+        jScrollPane = new JScrollPane(jTextArea_FileInformation);
+        JPanel jPanel = new JPanel();
+        MainPanel.setjPanel_FileInformation(jPanel);
+        jPanel.setLayout(new BorderLayout());
+        JButton button = MainPanel.getButton_Back();
+        jScrollPane.setBorder(new EmptyBorder(20, 100, 50, 100));
+        //button.setBorder(new EmptyBorder(20, 20, 20, 20));
+        jPanel.add(jScrollPane, BorderLayout.CENTER);
+        JPanel jPanel2 = new JPanel();
+        jPanel2.setLayout(new FlowLayout());
+        jPanel2.add(button);
+        jPanel.add(jPanel2, BorderLayout.SOUTH);
+        button.setBackground(Color.cyan);
+        button.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                back();
+            }
+        });
+        MainPanel.getButton_FileInformation().addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                display();
+            }
+        });
+    }
+
+    public static void display()
+    {
+        if (MainPanel.getFile() == null)
+        {
+            Toolkit.getDefaultToolkit().beep();
+            JOptionPane.showMessageDialog(null,
+                    "还未指定文件目录！！！", "提示", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        jTextArea_FileInformation.setText("\t\t文件信息：\n\n");
+        File file = MainPanel.getFile();
+        DecimalFormat decimalFormat = new DecimalFormat("###.##");
+        jTextArea_FileInformation.append("\t文件名称：" + file.getName());
+        if (file.length() < 1048576)
+        {
+            jTextArea_FileInformation.append("\n\t文件大小：" + file.length() + "字节  =" +
+                    decimalFormat.format((double) file.length() / 1024) + "KB");
+        }
+        else
+        {
+            jTextArea_FileInformation.append("\n\t文件大小：" + file.length() + "字节  =" +
+                    decimalFormat.format((double) file.length() / 1024) + "KB  =" +
+                    decimalFormat.format((double) (file.length() / 1024 / 1024)) + "MB");
+        }
+        jTextArea_FileInformation.append("\n\t文件相对路径：" + file.getPath());
+        jTextArea_FileInformation.append("\n\t文件绝对路径：" + file.getAbsolutePath());
+        if (file.canRead())
+        {
+            jTextArea_FileInformation.append("\n\t文件是否能读？：是");
+        }
+        else
+        {
+            jTextArea_FileInformation.append("\n\t文件是否能读？：否");
+        }
+        if (file.canWrite())
+        {
+            jTextArea_FileInformation.append("\n\t文件是否能写？：是");
+        }
+        else
+        {
+            jTextArea_FileInformation.append("\n\t文件是否能写？：否");
+        }
+        Date date = new Date(file.lastModified());
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy年 MM月 dd日   E   HH点 mm分 ss秒");
+        jTextArea_FileInformation.append("\n\t最后修改时间：" + simpleDateFormat.format(date));
+        JFrame jFrame = MainPanel.getjFrame();
+        jFrame.remove(MainPanel.getjPanel());
+        jFrame.add(MainPanel.getjPanel_FileInformation());
+        MainPanel.getjPanel_FileInformation().updateUI();
+        jFrame.repaint();
+    }
+
+    public static void back()               //返回到原来的面板
+    {
+        JFrame jFrame = MainPanel.getjFrame();
+        jFrame.remove(MainPanel.getjPanel_FileInformation());
+        jFrame.add(MainPanel.getjPanel());
+        jFrame.repaint();
+    }
+}
+�
+H:\����\��������\java�γ���� Swingʵ���ı��༭��\\src\\main\\java\\UI\\MainPanel.java
+package UI;
+
+import io.SHA.MD5;
+
+import javax.swing.*;
+import javax.swing.event.CaretEvent;
+import javax.swing.event.CaretListener;
+import javax.swing.text.BadLocationException;
+import java.awt.*;
+import java.awt.event.*;
+import java.io.File;
+
+
+
+/**
+ * Project name(项目名称)：java课程设计 Swing实现文本编辑器
+ * Package(包名): UI
+ * Class(类名): MainPanel
+ * Author(作者）: mao
+ * Author QQ：1296193245
+ * GitHub：https://github.com/maomao124/
+ * Date(创建日期)： 2021/12/7
+ * Time(创建时间)： 12:42
+ * Version(版本): 1.0
+ * Description(描述)： 无
+ */
+
+public class MainPanel
+{
+    private static JFrame jFrame;                         //顶层面板
+    private static JPanel jPanel;                         //主面板
+    private static JPanel jPanel_FileInformation;         //文件信息面板
+    private JTextArea jTextArea;                           //文本域
+    private JScrollPane jScrollPane;                      //滚动面板
+    private final JLabel label_FilePath = new JLabel("所选文件路径：");  //路径显示
+    private final JTextField jTextField_FilePath = new JTextField(25);
+    private final JButton button_Open = new JButton("浏览");      //文件打开按钮
+    private final JButton button_Save = new JButton("保存");     //保存按钮
+    private final JButton button_save_file = new JButton("另存为");
+    private final JButton button_EditMode = new JButton("编辑模式");      //编辑模式
+    private static JButton button_FileInformation = new JButton("文件信息");       //文件信息按钮
+    private static JButton button_Back = new JButton("<-返回");           //返回按钮
+    boolean isEditable = true;                                      //文本域是否可以编辑
+    private static File file;                                       //关联的文件
+    private final JLabel label_Information = new JLabel("欢迎使用文件编辑器", JLabel.CENTER);      //状态位
+
+    public static JButton getButton_FileInformation()
+    {
+        return button_FileInformation;
+    }
+
+    public static void setButton_FileInformation(JButton button_FileInformation)
+    {
+        MainPanel.button_FileInformation = button_FileInformation;
+    }
+
+    public static JFrame getjFrame()
+    {
+        return jFrame;
+    }
+
+    public static void setjFrame(JFrame jFrame)
+    {
+        MainPanel.jFrame = jFrame;
+    }
+
+    public static JPanel getjPanel()
+    {
+        return jPanel;
+    }
+
+    public static void setjPanel(JPanel jPanel)
+    {
+        MainPanel.jPanel = jPanel;
+    }
+
+    public static JPanel getjPanel_FileInformation()
+    {
+        return jPanel_FileInformation;
+    }
+
+    public static void setjPanel_FileInformation(JPanel jPanel_FileInformation)
+    {
+        MainPanel.jPanel_FileInformation = jPanel_FileInformation;
+    }
+
+    public static JButton getButton_Back()
+    {
+        return button_Back;
+    }
+
+    public static void setButton_Back(JButton button_Back)
+    {
+        MainPanel.button_Back = button_Back;
+    }
+
+    public static File getFile()
+    {
+        return file;
+    }
+
+    public static void setFile(File file)
+    {
+        MainPanel.file = file;
+    }
+
+    private void init_mainPanel()                                    //初始化主面板
+    {
+        jPanel = new JPanel();                                       //初始化主面板
+        Font font = new Font("宋体", Font.PLAIN, 19);      //设置字体
+
+        jTextArea = new JTextArea(720 / 28, 1280 / 11);     //初始化文本域
+        jTextArea.setLineWrap(true);
+        jTextArea.setFont(font);
+        jTextArea.setEditable(isEditable);
+
+        jScrollPane = new JScrollPane();
+        jScrollPane.setViewportView(jTextArea);
+
+        button_Open.setBackground(Color.cyan);                          //设置颜色
+        button_Save.setBackground(Color.cyan);
+        button_EditMode.setBackground(Color.green);
+        button_save_file.setBackground(Color.cyan);
+        button_FileInformation.setBackground(Color.cyan);
+
+        label_Information.setPreferredSize(new Dimension(800, 30));
+
+        jPanel.add(label_FilePath);                                      //加入到主面板中
+        jPanel.add(jTextField_FilePath);
+        jPanel.add(button_Open);
+        jPanel.add(button_Save);
+        jPanel.add(button_save_file);
+        jPanel.add(button_EditMode);
+        jPanel.add(button_FileInformation);
+        jPanel.add(jScrollPane);
+        jPanel.add(label_Information);
+    }
+
+    private void init_Listener()                                        //初始化各种监听器
+    {
+        jFrame.addWindowListener(new WindowListener()
+        {
+            @Override
+            public void windowOpened(WindowEvent e)
+            {
+
+            }
+
+            @Override
+            public void windowClosing(WindowEvent e)
+            {
+                MainPanel.this.close();
+            }
+
+            @Override
+            public void windowClosed(WindowEvent e)
+            {
+
+            }
+
+            @Override
+            public void windowIconified(WindowEvent e)
+            {
+
+            }
+
+            @Override
+            public void windowDeiconified(WindowEvent e)
+            {
+
+            }
+
+            @Override
+            public void windowActivated(WindowEvent e)
+            {
+
+            }
+
+            @Override
+            public void windowDeactivated(WindowEvent e)
+            {
+
+            }
+        });
+        jFrame.addComponentListener(new ComponentListener()
+        {
+            @Override
+            public void componentResized(ComponentEvent e)
+            {
+                int width = jFrame.getWidth();
+                int height = jFrame.getHeight();
+                if (height <= 500)
+                {
+                    jTextArea.setRows(height / 30);
+                    jTextArea.setColumns(width / 11);
+                }
+                else if (height > 1000)
+                {
+                    jTextArea.setRows(height / 26);
+                    jTextArea.setColumns(width / 11);
+                }
+                else
+                {
+                    jTextArea.setRows(height / 28);
+                    jTextArea.setColumns(width / 11);
+                }
+            }
+
+            @Override
+            public void componentMoved(ComponentEvent e)
+            {
+
+            }
+
+            @Override
+            public void componentShown(ComponentEvent e)
+            {
+
+            }
+
+            @Override
+            public void componentHidden(ComponentEvent e)
+            {
+
+            }
+        });
+        jFrame.addWindowStateListener(new WindowStateListener()
+        {
+            @Override
+            public void windowStateChanged(WindowEvent e)
+            {
+                int width = jFrame.getWidth();
+                int height = jFrame.getHeight();
+                jTextArea.setRows(height / 27);
+                jTextArea.setColumns(width / 11);
+            }
+        });
+
+        jTextArea.addCaretListener(new CaretListener()
+        {                                                            //实时获取文本域指针位置
+            @Override
+            public void caretUpdate(CaretEvent e)
+            {
+                MainPanel.this.jTextArea_CaretListener();
+            }
+        });
+
+        button_save_file.addActionListener(new ActionListener()
+        {                                                            //另存为
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                MainPanel.this.saveAs();
+            }
+        });
+
+        button_Save.addActionListener(new ActionListener()
+        {                                                           //保存
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                MainPanel.this.save();
+            }
+        });
+
+        button_EditMode.addActionListener(new ActionListener()
+        {                                                         //只读模式或者编辑模式的来回切换
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                MainPanel.this.EditMode();
+            }
+        });
+
+        button_Open.addActionListener(new ActionListener()
+        {                                                           //浏览
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                MainPanel.this.open();
+            }
+        });
+
+    }
+
+    public MainPanel()
+    {
+        jFrame = new JFrame("文本编辑器");                           //初始化顶层面板
+        jFrame.setSize(1280, 720);
+        jFrame.setLocation(1920 / 2 - 640, 1080 / 2 - 360);
+        jFrame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+
+        this.init_mainPanel();                                           //初始化主面板
+        FileInformation.init();                                          //初始化文件信息面板
+
+        jFrame.add(jPanel);                                              //主面板加入到顶层面板
+        jFrame.setVisible(true);                                         //设置可见
+
+        this.init_Listener();                                            //初始化各种监听器
+    }
+
+    private void close()                                                 //关闭程序
+    {
+        if (jTextArea.getText().length() == 0)
+        {
+            System.exit(1);
+        }
+        String fileMD5 = null;
+        String testAreaMD5 = null;
+        if (file != null)
+        {
+            label_Information.setText("请稍后，正在计算MD5值...");
+            fileMD5 = MD5.getFileMD5(file.getAbsolutePath());
+            testAreaMD5 = MD5.getMD5(jTextArea.getText());
+            label_Information.setText("MD5值计算完成");
+        }
+        if (file == null)
+        {
+            int result;
+            Toolkit.getDefaultToolkit().beep();
+            result = JOptionPane.showConfirmDialog(null, "文本还未保存！ 是否退出？",
+                    "退出提示", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
+            if (result == JOptionPane.YES_OPTION)
+            {
+                System.exit(1);
+            }
+            else if (result == 1)
+            {
+                label_Information.setText("取消退出");
+            }
+            else
+            {
+                label_Information.setText("关闭会话框，取消退出");
+            }
+        }
+        else if (fileMD5.equals(testAreaMD5))         //MD5值相同,直接退出
+        {
+            System.exit(1);
+        }
+        else if (fileMD5 == null || testAreaMD5 == null)
+        {
+            int result;
+            Toolkit.getDefaultToolkit().beep();
+            result = JOptionPane.showConfirmDialog(null,
+                    "无法计算MD5值！ 是否退出？\n文件MD5：" + fileMD5 + "\n文本域MD5:" + testAreaMD5,
+                    "退出提示", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
+            if (result == JOptionPane.YES_OPTION)
+            {
+                System.exit(1);
+            }
+            else if (result == 1)
+            {
+                label_Information.setText("取消退出");
+            }
+            else
+            {
+                label_Information.setText("关闭会话框，取消退出");
+            }
+        }
+        else
+        {
+            int result;
+            Toolkit.getDefaultToolkit().beep();
+            result = JOptionPane.showConfirmDialog(null,
+                    "文本还有一部分未保存！ 是否退出？\n文件MD5：" + fileMD5 + "\n文本域MD5:" + testAreaMD5,
+                    "退出提示", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
+            if (result == JOptionPane.YES_OPTION)
+            {
+                System.exit(1);
+            }
+            else if (result == 1)
+            {
+                label_Information.setText("取消退出");
+            }
+            else
+            {
+                label_Information.setText("关闭会话框，取消退出");
+            }
+        }
+    }
+
+    private void jTextArea_CaretListener()                                //实时获取文本域指针位置
+    {
+        try
+        {
+            int pos = jTextArea.getCaretPosition();
+            //获取行数
+            int lineOfC = 0;
+            lineOfC = jTextArea.getLineOfOffset(pos) + 1;
+            //获取列数
+            int col = pos - jTextArea.getLineStartOffset(lineOfC - 1) + 1;
+            //System.out.println("当前光标位置:" + lineOfC + "行," + col + "列");
+            label_Information.setText("当前光标位置：第" + lineOfC + "行,第" + col + "列");
+        }
+        catch (BadLocationException e1)
+        {
+            System.out.println("无法获取光标位置");
+            label_Information.setText("无法获取光标位置");
+            //e1.printStackTrace();
+        }
+    }
+
+    private void saveAs()                                                 //另存为
+    {
+        if (jTextArea.getText().length() == 0)
+        {
+            label_Information.setText("文本域为空,没必要保存");
+            return;
+        }
+        JFileChooser jFileChooser = new JFileChooser(".");
+        int result = jFileChooser.showSaveDialog(null);
+        if (result == JFileChooser.APPROVE_OPTION)
+        {
+            File file = jFileChooser.getSelectedFile();
+            if (MainPanel.file == null)
+            {
+                MainPanel.file = file;
+                jTextField_FilePath.setText(MainPanel.file.getAbsolutePath());
+            }
+            io.File.write(file, jTextArea, label_Information);         //写入文件
+        }
+        else
+        {
+            Toolkit.getDefaultToolkit().beep();
+            label_Information.setText("未成功保存！！！");
+        }
+    }
+
+    private void save()                                                    //保存
+    {
+        if (jTextArea.getText().length() == 0)
+        {
+            label_Information.setText("文本域为空,没必要保存");
+            return;
+        }
+        if (MainPanel.file == null)
+        {
+            JFileChooser jFileChooser = new JFileChooser(".");
+            int result = jFileChooser.showSaveDialog(null);
+            if (result == JFileChooser.APPROVE_OPTION)
+            {
+                File file = jFileChooser.getSelectedFile();
+                MainPanel.file = file;
+                jTextField_FilePath.setText(MainPanel.file.getAbsolutePath());
+                io.File.write(file, jTextArea, label_Information);         //写入文件
+            }
+            else
+            {
+                Toolkit.getDefaultToolkit().beep();
+                label_Information.setText("未成功保存！！！");
+            }
+        }
+        else
+        {
+            io.File.write(jTextArea, label_Information);                    //写入文件
+        }
+    }
+
+    private void EditMode()                                                //只读模式或者编辑模式的来回切换
+    {
+        if (isEditable)
+        {
+            button_EditMode.setText("只读模式");
+            button_EditMode.setBackground(Color.yellow);
+            isEditable = false;
+            jTextArea.setEditable(false);
+            label_Information.setText("当前为只读模式");
+        }
+        else
+        {
+            button_EditMode.setText("编辑模式");
+            button_EditMode.setBackground(Color.green);
+            isEditable = true;
+            jTextArea.setEditable(true);
+            label_Information.setText("当前为编辑模式");
+        }
+    }
+
+    private void open()                                                    //打开或者浏览
+    {
+        if (jTextArea.getText().length() != 0)
+        {
+            String[] selection = {"文件数据插入到文本域的后面", "使用文件里的数据替换文本域里的数据"};
+            Toolkit.getDefaultToolkit().beep();
+            int result;
+            result = JOptionPane.showOptionDialog(null, "文本域数据不为空！请选择更新模式！"
+                    , "警告", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE, null, selection, 0);
+            if (result == 0)
+            {
+                label_Information.setText("从第" + (jTextArea.getText().length() - 1) + "个位置插入文件数据");
+            }
+            else if (result == 1)
+            {
+                jTextArea.setText("");
+                label_Information.setText("文本域原来的数据已丢失");
+            }
+            else             //按到了关闭按钮
+            {
+                label_Information.setText("取消操作");
+                return;
+            }
+        }
+        JFileChooser jFileChooser = new JFileChooser(".");
+        int result = jFileChooser.showOpenDialog(null);
+        if (result == JFileChooser.APPROVE_OPTION)
+        {
+            jTextField_FilePath.setText(jFileChooser.getSelectedFile().toString());
+            file = jFileChooser.getSelectedFile();
+            label_Information.setText("正在加载...");
+            io.File.read(file, jTextArea, label_Information);
+        }
+        else
+        {
+            Toolkit.getDefaultToolkit().beep();
+            label_Information.setText("未选择文件！！！");
+        }
+    }
+
+
+}
+�
