@@ -237,7 +237,7 @@ public class MainPanel
         cut = new JMenuItem("剪切");
         paste = new JMenuItem("粘贴");
         delete = new JMenuItem("删除");
-        deleteAll=new JMenuItem("清空");
+        deleteAll = new JMenuItem("清空");
         search = new JMenuItem("查找");
         replace = new JMenuItem("替换");
         edit_mode = new JMenuItem("编辑模式");
@@ -246,6 +246,7 @@ public class MainPanel
         cut.setBackground(Color.cyan);
         paste.setBackground(Color.cyan);
         delete.setBackground(Color.cyan);
+        deleteAll.setBackground(Color.red);
         search.setBackground(Color.cyan);
         replace.setBackground(Color.cyan);
         edit_mode.setBackground(Color.green);
