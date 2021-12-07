@@ -51,6 +51,7 @@ public class MainPanel
     JMenuItem cut_pop;
     JMenuItem paste_pop;
     JMenuItem delete_pop;
+    JMenuItem deleteAll_pop;
     JMenuItem selectAll_pop;
     JMenu menu_file;            //菜单
     JMenu menu_edit;
@@ -66,6 +67,7 @@ public class MainPanel
     JMenuItem cut;
     JMenuItem paste;
     JMenuItem delete;
+    JMenuItem deleteAll;
     JMenuItem search;
     JMenuItem replace;
     JMenuItem edit_mode;
@@ -197,7 +199,15 @@ public class MainPanel
         cut_pop = new JMenuItem("剪切");
         paste_pop = new JMenuItem("粘贴");
         delete_pop = new JMenuItem("删除");
+        deleteAll_pop = new JMenuItem("清空");
         selectAll_pop = new JMenuItem("全选");
+
+        copy_pop.setBackground(Color.cyan);
+        cut_pop.setBackground(Color.cyan);
+        paste_pop.setBackground(Color.cyan);
+        delete_pop.setBackground(Color.yellow);
+        deleteAll_pop.setBackground(Color.red);
+        selectAll_pop.setBackground(Color.cyan);
 
         jPopupMenu.add(copy_pop);
         jPopupMenu.add(cut_pop);
@@ -227,6 +237,7 @@ public class MainPanel
         cut = new JMenuItem("剪切");
         paste = new JMenuItem("粘贴");
         delete = new JMenuItem("删除");
+        deleteAll=new JMenuItem("清空");
         search = new JMenuItem("查找");
         replace = new JMenuItem("替换");
         edit_mode = new JMenuItem("编辑模式");
@@ -418,6 +429,24 @@ public class MainPanel
                 MainPanel.this.paste();
             }
         });
+
+        delete.addActionListener(new ActionListener()
+        {                                                   //菜单按钮 删除
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                MainPanel.this.delete();
+            }
+        });
+
+        delete_pop.addActionListener(new ActionListener()
+        {                                                   //菜单按钮 删除
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                MainPanel.this.delete();
+            }
+        });
     }
 
     private void selectAll()                                         //全选
@@ -472,6 +501,19 @@ public class MainPanel
     {
         jTextArea.paste();
         label_Information.setText("粘贴成功");
+    }
+
+    private void delete()                                               //删除
+    {
+        if (jTextArea.getSelectedText() == null)
+        {
+            Toolkit.getDefaultToolkit().beep();
+            label_Information.setText("删除失败！ 未选择如何文字！");
+        }
+        else
+        {
+            jTextArea.replaceSelection("");
+        }
     }
 
     private void init_Listener()                                        //初始化各种监听器
