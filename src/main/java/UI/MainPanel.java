@@ -136,6 +136,11 @@ public class MainPanel
         jPanel.add(label_Information);
     }
 
+    private void init_menu()                                            //初始化菜单面板
+    {
+
+    }
+
     private void init_Listener()                                        //初始化各种监听器
     {
         jFrame.addWindowListener(new WindowListener()
@@ -291,6 +296,7 @@ public class MainPanel
         jFrame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 
         this.init_mainPanel();                                           //初始化主面板
+        this.init_menu();                                                //初始化菜单面板
         FileInformation.init();                                          //初始化文件信息面板
 
         jFrame.add(jPanel);                                              //主面板加入到顶层面板
