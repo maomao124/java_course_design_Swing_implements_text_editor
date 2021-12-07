@@ -156,7 +156,7 @@ public class MainPanel
         jPanel2.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
         Font font = new Font("宋体", Font.PLAIN, 19);      //设置字体
 
-        jTextArea = new JTextArea(720 / 28, 1280 / 12);     //初始化文本域
+        jTextArea = new JTextArea(720 / 30, 1280 / 12);     //初始化文本域
         jTextArea.setLineWrap(true);
         jTextArea.setFont(font);
         jTextArea.setEditable(isEditable);
@@ -346,6 +346,132 @@ public class MainPanel
                 MainPanel.this.close();
             }
         });
+
+        selectAll.addActionListener(new ActionListener()
+        {                                                    //菜单按钮 全选
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                MainPanel.this.selectAll();
+            }
+        });
+
+        selectAll_pop.addActionListener(new ActionListener()
+        {                                                    //菜单按钮 全选
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                MainPanel.this.selectAll();
+            }
+        });
+
+        copy.addActionListener(new ActionListener()
+        {                                                   //菜单按钮 复制
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                MainPanel.this.copy();
+            }
+        });
+
+        copy_pop.addActionListener(new ActionListener()
+        {                                                   //菜单按钮 复制
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                MainPanel.this.copy();
+            }
+        });
+
+        cut.addActionListener(new ActionListener()
+        {                                                   //菜单按钮 剪切
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                MainPanel.this.cut();
+            }
+        });
+
+        cut_pop.addActionListener(new ActionListener()
+        {                                                   //菜单按钮 剪切
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                MainPanel.this.cut();
+            }
+        });
+
+        paste.addActionListener(new ActionListener()
+        {                                                   //菜单按钮 粘贴
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                MainPanel.this.paste();
+            }
+        });
+
+        paste_pop.addActionListener(new ActionListener()
+        {                                                   //菜单按钮 粘贴
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                MainPanel.this.paste();
+            }
+        });
+    }
+
+    private void selectAll()                                         //全选
+    {
+        if (jTextArea.getText().length() == 0)
+        {
+            Toolkit.getDefaultToolkit().beep();
+            label_Information.setText("全选失败！ 文本域为空！");
+        }
+        else
+        {
+            jTextArea.selectAll();
+            int start = jTextArea.getSelectionStart();
+            int end = jTextArea.getSelectionEnd();
+            label_Information.setText("全选成功, 选中位置为" + start + "到" + end + "的文本");
+        }
+    }
+
+    private void copy()                                                 //复制
+    {
+        if (jTextArea.getSelectedText() == null)
+        {
+            Toolkit.getDefaultToolkit().beep();
+            label_Information.setText("复制失败！ 未选择文字");
+        }
+        else
+        {
+            jTextArea.copy();
+            int start = jTextArea.getSelectionStart();
+            int end = jTextArea.getSelectionEnd();
+            label_Information.setText("复制成功, 复制选中位置为" + start + "到" + end + "的文本");
+        }
+    }
+
+    private void cut()                                                  //剪切
+    {
+        if (jTextArea.getSelectedText() == null)
+        {
+            Toolkit.getDefaultToolkit().beep();
+            label_Information.setText("剪切失败！ 未选择文字");
+        }
+        else
+        {
+            int start = jTextArea.getSelectionStart();
+            int end = jTextArea.getSelectionEnd();
+            jTextArea.cut();
+            label_Information.setText("剪切成功, 剪切选中位置为" + start + "到" + end + "的文本");
+        }
+    }
+
+    private void paste()                                                //粘贴
+    {
+        jTextArea.paste();
+        label_Information.setText("粘贴成功");
     }
 
     private void init_Listener()                                        //初始化各种监听器
