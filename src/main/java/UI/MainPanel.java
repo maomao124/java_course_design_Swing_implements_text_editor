@@ -163,7 +163,7 @@ public class MainPanel
 
         jScrollPane = new JScrollPane();
         jScrollPane.setViewportView(jTextArea);
-        jScrollPane.setBorder(new EmptyBorder(0,30,15,30));
+        jScrollPane.setBorder(new EmptyBorder(0, 30, 15, 30));
 
         button_Open.setBackground(Color.cyan);                          //设置颜色
         button_Save.setBackground(Color.cyan);
@@ -308,6 +308,42 @@ public class MainPanel
                     // 弹出菜单
                     jPopupMenu.show(e.getComponent(), e.getX(), e.getY());
                 }
+            }
+        });
+
+        open.addActionListener(new ActionListener()
+        {                                                   //菜单按钮 浏览
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                MainPanel.this.open();
+            }
+        });
+
+        save.addActionListener(new ActionListener()
+        {                                                   //菜单按钮 保存
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                MainPanel.this.save();
+            }
+        });
+
+        save_as.addActionListener(new ActionListener()
+        {                                                   //菜单按钮 另存为
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                MainPanel.this.saveAs();
+            }
+        });
+
+        exit.addActionListener(new ActionListener()
+        {                                                   //菜单按钮 退出
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                MainPanel.this.close();
             }
         });
     }
