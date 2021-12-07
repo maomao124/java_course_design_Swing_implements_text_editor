@@ -24,7 +24,7 @@
     <!--依赖包配置放入位置-->
 
     <build>
-        <finalName>java课程设计 Swing实现文本编辑器</finalName>
+        <finalName>java课程设计_Swing实现文本编辑器</finalName>
         <!--更改项，也可以不改，打包的jar文件名称-->
         <plugins>
             <plugin>
@@ -63,8 +63,8 @@
                                     </fileset>
                                 </copy>
 
-                                <move file="${project.build.directory}/classes/java课程设计 Swing实现文本编辑器.jar"
-                                      tofile="${project.build.directory}/java课程设计 Swing实现文本编辑器_hide.jar"/>
+                                <move file="${project.build.directory}/classes/java课程设计_Swing实现文本编辑器.jar"
+                                      tofile="${project.build.directory}/java课程设计_Swing实现文本编辑器_hide.jar"/>
 
                                 <copy todir="${project.build.directory}/classes" overwrite="true">
                                     <fileset dir="${project.build.directory}"
@@ -73,11 +73,11 @@
                                     </fileset>
                                 </copy>
 
-                                <move file="${project.build.directory}/classes/java课程设计 Swing实现文本编辑器.jar"
-                                      tofile="${project.build.directory}/java课程设计 Swing实现文本编辑器_args.jar"/>
+                                <move file="${project.build.directory}/classes/java课程设计_Swing实现文本编辑器.jar"
+                                      tofile="${project.build.directory}/java课程设计_Swing实现文本编辑器_args.jar"/>
 
-                                <move file="${project.build.directory}/classes/java课程设计 Swing实现文本编辑器_hide.jar"
-                                      tofile="${project.build.directory}/java课程设计 Swing实现文本编辑器_args_save.jar"/>
+                                <move file="${project.build.directory}/classes/java课程设计_Swing实现文本编辑器_hide.jar"
+                                      tofile="${project.build.directory}/java课程设计_Swing实现文本编辑器_args_save.jar"/>
                                 <!--替换的名称-->
 
                                 <!--jar包备份-->
