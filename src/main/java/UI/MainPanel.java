@@ -358,61 +358,7 @@ public class MainPanel
 
             }
         });
-        /*
-        jFrame.addComponentListener(new ComponentListener()
-        {
-            @Override
-            public void componentResized(ComponentEvent e)
-            {
-                int width = jFrame.getWidth();
-                int height = jFrame.getHeight();
-                if (height <= 500)
-                {
-                    jTextArea.setRows(height / 30);
-                    jTextArea.setColumns(width / 11);
-                }
-                else if (height > 1000)
-                {
-                    jTextArea.setRows(height / 26);
-                    jTextArea.setColumns(width / 11);
-                }
-                else
-                {
-                    jTextArea.setRows(height / 28);
-                    jTextArea.setColumns(width / 11);
-                }
-            }
 
-            @Override
-            public void componentMoved(ComponentEvent e)
-            {
-
-            }
-
-            @Override
-            public void componentShown(ComponentEvent e)
-            {
-
-            }
-
-            @Override
-            public void componentHidden(ComponentEvent e)
-            {
-
-            }
-        });
-        jFrame.addWindowStateListener(new WindowStateListener()
-        {
-            @Override
-            public void windowStateChanged(WindowEvent e)
-            {
-                int width = jFrame.getWidth();
-                int height = jFrame.getHeight();
-                jTextArea.setRows(height / 27);
-                jTextArea.setColumns(width / 11);
-            }
-        });
-         */
         jTextArea.addCaretListener(new CaretListener()
         {                                                            //实时获取文本域指针位置
             @Override
