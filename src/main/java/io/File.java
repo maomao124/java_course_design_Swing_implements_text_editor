@@ -4,9 +4,7 @@ import UI.MainPanel;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.*;
 
 /**
  * Project name(项目名称)：java课程设计 Swing实现文本编辑器
@@ -44,11 +42,21 @@ public class File
         {
             Toolkit.getDefaultToolkit().beep();
             System.err.println("文件未找到！！！  " + "\n错误内容：" + e1.toString());
+            final Writer result = new StringWriter();
+            final PrintWriter printWriter = new PrintWriter(result);
+            e1.printStackTrace(printWriter);
+            String stackTraceStr = result.toString();
+            io.ErrorLog.write(stackTraceStr);
         }
         catch (Exception e1)                  //其它异常
         {
             Toolkit.getDefaultToolkit().beep();
             e1.printStackTrace();
+            final Writer result = new StringWriter();
+            final PrintWriter printWriter = new PrintWriter(result);
+            e1.printStackTrace(printWriter);
+            String stackTraceStr = result.toString();
+            io.ErrorLog.write(stackTraceStr);
         }
         finally
         {
@@ -63,11 +71,21 @@ public class File
             {
                 Toolkit.getDefaultToolkit().beep();
                 System.err.println("文件已经被关闭，无法再次关闭！！！");
+                final Writer result = new StringWriter();
+                final PrintWriter printWriter = new PrintWriter(result);
+                e1.printStackTrace(printWriter);
+                String stackTraceStr = result.toString();
+                io.ErrorLog.write(stackTraceStr);
             }
             catch (Exception e1)              //其它异常
             {
                 Toolkit.getDefaultToolkit().beep();
                 e1.printStackTrace();
+                final Writer result = new StringWriter();
+                final PrintWriter printWriter = new PrintWriter(result);
+                e1.printStackTrace(printWriter);
+                String stackTraceStr = result.toString();
+                io.ErrorLog.write(stackTraceStr);
             }
         }
     }
@@ -86,11 +104,21 @@ public class File
         {
             Toolkit.getDefaultToolkit().beep();
             System.err.println("文件未找到！！！  " + "\n错误内容：" + e1.toString());
+            final Writer result = new StringWriter();
+            final PrintWriter printWriter = new PrintWriter(result);
+            e1.printStackTrace(printWriter);
+            String stackTraceStr = result.toString();
+            io.ErrorLog.write(stackTraceStr);
         }
         catch (Exception e1)                  //其它异常
         {
             Toolkit.getDefaultToolkit().beep();
             e1.printStackTrace();
+            final Writer result = new StringWriter();
+            final PrintWriter printWriter = new PrintWriter(result);
+            e1.printStackTrace(printWriter);
+            String stackTraceStr = result.toString();
+            io.ErrorLog.write(stackTraceStr);
         }
         finally
         {
@@ -105,11 +133,21 @@ public class File
             {
                 Toolkit.getDefaultToolkit().beep();
                 System.err.println("文件已经被关闭，无法再次关闭！！！");
+                final Writer result = new StringWriter();
+                final PrintWriter printWriter = new PrintWriter(result);
+                e1.printStackTrace(printWriter);
+                String stackTraceStr = result.toString();
+                io.ErrorLog.write(stackTraceStr);
             }
             catch (Exception e1)              //其它异常
             {
                 Toolkit.getDefaultToolkit().beep();
                 e1.printStackTrace();
+                final Writer result = new StringWriter();
+                final PrintWriter printWriter = new PrintWriter(result);
+                e1.printStackTrace(printWriter);
+                String stackTraceStr = result.toString();
+                io.ErrorLog.write(stackTraceStr);
             }
         }
     }
@@ -127,11 +165,21 @@ public class File
         {
             Toolkit.getDefaultToolkit().beep();
             System.err.println("文件未找到！！！  " + "\n错误内容：" + e1.toString());
+            final Writer result = new StringWriter();
+            final PrintWriter printWriter = new PrintWriter(result);
+            e1.printStackTrace(printWriter);
+            String stackTraceStr = result.toString();
+            io.ErrorLog.write(stackTraceStr);
         }
         catch (Exception e1)                  //其它异常
         {
             Toolkit.getDefaultToolkit().beep();
             e1.printStackTrace();
+            final Writer result = new StringWriter();
+            final PrintWriter printWriter = new PrintWriter(result);
+            e1.printStackTrace(printWriter);
+            String stackTraceStr = result.toString();
+            io.ErrorLog.write(stackTraceStr);
         }
         finally
         {
@@ -146,11 +194,21 @@ public class File
             {
                 Toolkit.getDefaultToolkit().beep();
                 System.err.println("文件已经被关闭，无法再次关闭！！！");
+                final Writer result = new StringWriter();
+                final PrintWriter printWriter = new PrintWriter(result);
+                e1.printStackTrace(printWriter);
+                String stackTraceStr = result.toString();
+                io.ErrorLog.write(stackTraceStr);
             }
             catch (Exception e1)              //其它异常
             {
                 Toolkit.getDefaultToolkit().beep();
                 e1.printStackTrace();
+                final Writer result = new StringWriter();
+                final PrintWriter printWriter = new PrintWriter(result);
+                e1.printStackTrace(printWriter);
+                String stackTraceStr = result.toString();
+                io.ErrorLog.write(stackTraceStr);
             }
         }
     }

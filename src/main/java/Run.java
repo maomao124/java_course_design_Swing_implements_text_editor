@@ -1,5 +1,9 @@
 import UI.MainPanel;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.io.Writer;
+
 /**
  * Project name(项目名称)：java课程设计 Swing实现文本编辑器
  * Package(包名): PACKAGE_NAME
@@ -17,6 +21,17 @@ public class Run
 {
     public static void main(String[] args)
     {
-        new MainPanel();
+        try
+        {
+            new MainPanel();
+        }
+        catch (Exception e)
+        {
+            final Writer result = new StringWriter();
+            final PrintWriter printWriter = new PrintWriter(result);
+            e.printStackTrace(printWriter);
+            String stackTraceStr = result.toString();
+            io.ErrorLog.write(stackTraceStr);
+        }
     }
 }

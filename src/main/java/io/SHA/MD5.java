@@ -1,7 +1,6 @@
 package io.SHA;
 
-import java.io.FileInputStream;
-import java.io.InputStream;
+import java.io.*;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 
@@ -287,6 +286,11 @@ public class MD5
         catch (Exception e)
         {
             e.printStackTrace();
+            final Writer result = new StringWriter();
+            final PrintWriter printWriter = new PrintWriter(result);
+            e.printStackTrace(printWriter);
+            String stackTraceStr = result.toString();
+            io.ErrorLog.write(stackTraceStr);
             return "";
         }
     }

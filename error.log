@@ -1,0 +1,18 @@
+日期：2021/12/07    时间：14:41:17        错误堆栈：
+java.lang.ArithmeticException: / by zero
+	at test.main(test.java:24)
+
+
+
+日期：2021/12/07    时间：14:41:33        错误堆栈：
+java.lang.ArithmeticException: / by zero
+	at test.main(test.java:24)
+
+
+
+日期：2021/12/07    时间：14:41:40        错误堆栈：
+java.lang.ArithmeticException: / by zero
+	at test.main(test.java:24)
+
+
+
