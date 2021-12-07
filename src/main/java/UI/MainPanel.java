@@ -22,7 +22,7 @@ import java.io.File;
  * Date(创建日期)： 2021/12/7
  * Time(创建时间)： 12:42
  * Version(版本): 1.0
- * Description(描述)： 无
+ * Description(描述)： 主面板类
  */
 
 public class MainPanel
