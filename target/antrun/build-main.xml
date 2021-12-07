@@ -8,14 +8,14 @@
       <include name="*.jar"/>
     </fileset>
   </copy>
-  <move file="H:\程序\大三上期\java课程设计 Swing实现文本编辑器\target/classes/java课程设计 Swing实现文本编辑器.jar" tofile="H:\程序\大三上期\java课程设计 Swing实现文本编辑器\target/java课程设计 Swing实现文本编辑器_hide.jar"/>
+  <move file="H:\程序\大三上期\java课程设计 Swing实现文本编辑器\target/classes/java课程设计_Swing实现文本编辑器.jar" tofile="H:\程序\大三上期\java课程设计 Swing实现文本编辑器\target/java课程设计_Swing实现文本编辑器_hide.jar"/>
   <copy todir="H:\程序\大三上期\java课程设计 Swing实现文本编辑器\target/classes" overwrite="true">
     <fileset dir="H:\程序\大三上期\java课程设计 Swing实现文本编辑器\target" erroronmissingdir="false">
       <include name="*.jar"/>
     </fileset>
   </copy>
-  <move file="H:\程序\大三上期\java课程设计 Swing实现文本编辑器\target/classes/java课程设计 Swing实现文本编辑器.jar" tofile="H:\程序\大三上期\java课程设计 Swing实现文本编辑器\target/java课程设计 Swing实现文本编辑器_args.jar"/>
-  <move file="H:\程序\大三上期\java课程设计 Swing实现文本编辑器\target/classes/java课程设计 Swing实现文本编辑器_hide.jar" tofile="H:\程序\大三上期\java课程设计 Swing实现文本编辑器\target/java课程设计 Swing实现文本编辑器_args_save.jar"/>
+  <move file="H:\程序\大三上期\java课程设计 Swing实现文本编辑器\target/classes/java课程设计_Swing实现文本编辑器.jar" tofile="H:\程序\大三上期\java课程设计 Swing实现文本编辑器\target/java课程设计_Swing实现文本编辑器_args.jar"/>
+  <move file="H:\程序\大三上期\java课程设计 Swing实现文本编辑器\target/classes/java课程设计_Swing实现文本编辑器_hide.jar" tofile="H:\程序\大三上期\java课程设计 Swing实现文本编辑器\target/java课程设计_Swing实现文本编辑器_args_save.jar"/>
   <copy todir="H:/jar包/" overwrite="true">
     <fileset dir="H:\程序\大三上期\java课程设计 Swing实现文本编辑器\target" erroronmissingdir="false">
       <include name="*.jar"/>
