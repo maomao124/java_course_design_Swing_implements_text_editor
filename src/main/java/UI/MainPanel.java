@@ -76,6 +76,7 @@ public class MainPanel
     JMenuItem background_color;
     JMenuItem selected_color;
     JMenuItem wrap;
+    JMenuItem errorLog;
     JMenuItem about;
 
     public static JButton getButton_FileInformation()
@@ -213,6 +214,7 @@ public class MainPanel
         jPopupMenu.add(cut_pop);
         jPopupMenu.add(paste_pop);
         jPopupMenu.add(delete_pop);
+        jPopupMenu.add(deleteAll_pop);
         jPopupMenu.add(selectAll_pop);
 
         // 菜单
@@ -245,7 +247,7 @@ public class MainPanel
         copy.setBackground(Color.cyan);
         cut.setBackground(Color.cyan);
         paste.setBackground(Color.cyan);
-        delete.setBackground(Color.cyan);
+        delete.setBackground(Color.yellow);
         deleteAll.setBackground(Color.red);
         search.setBackground(Color.cyan);
         replace.setBackground(Color.cyan);
@@ -263,7 +265,9 @@ public class MainPanel
         wrap = new JMenuItem("自动换行");
         wrap.setBackground(Color.cyan);
 
+        errorLog = new JMenuItem("错误日志");
         about = new JMenuItem("关于");
+        errorLog.setBackground(Color.pink);
         about.setBackground(Color.pink);
 
         //文件
@@ -278,6 +282,7 @@ public class MainPanel
         menu_edit.add(cut);
         menu_edit.add(paste);
         menu_edit.add(delete);
+        menu_edit.add(deleteAll);
         menu_edit.add(search);
         menu_edit.add(replace);
         menu_edit.add(edit_mode);
@@ -292,6 +297,7 @@ public class MainPanel
         format.add(wrap);
 
         //帮助
+        help.add(errorLog);
         help.add(about);
 
         // 将菜单和相应的子菜单添加到菜单栏
