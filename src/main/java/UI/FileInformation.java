@@ -64,6 +64,14 @@ public class FileInformation
                 display();
             }
         });
+        MainPanel.getFile_information().addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                display();
+            }
+        });
     }
 
     public static void display()

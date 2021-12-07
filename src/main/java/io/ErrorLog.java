@@ -5,8 +5,9 @@ import UI.MainPanel;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.*;
 import java.text.DecimalFormat;
 import java.util.Calendar;
 
@@ -48,6 +49,40 @@ public class ErrorLog
         jPanel2.add(button_back);
         jPanel.add(jPanel2, BorderLayout.SOUTH);
         button_back.setBackground(Color.cyan);
+        button_back.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                back();
+            }
+        });
+        MainPanel.getErrorLog().addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                display();
+            }
+        });
+    }
+
+    private static void display()
+    {
+        read();                                   //读取日志
+        JFrame jFrame = MainPanel.getjFrame();
+        jFrame.remove(MainPanel.getjPanel());
+        jFrame.add(MainPanel.getjPanel_ErrorLog());
+        MainPanel.getjPanel_ErrorLog().updateUI();
+        jFrame.repaint();
+    }
+
+    private static void back()
+    {
+        JFrame jFrame = MainPanel.getjFrame();
+        jFrame.remove(MainPanel.getjPanel_ErrorLog());
+        jFrame.add(MainPanel.getjPanel());
+        jFrame.repaint();
     }
 
     public static void write(String message)
@@ -115,6 +150,77 @@ public class ErrorLog
             {
                 Toolkit.getDefaultToolkit().beep();
                 e.printStackTrace();
+            }
+        }
+    }
+
+    private static void read()
+    {
+        jTextArea_ErrorLog.setText("");             //清空
+        FileReader fileReader = null;
+        BufferedReader bufferedReader = null;
+        try                                  //文件流打开，文件读写
+        {
+            fileReader = new FileReader("error.log");
+            bufferedReader = new BufferedReader(fileReader);
+            String str;
+            while ((str = bufferedReader.readLine()) != null)
+            {
+                jTextArea_ErrorLog.append(str+"\n");
+            }
+        }
+        catch (FileNotFoundException e)      //文件未找到
+        {
+            Toolkit.getDefaultToolkit().beep();
+            System.err.println("文件未找到！！！  " + "\n错误内容：" + e.toString());
+            final Writer result = new StringWriter();
+            final PrintWriter printWriter = new PrintWriter(result);
+            e.printStackTrace(printWriter);
+            String stackTraceStr = result.toString();
+            io.ErrorLog.write(stackTraceStr);
+        }
+        catch (Exception e)                  //其它异常
+        {
+            Toolkit.getDefaultToolkit().beep();
+            e.printStackTrace();
+            final Writer result = new StringWriter();
+            final PrintWriter printWriter = new PrintWriter(result);
+            e.printStackTrace(printWriter);
+            String stackTraceStr = result.toString();
+            io.ErrorLog.write(stackTraceStr);
+        }
+        finally
+        {
+            try                              //关闭流
+            {
+                if (fileReader != null)
+                {
+                    fileReader.close();
+                }
+                if (bufferedReader != null)
+                {
+                    bufferedReader.close();
+                }
+            }
+            catch (NullPointerException e)    //空指针异常
+            {
+                Toolkit.getDefaultToolkit().beep();
+                System.err.println("文件已经被关闭，无法再次关闭！！！");
+                final Writer result = new StringWriter();
+                final PrintWriter printWriter = new PrintWriter(result);
+                e.printStackTrace(printWriter);
+                String stackTraceStr = result.toString();
+                io.ErrorLog.write(stackTraceStr);
+            }
+            catch (Exception e)              //其它异常
+            {
+                Toolkit.getDefaultToolkit().beep();
+                e.printStackTrace();
+                final Writer result = new StringWriter();
+                final PrintWriter printWriter = new PrintWriter(result);
+                e.printStackTrace(printWriter);
+                String stackTraceStr = result.toString();
+                io.ErrorLog.write(stackTraceStr);
             }
         }
     }

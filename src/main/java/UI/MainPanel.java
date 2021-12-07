@@ -61,6 +61,7 @@ public class MainPanel
     JMenuItem open;         // 子菜单
     JMenuItem save;
     JMenuItem save_as;
+    private static JMenuItem file_information;
     JMenuItem exit;
     JMenuItem selectAll;
     JMenuItem copy;
@@ -76,7 +77,7 @@ public class MainPanel
     JMenuItem background_color;
     JMenuItem selected_color;
     JMenuItem wrap;
-    JMenuItem errorLog;
+    private static JMenuItem errorLog;
     JMenuItem about;
 
     public static JButton getButton_FileInformation()
@@ -92,6 +93,26 @@ public class MainPanel
     public static JPanel getjPanel_ErrorLog()
     {
         return jPanel_ErrorLog;
+    }
+
+    public static JMenuItem getErrorLog()
+    {
+        return errorLog;
+    }
+
+    public static void setErrorLog(JMenuItem errorLog)
+    {
+        MainPanel.errorLog = errorLog;
+    }
+
+    public static JMenuItem getFile_information()
+    {
+        return file_information;
+    }
+
+    public static void setFile_information(JMenuItem file_information)
+    {
+        MainPanel.file_information = file_information;
     }
 
     public static void setjPanel_ErrorLog(JPanel jPanel_ErrorLog)
@@ -228,10 +249,12 @@ public class MainPanel
         open = new JMenuItem("浏览");
         save = new JMenuItem("保存");
         save_as = new JMenuItem("另存为");
+        file_information = new JMenuItem("文件信息");
         exit = new JMenuItem("退出");
         open.setBackground(Color.cyan);
         save.setBackground(Color.cyan);
         save_as.setBackground(Color.cyan);
+        file_information.setBackground(Color.cyan);
         exit.setBackground(Color.red);
 
         selectAll = new JMenuItem("全选");
@@ -274,6 +297,7 @@ public class MainPanel
         menu_file.add(open);
         menu_file.add(save);
         menu_file.add(save_as);
+        menu_file.add(file_information);
         menu_file.add(exit);
 
         //编辑
@@ -627,6 +651,7 @@ public class MainPanel
         this.init_mainPanel();                                           //初始化主面板
         this.init_menu();                                                //初始化菜单面板
         FileInformation.init();                                          //初始化文件信息面板
+        io.ErrorLog.init_error_log_jPanel();                             //初始化错误日志面板
 
         jFrame.add(jPanel);                                              //主面板加入到顶层面板
         jFrame.setVisible(true);                                         //设置可见
