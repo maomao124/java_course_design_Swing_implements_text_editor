@@ -20,7 +20,7 @@ import java.util.Date;
  * Date(创建日期)： 2021/12/7
  * Time(创建时间)： 12:52
  * Version(版本): 1.0
- * Description(描述)： 无
+ * Description(描述)： 文件信息面板
  */
 
 public class FileInformation
