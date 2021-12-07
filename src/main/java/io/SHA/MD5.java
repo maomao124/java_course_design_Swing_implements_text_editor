@@ -14,7 +14,7 @@ import java.security.MessageDigest;
  * Date(创建日期)： 2021/12/7
  * Time(创建时间)： 12:50
  * Version(版本): 1.0
- * Description(描述)： 无
+ * Description(描述)： 散列算法 MD5
  */
 
 public class MD5
