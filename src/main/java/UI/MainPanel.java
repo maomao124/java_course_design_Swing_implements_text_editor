@@ -3,6 +3,7 @@ package UI;
 import io.SHA.MD5;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
 import javax.swing.text.BadLocationException;
@@ -33,7 +34,7 @@ public class MainPanel
     private JTextArea jTextArea;                           //文本域
     private JScrollPane jScrollPane;                      //滚动面板
     private final JLabel label_FilePath = new JLabel("所选文件路径：");  //路径显示
-    private final JTextField jTextField_FilePath = new JTextField(25);
+    private final JTextField jTextField_FilePath = new JTextField(30);
     private final JButton button_Open = new JButton("浏览");      //文件打开按钮
     private final JButton button_Save = new JButton("保存");     //保存按钮
     private final JButton button_save_file = new JButton("另存为");
@@ -148,15 +149,21 @@ public class MainPanel
     private void init_mainPanel()                                    //初始化主面板
     {
         jPanel = new JPanel();                                       //初始化主面板
+        jPanel.setLayout(new BorderLayout());
+        JPanel jPanel1 = new JPanel();                               //上面的按钮
+        JPanel jPanel2 = new JPanel();                                 //下面的状态字体
+        jPanel1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+        jPanel2.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
         Font font = new Font("宋体", Font.PLAIN, 19);      //设置字体
 
-        jTextArea = new JTextArea(720 / 28, 1280 / 11);     //初始化文本域
+        jTextArea = new JTextArea(720 / 28, 1280 / 12);     //初始化文本域
         jTextArea.setLineWrap(true);
         jTextArea.setFont(font);
         jTextArea.setEditable(isEditable);
 
         jScrollPane = new JScrollPane();
         jScrollPane.setViewportView(jTextArea);
+        jScrollPane.setBorder(new EmptyBorder(0,30,15,30));
 
         button_Open.setBackground(Color.cyan);                          //设置颜色
         button_Save.setBackground(Color.cyan);
@@ -166,15 +173,17 @@ public class MainPanel
 
         label_Information.setPreferredSize(new Dimension(800, 30));
 
-        jPanel.add(label_FilePath);                                      //加入到主面板中
-        jPanel.add(jTextField_FilePath);
-        jPanel.add(button_Open);
-        jPanel.add(button_Save);
-        jPanel.add(button_save_file);
-        jPanel.add(button_EditMode);
-        jPanel.add(button_FileInformation);
-        jPanel.add(jScrollPane);
-        jPanel.add(label_Information);
+        jPanel1.add(label_FilePath);                                      //加入到主面板中
+        jPanel1.add(jTextField_FilePath);
+        jPanel1.add(button_Open);
+        jPanel1.add(button_Save);
+        jPanel1.add(button_save_file);
+        jPanel1.add(button_EditMode);
+        jPanel1.add(button_FileInformation);
+        jPanel.add(jPanel1, BorderLayout.NORTH);
+        jPanel.add(jScrollPane, BorderLayout.CENTER);
+        jPanel2.add(label_Information);
+        jPanel.add(jPanel2, BorderLayout.SOUTH);
     }
 
     private void init_menu()                                            //初始化菜单面板
@@ -300,7 +309,6 @@ public class MainPanel
                     jPopupMenu.show(e.getComponent(), e.getX(), e.getY());
                 }
             }
-
         });
     }
 
@@ -350,6 +358,7 @@ public class MainPanel
 
             }
         });
+        /*
         jFrame.addComponentListener(new ComponentListener()
         {
             @Override
@@ -403,7 +412,7 @@ public class MainPanel
                 jTextArea.setColumns(width / 11);
             }
         });
-
+         */
         jTextArea.addCaretListener(new CaretListener()
         {                                                            //实时获取文本域指针位置
             @Override

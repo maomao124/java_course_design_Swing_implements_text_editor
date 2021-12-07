@@ -49,3 +49,11 @@ java.lang.NullPointerException: Cannot read field "parent" because "comp" is nul
 
 
 
+日期：2021/12/07    时间：20:22:44主机：mao        错误堆栈：
+java.lang.NullPointerException: Cannot invoke "javax.swing.JTextArea.setLineWrap(boolean)" because "this.jTextArea" is null
+	at UI.MainPanel.init_mainPanel(MainPanel.java:159)
+	at UI.MainPanel.<init>(MainPanel.java:468)
+	at Run.main(Run.java:26)
+
+
+

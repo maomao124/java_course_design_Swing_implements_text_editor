@@ -75,7 +75,7 @@ public class ErrorLog
                 .append(decimalFormat1.format(day)).append("    时间：").append(decimalFormat1.format(hour))
                 .append(":").append(decimalFormat1.format(minute)).append(":").append(decimalFormat1.format(second));
         //System.out.println(stringBuffer1);
-        stringBuffer1.append("主机：").append(System.getProperty("user.name"));
+        stringBuffer1.append("        主机：").append(System.getProperty("user.name"));
         stringBuffer1.append("        错误堆栈：\n");
         stringBuffer1.append(message);
         stringBuffer1.append("\n\n\n");
