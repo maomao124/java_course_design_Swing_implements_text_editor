@@ -40,7 +40,7 @@ public class ErrorLog
         JPanel jPanel = new JPanel();
         MainPanel.setjPanel_ErrorLog(jPanel);
         jPanel.setLayout(new BorderLayout());
-        button_back=new JButton("<-返回");
+        button_back = new JButton("<-返回");
         jScrollPane.setBorder(new EmptyBorder(20, 100, 50, 100));
         jPanel.add(jScrollPane, BorderLayout.CENTER);
         JPanel jPanel2 = new JPanel();
@@ -75,6 +75,7 @@ public class ErrorLog
                 .append(decimalFormat1.format(day)).append("    时间：").append(decimalFormat1.format(hour))
                 .append(":").append(decimalFormat1.format(minute)).append(":").append(decimalFormat1.format(second));
         //System.out.println(stringBuffer1);
+        stringBuffer1.append("主机：").append(System.getProperty("user.name"));
         stringBuffer1.append("        错误堆栈：\n");
         stringBuffer1.append(message);
         stringBuffer1.append("\n\n\n");

@@ -16,3 +16,36 @@ java.lang.ArithmeticException: / by zero
 
 
 
+日期：2021/12/07    时间：20:10:01        错误堆栈：
+java.lang.NullPointerException: Cannot read field "parent" because "comp" is null
+	at java.desktop/java.awt.Container.addImpl(Container.java:1118)
+	at java.desktop/java.awt.Container.add(Container.java:437)
+	at java.desktop/javax.swing.JPopupMenu.add(JPopupMenu.java:283)
+	at UI.MainPanel.init_menu(MainPanel.java:197)
+	at UI.MainPanel.<init>(MainPanel.java:462)
+	at Run.main(Run.java:26)
+
+
+
+日期：2021/12/07    时间：20:10:07        错误堆栈：
+java.lang.NullPointerException: Cannot read field "parent" because "comp" is null
+	at java.desktop/java.awt.Container.addImpl(Container.java:1118)
+	at java.desktop/java.awt.Container.add(Container.java:437)
+	at java.desktop/javax.swing.JPopupMenu.add(JPopupMenu.java:283)
+	at UI.MainPanel.init_menu(MainPanel.java:197)
+	at UI.MainPanel.<init>(MainPanel.java:462)
+	at Run.main(Run.java:26)
+
+
+
+日期：2021/12/07    时间：20:10:18        错误堆栈：
+java.lang.NullPointerException: Cannot read field "parent" because "comp" is null
+	at java.desktop/java.awt.Container.addImpl(Container.java:1118)
+	at java.desktop/java.awt.Container.add(Container.java:437)
+	at java.desktop/javax.swing.JPopupMenu.add(JPopupMenu.java:283)
+	at UI.MainPanel.init_menu(MainPanel.java:197)
+	at UI.MainPanel.<init>(MainPanel.java:462)
+	at Run.main(Run.java:26)
+
+
+

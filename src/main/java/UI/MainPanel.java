@@ -11,7 +11,6 @@ import java.awt.event.*;
 import java.io.File;
 
 
-
 /**
  * Project name(项目名称)：java课程设计 Swing实现文本编辑器
  * Package(包名): UI
@@ -44,6 +43,37 @@ public class MainPanel
     boolean isEditable = true;                                      //文本域是否可以编辑
     private static File file;                                       //关联的文件
     private final JLabel label_Information = new JLabel("欢迎使用文件编辑器", JLabel.CENTER);      //状态位
+
+    JMenuBar jMenuBar;        //菜单栏
+    JPopupMenu jPopupMenu;      //弹出菜单
+    JMenuItem copy_pop;
+    JMenuItem cut_pop;
+    JMenuItem paste_pop;
+    JMenuItem delete_pop;
+    JMenuItem selectAll_pop;
+    JMenu menu_file;            //菜单
+    JMenu menu_edit;
+    JMenu individualization;
+    JMenu format;
+    JMenu help;
+    JMenuItem open;         // 子菜单
+    JMenuItem save;
+    JMenuItem save_as;
+    JMenuItem exit;
+    JMenuItem selectAll;
+    JMenuItem copy;
+    JMenuItem cut;
+    JMenuItem paste;
+    JMenuItem delete;
+    JMenuItem search;
+    JMenuItem replace;
+    JMenuItem edit_mode;
+    JMenuItem font_setting;
+    JMenuItem cursor_color;
+    JMenuItem background_color;
+    JMenuItem selected_color;
+    JMenuItem wrap;
+    JMenuItem about;
 
     public static JButton getButton_FileInformation()
     {
@@ -149,7 +179,129 @@ public class MainPanel
 
     private void init_menu()                                            //初始化菜单面板
     {
+        // 菜单栏
+        jMenuBar = new JMenuBar();
 
+        // 弹出菜单
+        jPopupMenu = new JPopupMenu();
+        copy_pop = new JMenuItem("复制");
+        cut_pop = new JMenuItem("剪切");
+        paste_pop = new JMenuItem("粘贴");
+        delete_pop = new JMenuItem("删除");
+        selectAll_pop = new JMenuItem("全选");
+
+        jPopupMenu.add(copy_pop);
+        jPopupMenu.add(cut_pop);
+        jPopupMenu.add(paste_pop);
+        jPopupMenu.add(delete_pop);
+        jPopupMenu.add(selectAll_pop);
+
+        // 菜单
+        menu_file = new JMenu("文件");
+        menu_edit = new JMenu("编辑");
+        individualization = new JMenu("个性化");
+        format = new JMenu("格式");
+        help = new JMenu("帮助");
+
+        // 子菜单
+        open = new JMenuItem("浏览");
+        save = new JMenuItem("保存");
+        save_as = new JMenuItem("另存为");
+        exit = new JMenuItem("退出");
+        open.setBackground(Color.cyan);
+        save.setBackground(Color.cyan);
+        save_as.setBackground(Color.cyan);
+        exit.setBackground(Color.red);
+
+        selectAll = new JMenuItem("全选");
+        copy = new JMenuItem("复制");
+        cut = new JMenuItem("剪切");
+        paste = new JMenuItem("粘贴");
+        delete = new JMenuItem("删除");
+        search = new JMenuItem("查找");
+        replace = new JMenuItem("替换");
+        edit_mode = new JMenuItem("编辑模式");
+        selectAll.setBackground(Color.cyan);
+        copy.setBackground(Color.cyan);
+        cut.setBackground(Color.cyan);
+        paste.setBackground(Color.cyan);
+        delete.setBackground(Color.cyan);
+        search.setBackground(Color.cyan);
+        replace.setBackground(Color.cyan);
+        edit_mode.setBackground(Color.cyan);
+
+        font_setting = new JMenuItem("字体设置");
+        cursor_color = new JMenuItem("光标颜色");
+        background_color = new JMenuItem("背景颜色");
+        selected_color = new JMenuItem("选中颜色");
+        font_setting.setBackground(Color.green);
+        cursor_color.setBackground(Color.green);
+        background_color.setBackground(Color.green);
+        selected_color.setBackground(Color.green);
+
+        wrap = new JMenuItem("自动换行");
+        wrap.setBackground(Color.cyan);
+
+        about = new JMenuItem("关于");
+        about.setBackground(Color.pink);
+
+        //文件
+        menu_file.add(open);
+        menu_file.add(save);
+        menu_file.add(save_as);
+        menu_file.add(exit);
+
+        //编辑
+        menu_edit.add(selectAll);
+        menu_edit.add(copy);
+        menu_edit.add(cut);
+        menu_edit.add(paste);
+        menu_edit.add(delete);
+        menu_edit.add(search);
+        menu_edit.add(replace);
+        menu_edit.add(edit_mode);
+
+        //个性化
+        individualization.add(font_setting);
+        individualization.add(cursor_color);
+        individualization.add(background_color);
+        individualization.add(selected_color);
+
+        //格式
+        format.add(wrap);
+
+        //帮助
+        help.add(about);
+
+        // 将菜单和相应的子菜单添加到菜单栏
+        jMenuBar.add(menu_file);
+        jMenuBar.add(menu_edit);
+        jMenuBar.add(individualization);
+        jMenuBar.add(format);
+        jMenuBar.add(help);
+
+        // 添加菜单栏
+        jFrame.setJMenuBar(jMenuBar);
+    }
+
+    private void init_menu_Listener()                                   //初始化菜单监听器
+    {
+        // 鼠标监听,弹出右键菜单
+        jTextArea.addMouseListener(new MouseAdapter()
+        {
+            public void mousePressed(MouseEvent e)
+            {
+                int mods = e.getModifiersEx();
+                //System.out.println(mods);
+                // 鼠标右键
+                if (mods == 4096)
+                {
+                    // 弹出菜单
+                    jPopupMenu.show(e.getComponent(), e.getX(), e.getY());
+                }
+            }
+
+        });
     }
 
     private void init_Listener()                                        //初始化各种监听器
@@ -314,6 +466,7 @@ public class MainPanel
         jFrame.setVisible(true);                                         //设置可见
 
         this.init_Listener();                                            //初始化各种监听器
+        this.init_menu_Listener();                                       //初始化菜单监听器
     }
 
     private void close()                                                 //关闭程序

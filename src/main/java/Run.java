@@ -27,6 +27,7 @@ public class Run
         }
         catch (Exception e)
         {
+            e.printStackTrace();
             final Writer result = new StringWriter();
             final PrintWriter printWriter = new PrintWriter(result);
             e.printStackTrace(printWriter);
