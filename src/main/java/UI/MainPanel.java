@@ -69,7 +69,7 @@ public class MainPanel
     JMenuItem paste;
     JMenuItem delete;
     JMenuItem deleteAll;
-    JMenuItem search;
+    private static JMenuItem search;
     JMenuItem replace;
     JMenuItem edit_mode;
     JMenuItem font_setting;
@@ -113,6 +113,11 @@ public class MainPanel
     public static void setFile_information(JMenuItem file_information)
     {
         MainPanel.file_information = file_information;
+    }
+
+    public static JMenuItem getSearch()
+    {
+        return search;
     }
 
     public static void setjPanel_ErrorLog(JPanel jPanel_ErrorLog)
@@ -505,6 +510,7 @@ public class MainPanel
                 MainPanel.this.EditMode();
             }
         });
+
     }
 
 
@@ -708,6 +714,7 @@ public class MainPanel
         this.init_menu();                                                //初始化菜单面板
         FileInformation.init();                                          //初始化文件信息面板
         UI.ErrorLog.init_error_log_jPanel();                             //初始化错误日志面板
+        UI.Search.init_search();                                         //初始化查找面板
 
         jFrame.add(jPanel);                                              //主面板加入到顶层面板
         jFrame.setVisible(true);                                         //设置可见
