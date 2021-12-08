@@ -77,3 +77,10 @@ java.lang.NullPointerException: Cannot read field "parent" because "comp" is nul
 
 
 
+日期：2021/12/08    时间：19:56:56        主机：mao        错误堆栈：
+java.lang.NullPointerException: Cannot invoke "javax.swing.JTextArea.setForeground(java.awt.Color)" because "this.jTextArea" is null
+	at UI.MainPanel.<init>(MainPanel.java:796)
+	at Run.main(Run.java:26)
+
+
+

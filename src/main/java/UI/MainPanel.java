@@ -74,9 +74,11 @@ public class MainPanel
     private static JMenuItem replace;
     JMenuItem edit_mode;
     JMenuItem font_setting;
+    JMenuItem font_color;
     JMenuItem cursor_color;
     JMenuItem background_color;
     JMenuItem selected_color;
+    JMenuItem rendering_color;
     JMenuItem wrap;
     private static JMenuItem errorLog;
     JMenuItem about;
@@ -289,10 +291,12 @@ public class MainPanel
         edit_mode.setBackground(Color.green);
 
         font_setting = new JMenuItem("字体设置");
+        font_color = new JMenuItem("字体颜色");
         cursor_color = new JMenuItem("光标颜色");
         background_color = new JMenuItem("背景颜色");
         selected_color = new JMenuItem("选中颜色");
         font_setting.setBackground(Color.green);
+        font_color.setBackground(Color.green);
         cursor_color.setBackground(Color.green);
         background_color.setBackground(Color.green);
         selected_color.setBackground(Color.green);
@@ -325,6 +329,7 @@ public class MainPanel
 
         //个性化
         individualization.add(font_setting);
+        individualization.add(font_color);
         individualization.add(cursor_color);
         individualization.add(background_color);
         individualization.add(selected_color);
@@ -800,7 +805,9 @@ public class MainPanel
         UI.ErrorLog.init_error_log_jPanel();                             //初始化错误日志面板
         UI.Search.init_search(jTextArea, label_Information);              //初始化查找面板
         UI.Replace.init_replace(jTextArea, label_Information);            //初始化替换面板
-        fontSetting = new UI.FontSetting(jTextArea);                        //初始化字体设置模板
+        fontSetting = new UI.FontSetting(jTextArea);                      //初始化字体设置面板
+        Color_JTextArea.init_Color_JTextArea                              //初始化文本域颜色选择
+                (jTextArea, font_color, cursor_color, background_color, selected_color);
 
         jFrame.add(jPanel);                                              //主面板加入到顶层面板
         jFrame.setVisible(true);                                         //设置可见
