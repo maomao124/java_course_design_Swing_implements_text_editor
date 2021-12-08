@@ -22,19 +22,6 @@ import java.net.URL;
 
 public class Run
 {
-    public static ImageIcon createImageIcon(String path)
-    {
-        URL imgURL = About.class.getResource(path);
-        if (imgURL != null)
-        {
-            return new ImageIcon(imgURL);
-        }
-        else
-        {
-            System.err.println("文件未找到: " + path);
-            return null;
-        }
-    }
     public static void main(String[] args)
     {
         try

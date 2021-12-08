@@ -45,10 +45,12 @@ public class About extends JFrame
         label2.setHorizontalAlignment(0);
         JLabel label3 = new JLabel("GitHub：https://github.com/maomao124/");
         label3.setHorizontalAlignment(0);
-        ImageIcon icon = createImageIcon("二维码.bmp");
-        JLabel jLabel4 = new JLabel(icon);
+        ImageIcon icon = createImageIcon("t.png");
+        JLabel label4 = new JLabel(icon);
+        JOptionPane.showMessageDialog(null,"","",0,icon);
         this.add(label1);
         this.add(label2);
         this.add(label3);
+        this.add(label4);
     }
 }
