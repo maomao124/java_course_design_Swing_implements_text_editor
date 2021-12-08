@@ -295,12 +295,13 @@ public class MainPanel
         cursor_color = new JMenuItem("光标颜色");
         background_color = new JMenuItem("背景颜色");
         selected_color = new JMenuItem("选中颜色");
-        rendering_color=new JMenuItem("渲染颜色");
+        rendering_color = new JMenuItem("渲染颜色");
         font_setting.setBackground(Color.green);
         font_color.setBackground(Color.green);
         cursor_color.setBackground(Color.green);
         background_color.setBackground(Color.green);
         selected_color.setBackground(Color.green);
+        rendering_color.setBackground(Color.green);
 
         wrap = new JMenuItem("自动换行");
         wrap.setBackground(Color.cyan);
@@ -334,6 +335,7 @@ public class MainPanel
         individualization.add(cursor_color);
         individualization.add(background_color);
         individualization.add(selected_color);
+        individualization.add(rendering_color);
 
         //格式
         format.add(wrap);
