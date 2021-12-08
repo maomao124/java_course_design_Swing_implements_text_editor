@@ -20,10 +20,10 @@ import java.awt.event.ActionListener;
 
 public class Search
 {
-    int start = 0;// 查找开始位置
-    int end = 0;// 查找结束位置
+    private static int start = 0;// 查找开始位置
+    private static int end = 0;// 查找结束位置
 
-    public static void init_search()
+    public static void init_search(JTextArea jTextArea)
     {
         MainPanel.getSearch().addActionListener(new ActionListener()
         {
@@ -49,6 +49,45 @@ public class Search
                 panel.add(buttonChange);
                 search.add(panel);
                 search.setVisible(true);
+                // 为查找下一个 按钮绑定监听事件
+                buttonFind.addActionListener(new ActionListener()
+                {
+                    @Override
+                    public void actionPerformed(ActionEvent e)
+                    {
+                        // TODO Auto-generated method stub
+                        String findText = textField_1.getText();// 查找的字符串
+
+                        String textArea = jTextArea.getText();// 当前文本框的内容
+                        start = textArea.indexOf(findText, end);
+                        end = start + findText.length();
+                        // 没有找到
+                        if (start == -1)
+                        {
+                            JOptionPane.showMessageDialog(null, "“" + findText +
+                                    "”" + "已经查找完毕", "记事本", JOptionPane.WARNING_MESSAGE);
+                            jTextArea.select(start, end);
+                        }
+                        else
+                        {
+                            jTextArea.select(start, end);
+                        }
+
+                    }
+                });
+                // 为替换按钮绑定监听事件
+                buttonChange.addActionListener(new ActionListener()
+                {
+                    @Override
+                    public void actionPerformed(ActionEvent e)
+                    {
+                        // TODO Auto-generated method stub
+                        String changeText = textField_2.getText();// 替换的字符串
+                        jTextArea.select(start, end);
+                        jTextArea.replaceSelection(changeText);
+                        jTextArea.select(start, end);
+                    }
+                });
             }
         });
 

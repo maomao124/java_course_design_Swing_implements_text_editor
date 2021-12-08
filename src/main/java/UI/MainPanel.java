@@ -714,7 +714,7 @@ public class MainPanel
         this.init_menu();                                                //初始化菜单面板
         FileInformation.init();                                          //初始化文件信息面板
         UI.ErrorLog.init_error_log_jPanel();                             //初始化错误日志面板
-        UI.Search.init_search();                                         //初始化查找面板
+        UI.Search.init_search(jTextArea);                                //初始化查找面板
 
         jFrame.add(jPanel);                                              //主面板加入到顶层面板
         jFrame.setVisible(true);                                         //设置可见
