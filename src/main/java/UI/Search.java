@@ -2,10 +2,7 @@ package UI;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 
 /**
  * Project name(项目名称)：java课程设计 Swing实现文本编辑器
@@ -58,6 +55,7 @@ public class Search
                 panel1.add(textField_search, BorderLayout.CENTER);
                 jDialog_search.add(panel1);
                 jDialog_search.setVisible(true);
+
                 // 查找下一个按钮监听器
                 buttonFind.addActionListener(new ActionListener()
                 {

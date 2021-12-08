@@ -44,6 +44,7 @@ public class MainPanel
     boolean isEditable = true;                                      //文本域是否可以编辑
     private static File file;                                       //关联的文件
     private final JLabel label_Information = new JLabel("欢迎使用文件编辑器", JLabel.CENTER);      //状态位
+    private UI.FontSetting fontSetting;
 
     JMenuBar jMenuBar;        //菜单栏
     JPopupMenu jPopupMenu;      //弹出菜单
@@ -517,6 +518,14 @@ public class MainPanel
             }
         });
 
+        font_setting.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                fontSetting.setVisible(true);
+            }
+        });
     }
 
 
@@ -791,6 +800,7 @@ public class MainPanel
         UI.ErrorLog.init_error_log_jPanel();                             //初始化错误日志面板
         UI.Search.init_search(jTextArea, label_Information);              //初始化查找面板
         UI.Replace.init_replace(jTextArea, label_Information);            //初始化替换面板
+        fontSetting = new UI.FontSetting(jTextArea);                        //初始化字体设置模板
 
         jFrame.add(jPanel);                                              //主面板加入到顶层面板
         jFrame.setVisible(true);                                         //设置可见
