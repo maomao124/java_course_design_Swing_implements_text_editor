@@ -5,6 +5,8 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -62,6 +64,7 @@ public class FileInformation
                 back();
             }
         });
+
         button_back_pop.addActionListener(new ActionListener()
         {
             @Override
@@ -70,6 +73,7 @@ public class FileInformation
                 back();
             }
         });
+
         MainPanel.getButton_FileInformation().addActionListener(new ActionListener()
         {
             @Override
@@ -78,12 +82,37 @@ public class FileInformation
                 display();
             }
         });
+
         MainPanel.getFile_information().addActionListener(new ActionListener()
         {
             @Override
             public void actionPerformed(ActionEvent e)
             {
                 display();
+            }
+        });
+
+        jPanel.addMouseListener(new MouseAdapter()
+        {
+            public void mousePressed(MouseEvent e)
+            {
+                int mods = e.getModifiersEx();
+                if (mods == 16384)
+                {
+                    back();
+                }
+            }
+        });
+
+        jTextArea_FileInformation.addMouseListener(new MouseAdapter()
+        {
+            public void mousePressed(MouseEvent e)
+            {
+                int mods = e.getModifiersEx();
+                if (mods == 16384)
+                {
+                    back();
+                }
             }
         });
     }

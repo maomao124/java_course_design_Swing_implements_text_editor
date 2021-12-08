@@ -5,6 +5,8 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
  * Project name(项目名称)：java课程设计 Swing实现文本编辑器
@@ -50,7 +52,7 @@ public class ErrorLog
         JPanel jPanel3 = new JPanel();                        //顶部面板
         jPanel2.setLayout(new FlowLayout());
         jPanel2.add(button_back);
-        jPanel3.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
+        jPanel3.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
         jPanel3.add(button_back_pop);
         jPanel.add(jPanel2, BorderLayout.SOUTH);
         jPanel.add(jPanel3, BorderLayout.WEST);
@@ -64,6 +66,7 @@ public class ErrorLog
                 back();
             }
         });
+
         button_back_pop.addActionListener(new ActionListener()
         {
             @Override
@@ -72,6 +75,7 @@ public class ErrorLog
                 back();
             }
         });
+
         MainPanel.getErrorLog().addActionListener(new ActionListener()
         {
             @Override
@@ -80,9 +84,33 @@ public class ErrorLog
                 display();
             }
         });
+
+        jPanel.addMouseListener(new MouseAdapter()
+        {
+            public void mousePressed(MouseEvent e)
+            {
+                int mods = e.getModifiersEx();
+                if (mods == 16384)
+                {
+                    back();
+                }
+            }
+        });
+
+        jTextArea_ErrorLog.addMouseListener(new MouseAdapter()
+        {
+            public void mousePressed(MouseEvent e)
+            {
+                int mods = e.getModifiersEx();
+                if (mods == 16384)
+                {
+                    back();
+                }
+            }
+        });
     }
 
-    private static void display()
+    public static void display()
     {
         jTextArea_ErrorLog.setText("");             //清空
         io.ErrorLog.read();                                   //读取日志

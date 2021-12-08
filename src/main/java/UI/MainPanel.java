@@ -70,7 +70,7 @@ public class MainPanel
     JMenuItem delete;
     JMenuItem deleteAll;
     private static JMenuItem search;
-    JMenuItem replace;
+    private static JMenuItem replace;
     JMenuItem edit_mode;
     JMenuItem font_setting;
     JMenuItem cursor_color;
@@ -88,6 +88,11 @@ public class MainPanel
     public static void setButton_FileInformation(JButton button_FileInformation)
     {
         MainPanel.button_FileInformation = button_FileInformation;
+    }
+
+    public static JMenuItem getReplace()
+    {
+        return replace;
     }
 
     public static JPanel getjPanel_ErrorLog()
@@ -183,7 +188,7 @@ public class MainPanel
         JPanel jPanel2 = new JPanel();                                 //下面的状态字体
         jPanel1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
         jPanel2.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-        Font font = new Font("宋体", Font.PLAIN, 19);      //设置字体
+        Font font = new Font("宋体", Font.PLAIN, 19);         //设置字体
 
         jTextArea = new JTextArea(720 / 30, 1280 / 12);     //初始化文本域
         jTextArea.setLineWrap(true);
@@ -199,6 +204,7 @@ public class MainPanel
         button_EditMode.setBackground(Color.green);
         button_save_file.setBackground(Color.cyan);
         button_FileInformation.setBackground(Color.cyan);
+        label_Information.setForeground(Color.black);
 
         label_Information.setPreferredSize(new Dimension(800, 30));
 
@@ -701,6 +707,75 @@ public class MainPanel
             }
         });
 
+        jTextArea.addKeyListener(new KeyAdapter()
+        {
+            @Override
+            public void keyPressed(KeyEvent e)
+            {                                                       //ctrl+f 查找
+                if ((e.getKeyCode() == KeyEvent.VK_F) && (e.isControlDown()))
+                {
+                    UI.Search.search(jTextArea, label_Information);
+                }
+
+                else if ((e.getKeyCode() == KeyEvent.VK_G) && (e.isControlDown()))
+                {                                                   //ctrl+g 替换
+                    UI.Replace.replace(jTextArea, label_Information);
+                }
+
+                else if ((e.getKeyCode() == KeyEvent.VK_S) && (e.isControlDown()))
+                {                                                   //ctrl+s 保存
+                    MainPanel.this.save();
+                }
+
+                else if ((e.getKeyCode() == KeyEvent.VK_S) && (e.isControlDown()) && (e.isShiftDown()))
+                {                                                   //ctrl+shift+s 另存为
+                    MainPanel.this.saveAs();
+                }
+
+                else if ((e.getKeyCode() == KeyEvent.VK_O) && (e.isControlDown()))
+                {                                                   //ctrl+o 浏览
+                    MainPanel.this.open();
+                }
+
+                else if ((e.getKeyCode() == KeyEvent.VK_I) && (e.isControlDown()))
+                {                                                   //ctrl+i 文件信息
+                    UI.FileInformation.display();
+                }
+
+                else if ((e.getKeyCode() == KeyEvent.VK_E) && (e.isControlDown()))
+                {                                                   //ctrl+e 错误日志
+                    UI.ErrorLog.display();
+                }
+
+                //以下快捷键不能设置操作，和操作系统快捷键起冲突，否则会得到双倍快乐
+                else if ((e.getKeyCode() == KeyEvent.VK_A) && (e.isControlDown()))
+                {                                                   //ctrl+a 全选
+                    label_Information.setText("全选成功");
+                }
+
+                else if ((e.getKeyCode() == KeyEvent.VK_C) && (e.isControlDown()))
+                {                                                   //ctrl+c 复制
+                    label_Information.setText("复制成功");
+                }
+
+                else if ((e.getKeyCode() == KeyEvent.VK_V) && (e.isControlDown()))
+                {                                                   //ctrl+v 粘贴
+                    label_Information.setText("粘贴成功");
+                }
+
+                else if ((e.getKeyCode() == KeyEvent.VK_X) && (e.isControlDown()))
+                {                                                   //ctrl+v 粘贴
+                    label_Information.setText("剪切成功");
+                }
+
+                else if ((e.getKeyCode() == KeyEvent.VK_R) && (e.isControlDown()))
+                {                                                   //ctrl+r 模式切换
+                    MainPanel.this.EditMode();
+                }
+
+            }
+        });
+
     }
 
     public MainPanel()
@@ -714,7 +789,8 @@ public class MainPanel
         this.init_menu();                                                //初始化菜单面板
         FileInformation.init();                                          //初始化文件信息面板
         UI.ErrorLog.init_error_log_jPanel();                             //初始化错误日志面板
-        UI.Search.init_search(jTextArea);                                //初始化查找面板
+        UI.Search.init_search(jTextArea, label_Information);              //初始化查找面板
+        UI.Replace.init_replace(jTextArea, label_Information);            //初始化替换面板
 
         jFrame.add(jPanel);                                              //主面板加入到顶层面板
         jFrame.setVisible(true);                                         //设置可见
