@@ -1,13 +1,8 @@
 H:\����\��������\java�γ���� Swingʵ���ı��༭��\\src\\main\\java\\io\\ErrorLog.java
 package io;
 
-import UI.MainPanel;
-
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.*;
 import java.text.DecimalFormat;
 import java.util.Calendar;
@@ -22,70 +17,11 @@ import java.util.Calendar;
  * Date(创建日期)： 2021/12/7
  * Time(创建时间)： 14:20
  * Version(版本): 1.0
- * Description(描述)： 错误日志类
+ * Description(描述)： 错误日志类 读写
  */
 
 public class ErrorLog
 {
-    private static JTextArea jTextArea_ErrorLog;
-    private static JScrollPane jScrollPane;
-    private static JButton button_back;
-
-    public static void init_error_log_jPanel()                  //初始化错误日志面板
-    {
-        jTextArea_ErrorLog = new JTextArea(15, 55);
-        jTextArea_ErrorLog.setLineWrap(false);
-        jTextArea_ErrorLog.setEditable(false);
-        Font font = new Font("宋体", Font.PLAIN, 18);
-        jTextArea_ErrorLog.setFont(font);
-        jScrollPane = new JScrollPane(jTextArea_ErrorLog);
-        JPanel jPanel = new JPanel();
-        MainPanel.setjPanel_ErrorLog(jPanel);
-        jPanel.setLayout(new BorderLayout());
-        button_back = new JButton("<-返回");
-        jScrollPane.setBorder(new EmptyBorder(20, 100, 50, 100));
-        jPanel.add(jScrollPane, BorderLayout.CENTER);
-        JPanel jPanel2 = new JPanel();
-        jPanel2.setLayout(new FlowLayout());
-        jPanel2.add(button_back);
-        jPanel.add(jPanel2, BorderLayout.SOUTH);
-        button_back.setBackground(Color.cyan);
-        button_back.addActionListener(new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                back();
-            }
-        });
-        MainPanel.getErrorLog().addActionListener(new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                display();
-            }
-        });
-    }
-
-    private static void display()
-    {
-        read();                                   //读取日志
-        JFrame jFrame = MainPanel.getjFrame();
-        jFrame.remove(MainPanel.getjPanel());
-        jFrame.add(MainPanel.getjPanel_ErrorLog());
-        MainPanel.getjPanel_ErrorLog().updateUI();
-        jFrame.repaint();
-    }
-
-    private static void back()
-    {
-        JFrame jFrame = MainPanel.getjFrame();
-        jFrame.remove(MainPanel.getjPanel_ErrorLog());
-        jFrame.add(MainPanel.getjPanel());
-        jFrame.repaint();
-    }
-
     public static void write(String message)
     {
         Calendar calendar = Calendar.getInstance();// 获取当前时间
@@ -155,9 +91,8 @@ public class ErrorLog
         }
     }
 
-    private static void read()
+    public static void read()
     {
-        jTextArea_ErrorLog.setText("");             //清空
         FileReader fileReader = null;
         BufferedReader bufferedReader = null;
         try                                  //文件流打开，文件读写
@@ -165,9 +100,10 @@ public class ErrorLog
             fileReader = new FileReader("error.log");
             bufferedReader = new BufferedReader(fileReader);
             String str;
+            JTextArea jTextArea=UI.ErrorLog.getjTextArea_ErrorLog();
             while ((str = bufferedReader.readLine()) != null)
             {
-                jTextArea_ErrorLog.append(str+"\n");
+                jTextArea.append(str + "\n");
             }
         }
         catch (FileNotFoundException e)      //文件未找到
@@ -784,6 +720,307 @@ public class Run
     }
 }
 �
+H:\����\��������\java�γ���� Swingʵ���ı��༭��\\src\\main\\java\\UI\\About.java
+package UI;
+
+import javax.swing.*;
+import java.awt.*;
+
+/**
+ * Project name(项目名称)：java课程设计 Swing实现文本编辑器
+ * Package(包名): UI
+ * Class(类名): About
+ * Author(作者）: mao
+ * Author QQ：1296193245
+ * GitHub：https://github.com/maomao124/
+ * Date(创建日期)： 2021/12/8
+ * Time(创建时间)： 20:52
+ * Version(版本): 1.0
+ * Description(描述)： 关于
+ */
+
+public class About extends JFrame
+{
+    public About()
+    {
+        this.setSize(300, 200);
+        this.setTitle("关于");
+        this.setLocationRelativeTo(null);
+        this.setLayout(new GridLayout(3, 1));
+        JLabel label1 = new JLabel("作者：mao");
+        label1.setHorizontalAlignment(0);
+        JLabel label2 = new JLabel("完成时间：2021-12-08");
+        label2.setHorizontalAlignment(0);
+        JLabel label3 = new JLabel("GitHub：https://github.com/maomao124/");
+        label3.setHorizontalAlignment(0);
+        this.add(label1);
+        this.add(label2);
+        this.add(label3);
+    }
+}
+�
+H:\����\��������\java�γ���� Swingʵ���ı��༭��\\src\\main\\java\\UI\\Color_JTextArea.java
+package UI;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+/**
+ * Project name(项目名称)：java课程设计 Swing实现文本编辑器
+ * Package(包名): UI
+ * Class(类名): Color_JtestAra
+ * Author(作者）: mao
+ * Author QQ：1296193245
+ * GitHub：https://github.com/maomao124/
+ * Date(创建日期)： 2021/12/8
+ * Time(创建时间)： 20:01
+ * Version(版本): 1.0
+ * Description(描述)： 设置文本域颜色
+ */
+
+public class Color_JTextArea
+{
+    private static JTextArea jTextArea;
+
+    public static void init_Color_JTextArea(JTextArea jTextArea, JMenuItem
+            font_color, JMenuItem cursor_color, JMenuItem background_color, JMenuItem selected_color, JMenuItem rendering_color)
+    {
+        Color_JTextArea.jTextArea = jTextArea;
+
+        font_color.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                change_font_color();
+            }
+        });
+
+        cursor_color.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                change_cursor_color();
+            }
+        });
+
+        background_color.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                change_background_color();
+            }
+        });
+
+        selected_color.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                change_selected_color();
+            }
+        });
+
+        rendering_color.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                change_rendering_color();
+            }
+        });
+    }
+
+
+    private static void change_font_color()                           //设置此组件的前景色
+    {
+        Color color = null;
+        color = JColorChooser.showDialog(MainPanel.getjFrame(), "请选择字体颜色", Color.black);
+        if (color != null)
+        {
+            jTextArea.setForeground(color);
+        }
+    }
+
+    private static void change_cursor_color()                         //设置用于渲染插入符号的当前颜色
+    {
+        Color color = null;
+        color = JColorChooser.showDialog(MainPanel.getjFrame(), "请选择光标颜色", Color.black);
+        if (color != null)
+        {
+            jTextArea.setCaretColor(color);
+        }
+    }
+
+    private static void change_background_color()                    //设置此组件的背景颜色。
+    // 背景颜色仅在组件不透明时使用，并且仅由JComponent或ComponentUI实现的子类使用
+    {
+        Color color = null;
+        color = JColorChooser.showDialog(MainPanel.getjFrame(), "请选择背景颜色", Color.black);
+        if (color != null)
+        {
+            jTextArea.setBackground(color);
+        }
+    }
+
+    private static void change_selected_color()                       //设置用于呈现选定文本的当前颜色
+    {
+        Color color = null;
+        color = JColorChooser.showDialog(MainPanel.getjFrame(), "请选择选中颜色", Color.black);
+        if (color != null)
+        {
+            jTextArea.setSelectedTextColor(color);
+        }
+    }
+
+    private static void change_rendering_color()                        //设置用于渲染选择的当前颜色
+    {
+        Color color = null;
+        color = JColorChooser.showDialog(MainPanel.getjFrame(), "请选择选中颜色", Color.black);
+        if (color != null)
+        {
+            jTextArea.setSelectionColor(color);
+        }
+    }
+}
+�
+H:\����\��������\java�γ���� Swingʵ���ı��༭��\\src\\main\\java\\UI\\ErrorLog.java
+package UI;
+
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+/**
+ * Project name(项目名称)：java课程设计 Swing实现文本编辑器
+ * Package(包名): UI
+ * Class(类名): ErrorLog
+ * Author(作者）: mao
+ * Author QQ：1296193245
+ * GitHub：https://github.com/maomao124/
+ * Date(创建日期)： 2021/12/8
+ * Time(创建时间)： 9:55
+ * Version(版本): 1.0
+ * Description(描述)： 错误日志类的GUI界面
+ */
+
+public class ErrorLog
+{
+    private static JTextArea jTextArea_ErrorLog;
+    private static JScrollPane jScrollPane;
+    private static JButton button_back;
+    private static JButton button_back_pop;
+
+    public static JTextArea getjTextArea_ErrorLog()
+    {
+        return jTextArea_ErrorLog;
+    }
+
+    public static void init_error_log_jPanel()                  //初始化错误日志面板
+    {
+        jTextArea_ErrorLog = new JTextArea(15, 55);
+        jTextArea_ErrorLog.setLineWrap(false);
+        jTextArea_ErrorLog.setEditable(false);
+        Font font = new Font("宋体", Font.PLAIN, 18);
+        jTextArea_ErrorLog.setFont(font);
+        jScrollPane = new JScrollPane(jTextArea_ErrorLog);
+        JPanel jPanel = new JPanel();
+        MainPanel.setjPanel_ErrorLog(jPanel);
+        jPanel.setLayout(new BorderLayout());
+        button_back = new JButton("<-返回");
+        button_back_pop = new JButton("<-返回");
+        jScrollPane.setBorder(new EmptyBorder(20, 45, 50, 100));
+        jPanel.add(jScrollPane, BorderLayout.CENTER);
+        JPanel jPanel2 = new JPanel();                        //底部面板
+        JPanel jPanel3 = new JPanel();                        //顶部面板
+        jPanel2.setLayout(new FlowLayout());
+        jPanel2.add(button_back);
+        jPanel3.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
+        jPanel3.add(button_back_pop);
+        jPanel.add(jPanel2, BorderLayout.SOUTH);
+        jPanel.add(jPanel3, BorderLayout.WEST);
+        button_back.setBackground(Color.cyan);                //设置颜色
+        button_back_pop.setBackground(Color.WHITE);
+        button_back.addActionListener(new ActionListener()
+        {                                                     //设置监听
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                back();
+            }
+        });
+
+        button_back_pop.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                back();
+            }
+        });
+
+        MainPanel.getErrorLog().addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                display();
+            }
+        });
+
+        jPanel.addMouseListener(new MouseAdapter()
+        {
+            public void mousePressed(MouseEvent e)
+            {
+                int mods = e.getModifiersEx();
+                if (mods == 16384)
+                {
+                    back();
+                }
+            }
+        });
+
+        jTextArea_ErrorLog.addMouseListener(new MouseAdapter()
+        {
+            public void mousePressed(MouseEvent e)
+            {
+                int mods = e.getModifiersEx();
+                if (mods == 16384)
+                {
+                    back();
+                }
+            }
+        });
+    }
+
+    public static void display()
+    {
+        jTextArea_ErrorLog.setText("");             //清空
+        io.ErrorLog.read();                                   //读取日志
+        JFrame jFrame = MainPanel.getjFrame();
+        jFrame.remove(MainPanel.getjPanel());
+        jFrame.add(MainPanel.getjPanel_ErrorLog());
+        MainPanel.getjPanel_ErrorLog().updateUI();
+        jFrame.repaint();
+    }
+
+    private static void back()
+    {
+        JFrame jFrame = MainPanel.getjFrame();
+        jFrame.remove(MainPanel.getjPanel_ErrorLog());
+        jFrame.add(MainPanel.getjPanel());
+        jFrame.repaint();
+    }
+}
+�
 H:\����\��������\java�γ���� Swingʵ���ı��༭��\\src\\main\\java\\UI\\FileInformation.java
 package UI;
 
@@ -792,6 +1029,8 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -827,13 +1066,19 @@ public class FileInformation
         MainPanel.setjPanel_FileInformation(jPanel);
         jPanel.setLayout(new BorderLayout());
         JButton button = MainPanel.getButton_Back();
-        jScrollPane.setBorder(new EmptyBorder(20, 100, 50, 100));
+        JButton button_back_pop = new JButton("<-返回");
+        button_back_pop.setBackground(Color.white);
+        jScrollPane.setBorder(new EmptyBorder(20, 45, 50, 100));
         //button.setBorder(new EmptyBorder(20, 20, 20, 20));
         jPanel.add(jScrollPane, BorderLayout.CENTER);
-        JPanel jPanel2 = new JPanel();
+        JPanel jPanel2 = new JPanel();                          //底层面板
+        JPanel jPanel3 = new JPanel();                          //顶层面板
+        jPanel3.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
+        jPanel3.add(button_back_pop);
         jPanel2.setLayout(new FlowLayout());
         jPanel2.add(button);
         jPanel.add(jPanel2, BorderLayout.SOUTH);
+        jPanel.add(jPanel3, BorderLayout.WEST);
         button.setBackground(Color.cyan);
         button.addActionListener(new ActionListener()
         {
@@ -843,6 +1088,16 @@ public class FileInformation
                 back();
             }
         });
+
+        button_back_pop.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                back();
+            }
+        });
+
         MainPanel.getButton_FileInformation().addActionListener(new ActionListener()
         {
             @Override
@@ -851,12 +1106,37 @@ public class FileInformation
                 display();
             }
         });
+
         MainPanel.getFile_information().addActionListener(new ActionListener()
         {
             @Override
             public void actionPerformed(ActionEvent e)
             {
                 display();
+            }
+        });
+
+        jPanel.addMouseListener(new MouseAdapter()
+        {
+            public void mousePressed(MouseEvent e)
+            {
+                int mods = e.getModifiersEx();
+                if (mods == 16384)
+                {
+                    back();
+                }
+            }
+        });
+
+        jTextArea_FileInformation.addMouseListener(new MouseAdapter()
+        {
+            public void mousePressed(MouseEvent e)
+            {
+                int mods = e.getModifiersEx();
+                if (mods == 16384)
+                {
+                    back();
+                }
             }
         });
     }
@@ -922,6 +1202,137 @@ public class FileInformation
     }
 }
 �
+H:\����\��������\java�γ���� Swingʵ���ı��༭��\\src\\main\\java\\UI\\FontSetting.java
+package UI;
+
+import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import java.awt.*;
+
+/**
+ * Project name(项目名称)：java课程设计 Swing实现文本编辑器
+ * Package(包名): UI
+ * Class(类名): Font
+ * Author(作者）: mao
+ * Author QQ：1296193245
+ * GitHub：https://github.com/maomao124/
+ * Date(创建日期)： 2021/12/8
+ * Time(创建时间)： 19:37
+ * Version(版本): 1.0
+ * Description(描述)： 无
+ */
+
+public class FontSetting extends JFrame
+{
+    private JTextArea textArea;
+    private JList<String> list1;
+    private JList<String> list2;
+    private JList<String> list3;
+    private DefaultListModel<String> defaultListModel1;
+    private DefaultListModel<String> defaultListModel2;
+    private DefaultListModel<String> defaultListModel3;
+    private JScrollPane jScrollPane1;
+    private JScrollPane jScrollPane2;
+    private JScrollPane jScrollPane3;
+
+    public FontSetting(JTextArea textArea)
+    {
+
+        this.textArea = textArea;
+
+        this.setTitle("字体设置");
+        this.setSize(300, 200);
+        this.setLocationRelativeTo(null);
+
+        this.setLayout(new GridLayout(1, 3));
+        this.addLists();
+        this.addListener();
+
+    }
+
+    private void addLists()
+    {
+        defaultListModel1 = new DefaultListModel<String>();
+        defaultListModel2 = new DefaultListModel<String>();
+        defaultListModel3 = new DefaultListModel<String>();
+        list1 = new JList<String>(defaultListModel1);
+        list2 = new JList<String>(defaultListModel2);
+        list3 = new JList<String>(defaultListModel3);
+        jScrollPane1 = new JScrollPane(list1);
+        jScrollPane2 = new JScrollPane(list2);
+        jScrollPane3 = new JScrollPane(list3);
+
+        defaultListModel1.addElement("12");
+        defaultListModel1.addElement("14");
+        defaultListModel1.addElement("16");
+        defaultListModel1.addElement("18");
+        defaultListModel1.addElement("20");
+        defaultListModel1.addElement("22");
+        defaultListModel1.addElement("24");
+        defaultListModel1.addElement("26");
+        defaultListModel1.addElement("28");
+        defaultListModel1.addElement("30");
+        defaultListModel1.addElement("32");
+        defaultListModel1.addElement("34");
+        defaultListModel1.addElement("36");
+        defaultListModel1.addElement("38");
+        defaultListModel1.addElement("40");
+
+        defaultListModel2.addElement("正常");
+        defaultListModel2.addElement("粗体");
+
+        defaultListModel3.addElement("宋体");
+        defaultListModel3.addElement("楷体");
+        defaultListModel3.addElement("黑体");
+
+        list1.setSelectedIndex(0);
+        list2.setSelectedIndex(0);
+        list3.setSelectedIndex(0);
+
+        this.add(jScrollPane1);
+        this.add(jScrollPane2);
+        this.add(jScrollPane3);
+    }
+
+    public void addListener()
+    {
+        list1.addListSelectionListener(new ListSelectionListener()
+        {
+            @Override
+            public void valueChanged(ListSelectionEvent e)
+            {
+                Font font = new java.awt.Font(defaultListModel3.get(list3.getSelectedIndex()),
+                        list2.getSelectedIndex(), Integer.parseInt(defaultListModel1.get(list1.getSelectedIndex())));
+                textArea.setFont(font);
+
+            }
+        });
+
+        list2.addListSelectionListener(new ListSelectionListener()
+        {
+            @Override
+            public void valueChanged(ListSelectionEvent e)
+            {
+                Font font = new java.awt.Font(defaultListModel3.get(list3.getSelectedIndex()),
+                        list2.getSelectedIndex(), Integer.parseInt(defaultListModel1.get(list1.getSelectedIndex())));
+                textArea.setFont(font);
+            }
+        });
+
+        list3.addListSelectionListener(new ListSelectionListener()
+        {
+            @Override
+            public void valueChanged(ListSelectionEvent e)
+            {
+                Font font = new java.awt.Font(defaultListModel3.get(list3.getSelectedIndex()),
+                        list2.getSelectedIndex(), Integer.parseInt(defaultListModel1.get(list1.getSelectedIndex())));
+                textArea.setFont(font);
+            }
+        });
+    }
+}
+�
 H:\����\��������\java�γ���� Swingʵ���ı��༭��\\src\\main\\java\\UI\\MainPanel.java
 package UI;
 
@@ -969,6 +1380,8 @@ public class MainPanel
     boolean isEditable = true;                                      //文本域是否可以编辑
     private static File file;                                       //关联的文件
     private final JLabel label_Information = new JLabel("欢迎使用文件编辑器", JLabel.CENTER);      //状态位
+    private final UI.FontSetting fontSetting;
+    private UI.About about_software;
 
     JMenuBar jMenuBar;        //菜单栏
     JPopupMenu jPopupMenu;      //弹出菜单
@@ -994,13 +1407,15 @@ public class MainPanel
     JMenuItem paste;
     JMenuItem delete;
     JMenuItem deleteAll;
-    JMenuItem search;
-    JMenuItem replace;
+    private static JMenuItem search;
+    private static JMenuItem replace;
     JMenuItem edit_mode;
     JMenuItem font_setting;
+    JMenuItem font_color;
     JMenuItem cursor_color;
     JMenuItem background_color;
     JMenuItem selected_color;
+    JMenuItem rendering_color;
     JMenuItem wrap;
     private static JMenuItem errorLog;
     JMenuItem about;
@@ -1013,6 +1428,11 @@ public class MainPanel
     public static void setButton_FileInformation(JButton button_FileInformation)
     {
         MainPanel.button_FileInformation = button_FileInformation;
+    }
+
+    public static JMenuItem getReplace()
+    {
+        return replace;
     }
 
     public static JPanel getjPanel_ErrorLog()
@@ -1038,6 +1458,11 @@ public class MainPanel
     public static void setFile_information(JMenuItem file_information)
     {
         MainPanel.file_information = file_information;
+    }
+
+    public static JMenuItem getSearch()
+    {
+        return search;
     }
 
     public static void setjPanel_ErrorLog(JPanel jPanel_ErrorLog)
@@ -1103,7 +1528,7 @@ public class MainPanel
         JPanel jPanel2 = new JPanel();                                 //下面的状态字体
         jPanel1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
         jPanel2.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-        Font font = new Font("宋体", Font.PLAIN, 19);      //设置字体
+        Font font = new Font("宋体", Font.PLAIN, 19);         //设置字体
 
         jTextArea = new JTextArea(720 / 30, 1280 / 12);     //初始化文本域
         jTextArea.setLineWrap(true);
@@ -1119,6 +1544,7 @@ public class MainPanel
         button_EditMode.setBackground(Color.green);
         button_save_file.setBackground(Color.cyan);
         button_FileInformation.setBackground(Color.cyan);
+        label_Information.setForeground(Color.black);
 
         label_Information.setPreferredSize(new Dimension(800, 30));
 
@@ -1202,15 +1628,19 @@ public class MainPanel
         edit_mode.setBackground(Color.green);
 
         font_setting = new JMenuItem("字体设置");
+        font_color = new JMenuItem("字体颜色");
         cursor_color = new JMenuItem("光标颜色");
         background_color = new JMenuItem("背景颜色");
         selected_color = new JMenuItem("选中颜色");
+        rendering_color = new JMenuItem("渲染颜色");
         font_setting.setBackground(Color.green);
+        font_color.setBackground(Color.green);
         cursor_color.setBackground(Color.green);
         background_color.setBackground(Color.green);
         selected_color.setBackground(Color.green);
+        rendering_color.setBackground(Color.green);
 
-        wrap = new JMenuItem("自动换行");
+        wrap = new JMenuItem("不自动换行");
         wrap.setBackground(Color.cyan);
 
         errorLog = new JMenuItem("错误日志");
@@ -1238,9 +1668,11 @@ public class MainPanel
 
         //个性化
         individualization.add(font_setting);
+        individualization.add(font_color);
         individualization.add(cursor_color);
         individualization.add(background_color);
         individualization.add(selected_color);
+        individualization.add(rendering_color);
 
         //格式
         format.add(wrap);
@@ -1258,6 +1690,31 @@ public class MainPanel
 
         // 添加菜单栏
         jFrame.setJMenuBar(jMenuBar);
+    }
+
+    public MainPanel()                                                   //构造方法
+    {
+        jFrame = new JFrame("文本编辑器");                            //初始化顶层面板
+        jFrame.setSize(1280, 720);
+        jFrame.setLocation(1920 / 2 - 640, 1080 / 2 - 360);
+        jFrame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+
+        this.init_mainPanel();                                           //初始化主面板
+        this.init_menu();                                                //初始化菜单面板
+        FileInformation.init();                                          //初始化文件信息面板
+        UI.ErrorLog.init_error_log_jPanel();                             //初始化错误日志面板
+        UI.Search.init_search(jTextArea, label_Information);              //初始化查找面板
+        UI.Replace.init_replace(jTextArea, label_Information);            //初始化替换面板
+        about_software = new UI.About();                                    //初始化关于面板
+        fontSetting = new UI.FontSetting(jTextArea);                      //初始化字体设置面板
+        Color_JTextArea.init_Color_JTextArea                              //初始化文本域颜色选择
+                (jTextArea, font_color, cursor_color, background_color, selected_color, rendering_color);
+
+        jFrame.add(jPanel);                                              //主面板加入到顶层面板
+        jFrame.setVisible(true);                                         //设置可见
+
+        this.init_Listener();                                            //初始化各种监听器
+        this.init_menu_Listener();                                       //初始化菜单监听器
     }
 
     private void init_menu_Listener()                                   //初始化菜单监听器
@@ -1403,74 +1860,76 @@ public class MainPanel
                 MainPanel.this.delete();
             }
         });
+
+        deleteAll.addActionListener(new ActionListener()
+        {                                                   //菜单按钮 清空
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                MainPanel.this.deleteAll();
+            }
+        });
+
+        deleteAll_pop.addActionListener(new ActionListener()
+        {                                                   //菜单按钮 清空
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                MainPanel.this.deleteAll();
+            }
+        });
+
+        edit_mode.addActionListener(new ActionListener()
+        {                                                   //编辑模式和只读模式来回切换
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                MainPanel.this.EditMode();
+            }
+        });
+
+        font_setting.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                fontSetting.setVisible(true);
+            }
+        });
+
+        wrap.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                boolean result = jTextArea.getLineWrap();
+                if (result)                                              //是换行状态
+                {
+                    wrap.setBackground(Color.yellow);
+                    wrap.setText("自动换行");
+                    jTextArea.setLineWrap(false);
+                    label_Information.setText("当前为不自动换行模式");
+                }
+                else                                                      //不是换行状态
+                {
+                    wrap.setBackground(Color.cyan);
+                    wrap.setText("不自动换行");
+                    jTextArea.setLineWrap(true);
+                    label_Information.setText("当前为自动换行模式");
+                }
+            }
+        });
+
+        about.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                about_software.setVisible(true);
+            }
+        });
     }
 
-    private void selectAll()                                         //全选
-    {
-        if (jTextArea.getText().length() == 0)
-        {
-            Toolkit.getDefaultToolkit().beep();
-            label_Information.setText("全选失败！ 文本域为空！");
-        }
-        else
-        {
-            jTextArea.selectAll();
-            int start = jTextArea.getSelectionStart();
-            int end = jTextArea.getSelectionEnd();
-            label_Information.setText("全选成功, 选中位置为" + start + "到" + end + "的文本");
-        }
-    }
-
-    private void copy()                                                 //复制
-    {
-        if (jTextArea.getSelectedText() == null)
-        {
-            Toolkit.getDefaultToolkit().beep();
-            label_Information.setText("复制失败！ 未选择文字");
-        }
-        else
-        {
-            jTextArea.copy();
-            int start = jTextArea.getSelectionStart();
-            int end = jTextArea.getSelectionEnd();
-            label_Information.setText("复制成功, 复制选中位置为" + start + "到" + end + "的文本");
-        }
-    }
-
-    private void cut()                                                  //剪切
-    {
-        if (jTextArea.getSelectedText() == null)
-        {
-            Toolkit.getDefaultToolkit().beep();
-            label_Information.setText("剪切失败！ 未选择文字");
-        }
-        else
-        {
-            int start = jTextArea.getSelectionStart();
-            int end = jTextArea.getSelectionEnd();
-            jTextArea.cut();
-            label_Information.setText("剪切成功, 剪切选中位置为" + start + "到" + end + "的文本");
-        }
-    }
-
-    private void paste()                                                //粘贴
-    {
-        jTextArea.paste();
-        label_Information.setText("粘贴成功");
-    }
-
-    private void delete()                                               //删除
-    {
-        if (jTextArea.getSelectedText() == null)
-        {
-            Toolkit.getDefaultToolkit().beep();
-            label_Information.setText("删除失败！ 未选择如何文字！");
-        }
-        else
-        {
-            jTextArea.replaceSelection("");
-        }
-    }
 
     private void init_Listener()                                        //初始化各种监听器
     {
@@ -1564,25 +2023,75 @@ public class MainPanel
             }
         });
 
-    }
+        jTextArea.addKeyListener(new KeyAdapter()
+        {
+            @Override
+            public void keyPressed(KeyEvent e)
+            {                                                       //ctrl+f 查找
+                if ((e.getKeyCode() == KeyEvent.VK_F) && (e.isControlDown()))
+                {
+                    UI.Search.search(jTextArea, label_Information);
+                }
 
-    public MainPanel()
-    {
-        jFrame = new JFrame("文本编辑器");                           //初始化顶层面板
-        jFrame.setSize(1280, 720);
-        jFrame.setLocation(1920 / 2 - 640, 1080 / 2 - 360);
-        jFrame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+                else if ((e.getKeyCode() == KeyEvent.VK_G) && (e.isControlDown()))
+                {                                                   //ctrl+g 替换
+                    UI.Replace.replace(jTextArea, label_Information);
+                }
 
-        this.init_mainPanel();                                           //初始化主面板
-        this.init_menu();                                                //初始化菜单面板
-        FileInformation.init();                                          //初始化文件信息面板
-        io.ErrorLog.init_error_log_jPanel();                             //初始化错误日志面板
+                else if ((e.getKeyCode() == KeyEvent.VK_S) && (e.isControlDown()))
+                {                                                   //ctrl+s 保存
+                    MainPanel.this.save();
+                }
 
-        jFrame.add(jPanel);                                              //主面板加入到顶层面板
-        jFrame.setVisible(true);                                         //设置可见
+                else if ((e.getKeyCode() == KeyEvent.VK_S) && (e.isControlDown()) && (e.isShiftDown()))
+                {                                                   //ctrl+shift+s 另存为
+                    MainPanel.this.saveAs();
+                }
 
-        this.init_Listener();                                            //初始化各种监听器
-        this.init_menu_Listener();                                       //初始化菜单监听器
+                else if ((e.getKeyCode() == KeyEvent.VK_O) && (e.isControlDown()))
+                {                                                   //ctrl+o 浏览
+                    MainPanel.this.open();
+                }
+
+                else if ((e.getKeyCode() == KeyEvent.VK_I) && (e.isControlDown()))
+                {                                                   //ctrl+i 文件信息
+                    UI.FileInformation.display();
+                }
+
+                else if ((e.getKeyCode() == KeyEvent.VK_E) && (e.isControlDown()))
+                {                                                   //ctrl+e 错误日志
+                    UI.ErrorLog.display();
+                }
+
+                //以下快捷键不能设置操作，和操作系统快捷键起冲突，否则会得到双倍快乐
+                else if ((e.getKeyCode() == KeyEvent.VK_A) && (e.isControlDown()))
+                {                                                   //ctrl+a 全选
+                    label_Information.setText("全选成功");
+                }
+
+                else if ((e.getKeyCode() == KeyEvent.VK_C) && (e.isControlDown()))
+                {                                                   //ctrl+c 复制
+                    label_Information.setText("复制成功");
+                }
+
+                else if ((e.getKeyCode() == KeyEvent.VK_V) && (e.isControlDown()))
+                {                                                   //ctrl+v 粘贴
+                    label_Information.setText("粘贴成功");
+                }
+
+                else if ((e.getKeyCode() == KeyEvent.VK_X) && (e.isControlDown()))
+                {                                                   //ctrl+v 粘贴
+                    label_Information.setText("剪切成功");
+                }
+
+                else if ((e.getKeyCode() == KeyEvent.VK_R) && (e.isControlDown()))
+                {                                                   //ctrl+r 模式切换
+                    MainPanel.this.EditMode();
+                }
+
+            }
+        });
+
     }
 
     private void close()                                                 //关闭程序
@@ -1747,7 +2256,9 @@ public class MainPanel
         if (isEditable)
         {
             button_EditMode.setText("只读模式");
+            edit_mode.setText("只读模式");
             button_EditMode.setBackground(Color.yellow);
+            edit_mode.setBackground(Color.yellow);
             isEditable = false;
             jTextArea.setEditable(false);
             label_Information.setText("当前为只读模式");
@@ -1755,7 +2266,9 @@ public class MainPanel
         else
         {
             button_EditMode.setText("编辑模式");
+            edit_mode.setText("编辑模式");
             button_EditMode.setBackground(Color.green);
+            edit_mode.setBackground(Color.green);
             isEditable = true;
             jTextArea.setEditable(true);
             label_Information.setText("当前为编辑模式");
@@ -1802,6 +2315,437 @@ public class MainPanel
         }
     }
 
+    private void selectAll()                                         //全选
+    {
+        if (jTextArea.getText().length() == 0)
+        {
+            Toolkit.getDefaultToolkit().beep();
+            label_Information.setText("全选失败！ 文本域为空！");
+        }
+        else
+        {
+            jTextArea.selectAll();
+            int start = jTextArea.getSelectionStart();
+            int end = jTextArea.getSelectionEnd();
+            label_Information.setText("全选成功, 选中位置为" + start + "到" + end + "的文本");
+        }
+    }
 
+    private void copy()                                                 //复制
+    {
+        if (jTextArea.getSelectedText() == null)
+        {
+            Toolkit.getDefaultToolkit().beep();
+            label_Information.setText("复制失败！ 未选择文字");
+        }
+        else
+        {
+            jTextArea.copy();
+            int start = jTextArea.getSelectionStart();
+            int end = jTextArea.getSelectionEnd();
+            label_Information.setText("复制成功, 复制选中位置为" + start + "到" + end + "的文本");
+        }
+    }
+
+    private void cut()                                                  //剪切
+    {
+        if (jTextArea.getSelectedText() == null)
+        {
+            Toolkit.getDefaultToolkit().beep();
+            label_Information.setText("剪切失败！ 未选择文字");
+        }
+        else
+        {
+            int start = jTextArea.getSelectionStart();
+            int end = jTextArea.getSelectionEnd();
+            jTextArea.cut();
+            label_Information.setText("剪切成功, 剪切选中位置为" + start + "到" + end + "的文本");
+        }
+    }
+
+    private void paste()                                                //粘贴
+    {
+        jTextArea.paste();
+        label_Information.setText("粘贴成功");
+    }
+
+    private void delete()                                               //删除
+    {
+        if (jTextArea.getSelectedText() == null)
+        {
+            Toolkit.getDefaultToolkit().beep();
+            label_Information.setText("删除失败！ 未选择如何文字！");
+        }
+        else
+        {
+            jTextArea.replaceSelection("");
+        }
+    }
+
+    private void deleteAll()                                            //清空
+    {
+        if (jTextArea.getText().length() == 0)
+        {
+            label_Information.setText("文本域已经清空 无法再清空");
+        }
+        else
+        {
+            int result;
+            Toolkit.getDefaultToolkit().beep();
+            result = JOptionPane.showConfirmDialog(null, "是否清空文本域的所有数据？"
+                    , "数据丢失警告", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
+            if (result == 0)
+            {
+                jTextArea.setText("");                                  //清空操作
+                label_Information.setText("文本域已清空");
+            }
+            else if (result == 1)
+            {
+                label_Information.setText("取消清空");
+            }
+            else
+            {
+                label_Information.setText("关闭会话框，取消清空");
+            }
+        }
+    }
+
+}
+�
+H:\����\��������\java�γ���� Swingʵ���ı��༭��\\src\\main\\java\\UI\\Replace.java
+package UI;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+/**
+ * Project name(项目名称)：java课程设计 Swing实现文本编辑器
+ * Package(包名): UI
+ * Class(类名): Replace
+ * Author(作者）: mao
+ * Author QQ：1296193245
+ * GitHub：https://github.com/maomao124/
+ * Date(创建日期)： 2021/12/8
+ * Time(创建时间)： 16:39
+ * Version(版本): 1.0
+ * Description(描述)： 替换
+ */
+
+public class Replace
+{
+    private static int start = 0;// 查找开始位置
+    private static int end = 0;// 查找结束位置
+
+    public static void init_replace(JTextArea jTextArea, JLabel label_information)
+    {
+        MainPanel.getReplace().addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                // 替换对话框
+                JDialog jDialog_search = new JDialog(MainPanel.getjFrame(), "替换");
+                jDialog_search.setSize(500, 150);
+                int x = MainPanel.getjFrame().getX();
+                int y = MainPanel.getjFrame().getY();
+                int width = MainPanel.getjFrame().getWidth();
+                int height = MainPanel.getjFrame().getHeight();
+                int search_x = x + width / 2 - 500 / 2;
+                int search_y = y + height / 2 - 150 / 2;
+                jDialog_search.setLocation(search_x, search_y);
+                JLabel label_search = new JLabel("查找的内容");
+                label_search.setHorizontalAlignment(0);
+                JLabel label_Replace = new JLabel("替换为");
+                label_Replace.setHorizontalAlignment(0);
+                final JTextField textField_search = new JTextField(20);
+                final JTextField textField_Replace = new JTextField(20);
+                JButton buttonFind = new JButton("查找下一个");
+                JButton buttonReplace = new JButton("替换查找选中的内容");
+                JPanel panel = new JPanel(new GridLayout(2, 3));
+                buttonFind.setBackground(Color.cyan);
+                buttonReplace.setBackground(Color.cyan);
+                panel.add(label_search);
+                panel.add(textField_search);
+                panel.add(buttonFind);
+                panel.add(label_Replace);
+                panel.add(textField_Replace);
+                panel.add(buttonReplace);
+                jDialog_search.add(panel);
+                if (jTextArea.getSelectedText() != null)                              //如果选中了文字
+                {
+                    textField_search.setText(jTextArea.getSelectedText());            //从选中处开始
+                    start = jTextArea.getSelectionStart();
+                    end = jTextArea.getSelectionEnd();
+                }
+                jDialog_search.setVisible(true);
+
+                buttonFind.addActionListener(new ActionListener()
+                {
+                    @Override
+                    public void actionPerformed(ActionEvent e)
+                    {
+                        String findText = textField_search.getText();               // 查找的字符串
+                        String textArea = jTextArea.getText();                      // 当前文本框的内容
+                        start = textArea.indexOf(findText, end);
+                        end = start + findText.length();
+                        if (start == -1)                                            // 没有找到
+                        {
+                            Toolkit.getDefaultToolkit().beep();
+                            JOptionPane.showMessageDialog(null,
+                                    "已经到达文档尾部", "提示", JOptionPane.WARNING_MESSAGE);
+                            jTextArea.select(start, end);
+                            start = 0;
+                            end = 0;
+                        }
+                        else
+                        {
+                            jTextArea.select(start, end);
+                        }
+                    }
+                });
+
+                buttonReplace.addActionListener(new ActionListener()
+                {                                                                       //替换监听器
+                    @Override
+                    public void actionPerformed(ActionEvent e)
+                    {
+                        String ReplaceText = textField_Replace.getText();
+                        jTextArea.select(start, end);
+                        jTextArea.replaceSelection(ReplaceText);
+                        jTextArea.select(start, end);
+                        label_information.setText("替换成功    \"" + textField_search.getText() + "\"替换成\"" + ReplaceText + "\"");
+                    }
+                });
+            }
+        });
+    }
+
+    public static void replace(JTextArea jTextArea, JLabel label_information)
+    {
+        // 替换对话框
+        JDialog jDialog_search = new JDialog(MainPanel.getjFrame(), "替换");
+        jDialog_search.setSize(500, 150);
+        int x = MainPanel.getjFrame().getX();
+        int y = MainPanel.getjFrame().getY();
+        int width = MainPanel.getjFrame().getWidth();
+        int height = MainPanel.getjFrame().getHeight();
+        int search_x = x + width / 2 - 500 / 2;
+        int search_y = y + height / 2 - 150 / 2;
+        jDialog_search.setLocation(search_x, search_y);
+        JLabel label_search = new JLabel("查找的内容");
+        label_search.setHorizontalAlignment(0);
+        JLabel label_Replace = new JLabel("替换为");
+        label_Replace.setHorizontalAlignment(0);
+        final JTextField textField_search = new JTextField(20);
+        final JTextField textField_Replace = new JTextField(20);
+        JButton buttonFind = new JButton("查找下一个");
+        JButton buttonReplace = new JButton("替换查找选中的内容");
+        JPanel panel = new JPanel(new GridLayout(2, 3));
+        buttonFind.setBackground(Color.cyan);
+        buttonReplace.setBackground(Color.cyan);
+        panel.add(label_search);
+        panel.add(textField_search);
+        panel.add(buttonFind);
+        panel.add(label_Replace);
+        panel.add(textField_Replace);
+        panel.add(buttonReplace);
+        jDialog_search.add(panel);
+        if (jTextArea.getSelectedText() != null)                              //如果选中了文字
+        {
+            textField_search.setText(jTextArea.getSelectedText());            //从选中处开始
+            start = jTextArea.getSelectionStart();
+            end = jTextArea.getSelectionEnd();
+        }
+        jDialog_search.setVisible(true);
+
+        buttonFind.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                String findText = textField_search.getText();               // 查找的字符串
+                String textArea = jTextArea.getText();                      // 当前文本框的内容
+                start = textArea.indexOf(findText, end);
+                end = start + findText.length();
+                if (start == -1)                                            // 没有找到
+                {
+                    Toolkit.getDefaultToolkit().beep();
+                    JOptionPane.showMessageDialog(null,
+                            "已经到达文档尾部", "提示", JOptionPane.WARNING_MESSAGE);
+                    jTextArea.select(start, end);
+                    start = 0;
+                    end = 0;
+                }
+                else
+                {
+                    jTextArea.select(start, end);
+                }
+            }
+        });
+
+        buttonReplace.addActionListener(new ActionListener()
+        {                                                                       //替换监听器
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                String ReplaceText = textField_Replace.getText();
+                jTextArea.select(start, end);
+                jTextArea.replaceSelection(ReplaceText);
+                jTextArea.select(start, end);
+                label_information.setText("替换成功    \"" + textField_search.getText() + "\"替换成\"" + ReplaceText + "\"");
+            }
+        });
+    }
+}
+�
+H:\����\��������\java�γ���� Swingʵ���ı��༭��\\src\\main\\java\\UI\\Search.java
+package UI;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+/**
+ * Project name(项目名称)：java课程设计 Swing实现文本编辑器
+ * Package(包名): UI
+ * Class(类名): Search
+ * Author(作者）: mao
+ * Author QQ：1296193245
+ * GitHub：https://github.com/maomao124/
+ * Date(创建日期)： 2021/12/8
+ * Time(创建时间)： 10:52
+ * Version(版本): 1.0
+ * Description(描述)： 查找面板
+ */
+
+public class Search
+{
+    private static int start = 0;                                            // 查找开始位置
+    private static int end = 0;                                              // 查找结束位置
+
+    public static void init_search(JTextArea jTextArea, JLabel label_information)
+    {
+        MainPanel.getSearch().addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                // 查找对话框
+                JDialog jDialog_search = new JDialog(MainPanel.getjFrame(), "查找");
+                jDialog_search.setSize(500, 150);
+                int x = MainPanel.getjFrame().getX();
+                int y = MainPanel.getjFrame().getY();
+                //System.out.println(x+"  "+y);
+                int width = MainPanel.getjFrame().getWidth();
+                int height = MainPanel.getjFrame().getHeight();
+                int search_x = x + width / 2 - 500 / 2;
+                int search_y = y + height / 2 - 150 / 2;
+                jDialog_search.setLocation(search_x, search_y);
+                JLabel label_search = new JLabel("查找的内容");
+                label_search.setFont(new Font("宋体", Font.BOLD, 15));
+                final JTextField textField_search = new JTextField(10);
+                JButton buttonFind = new JButton("查找下一个");
+                buttonFind.setBackground(Color.cyan);
+                JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
+                JPanel panel1 = new JPanel(new BorderLayout());
+                JPanel panel2 = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
+                panel.add(label_search);
+                panel2.add(buttonFind);
+                panel1.add(panel, BorderLayout.NORTH);
+                panel1.add(panel2, BorderLayout.SOUTH);
+                panel1.add(textField_search, BorderLayout.CENTER);
+                jDialog_search.add(panel1);
+                jDialog_search.setVisible(true);
+
+                // 查找下一个按钮监听器
+                buttonFind.addActionListener(new ActionListener()
+                {
+                    @Override
+                    public void actionPerformed(ActionEvent e)
+                    {
+                        String findText = textField_search.getText();       // 查找的字符串
+                        String textArea = jTextArea.getText();              // 当前文本框的内容
+                        start = textArea.indexOf(findText, end);
+                        end = start + findText.length();
+                        // 没有找到
+                        if (start == -1)
+                        {
+                            Toolkit.getDefaultToolkit().beep();
+                            JOptionPane.showMessageDialog(null,
+                                    "已经到达文档尾部", "提示", JOptionPane.WARNING_MESSAGE);
+                            jTextArea.select(start, end);
+                            start = 0;
+                            end = 0;
+                        }
+                        else                                                //找到了
+                        {
+                            jTextArea.select(start, end);
+                            label_information.setText("查找成功  当前位置：" + start + "-" + end);
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+    public static void search(JTextArea jTextArea, JLabel label_information)
+    {
+        // 查找对话框
+        JDialog jDialog_search = new JDialog(MainPanel.getjFrame(), "查找");
+        jDialog_search.setSize(500, 150);
+        int x = MainPanel.getjFrame().getX();
+        int y = MainPanel.getjFrame().getY();
+        //System.out.println(x+"  "+y);
+        int width = MainPanel.getjFrame().getWidth();
+        int height = MainPanel.getjFrame().getHeight();
+        int search_x = x + width / 2 - 500 / 2;
+        int search_y = y + height / 2 - 150 / 2;
+        jDialog_search.setLocation(search_x, search_y);
+        JLabel label_search = new JLabel("查找的内容");
+        label_search.setFont(new Font("宋体", Font.BOLD, 15));
+        final JTextField textField_search = new JTextField(10);
+        JButton buttonFind = new JButton("查找下一个");
+        buttonFind.setBackground(Color.cyan);
+        JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
+        JPanel panel1 = new JPanel(new BorderLayout());
+        JPanel panel2 = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
+        panel.add(label_search);
+        panel2.add(buttonFind);
+        panel1.add(panel, BorderLayout.NORTH);
+        panel1.add(panel2, BorderLayout.SOUTH);
+        panel1.add(textField_search, BorderLayout.CENTER);
+        jDialog_search.add(panel1);
+        jDialog_search.setVisible(true);
+
+        // 查找下一个按钮监听器
+        buttonFind.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                String findText = textField_search.getText();       // 查找的字符串
+                String textArea = jTextArea.getText();              // 当前文本框的内容
+                start = textArea.indexOf(findText, end);
+                end = start + findText.length();
+                // 没有找到
+                if (start == -1)
+                {
+                    Toolkit.getDefaultToolkit().beep();
+                    JOptionPane.showMessageDialog(null,
+                            "已经到达文档尾部", "提示", JOptionPane.WARNING_MESSAGE);
+                    jTextArea.select(start, end);
+                    start = 0;
+                    end = 0;
+                }
+                else                                                //找到了
+                {
+                    jTextArea.select(start, end);
+                    label_information.setText("查找成功  当前位置：" + start + "-" + end);
+                }
+            }
+        });
+    }
 }
 �
