@@ -651,7 +651,7 @@ public class MainPanel
         this.init_mainPanel();                                           //初始化主面板
         this.init_menu();                                                //初始化菜单面板
         FileInformation.init();                                          //初始化文件信息面板
-        io.ErrorLog.init_error_log_jPanel();                             //初始化错误日志面板
+        UI.ErrorLog.init_error_log_jPanel();                             //初始化错误日志面板
 
         jFrame.add(jPanel);                                              //主面板加入到顶层面板
         jFrame.setVisible(true);                                         //设置可见

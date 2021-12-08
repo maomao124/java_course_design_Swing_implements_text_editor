@@ -1,12 +1,7 @@
 package io;
 
-import UI.MainPanel;
-
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.*;
 import java.text.DecimalFormat;
 import java.util.Calendar;
@@ -21,70 +16,11 @@ import java.util.Calendar;
  * Date(创建日期)： 2021/12/7
  * Time(创建时间)： 14:20
  * Version(版本): 1.0
- * Description(描述)： 错误日志类
+ * Description(描述)： 错误日志类 读写
  */
 
 public class ErrorLog
 {
-    private static JTextArea jTextArea_ErrorLog;
-    private static JScrollPane jScrollPane;
-    private static JButton button_back;
-
-    public static void init_error_log_jPanel()                  //初始化错误日志面板
-    {
-        jTextArea_ErrorLog = new JTextArea(15, 55);
-        jTextArea_ErrorLog.setLineWrap(false);
-        jTextArea_ErrorLog.setEditable(false);
-        Font font = new Font("宋体", Font.PLAIN, 18);
-        jTextArea_ErrorLog.setFont(font);
-        jScrollPane = new JScrollPane(jTextArea_ErrorLog);
-        JPanel jPanel = new JPanel();
-        MainPanel.setjPanel_ErrorLog(jPanel);
-        jPanel.setLayout(new BorderLayout());
-        button_back = new JButton("<-返回");
-        jScrollPane.setBorder(new EmptyBorder(20, 100, 50, 100));
-        jPanel.add(jScrollPane, BorderLayout.CENTER);
-        JPanel jPanel2 = new JPanel();
-        jPanel2.setLayout(new FlowLayout());
-        jPanel2.add(button_back);
-        jPanel.add(jPanel2, BorderLayout.SOUTH);
-        button_back.setBackground(Color.cyan);
-        button_back.addActionListener(new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                back();
-            }
-        });
-        MainPanel.getErrorLog().addActionListener(new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                display();
-            }
-        });
-    }
-
-    private static void display()
-    {
-        read();                                   //读取日志
-        JFrame jFrame = MainPanel.getjFrame();
-        jFrame.remove(MainPanel.getjPanel());
-        jFrame.add(MainPanel.getjPanel_ErrorLog());
-        MainPanel.getjPanel_ErrorLog().updateUI();
-        jFrame.repaint();
-    }
-
-    private static void back()
-    {
-        JFrame jFrame = MainPanel.getjFrame();
-        jFrame.remove(MainPanel.getjPanel_ErrorLog());
-        jFrame.add(MainPanel.getjPanel());
-        jFrame.repaint();
-    }
-
     public static void write(String message)
     {
         Calendar calendar = Calendar.getInstance();// 获取当前时间
@@ -154,9 +90,8 @@ public class ErrorLog
         }
     }
 
-    private static void read()
+    public static void read()
     {
-        jTextArea_ErrorLog.setText("");             //清空
         FileReader fileReader = null;
         BufferedReader bufferedReader = null;
         try                                  //文件流打开，文件读写
@@ -164,9 +99,10 @@ public class ErrorLog
             fileReader = new FileReader("error.log");
             bufferedReader = new BufferedReader(fileReader);
             String str;
+            JTextArea jTextArea=UI.ErrorLog.getjTextArea_ErrorLog();
             while ((str = bufferedReader.readLine()) != null)
             {
-                jTextArea_ErrorLog.append(str+"\n");
+                jTextArea.append(str + "\n");
             }
         }
         catch (FileNotFoundException e)      //文件未找到
