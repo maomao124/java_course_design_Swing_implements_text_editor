@@ -84,3 +84,13 @@ java.lang.NullPointerException: Cannot invoke "javax.swing.JTextArea.setForegrou
 
 
 
+日期：2021/12/08    时间：21:01:45        主机：mao        错误堆栈：
+java.lang.IllegalArgumentException: horizontalAlignment
+	at java.desktop/javax.swing.JLabel.checkHorizontalKey(JLabel.java:594)
+	at java.desktop/javax.swing.JLabel.setHorizontalAlignment(JLabel.java:748)
+	at UI.About.<init>(About.java:28)
+	at UI.MainPanel.<init>(MainPanel.java:372)
+	at Run.main(Run.java:26)
+
+
+
