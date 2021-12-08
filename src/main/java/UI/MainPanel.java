@@ -295,6 +295,7 @@ public class MainPanel
         cursor_color = new JMenuItem("光标颜色");
         background_color = new JMenuItem("背景颜色");
         selected_color = new JMenuItem("选中颜色");
+        rendering_color=new JMenuItem("渲染颜色");
         font_setting.setBackground(Color.green);
         font_color.setBackground(Color.green);
         cursor_color.setBackground(Color.green);
