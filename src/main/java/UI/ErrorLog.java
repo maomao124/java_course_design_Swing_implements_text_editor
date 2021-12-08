@@ -24,6 +24,7 @@ public class ErrorLog
     private static JTextArea jTextArea_ErrorLog;
     private static JScrollPane jScrollPane;
     private static JButton button_back;
+    private static JButton button_back_pop;
 
     public static JTextArea getjTextArea_ErrorLog()
     {
@@ -42,14 +43,28 @@ public class ErrorLog
         MainPanel.setjPanel_ErrorLog(jPanel);
         jPanel.setLayout(new BorderLayout());
         button_back = new JButton("<-返回");
-        jScrollPane.setBorder(new EmptyBorder(20, 100, 50, 100));
+        button_back_pop = new JButton("<-返回");
+        jScrollPane.setBorder(new EmptyBorder(20, 45, 50, 100));
         jPanel.add(jScrollPane, BorderLayout.CENTER);
-        JPanel jPanel2 = new JPanel();
+        JPanel jPanel2 = new JPanel();                        //底部面板
+        JPanel jPanel3 = new JPanel();                        //顶部面板
         jPanel2.setLayout(new FlowLayout());
         jPanel2.add(button_back);
+        jPanel3.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
+        jPanel3.add(button_back_pop);
         jPanel.add(jPanel2, BorderLayout.SOUTH);
-        button_back.setBackground(Color.cyan);
+        jPanel.add(jPanel3, BorderLayout.WEST);
+        button_back.setBackground(Color.cyan);                //设置颜色
+        button_back_pop.setBackground(Color.WHITE);
         button_back.addActionListener(new ActionListener()
+        {                                                     //设置监听
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                back();
+            }
+        });
+        button_back_pop.addActionListener(new ActionListener()
         {
             @Override
             public void actionPerformed(ActionEvent e)
