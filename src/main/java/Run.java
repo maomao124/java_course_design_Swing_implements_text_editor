@@ -1,8 +1,11 @@
+import UI.About;
 import UI.MainPanel;
 
+import javax.swing.*;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.net.URL;
 
 /**
  * Project name(项目名称)：java课程设计 Swing实现文本编辑器
@@ -19,6 +22,19 @@ import java.io.Writer;
 
 public class Run
 {
+    public static ImageIcon createImageIcon(String path)
+    {
+        URL imgURL = About.class.getResource(path);
+        if (imgURL != null)
+        {
+            return new ImageIcon(imgURL);
+        }
+        else
+        {
+            System.err.println("文件未找到: " + path);
+            return null;
+        }
+    }
     public static void main(String[] args)
     {
         try
