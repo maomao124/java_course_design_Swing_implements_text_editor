@@ -478,7 +478,35 @@ public class MainPanel
                 MainPanel.this.delete();
             }
         });
+
+        deleteAll.addActionListener(new ActionListener()
+        {                                                   //菜单按钮 清空
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                MainPanel.this.deleteAll();
+            }
+        });
+
+        deleteAll_pop.addActionListener(new ActionListener()
+        {                                                   //菜单按钮 清空
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                MainPanel.this.deleteAll();
+            }
+        });
+
+        edit_mode.addActionListener(new ActionListener()
+        {                                                   //编辑模式和只读模式来回切换
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                MainPanel.this.EditMode();
+            }
+        });
     }
+
 
     private void selectAll()                                         //全选
     {
@@ -544,6 +572,34 @@ public class MainPanel
         else
         {
             jTextArea.replaceSelection("");
+        }
+    }
+
+    private void deleteAll()                                            //清空
+    {
+        if (jTextArea.getText().length() == 0)
+        {
+            label_Information.setText("文本域已经清空 无法再清空");
+        }
+        else
+        {
+            int result;
+            Toolkit.getDefaultToolkit().beep();
+            result = JOptionPane.showConfirmDialog(null, "是否清空文本域的所有数据？"
+                    , "数据丢失警告", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
+            if (result == 0)
+            {
+                jTextArea.setText("");                                  //清空操作
+                label_Information.setText("文本域已清空");
+            }
+            else if (result == 1)
+            {
+                label_Information.setText("取消清空");
+            }
+            else
+            {
+                label_Information.setText("关闭会话框，取消清空");
+            }
         }
     }
 
@@ -822,7 +878,9 @@ public class MainPanel
         if (isEditable)
         {
             button_EditMode.setText("只读模式");
+            edit_mode.setText("只读模式");
             button_EditMode.setBackground(Color.yellow);
+            edit_mode.setBackground(Color.yellow);
             isEditable = false;
             jTextArea.setEditable(false);
             label_Information.setText("当前为只读模式");
@@ -830,7 +888,9 @@ public class MainPanel
         else
         {
             button_EditMode.setText("编辑模式");
+            edit_mode.setText("编辑模式");
             button_EditMode.setBackground(Color.green);
+            edit_mode.setBackground(Color.green);
             isEditable = true;
             jTextArea.setEditable(true);
             label_Information.setText("当前为编辑模式");
