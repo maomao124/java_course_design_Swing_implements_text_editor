@@ -40,15 +40,29 @@ public class FileInformation
         MainPanel.setjPanel_FileInformation(jPanel);
         jPanel.setLayout(new BorderLayout());
         JButton button = MainPanel.getButton_Back();
-        jScrollPane.setBorder(new EmptyBorder(20, 100, 50, 100));
+        JButton button_back_pop = new JButton("<-返回");
+        button_back_pop.setBackground(Color.white);
+        jScrollPane.setBorder(new EmptyBorder(20, 45, 50, 100));
         //button.setBorder(new EmptyBorder(20, 20, 20, 20));
         jPanel.add(jScrollPane, BorderLayout.CENTER);
-        JPanel jPanel2 = new JPanel();
+        JPanel jPanel2 = new JPanel();                          //底层面板
+        JPanel jPanel3 = new JPanel();                          //顶层面板
+        jPanel3.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
+        jPanel3.add(button_back_pop);
         jPanel2.setLayout(new FlowLayout());
         jPanel2.add(button);
         jPanel.add(jPanel2, BorderLayout.SOUTH);
+        jPanel.add(jPanel3, BorderLayout.WEST);
         button.setBackground(Color.cyan);
         button.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                back();
+            }
+        });
+        button_back_pop.addActionListener(new ActionListener()
         {
             @Override
             public void actionPerformed(ActionEvent e)
