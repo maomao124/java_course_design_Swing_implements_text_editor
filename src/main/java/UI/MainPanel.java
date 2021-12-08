@@ -303,7 +303,7 @@ public class MainPanel
         selected_color.setBackground(Color.green);
         rendering_color.setBackground(Color.green);
 
-        wrap = new JMenuItem("自动换行");
+        wrap = new JMenuItem("不自动换行");
         wrap.setBackground(Color.cyan);
 
         errorLog = new JMenuItem("错误日志");
@@ -353,6 +353,30 @@ public class MainPanel
 
         // 添加菜单栏
         jFrame.setJMenuBar(jMenuBar);
+    }
+
+    public MainPanel()                                                   //构造方法
+    {
+        jFrame = new JFrame("文本编辑器");                            //初始化顶层面板
+        jFrame.setSize(1280, 720);
+        jFrame.setLocation(1920 / 2 - 640, 1080 / 2 - 360);
+        jFrame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+
+        this.init_mainPanel();                                           //初始化主面板
+        this.init_menu();                                                //初始化菜单面板
+        FileInformation.init();                                          //初始化文件信息面板
+        UI.ErrorLog.init_error_log_jPanel();                             //初始化错误日志面板
+        UI.Search.init_search(jTextArea, label_Information);              //初始化查找面板
+        UI.Replace.init_replace(jTextArea, label_Information);            //初始化替换面板
+        fontSetting = new UI.FontSetting(jTextArea);                      //初始化字体设置面板
+        Color_JTextArea.init_Color_JTextArea                              //初始化文本域颜色选择
+                (jTextArea, font_color, cursor_color, background_color, selected_color, rendering_color);
+
+        jFrame.add(jPanel);                                              //主面板加入到顶层面板
+        jFrame.setVisible(true);                                         //设置可见
+
+        this.init_Listener();                                            //初始化各种监听器
+        this.init_menu_Listener();                                       //初始化菜单监听器
     }
 
     private void init_menu_Listener()                                   //初始化菜单监听器
@@ -534,103 +558,31 @@ public class MainPanel
                 fontSetting.setVisible(true);
             }
         });
-    }
 
-
-    private void selectAll()                                         //全选
-    {
-        if (jTextArea.getText().length() == 0)
+        wrap.addActionListener(new ActionListener()
         {
-            Toolkit.getDefaultToolkit().beep();
-            label_Information.setText("全选失败！ 文本域为空！");
-        }
-        else
-        {
-            jTextArea.selectAll();
-            int start = jTextArea.getSelectionStart();
-            int end = jTextArea.getSelectionEnd();
-            label_Information.setText("全选成功, 选中位置为" + start + "到" + end + "的文本");
-        }
-    }
-
-    private void copy()                                                 //复制
-    {
-        if (jTextArea.getSelectedText() == null)
-        {
-            Toolkit.getDefaultToolkit().beep();
-            label_Information.setText("复制失败！ 未选择文字");
-        }
-        else
-        {
-            jTextArea.copy();
-            int start = jTextArea.getSelectionStart();
-            int end = jTextArea.getSelectionEnd();
-            label_Information.setText("复制成功, 复制选中位置为" + start + "到" + end + "的文本");
-        }
-    }
-
-    private void cut()                                                  //剪切
-    {
-        if (jTextArea.getSelectedText() == null)
-        {
-            Toolkit.getDefaultToolkit().beep();
-            label_Information.setText("剪切失败！ 未选择文字");
-        }
-        else
-        {
-            int start = jTextArea.getSelectionStart();
-            int end = jTextArea.getSelectionEnd();
-            jTextArea.cut();
-            label_Information.setText("剪切成功, 剪切选中位置为" + start + "到" + end + "的文本");
-        }
-    }
-
-    private void paste()                                                //粘贴
-    {
-        jTextArea.paste();
-        label_Information.setText("粘贴成功");
-    }
-
-    private void delete()                                               //删除
-    {
-        if (jTextArea.getSelectedText() == null)
-        {
-            Toolkit.getDefaultToolkit().beep();
-            label_Information.setText("删除失败！ 未选择如何文字！");
-        }
-        else
-        {
-            jTextArea.replaceSelection("");
-        }
-    }
-
-    private void deleteAll()                                            //清空
-    {
-        if (jTextArea.getText().length() == 0)
-        {
-            label_Information.setText("文本域已经清空 无法再清空");
-        }
-        else
-        {
-            int result;
-            Toolkit.getDefaultToolkit().beep();
-            result = JOptionPane.showConfirmDialog(null, "是否清空文本域的所有数据？"
-                    , "数据丢失警告", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
-            if (result == 0)
+            @Override
+            public void actionPerformed(ActionEvent e)
             {
-                jTextArea.setText("");                                  //清空操作
-                label_Information.setText("文本域已清空");
+                boolean result = jTextArea.getLineWrap();
+                if (result)                                              //是换行状态
+                {
+                    wrap.setBackground(Color.yellow);
+                    wrap.setText("自动换行");
+                    jTextArea.setLineWrap(false);
+                    label_Information.setText("当前为不自动换行模式");
+                }
+                else                                                      //不是换行状态
+                {
+                    wrap.setBackground(Color.cyan);
+                    wrap.setText("不自动换行");
+                    jTextArea.setLineWrap(true);
+                    label_Information.setText("当前为自动换行模式");
+                }
             }
-            else if (result == 1)
-            {
-                label_Information.setText("取消清空");
-            }
-            else
-            {
-                label_Information.setText("关闭会话框，取消清空");
-            }
-        }
+        });
     }
+
 
     private void init_Listener()                                        //初始化各种监听器
     {
@@ -793,30 +745,6 @@ public class MainPanel
             }
         });
 
-    }
-
-    public MainPanel()
-    {
-        jFrame = new JFrame("文本编辑器");                           //初始化顶层面板
-        jFrame.setSize(1280, 720);
-        jFrame.setLocation(1920 / 2 - 640, 1080 / 2 - 360);
-        jFrame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-
-        this.init_mainPanel();                                           //初始化主面板
-        this.init_menu();                                                //初始化菜单面板
-        FileInformation.init();                                          //初始化文件信息面板
-        UI.ErrorLog.init_error_log_jPanel();                             //初始化错误日志面板
-        UI.Search.init_search(jTextArea, label_Information);              //初始化查找面板
-        UI.Replace.init_replace(jTextArea, label_Information);            //初始化替换面板
-        fontSetting = new UI.FontSetting(jTextArea);                      //初始化字体设置面板
-        Color_JTextArea.init_Color_JTextArea                              //初始化文本域颜色选择
-                (jTextArea, font_color, cursor_color, background_color, selected_color, rendering_color);
-
-        jFrame.add(jPanel);                                              //主面板加入到顶层面板
-        jFrame.setVisible(true);                                         //设置可见
-
-        this.init_Listener();                                            //初始化各种监听器
-        this.init_menu_Listener();                                       //初始化菜单监听器
     }
 
     private void close()                                                 //关闭程序
@@ -1040,5 +968,99 @@ public class MainPanel
         }
     }
 
+    private void selectAll()                                         //全选
+    {
+        if (jTextArea.getText().length() == 0)
+        {
+            Toolkit.getDefaultToolkit().beep();
+            label_Information.setText("全选失败！ 文本域为空！");
+        }
+        else
+        {
+            jTextArea.selectAll();
+            int start = jTextArea.getSelectionStart();
+            int end = jTextArea.getSelectionEnd();
+            label_Information.setText("全选成功, 选中位置为" + start + "到" + end + "的文本");
+        }
+    }
+
+    private void copy()                                                 //复制
+    {
+        if (jTextArea.getSelectedText() == null)
+        {
+            Toolkit.getDefaultToolkit().beep();
+            label_Information.setText("复制失败！ 未选择文字");
+        }
+        else
+        {
+            jTextArea.copy();
+            int start = jTextArea.getSelectionStart();
+            int end = jTextArea.getSelectionEnd();
+            label_Information.setText("复制成功, 复制选中位置为" + start + "到" + end + "的文本");
+        }
+    }
+
+    private void cut()                                                  //剪切
+    {
+        if (jTextArea.getSelectedText() == null)
+        {
+            Toolkit.getDefaultToolkit().beep();
+            label_Information.setText("剪切失败！ 未选择文字");
+        }
+        else
+        {
+            int start = jTextArea.getSelectionStart();
+            int end = jTextArea.getSelectionEnd();
+            jTextArea.cut();
+            label_Information.setText("剪切成功, 剪切选中位置为" + start + "到" + end + "的文本");
+        }
+    }
+
+    private void paste()                                                //粘贴
+    {
+        jTextArea.paste();
+        label_Information.setText("粘贴成功");
+    }
+
+    private void delete()                                               //删除
+    {
+        if (jTextArea.getSelectedText() == null)
+        {
+            Toolkit.getDefaultToolkit().beep();
+            label_Information.setText("删除失败！ 未选择如何文字！");
+        }
+        else
+        {
+            jTextArea.replaceSelection("");
+        }
+    }
+
+    private void deleteAll()                                            //清空
+    {
+        if (jTextArea.getText().length() == 0)
+        {
+            label_Information.setText("文本域已经清空 无法再清空");
+        }
+        else
+        {
+            int result;
+            Toolkit.getDefaultToolkit().beep();
+            result = JOptionPane.showConfirmDialog(null, "是否清空文本域的所有数据？"
+                    , "数据丢失警告", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
+            if (result == 0)
+            {
+                jTextArea.setText("");                                  //清空操作
+                label_Information.setText("文本域已清空");
+            }
+            else if (result == 1)
+            {
+                label_Information.setText("取消清空");
+            }
+            else
+            {
+                label_Information.setText("关闭会话框，取消清空");
+            }
+        }
+    }
 
 }
