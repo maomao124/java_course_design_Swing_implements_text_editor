@@ -810,7 +810,7 @@ public class MainPanel
         UI.Replace.init_replace(jTextArea, label_Information);            //初始化替换面板
         fontSetting = new UI.FontSetting(jTextArea);                      //初始化字体设置面板
         Color_JTextArea.init_Color_JTextArea                              //初始化文本域颜色选择
-                (jTextArea, font_color, cursor_color, background_color, selected_color);
+                (jTextArea, font_color, cursor_color, background_color, selected_color, rendering_color);
 
         jFrame.add(jPanel);                                              //主面板加入到顶层面板
         jFrame.setVisible(true);                                         //设置可见

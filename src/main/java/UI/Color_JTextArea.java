@@ -22,7 +22,8 @@ public class Color_JTextArea
 {
     private static JTextArea jTextArea;
 
-    public static void init_Color_JTextArea(JTextArea jTextArea, JMenuItem font_color, JMenuItem cursor_color, JMenuItem background_color, JMenuItem selected_color)
+    public static void init_Color_JTextArea(JTextArea jTextArea, JMenuItem
+            font_color, JMenuItem cursor_color, JMenuItem background_color, JMenuItem selected_color, JMenuItem rendering_color)
     {
         Color_JTextArea.jTextArea = jTextArea;
 
@@ -61,10 +62,19 @@ public class Color_JTextArea
                 change_selected_color();
             }
         });
+
+        rendering_color.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                change_rendering_color();
+            }
+        });
     }
 
 
-    private static void change_font_color()
+    private static void change_font_color()                           //设置此组件的前景色
     {
         Color color = null;
         color = JColorChooser.showDialog(MainPanel.getjFrame(), "请选择字体颜色", Color.black);
@@ -74,7 +84,7 @@ public class Color_JTextArea
         }
     }
 
-    private static void change_cursor_color()
+    private static void change_cursor_color()                         //设置用于渲染插入符号的当前颜色
     {
         Color color = null;
         color = JColorChooser.showDialog(MainPanel.getjFrame(), "请选择光标颜色", Color.black);
@@ -84,7 +94,8 @@ public class Color_JTextArea
         }
     }
 
-    private static void change_background_color()
+    private static void change_background_color()                    //设置此组件的背景颜色。
+    // 背景颜色仅在组件不透明时使用，并且仅由JComponent或ComponentUI实现的子类使用
     {
         Color color = null;
         color = JColorChooser.showDialog(MainPanel.getjFrame(), "请选择背景颜色", Color.black);
@@ -94,13 +105,22 @@ public class Color_JTextArea
         }
     }
 
-    private static void change_selected_color()
+    private static void change_selected_color()                       //设置用于呈现选定文本的当前颜色
     {
         Color color = null;
         color = JColorChooser.showDialog(MainPanel.getjFrame(), "请选择选中颜色", Color.black);
         if (color != null)
         {
             jTextArea.setSelectedTextColor(color);
+        }
+    }
+
+    private static void change_rendering_color()                        //设置用于渲染选择的当前颜色
+    {
+        Color color = null;
+        color = JColorChooser.showDialog(MainPanel.getjFrame(), "请选择选中颜色", Color.black);
+        if (color != null)
+        {
             jTextArea.setSelectionColor(color);
         }
     }
