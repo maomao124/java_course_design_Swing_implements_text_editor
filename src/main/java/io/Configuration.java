@@ -1,5 +1,8 @@
 package io;
 
+import java.awt.*;
+import java.io.*;
+
 /**
  * Project name(项目名称)：java课程设计 Swing实现文本编辑器
  * Package(包名): io
@@ -15,5 +18,71 @@ package io;
 
 public class Configuration
 {
+    public static data.Configuration config;                //配置文件对象
 
+    public static void write()                              //将配置写入内存
+    {
+        FileOutputStream fileOutputStream = null;
+        ObjectOutputStream objectOutputStream = null;
+        try                                  //文件流打开，文件读写
+        {
+            fileOutputStream = new FileOutputStream("Configuration.ini");
+            objectOutputStream = new ObjectOutputStream(fileOutputStream);
+            objectOutputStream.writeObject(config);
+        }
+        catch (FileNotFoundException e)      //文件未找到
+        {
+            Toolkit.getDefaultToolkit().beep();
+            System.err.println("文件未找到！！！  " + "\n错误内容：" + e.toString());
+            final Writer result = new StringWriter();
+            final PrintWriter printWriter = new PrintWriter(result);
+            e.printStackTrace(printWriter);
+            String stackTraceStr = result.toString();
+            io.ErrorLog.write(stackTraceStr);
+        }
+        catch (Exception e)                  //其它异常
+        {
+            Toolkit.getDefaultToolkit().beep();
+            e.printStackTrace();
+            final Writer result = new StringWriter();
+            final PrintWriter printWriter = new PrintWriter(result);
+            e.printStackTrace(printWriter);
+            String stackTraceStr = result.toString();
+            io.ErrorLog.write(stackTraceStr);
+        }
+        finally
+        {
+            try                              //关闭流
+            {
+                if (fileOutputStream != null)
+                {
+                    fileOutputStream.close();
+                }
+                if (objectOutputStream != null)
+                {
+                    objectOutputStream.close();
+                }
+            }
+            catch (NullPointerException e)    //空指针异常
+            {
+                Toolkit.getDefaultToolkit().beep();
+                System.err.println("文件已经被关闭，无法再次关闭！！！");
+                final Writer result = new StringWriter();
+                final PrintWriter printWriter = new PrintWriter(result);
+                e.printStackTrace(printWriter);
+                String stackTraceStr = result.toString();
+                io.ErrorLog.write(stackTraceStr);
+            }
+            catch (Exception e)              //其它异常
+            {
+                Toolkit.getDefaultToolkit().beep();
+                e.printStackTrace();
+                final Writer result = new StringWriter();
+                final PrintWriter printWriter = new PrintWriter(result);
+                e.printStackTrace(printWriter);
+                String stackTraceStr = result.toString();
+                io.ErrorLog.write(stackTraceStr);
+            }
+        }
+    }
 }
