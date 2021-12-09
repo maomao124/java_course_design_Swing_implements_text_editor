@@ -34,7 +34,7 @@ public class MainPanel
     private JTextArea jTextArea;                           //文本域
     private JScrollPane jScrollPane;                      //滚动面板
     private final JLabel label_FilePath = new JLabel("所选文件路径：");  //路径显示
-    private final JTextField jTextField_FilePath = new JTextField(30);
+    private final JTextField jTextField_FilePath = new JTextField(35);
     private final JButton button_Open = new JButton("浏览");      //文件打开按钮
     private final JButton button_Save = new JButton("保存");     //保存按钮
     private final JButton button_save_file = new JButton("另存为");
@@ -211,6 +211,7 @@ public class MainPanel
 
         button_Open.setBackground(Color.cyan);                          //设置颜色
         button_Save.setBackground(Color.cyan);
+        button_autoSave.setBackground(Color.cyan);
         button_EditMode.setBackground(Color.green);
         button_save_file.setBackground(Color.cyan);
         button_FileInformation.setBackground(Color.cyan);
@@ -224,6 +225,7 @@ public class MainPanel
         jPanel1.add(button_Save);
         jPanel1.add(button_save_file);
         jPanel1.add(button_EditMode);
+        jPanel1.add(button_autoSave);
         jPanel1.add(button_FileInformation);
         jPanel.add(jPanel1, BorderLayout.NORTH);
         jPanel.add(jScrollPane, BorderLayout.CENTER);
@@ -326,6 +328,7 @@ public class MainPanel
         menu_file.add(open);
         menu_file.add(save);
         menu_file.add(save_as);
+        menu_file.add(auto_save);
         menu_file.add(file_information);
         menu_file.add(exit);
 
@@ -374,13 +377,15 @@ public class MainPanel
             @Override
             public void actionPerformed(ActionEvent e)
             {
+                //Toolkit.getDefaultToolkit().beep();
                 if (file != null)
                 {
                     MainPanel.this.save();
+                    label_Information.setText("已触发自动保存");
                 }
             }
         };
-        timer_autoSave = new Timer(200000, taskPerformer);
+        timer_autoSave = new Timer(5000, taskPerformer);
     }
 
     public MainPanel()                                                   //构造方法
@@ -634,6 +639,15 @@ public class MainPanel
                 about_software.setVisible(true);
             }
         });
+
+        auto_save.addActionListener(new ActionListener()
+        {                                                              //自动保存按钮
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                MainPanel.this.change_auto_save_mode();
+            }
+        });
     }
 
 
@@ -726,6 +740,15 @@ public class MainPanel
             public void actionPerformed(ActionEvent e)
             {
                 MainPanel.this.open();
+            }
+        });
+
+        button_autoSave.addActionListener(new ActionListener()
+        {                                                           //保存按钮
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                MainPanel.this.change_auto_save_mode();
             }
         });
 
@@ -1125,40 +1148,109 @@ public class MainPanel
     private void change_auto_save_mode()                                //改变自动保存模式
     {
         if (auto_save_mode == 0)                //当前为不自动保存
-        {
-
+        {                                           //改成600s
+            auto_save_mode = 1;
+            timer_autoSave.setDelay(600000);
+            timer_autoSave.start();
+            button_autoSave.setText("自动保存:10min");
+            button_autoSave.setBackground(Color.green);
+            auto_save.setText("自动保存：10min");
+            auto_save.setBackground(Color.green);
+            label_Information.setText("自动保存设置成10分钟");
         }
         else if (auto_save_mode == 1)               //600s
         {
-
+            auto_save_mode = 2;                     //改成5分钟
+            timer_autoSave.setDelay(300000);
+            timer_autoSave.stop();
+            timer_autoSave.start();
+            button_autoSave.setText("自动保存:5min");
+            button_autoSave.setBackground(Color.green);
+            auto_save.setText("自动保存：5min");
+            auto_save.setBackground(Color.green);
+            label_Information.setText("自动保存设置成5分钟");
         }
         else if (auto_save_mode == 2)               //300s
         {
-
+            auto_save_mode = 3;                     //改成4分钟
+            timer_autoSave.setDelay(240000);
+            timer_autoSave.stop();
+            timer_autoSave.start();
+            button_autoSave.setText("自动保存:4min");
+            button_autoSave.setBackground(Color.green);
+            auto_save.setText("自动保存:4min");
+            auto_save.setBackground(Color.green);
+            label_Information.setText("自动保存设置成4分钟");
         }
-        else if (auto_save_mode==3)                 //240s
+        else if (auto_save_mode == 3)                 //240s
         {
-
+            auto_save_mode = 4;                     //改成3分钟
+            timer_autoSave.stop();
+            timer_autoSave.setDelay(180000);
+            timer_autoSave.start();
+            button_autoSave.setText("自动保存:3min");
+            button_autoSave.setBackground(Color.green);
+            auto_save.setText("自动保存：3min");
+            auto_save.setBackground(Color.green);
+            label_Information.setText("自动保存设置成3分钟");
         }
-        else if (auto_save_mode==4)                 //180s
+        else if (auto_save_mode == 4)                 //180s
         {
-
+            auto_save_mode = 5;                     //改成2分钟
+            timer_autoSave.stop();
+            timer_autoSave.setDelay(120000);
+            timer_autoSave.start();
+            button_autoSave.setText("自动保存:2min");
+            button_autoSave.setBackground(Color.green);
+            auto_save.setText("自动保存：2min");
+            auto_save.setBackground(Color.green);
+            label_Information.setText("自动保存设置成2分钟");
         }
-        else if (auto_save_mode==5)                 //120s
+        else if (auto_save_mode == 5)                 //120s
         {
-
+            auto_save_mode = 6;                     //改成90s
+            timer_autoSave.stop();
+            timer_autoSave.setDelay(90000);
+            timer_autoSave.start();
+            button_autoSave.setText("自动保存：90s");
+            button_autoSave.setBackground(Color.green);
+            auto_save.setText("自动保存：90s");
+            auto_save.setBackground(Color.green);
+            label_Information.setText("自动保存设置成90秒");
         }
-        else if (auto_save_mode==6)                 //90s
+        else if (auto_save_mode == 6)                 //90s
         {
-
+            auto_save_mode = 7;                     //改成60s
+            timer_autoSave.stop();
+            timer_autoSave.setDelay(60000);
+            timer_autoSave.start();
+            button_autoSave.setText("自动保存：60s");
+            button_autoSave.setBackground(Color.green);
+            auto_save.setText("自动保存：60s");
+            auto_save.setBackground(Color.green);
+            label_Information.setText("自动保存设置成60秒");
         }
-        else if (auto_save_mode==7)                 //60s
+        else if (auto_save_mode == 7)                 //60s
         {
-
+            auto_save_mode = 8;                     //改成30s
+            timer_autoSave.stop();
+            timer_autoSave.setDelay(30000);
+            timer_autoSave.start();
+            button_autoSave.setText("自动保存：30s");
+            button_autoSave.setBackground(Color.green);
+            auto_save.setText("自动保存：30s");
+            auto_save.setBackground(Color.green);
+            label_Information.setText("自动保存设置成30秒");
         }
-        else if (auto_save_mode==8)                //30s
+        else if (auto_save_mode == 8)                //30s
         {
-
+            auto_save_mode = 0;                      //关闭自动保存
+            button_autoSave.setText("不自动保存");
+            timer_autoSave.stop();
+            button_autoSave.setBackground(Color.cyan);
+            auto_save.setText("不自动保存");
+            auto_save.setBackground(Color.cyan);
+            label_Information.setText("已关闭自动保存");
         }
     }
 }

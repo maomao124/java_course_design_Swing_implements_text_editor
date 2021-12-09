@@ -1,5 +1,7 @@
 package UI;
 
+import io.Configuration;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -81,6 +83,14 @@ public class Color_JTextArea
         if (color != null)
         {
             jTextArea.setForeground(color);
+            if (io.Configuration.config == null)
+            {
+                io.Configuration.config = new data.Configuration();
+                Configuration.config_is_not_null = true;
+            }
+            io.Configuration.config.setFont_color_r(color.getRed());
+            io.Configuration.config.setFont_color_g(color.getGreen());
+            io.Configuration.config.setFont_color_b(color.getBlue());
         }
     }
 
@@ -91,6 +101,14 @@ public class Color_JTextArea
         if (color != null)
         {
             jTextArea.setCaretColor(color);
+            if (io.Configuration.config == null)
+            {
+                io.Configuration.config = new data.Configuration();
+                Configuration.config_is_not_null = true;
+            }
+            io.Configuration.config.setCursor_color_r(color.getRed());
+            io.Configuration.config.setCursor_color_g(color.getGreen());
+            io.Configuration.config.setCursor_color_b(color.getBlue());
         }
     }
 
