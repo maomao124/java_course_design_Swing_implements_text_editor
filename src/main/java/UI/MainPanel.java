@@ -1124,6 +1124,41 @@ public class MainPanel
 
     private void change_auto_save_mode()                                //改变自动保存模式
     {
+        if (auto_save_mode == 0)                //当前为不自动保存
+        {
 
+        }
+        else if (auto_save_mode == 1)               //600s
+        {
+
+        }
+        else if (auto_save_mode == 2)               //300s
+        {
+
+        }
+        else if (auto_save_mode==3)                 //240s
+        {
+
+        }
+        else if (auto_save_mode==4)                 //180s
+        {
+
+        }
+        else if (auto_save_mode==5)                 //120s
+        {
+
+        }
+        else if (auto_save_mode==6)                 //90s
+        {
+
+        }
+        else if (auto_save_mode==7)                 //60s
+        {
+
+        }
+        else if (auto_save_mode==8)                //30s
+        {
+
+        }
     }
 }
