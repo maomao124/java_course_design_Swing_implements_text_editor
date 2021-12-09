@@ -1,3 +1,682 @@
+H:\����\��������\java�γ���� Swingʵ���ı��༭��\\src\\main\\java\\data\\Configuration.java
+package data;
+
+import java.io.Serializable;
+
+/**
+ * Project name(项目名称)：java课程设计 Swing实现文本编辑器
+ * Package(包名): data
+ * Class(类名): Configuration
+ * Author(作者）: mao
+ * Author QQ：1296193245
+ * GitHub：https://github.com/maomao124/
+ * Date(创建日期)： 2021/12/9
+ * Time(创建时间)： 13:04
+ * Version(版本): 1.0
+ * Description(描述)： 配置文件的数据类 可序列化
+ */
+
+public class Configuration implements Serializable
+{
+    private int width;                  //窗口大小
+    private int height;
+
+    private String fontName;            //字体设置
+    private int fontStyle;
+    private int fontSize;
+
+    private int font_color_r;           //字体颜色
+    private int font_color_g;
+    private int font_color_b;
+
+    private int cursor_color_r;         //光标颜色
+    private int cursor_color_g;
+    private int cursor_color_b;
+
+    private int background_color_r;     //背景颜色
+    private int background_color_g;
+    private int background_color_b;
+
+    private int selected_color_r;       //选择颜色
+    private int selected_color_g;
+    private int selected_color_b;
+
+    private int rendering_color_r;      //渲染颜色
+    private int rendering_color_g;
+    private int rendering_color_b;
+
+    boolean wrap;                       //文本域是否换行
+
+
+    public Configuration()              //get和set方法
+    {
+
+    }
+
+    public int getWidth()
+    {
+        return width;
+    }
+
+    public void setWidth(int width)
+    {
+        if (width >= 0)
+        {
+            this.width = width;
+        }
+        else
+        {
+            this.width = 0;
+        }
+    }
+
+    public int getHeight()
+    {
+        return height;
+    }
+
+    public void setHeight(int height)
+    {
+        if (height >= 0)
+        {
+            this.height = height;
+        }
+        else
+        {
+            this.height = 0;
+        }
+    }
+
+    public String getFontName()
+    {
+        return fontName;
+    }
+
+    public void setFontName(String fontName)
+    {
+        this.fontName = fontName;
+    }
+
+    public int getFontStyle()
+    {
+        return fontStyle;
+    }
+
+    public void setFontStyle(int fontStyle)
+    {
+        if (fontStyle >= 0)
+        {
+            this.fontStyle = fontStyle;
+        }
+        else
+        {
+            this.fontStyle = 0;
+        }
+    }
+
+    public int getFontSize()
+    {
+        return fontSize;
+    }
+
+    public void setFontSize(int fontSize)
+    {
+        if (fontSize >= 0)
+        {
+            this.fontSize = fontSize;
+        }
+        else
+        {
+            this.fontSize = 0;
+        }
+    }
+
+    public int getFont_color_r()
+    {
+        return font_color_r;
+    }
+
+    public void setFont_color_r(int font_color_r)
+    {
+        if (font_color_r > 255)
+        {
+            font_color_r = 255;
+        }
+        if (font_color_r >= 0)
+        {
+            this.font_color_r = font_color_r;
+        }
+        else
+        {
+            this.font_color_r = 0;
+        }
+    }
+
+    public int getFont_color_g()
+    {
+        return font_color_g;
+    }
+
+    public void setFont_color_g(int font_color_g)
+    {
+        if (font_color_g > 255)
+        {
+            font_color_g = 255;
+        }
+        if (font_color_g >= 0)
+        {
+            this.font_color_g = font_color_g;
+        }
+        else
+        {
+            this.font_color_g = 0;
+        }
+    }
+
+    public int getFont_color_b()
+    {
+        return font_color_b;
+    }
+
+    public void setFont_color_b(int font_color_b)
+    {
+        if (font_color_b > 255)
+        {
+            font_color_b = 255;
+        }
+        if (font_color_b >= 0)
+        {
+            this.font_color_b = font_color_b;
+        }
+        else
+        {
+            this.font_color_b = 0;
+        }
+    }
+
+    public int getCursor_color_r()
+    {
+        return cursor_color_r;
+    }
+
+    public void setCursor_color_r(int cursor_color_r)
+    {
+        if (cursor_color_r > 255)
+        {
+            cursor_color_r = 255;
+        }
+        if (cursor_color_r >= 0)
+        {
+            this.cursor_color_r = cursor_color_r;
+        }
+        else
+        {
+            this.cursor_color_r = 0;
+        }
+    }
+
+    public int getCursor_color_g()
+    {
+        return cursor_color_g;
+    }
+
+    public void setCursor_color_g(int cursor_color_g)
+    {
+        if (cursor_color_g > 255)
+        {
+            cursor_color_g = 255;
+        }
+        if (cursor_color_g >= 0)
+        {
+            this.cursor_color_g = cursor_color_g;
+        }
+        else
+        {
+            this.cursor_color_g = 0;
+        }
+    }
+
+    public int getCursor_color_b()
+    {
+        return cursor_color_b;
+    }
+
+    public void setCursor_color_b(int cursor_color_b)
+    {
+        if (cursor_color_b > 255)
+        {
+            cursor_color_b = 255;
+        }
+        if (cursor_color_b >= 0)
+        {
+            this.cursor_color_b = cursor_color_b;
+        }
+        else
+        {
+            this.cursor_color_b = 0;
+        }
+    }
+
+    public int getBackground_color_r()
+    {
+        return background_color_r;
+    }
+
+    public void setBackground_color_r(int background_color_r)
+    {
+        if (background_color_r > 255)
+        {
+            background_color_r = 255;
+        }
+        if (background_color_r >= 0)
+        {
+            this.background_color_r = background_color_r;
+        }
+        else
+        {
+            this.background_color_r = 0;
+        }
+    }
+
+    public int getBackground_color_g()
+    {
+        return background_color_g;
+    }
+
+    public void setBackground_color_g(int background_color_g)
+    {
+        if (background_color_g > 255)
+        {
+            background_color_g = 255;
+        }
+        if (background_color_g >= 0)
+        {
+            this.background_color_g = background_color_g;
+        }
+        else
+        {
+            this.background_color_g = 0;
+        }
+    }
+
+    public int getBackground_color_b()
+    {
+        return background_color_b;
+    }
+
+    public void setBackground_color_b(int background_color_b)
+    {
+        if (background_color_b > 255)
+        {
+            background_color_b = 255;
+        }
+        if (background_color_b >= 0)
+        {
+            this.background_color_b = background_color_b;
+        }
+        else
+        {
+            this.background_color_b = 0;
+        }
+    }
+
+    public int getSelected_color_r()
+    {
+        return selected_color_r;
+    }
+
+    public void setSelected_color_r(int selected_color_r)
+    {
+        if (selected_color_r > 255)
+        {
+            selected_color_r = 255;
+        }
+        if (selected_color_r >= 0)
+        {
+            this.selected_color_r = selected_color_r;
+        }
+        else
+        {
+            this.selected_color_r = 0;
+        }
+    }
+
+    public int getSelected_color_g()
+    {
+        return selected_color_g;
+    }
+
+    public void setSelected_color_g(int selected_color_g)
+    {
+        if (selected_color_g > 255)
+        {
+            selected_color_g = 255;
+        }
+        if (selected_color_g >= 0)
+        {
+            this.selected_color_g = selected_color_g;
+        }
+        else
+        {
+            this.selected_color_g = 0;
+        }
+    }
+
+    public int getSelected_color_b()
+    {
+        return selected_color_b;
+    }
+
+    public void setSelected_color_b(int selected_color_b)
+    {
+        if (selected_color_b > 255)
+        {
+            selected_color_b = 255;
+        }
+        if (selected_color_b >= 0)
+        {
+            this.selected_color_b = selected_color_b;
+        }
+        else
+        {
+            this.selected_color_b = 0;
+        }
+    }
+
+    public int getRendering_color_r()
+    {
+        return rendering_color_r;
+    }
+
+    public void setRendering_color_r(int rendering_color_r)
+    {
+        if (rendering_color_r > 255)
+        {
+            rendering_color_r = 255;
+        }
+        if (rendering_color_r >= 0)
+        {
+            this.rendering_color_r = rendering_color_r;
+        }
+        else
+        {
+            this.rendering_color_r = 0;
+        }
+    }
+
+    public int getRendering_color_g()
+    {
+        return rendering_color_g;
+    }
+
+    public void setRendering_color_g(int rendering_color_g)
+    {
+        if (rendering_color_g > 255)
+        {
+            rendering_color_g = 255;
+        }
+        if (rendering_color_g >= 0)
+        {
+            this.rendering_color_g = rendering_color_g;
+        }
+        else
+        {
+            this.rendering_color_g = 0;
+        }
+    }
+
+    public int getRendering_color_b()
+    {
+        return rendering_color_b;
+    }
+
+    public void setRendering_color_b(int rendering_color_b)
+    {
+        if (rendering_color_b > 255)
+        {
+            rendering_color_b = 255;
+        }
+        if (rendering_color_b >= 0)
+        {
+            this.rendering_color_b = rendering_color_b;
+        }
+        else
+        {
+            this.rendering_color_b = 0;
+        }
+    }
+
+    public boolean isWrap()
+    {
+        return wrap;
+    }
+
+    public void setWrap(boolean wrap)
+    {
+        this.wrap = wrap;
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o)    //引用同一个对象
+        {
+            return true;
+        }
+        if (o == null)    //检测obj是否为null
+        {
+            return false;
+        }
+        //if(!(otherObject instanceof ClassName)) //如果所有的子类都拥有统一的语义
+        if (this.getClass() != o.getClass())   //比较this与obj是否属于同一个类
+        {
+            return false;
+        }
+
+        //Object类向下转型
+        Configuration that = (Configuration) o;
+
+        if (width != that.width)
+        {
+            return false;
+        }
+        if (height != that.height)
+        {
+            return false;
+        }
+        if (fontStyle != that.fontStyle)
+        {
+            return false;
+        }
+        if (fontSize != that.fontSize)
+        {
+            return false;
+        }
+        if (font_color_r != that.font_color_r)
+        {
+            return false;
+        }
+        if (font_color_g != that.font_color_g)
+        {
+            return false;
+        }
+        if (font_color_b != that.font_color_b)
+        {
+            return false;
+        }
+        if (cursor_color_r != that.cursor_color_r)
+        {
+            return false;
+        }
+        if (cursor_color_g != that.cursor_color_g)
+        {
+            return false;
+        }
+        if (cursor_color_b != that.cursor_color_b)
+        {
+            return false;
+        }
+        if (background_color_r != that.background_color_r)
+        {
+            return false;
+        }
+        if (background_color_g != that.background_color_g)
+        {
+            return false;
+        }
+        if (background_color_b != that.background_color_b)
+        {
+            return false;
+        }
+        if (selected_color_r != that.selected_color_r)
+        {
+            return false;
+        }
+        if (selected_color_g != that.selected_color_g)
+        {
+            return false;
+        }
+        if (selected_color_b != that.selected_color_b)
+        {
+            return false;
+        }
+        if (rendering_color_r != that.rendering_color_r)
+        {
+            return false;
+        }
+        if (rendering_color_g != that.rendering_color_g)
+        {
+            return false;
+        }
+        if (rendering_color_b != that.rendering_color_b)
+        {
+            return false;
+        }
+        if (wrap != that.wrap)
+        {
+            return false;
+        }
+        return fontName.equals(that.fontName);
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int result = width;
+        result = 31 * result + height;
+        result = 31 * result + fontName.hashCode();
+        result = 31 * result + fontStyle;
+        result = 31 * result + fontSize;
+        result = 31 * result + font_color_r;
+        result = 31 * result + font_color_g;
+        result = 31 * result + font_color_b;
+        result = 31 * result + cursor_color_r;
+        result = 31 * result + cursor_color_g;
+        result = 31 * result + cursor_color_b;
+        result = 31 * result + background_color_r;
+        result = 31 * result + background_color_g;
+        result = 31 * result + background_color_b;
+        result = 31 * result + selected_color_r;
+        result = 31 * result + selected_color_g;
+        result = 31 * result + selected_color_b;
+        result = 31 * result + rendering_color_r;
+        result = 31 * result + rendering_color_g;
+        result = 31 * result + rendering_color_b;
+        result = 31 * result + (wrap ? 1 : 0);
+        return result;
+    }
+}
+�
+H:\����\��������\java�γ���� Swingʵ���ı��༭��\\src\\main\\java\\io\\Configuration.java
+package io;
+
+import java.awt.*;
+import java.io.*;
+
+/**
+ * Project name(项目名称)：java课程设计 Swing实现文本编辑器
+ * Package(包名): io
+ * Class(类名): Configuration
+ * Author(作者）: mao
+ * Author QQ：1296193245
+ * GitHub：https://github.com/maomao124/
+ * Date(创建日期)： 2021/12/9
+ * Time(创建时间)： 13:04
+ * Version(版本): 1.0
+ * Description(描述)： 无
+ */
+
+public class Configuration
+{
+    public static data.Configuration config;                //配置文件对象
+
+    public static void write()                              //将配置写入内存
+    {
+        FileOutputStream fileOutputStream = null;
+        ObjectOutputStream objectOutputStream = null;
+        try                                  //文件流打开，文件读写
+        {
+            fileOutputStream = new FileOutputStream("Configuration.ini");
+            objectOutputStream = new ObjectOutputStream(fileOutputStream);
+            objectOutputStream.writeObject(config);
+        }
+        catch (FileNotFoundException e)      //文件未找到
+        {
+            Toolkit.getDefaultToolkit().beep();
+            System.err.println("文件未找到！！！  " + "\n错误内容：" + e.toString());
+            final Writer result = new StringWriter();
+            final PrintWriter printWriter = new PrintWriter(result);
+            e.printStackTrace(printWriter);
+            String stackTraceStr = result.toString();
+            io.ErrorLog.write(stackTraceStr);
+        }
+        catch (Exception e)                  //其它异常
+        {
+            Toolkit.getDefaultToolkit().beep();
+            e.printStackTrace();
+            final Writer result = new StringWriter();
+            final PrintWriter printWriter = new PrintWriter(result);
+            e.printStackTrace(printWriter);
+            String stackTraceStr = result.toString();
+            io.ErrorLog.write(stackTraceStr);
+        }
+        finally
+        {
+            try                              //关闭流
+            {
+                if (fileOutputStream != null)
+                {
+                    fileOutputStream.close();
+                }
+                if (objectOutputStream != null)
+                {
+                    objectOutputStream.close();
+                }
+            }
+            catch (NullPointerException e)    //空指针异常
+            {
+                Toolkit.getDefaultToolkit().beep();
+                System.err.println("文件已经被关闭，无法再次关闭！！！");
+                final Writer result = new StringWriter();
+                final PrintWriter printWriter = new PrintWriter(result);
+                e.printStackTrace(printWriter);
+                String stackTraceStr = result.toString();
+                io.ErrorLog.write(stackTraceStr);
+            }
+            catch (Exception e)              //其它异常
+            {
+                Toolkit.getDefaultToolkit().beep();
+                e.printStackTrace();
+                final Writer result = new StringWriter();
+                final PrintWriter printWriter = new PrintWriter(result);
+                e.printStackTrace(printWriter);
+                String stackTraceStr = result.toString();
+                io.ErrorLog.write(stackTraceStr);
+            }
+        }
+    }
+}
+�
 H:\����\��������\java�γ���� Swingʵ���ı��༭��\\src\\main\\java\\io\\ErrorLog.java
 package io;
 
@@ -681,11 +1360,18 @@ public class MD5
 
 �
 H:\����\��������\java�γ���� Swingʵ���ı��༭��\\src\\main\\java\\Run.java
+import UI.About;
 import UI.MainPanel;
+import org.w3c.dom.css.RGBColor;
 
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.net.URL;
 
 /**
  * Project name(项目名称)：java课程设计 Swing实现文本编辑器
@@ -702,10 +1388,40 @@ import java.io.Writer;
 
 public class Run
 {
+    private static void init_MemoryComputing()
+    {
+        ActionListener taskPerformer = new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                Runtime r = Runtime.getRuntime();
+                float memory;
+                memory = r.totalMemory();
+                memory = memory / 1024 / 1024;
+                //System.out.printf("JVM总内存：%.3fMB\n", memory);
+                memory = r.freeMemory();
+                memory = memory / 1024 / 1024;
+                //System.out.printf(" 空闲内存：%.3fMB\n", memory);
+                memory = r.totalMemory() - r.freeMemory();
+                memory = memory / 1024 / 1024;
+                System.out.printf("已使用的内存：%.4fMB\n", memory);
+            }
+        };
+        Timer timer = new Timer(2000, taskPerformer);
+        timer.start();
+        Font font = new Font("宋体", 1, 33);
+        System.out.println(font.getName());
+        System.out.println(font.getStyle());
+        System.out.println(font.getSize());
+    }
+
     public static void main(String[] args)
     {
+
         try
         {
+            init_MemoryComputing();
             new MainPanel();
         }
         catch (Exception e)
@@ -724,7 +1440,9 @@ H:\����\��������\java�γ���� Swingʵ���ı��༭��\\src\\main\\java\\UI\\About.ja
 package UI;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.net.URL;
 
 /**
  * Project name(项目名称)：java课程设计 Swing实现文本编辑器
@@ -741,21 +1459,55 @@ import java.awt.*;
 
 public class About extends JFrame
 {
+    public static ImageIcon createImageIcon(String path)
+    {
+        URL imgURL = MainPanel.class.getResource(path);
+        if (imgURL != null)
+        {
+            return new ImageIcon(imgURL);
+        }
+        else
+        {
+            System.err.println("文件未找到: " + path);
+            return null;
+        }
+    }
+
     public About()
     {
-        this.setSize(300, 200);
+        this.setSize(320, 420);
+        int x = MainPanel.getjFrame().getX();
+        int y = MainPanel.getjFrame().getY();
+        int width = MainPanel.getjFrame().getWidth();
+        int height = MainPanel.getjFrame().getHeight();
+        int search_x = x + width / 2 - 500 / 2;
+        int search_y = y + height / 2 - 150 / 2;
+        this.setLocation(search_x, search_y);
         this.setTitle("关于");
         this.setLocationRelativeTo(null);
-        this.setLayout(new GridLayout(3, 1));
+        JPanel panel = new JPanel();
+        panel.setBorder(new EmptyBorder(10,5,10,5));
+        JPanel panel1 = new JPanel();
+        panel1.setBorder(new EmptyBorder(10,5,10,5));
+        panel.setLayout(new GridLayout(3, 1));
+        panel1.setLayout(new FlowLayout());
         JLabel label1 = new JLabel("作者：mao");
         label1.setHorizontalAlignment(0);
         JLabel label2 = new JLabel("完成时间：2021-12-08");
         label2.setHorizontalAlignment(0);
         JLabel label3 = new JLabel("GitHub：https://github.com/maomao124/");
         label3.setHorizontalAlignment(0);
-        this.add(label1);
-        this.add(label2);
-        this.add(label3);
+        ImageIcon icon = createImageIcon("二维码.png");
+        JLabel label4 = new JLabel(icon);
+        panel.add(label1);
+        panel.add(label2);
+        panel.add(label3);
+        panel1.add(label4);
+        JPanel panel2=new JPanel();
+        panel2.setLayout(new BorderLayout());
+        panel2.add(panel,BorderLayout.NORTH);
+        panel2.add(panel1,BorderLayout.CENTER);
+        this.add(panel2);
     }
 }
 �
@@ -880,7 +1632,7 @@ public class Color_JTextArea
     private static void change_rendering_color()                        //设置用于渲染选择的当前颜色
     {
         Color color = null;
-        color = JColorChooser.showDialog(MainPanel.getjFrame(), "请选择选中颜色", Color.black);
+        color = JColorChooser.showDialog(MainPanel.getjFrame(), "请选择渲染颜色", Color.black);
         if (color != null)
         {
             jTextArea.setSelectionColor(color);
@@ -1242,7 +1994,7 @@ public class FontSetting extends JFrame
         this.textArea = textArea;
 
         this.setTitle("字体设置");
-        this.setSize(300, 200);
+        this.setSize(350, 250);
         this.setLocationRelativeTo(null);
 
         this.setLayout(new GridLayout(1, 3));
@@ -1331,6 +2083,27 @@ public class FontSetting extends JFrame
             }
         });
     }
+}
+�
+H:\����\��������\java�γ���� Swingʵ���ı��༭��\\src\\main\\java\\UI\\InstructionsForUse.java
+package UI;
+
+/**
+ * Project name(项目名称)：java课程设计 Swing实现文本编辑器
+ * Package(包名): UI
+ * Class(类名): InstructionsForUse
+ * Author(作者）: mao
+ * Author QQ：1296193245
+ * GitHub：https://github.com/maomao124/
+ * Date(创建日期)： 2021/12/9
+ * Time(创建时间)： 13:03
+ * Version(版本): 1.0
+ * Description(描述)： 无
+ */
+
+public class InstructionsForUse
+{
+
 }
 �
 H:\����\��������\java�γ���� Swingʵ���ı��༭��\\src\\main\\java\\UI\\MainPanel.java
@@ -1893,6 +2666,13 @@ public class MainPanel
             @Override
             public void actionPerformed(ActionEvent e)
             {
+                int x = MainPanel.getjFrame().getX();
+                int y = MainPanel.getjFrame().getY();
+                int width = MainPanel.getjFrame().getWidth();
+                int height = MainPanel.getjFrame().getHeight();
+                int search_x = x + width / 2 - fontSetting.getWidth() / 2;
+                int search_y = y + height / 2 - fontSetting.getHeight() / 2;
+                fontSetting.setLocation(search_x, search_y);
                 fontSetting.setVisible(true);
             }
         });
@@ -1925,6 +2705,13 @@ public class MainPanel
             @Override
             public void actionPerformed(ActionEvent e)
             {
+                int x = MainPanel.getjFrame().getX();
+                int y = MainPanel.getjFrame().getY();
+                int width = MainPanel.getjFrame().getWidth();
+                int height = MainPanel.getjFrame().getHeight();
+                int search_x = x + width / 2 - about_software.getWidth() / 2;
+                int search_y = y + height / 2 - about_software.getHeight() / 2;
+                about_software.setLocation(search_x, search_y);
                 about_software.setVisible(true);
             }
         });
@@ -2087,6 +2874,12 @@ public class MainPanel
                 else if ((e.getKeyCode() == KeyEvent.VK_R) && (e.isControlDown()))
                 {                                                   //ctrl+r 模式切换
                     MainPanel.this.EditMode();
+                }
+
+                else if ((e.getKeyCode() == KeyEvent.VK_F4))
+                {                                                   //f4 清理内存
+                    System.gc();
+                    label_Information.setText("已清理软件内存");
                 }
 
             }

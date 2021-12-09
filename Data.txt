@@ -1,4 +1,6 @@
-12
+15
+src\\main\\java\\data\\Configuration.java
+src\\main\\java\\io\\Configuration.java
 src\\main\\java\\io\\ErrorLog.java
 src\\main\\java\\io\\File.java
 src\\main\\java\\io\\SHA\\MD5.java
@@ -8,6 +10,7 @@ src\\main\\java\\UI\\Color_JTextArea.java
 src\\main\\java\\UI\\ErrorLog.java
 src\\main\\java\\UI\\FileInformation.java
 src\\main\\java\\UI\\FontSetting.java
+src\\main\\java\\UI\\InstructionsForUse.java
 src\\main\\java\\UI\\MainPanel.java
 src\\main\\java\\UI\\Replace.java
 src\\main\\java\\UI\\Search.java
