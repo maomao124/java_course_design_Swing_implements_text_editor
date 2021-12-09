@@ -37,7 +37,7 @@ public class FontSetting extends JFrame
         this.textArea = textArea;
 
         this.setTitle("字体设置");
-        this.setSize(300, 200);
+        this.setSize(350, 250);
         this.setLocationRelativeTo(null);
 
         this.setLayout(new GridLayout(1, 3));

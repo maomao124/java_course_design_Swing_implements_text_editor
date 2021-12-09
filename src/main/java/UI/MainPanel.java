@@ -557,6 +557,13 @@ public class MainPanel
             @Override
             public void actionPerformed(ActionEvent e)
             {
+                int x = MainPanel.getjFrame().getX();
+                int y = MainPanel.getjFrame().getY();
+                int width = MainPanel.getjFrame().getWidth();
+                int height = MainPanel.getjFrame().getHeight();
+                int search_x = x + width / 2 - fontSetting.getWidth() / 2;
+                int search_y = y + height / 2 - fontSetting.getHeight() / 2;
+                fontSetting.setLocation(search_x, search_y);
                 fontSetting.setVisible(true);
             }
         });
@@ -589,6 +596,13 @@ public class MainPanel
             @Override
             public void actionPerformed(ActionEvent e)
             {
+                int x = MainPanel.getjFrame().getX();
+                int y = MainPanel.getjFrame().getY();
+                int width = MainPanel.getjFrame().getWidth();
+                int height = MainPanel.getjFrame().getHeight();
+                int search_x = x + width / 2 - about_software.getWidth() / 2;
+                int search_y = y + height / 2 - about_software.getHeight() / 2;
+                about_software.setLocation(search_x, search_y);
                 about_software.setVisible(true);
             }
         });

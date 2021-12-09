@@ -2,6 +2,8 @@ import UI.About;
 import UI.MainPanel;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
@@ -24,6 +26,26 @@ public class Run
 {
     public static void main(String[] args)
     {
+        ActionListener taskPerformer = new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                Runtime r = Runtime.getRuntime();
+                float memory;
+                memory = r.totalMemory();
+                memory = memory / 1024 / 1024;
+                //System.out.printf("JVM总内存：%.3fMB\n", memory);
+                memory = r.freeMemory();
+                memory = memory / 1024 / 1024;
+                //System.out.printf(" 空闲内存：%.3fMB\n", memory);
+                memory = r.totalMemory() - r.freeMemory();
+                memory = memory / 1024 / 1024;
+                System.out.printf("已使用的内存：%.4fMB\n", memory);
+            }
+        };
+        Timer timer = new Timer(2000, taskPerformer);
+        timer.start();
         try
         {
             new MainPanel();
