@@ -767,6 +767,12 @@ public class MainPanel
                     MainPanel.this.EditMode();
                 }
 
+                else if ((e.getKeyCode() == KeyEvent.VK_F4))
+                {                                                   //f4 清理内存
+                    System.gc();
+                    label_Information.setText("已清理软件内存");
+                }
+
             }
         });
 
