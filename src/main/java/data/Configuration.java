@@ -17,37 +17,37 @@ import java.io.Serializable;
 
 public class Configuration implements Serializable
 {
-    private int width;                  //窗口大小
+    private int width;                            //窗口大小
     private int height;
 
-    private String fontName;            //字体设置
-    private int fontStyle;
-    private int fontSize;
+    private String fontName = "宋体";              //字体设置
+    private int fontStyle = 0;
+    private int fontSize = 20;
 
-    private int font_color_r;           //字体颜色
-    private int font_color_g;
-    private int font_color_b;
+    private int font_color_r = 0;                //字体颜色
+    private int font_color_g = 0;
+    private int font_color_b = 0;
 
-    private int cursor_color_r;         //光标颜色
-    private int cursor_color_g;
-    private int cursor_color_b;
+    private int cursor_color_r = 0;              //光标颜色
+    private int cursor_color_g = 0;
+    private int cursor_color_b = 0;
 
-    private int background_color_r;     //背景颜色
-    private int background_color_g;
-    private int background_color_b;
+    private int background_color_r = 255;         //背景颜色
+    private int background_color_g = 255;
+    private int background_color_b = 255;
 
-    private int selected_color_r;       //选择颜色
-    private int selected_color_g;
-    private int selected_color_b;
+    private int selected_color_r = 0;             //选择颜色
+    private int selected_color_g = 0;
+    private int selected_color_b = 0;
 
-    private int rendering_color_r;      //渲染颜色
-    private int rendering_color_g;
-    private int rendering_color_b;
+    private int rendering_color_r = 0;           //渲染颜色
+    private int rendering_color_g = 0;
+    private int rendering_color_b = 255;
 
-    boolean wrap;                       //文本域是否换行
+    boolean wrap = true;                         //文本域是否换行
 
 
-    public Configuration()              //get和set方法
+    public Configuration()                       //get和set方法
     {
 
     }
