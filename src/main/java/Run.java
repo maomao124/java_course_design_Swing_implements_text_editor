@@ -1,7 +1,9 @@
 import UI.About;
 import UI.MainPanel;
+import org.w3c.dom.css.RGBColor;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.PrintWriter;
@@ -24,7 +26,7 @@ import java.net.URL;
 
 public class Run
 {
-    public static void main(String[] args)
+    private static void init_MemoryComputing()
     {
         ActionListener taskPerformer = new ActionListener()
         {
@@ -46,8 +48,14 @@ public class Run
         };
         Timer timer = new Timer(2000, taskPerformer);
         timer.start();
+    }
+
+    public static void main(String[] args)
+    {
+
         try
         {
+            init_MemoryComputing();
             new MainPanel();
         }
         catch (Exception e)
