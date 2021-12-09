@@ -19,6 +19,7 @@ import java.io.*;
 public class Configuration
 {
     public static data.Configuration config;                //配置文件对象
+    public static boolean config_is_not_null;               //配置文件的对象是否为空
 
     public static void write()                              //将配置写入内存
     {
@@ -85,8 +86,67 @@ public class Configuration
             }
         }
     }
+
     public static void read()
     {
-
+        FileInputStream fileInputStream = null;
+        ObjectInputStream objectInputStream = null;
+        try                                  //文件流打开，文件读写
+        {
+            fileInputStream = new FileInputStream("Configuration.ini");
+            objectInputStream = new ObjectInputStream(fileInputStream);
+            config = (data.Configuration) objectInputStream.readObject();
+            config_is_not_null = true;
+        }
+        catch (FileNotFoundException e)      //文件未找到
+        {
+            System.err.println("未找到配置文件");
+            config_is_not_null = false;
+        }
+        catch (Exception e)                  //其它异常
+        {
+            Toolkit.getDefaultToolkit().beep();
+            e.printStackTrace();
+            final Writer result = new StringWriter();
+            final PrintWriter printWriter = new PrintWriter(result);
+            e.printStackTrace(printWriter);
+            String stackTraceStr = result.toString();
+            io.ErrorLog.write(stackTraceStr);
+            config_is_not_null = false;
+        }
+        finally
+        {
+            try                              //关闭流
+            {
+                if (fileInputStream != null)
+                {
+                    fileInputStream.close();
+                }
+                if (objectInputStream != null)
+                {
+                    objectInputStream.close();
+                }
+            }
+            catch (NullPointerException e)    //空指针异常
+            {
+                Toolkit.getDefaultToolkit().beep();
+                System.err.println("文件已经被关闭，无法再次关闭！！！");
+                final Writer result = new StringWriter();
+                final PrintWriter printWriter = new PrintWriter(result);
+                e.printStackTrace(printWriter);
+                String stackTraceStr = result.toString();
+                io.ErrorLog.write(stackTraceStr);
+            }
+            catch (Exception e)              //其它异常
+            {
+                Toolkit.getDefaultToolkit().beep();
+                e.printStackTrace();
+                final Writer result = new StringWriter();
+                final PrintWriter printWriter = new PrintWriter(result);
+                e.printStackTrace(printWriter);
+                String stackTraceStr = result.toString();
+                io.ErrorLog.write(stackTraceStr);
+            }
+        }
     }
 }
