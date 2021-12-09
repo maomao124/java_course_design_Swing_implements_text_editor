@@ -1,5 +1,7 @@
 package UI;
 
+import io.Configuration;
+
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -100,7 +102,14 @@ public class FontSetting extends JFrame
                 Font font = new java.awt.Font(defaultListModel3.get(list3.getSelectedIndex()),
                         list2.getSelectedIndex(), Integer.parseInt(defaultListModel1.get(list1.getSelectedIndex())));
                 textArea.setFont(font);
-
+                if (io.Configuration.config == null)
+                {
+                    io.Configuration.config = new data.Configuration();
+                    Configuration.config_is_not_null = true;
+                }
+                io.Configuration.config.setFontName(font.getName());
+                io.Configuration.config.setFontStyle(font.getStyle());
+                io.Configuration.config.setFontSize(font.getSize());
             }
         });
 
@@ -112,6 +121,14 @@ public class FontSetting extends JFrame
                 Font font = new java.awt.Font(defaultListModel3.get(list3.getSelectedIndex()),
                         list2.getSelectedIndex(), Integer.parseInt(defaultListModel1.get(list1.getSelectedIndex())));
                 textArea.setFont(font);
+                if (io.Configuration.config == null)
+                {
+                    io.Configuration.config = new data.Configuration();
+                    Configuration.config_is_not_null = true;
+                }
+                io.Configuration.config.setFontName(font.getName());
+                io.Configuration.config.setFontStyle(font.getStyle());
+                io.Configuration.config.setFontSize(font.getSize());
             }
         });
 
@@ -123,6 +140,14 @@ public class FontSetting extends JFrame
                 Font font = new java.awt.Font(defaultListModel3.get(list3.getSelectedIndex()),
                         list2.getSelectedIndex(), Integer.parseInt(defaultListModel1.get(list1.getSelectedIndex())));
                 textArea.setFont(font);
+                if (io.Configuration.config == null)
+                {
+                    io.Configuration.config = new data.Configuration();
+                    Configuration.config_is_not_null = true;
+                }
+                io.Configuration.config.setFontName(font.getName());
+                io.Configuration.config.setFontStyle(font.getStyle());
+                io.Configuration.config.setFontSize(font.getSize());
             }
         });
     }

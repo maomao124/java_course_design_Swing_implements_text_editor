@@ -1,5 +1,6 @@
 package UI;
 
+import io.Configuration;
 import io.SHA.MD5;
 
 import javax.swing.*;
@@ -613,6 +614,12 @@ public class MainPanel
                     wrap.setText("自动换行");
                     jTextArea.setLineWrap(false);
                     label_Information.setText("当前为不自动换行模式");
+                    if (io.Configuration.config == null)
+                    {
+                        io.Configuration.config = new data.Configuration();
+                        Configuration.config_is_not_null = true;
+                    }
+                    io.Configuration.config.setWrap(false);
                 }
                 else                                                      //不是换行状态
                 {
@@ -620,6 +627,12 @@ public class MainPanel
                     wrap.setText("不自动换行");
                     jTextArea.setLineWrap(true);
                     label_Information.setText("当前为自动换行模式");
+                    if (io.Configuration.config == null)
+                    {
+                        io.Configuration.config = new data.Configuration();
+                        Configuration.config_is_not_null = true;
+                    }
+                    io.Configuration.config.setWrap(true);
                 }
             }
         });
