@@ -48,10 +48,6 @@ public class Run
         };
         Timer timer = new Timer(2000, taskPerformer);
         timer.start();
-        Font font = new Font("宋体", 1, 33);
-        System.out.println(font.getName());
-        System.out.println(font.getStyle());
-        System.out.println(font.getSize());
     }
 
     public static void main(String[] args)

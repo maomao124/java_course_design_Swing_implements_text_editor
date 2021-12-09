@@ -40,12 +40,15 @@ public class MainPanel
     private final JButton button_save_file = new JButton("另存为");
     private final JButton button_EditMode = new JButton("编辑模式");      //编辑模式
     private static JButton button_FileInformation = new JButton("文件信息");       //文件信息按钮
+    private final JButton button_autoSave = new JButton("不自动保存");             //自动保存按钮
     private static JButton button_Back = new JButton("<-返回");           //返回按钮
     boolean isEditable = true;                                      //文本域是否可以编辑
     private static File file;                                       //关联的文件
     private final JLabel label_Information = new JLabel("欢迎使用文件编辑器", JLabel.CENTER);      //状态位
     private final UI.FontSetting fontSetting;
     private UI.About about_software;
+    private Timer timer_autoSave;
+    private int auto_save_mode = 0;
 
     JMenuBar jMenuBar;        //菜单栏
     JPopupMenu jPopupMenu;      //弹出菜单
@@ -63,6 +66,7 @@ public class MainPanel
     JMenuItem open;         // 子菜单
     JMenuItem save;
     JMenuItem save_as;
+    JMenuItem auto_save;
     private static JMenuItem file_information;
     JMenuItem exit;
     JMenuItem selectAll;
@@ -82,6 +86,7 @@ public class MainPanel
     JMenuItem rendering_color;
     JMenuItem wrap;
     private static JMenuItem errorLog;
+    JMenuItem instructions_for_use;
     JMenuItem about;
 
     public static JButton getButton_FileInformation()
@@ -186,6 +191,7 @@ public class MainPanel
 
     private void init_mainPanel()                                    //初始化主面板
     {
+        jTextField_FilePath.setEditable(false);
         jPanel = new JPanel();                                       //初始化主面板
         jPanel.setLayout(new BorderLayout());
         JPanel jPanel1 = new JPanel();                               //上面的按钮
@@ -264,11 +270,13 @@ public class MainPanel
         open = new JMenuItem("浏览");
         save = new JMenuItem("保存");
         save_as = new JMenuItem("另存为");
+        auto_save = new JMenuItem("不自动保存");
         file_information = new JMenuItem("文件信息");
         exit = new JMenuItem("退出");
         open.setBackground(Color.cyan);
         save.setBackground(Color.cyan);
         save_as.setBackground(Color.cyan);
+        auto_save.setBackground(Color.cyan);
         file_information.setBackground(Color.cyan);
         exit.setBackground(Color.red);
 
@@ -308,8 +316,10 @@ public class MainPanel
         wrap.setBackground(Color.cyan);
 
         errorLog = new JMenuItem("错误日志");
+        instructions_for_use = new JMenuItem("使用说明");
         about = new JMenuItem("关于");
         errorLog.setBackground(Color.pink);
+        instructions_for_use.setBackground(Color.pink);
         about.setBackground(Color.pink);
 
         //文件
@@ -343,6 +353,7 @@ public class MainPanel
 
         //帮助
         help.add(errorLog);
+        help.add(instructions_for_use);
         help.add(about);
 
         // 将菜单和相应的子菜单添加到菜单栏
@@ -354,6 +365,22 @@ public class MainPanel
 
         // 添加菜单栏
         jFrame.setJMenuBar(jMenuBar);
+    }
+
+    private void init_timer_auto_save()
+    {
+        ActionListener taskPerformer = new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                if (file != null)
+                {
+                    MainPanel.this.save();
+                }
+            }
+        };
+        timer_autoSave = new Timer(200000, taskPerformer);
     }
 
     public MainPanel()                                                   //构造方法
@@ -370,6 +397,7 @@ public class MainPanel
         UI.Search.init_search(jTextArea, label_Information);              //初始化查找面板
         UI.Replace.init_replace(jTextArea, label_Information);            //初始化替换面板
         about_software = new UI.About();                                    //初始化关于面板
+        this.init_timer_auto_save();                                        //初始化自动保存
         fontSetting = new UI.FontSetting(jTextArea);                      //初始化字体设置面板
         Color_JTextArea.init_Color_JTextArea                              //初始化文本域颜色选择
                 (jTextArea, font_color, cursor_color, background_color, selected_color, rendering_color);
@@ -1094,4 +1122,8 @@ public class MainPanel
         }
     }
 
+    private void change_auto_save_mode()                                //改变自动保存模式
+    {
+
+    }
 }
