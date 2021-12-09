@@ -1,6 +1,7 @@
 package UI;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.net.URL;
 
@@ -35,22 +36,38 @@ public class About extends JFrame
 
     public About()
     {
-        this.setSize(300, 200);
+        this.setSize(320, 420);
+        int x = MainPanel.getjFrame().getX();
+        int y = MainPanel.getjFrame().getY();
+        int width = MainPanel.getjFrame().getWidth();
+        int height = MainPanel.getjFrame().getHeight();
+        int search_x = x + width / 2 - 500 / 2;
+        int search_y = y + height / 2 - 150 / 2;
+        this.setLocation(search_x, search_y);
         this.setTitle("关于");
         this.setLocationRelativeTo(null);
-        this.setLayout(new GridLayout(4, 1));
+        JPanel panel = new JPanel();
+        panel.setBorder(new EmptyBorder(10,5,10,5));
+        JPanel panel1 = new JPanel();
+        panel1.setBorder(new EmptyBorder(10,5,10,5));
+        panel.setLayout(new GridLayout(3, 1));
+        panel1.setLayout(new FlowLayout());
         JLabel label1 = new JLabel("作者：mao");
         label1.setHorizontalAlignment(0);
         JLabel label2 = new JLabel("完成时间：2021-12-08");
         label2.setHorizontalAlignment(0);
         JLabel label3 = new JLabel("GitHub：https://github.com/maomao124/");
         label3.setHorizontalAlignment(0);
-        ImageIcon icon = createImageIcon("t.png");
+        ImageIcon icon = createImageIcon("二维码.png");
         JLabel label4 = new JLabel(icon);
-        JOptionPane.showMessageDialog(null,"","",0,icon);
-        this.add(label1);
-        this.add(label2);
-        this.add(label3);
-        this.add(label4);
+        panel.add(label1);
+        panel.add(label2);
+        panel.add(label3);
+        panel1.add(label4);
+        JPanel panel2=new JPanel();
+        panel2.setLayout(new BorderLayout());
+        panel2.add(panel,BorderLayout.NORTH);
+        panel2.add(panel1,BorderLayout.CENTER);
+        this.add(panel2);
     }
 }

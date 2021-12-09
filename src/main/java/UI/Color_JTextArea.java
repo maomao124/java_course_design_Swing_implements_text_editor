@@ -118,7 +118,7 @@ public class Color_JTextArea
     private static void change_rendering_color()                        //设置用于渲染选择的当前颜色
     {
         Color color = null;
-        color = JColorChooser.showDialog(MainPanel.getjFrame(), "请选择选中颜色", Color.black);
+        color = JColorChooser.showDialog(MainPanel.getjFrame(), "请选择渲染颜色", Color.black);
         if (color != null)
         {
             jTextArea.setSelectionColor(color);
