@@ -120,6 +120,14 @@ public class Color_JTextArea
         if (color != null)
         {
             jTextArea.setBackground(color);
+            if (io.Configuration.config == null)
+            {
+                io.Configuration.config = new data.Configuration();
+                Configuration.config_is_not_null = true;
+            }
+            io.Configuration.config.setBackground_color_r(color.getRed());
+            io.Configuration.config.setBackground_color_g(color.getGreen());
+            io.Configuration.config.setBackground_color_b(color.getBlue());
         }
     }
 
@@ -130,6 +138,14 @@ public class Color_JTextArea
         if (color != null)
         {
             jTextArea.setSelectedTextColor(color);
+            if (io.Configuration.config == null)
+            {
+                io.Configuration.config = new data.Configuration();
+                Configuration.config_is_not_null = true;
+            }
+            io.Configuration.config.setSelected_color_r(color.getRed());
+            io.Configuration.config.setSelected_color_g(color.getGreen());
+            io.Configuration.config.setSelected_color_b(color.getBlue());
         }
     }
 
@@ -140,6 +156,14 @@ public class Color_JTextArea
         if (color != null)
         {
             jTextArea.setSelectionColor(color);
+            if (io.Configuration.config == null)
+            {
+                io.Configuration.config = new data.Configuration();
+                Configuration.config_is_not_null = true;
+            }
+            io.Configuration.config.setRendering_color_r(color.getRed());
+            io.Configuration.config.setRendering_color_g(color.getGreen());
+            io.Configuration.config.setRendering_color_b(color.getBlue());
         }
     }
 }
