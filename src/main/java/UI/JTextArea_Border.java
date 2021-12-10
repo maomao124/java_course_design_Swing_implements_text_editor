@@ -3,6 +3,7 @@ package UI;
 import io.Configuration;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
@@ -23,23 +24,33 @@ import java.awt.*;
 public class JTextArea_Border extends JFrame
 {
     private JTextArea textArea;
+    private JScrollPane jScrollPane;
     private JList<String> list1;
     private JList<String> list2;
+    private JList<String> list3;
+    private JList<String> list4;
+
     private DefaultListModel<String> defaultListModel1;
     private DefaultListModel<String> defaultListModel2;
+    private DefaultListModel<String> defaultListModel3;
+    private DefaultListModel<String> defaultListModel4;
+
     private JScrollPane jScrollPane1;
     private JScrollPane jScrollPane2;
+    private JScrollPane jScrollPane3;
+    private JScrollPane jScrollPane4;
 
-    public JTextArea_Border(JTextArea textArea)
+    public JTextArea_Border(JTextArea textArea, JScrollPane jScrollPane)
     {
 
         this.textArea = textArea;
+        this.jScrollPane = jScrollPane;
 
         this.setTitle("边框设置-左边为左右边框设置，右边为上下边框设置");
         this.setSize(470, 300);
         this.setLocationRelativeTo(null);
 
-        this.setLayout(new GridLayout(1, 2));
+        this.setLayout(new GridLayout(1, 4));
         this.addLists();
         this.addListener();
     }
@@ -48,12 +59,18 @@ public class JTextArea_Border extends JFrame
     {
         defaultListModel1 = new DefaultListModel<String>();
         defaultListModel2 = new DefaultListModel<String>();
+        defaultListModel3 = new DefaultListModel<String>();
+        defaultListModel4 = new DefaultListModel<String>();
 
         list1 = new JList<String>(defaultListModel1);
         list2 = new JList<String>(defaultListModel2);
+        list3 = new JList<String>(defaultListModel3);
+        list4 = new JList<String>(defaultListModel4);
 
         jScrollPane1 = new JScrollPane(list1);
         jScrollPane2 = new JScrollPane(list2);
+        jScrollPane3 = new JScrollPane(list3);
+        jScrollPane4 = new JScrollPane(list4);
 
         defaultListModel1.addElement("0");
         defaultListModel1.addElement("5");
@@ -99,6 +116,16 @@ public class JTextArea_Border extends JFrame
         defaultListModel1.addElement("450");
         defaultListModel1.addElement("475");
         defaultListModel1.addElement("500");
+        defaultListModel1.addElement("525");
+        defaultListModel1.addElement("550");
+        defaultListModel1.addElement("575");
+        defaultListModel1.addElement("600");
+        defaultListModel1.addElement("625");
+        defaultListModel1.addElement("650");
+        defaultListModel1.addElement("675");
+        defaultListModel1.addElement("700");
+        defaultListModel1.addElement("725");
+        defaultListModel1.addElement("750");
 
         defaultListModel2.addElement("0");
         defaultListModel2.addElement("5");
@@ -164,6 +191,8 @@ public class JTextArea_Border extends JFrame
                 int Layout_up_and_down = Integer.parseInt(defaultListModel2.get(list2.getSelectedIndex()));
                 System.out.println(Layout_left_and_right);
                 System.out.println(Layout_up_and_down);
+                jScrollPane.setBorder(new EmptyBorder(Layout_up_and_down, Layout_left_and_right, Layout_up_and_down, Layout_left_and_right));
+                MainPanel.getjFrame().repaint();
             }
         });
 
@@ -176,6 +205,9 @@ public class JTextArea_Border extends JFrame
                 int Layout_up_and_down = Integer.parseInt(defaultListModel2.get(list2.getSelectedIndex()));
                 System.out.println(Layout_left_and_right);
                 System.out.println(Layout_up_and_down);
+                jScrollPane.setBorder(new EmptyBorder(Layout_up_and_down, Layout_left_and_right, Layout_up_and_down, Layout_left_and_right));
+                MainPanel.getjFrame().repaint();
+
             }
         });
     }
