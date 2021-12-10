@@ -354,6 +354,7 @@ public class MainPanel
         individualization.add(background_color);
         individualization.add(selected_color);
         individualization.add(rendering_color);
+        individualization.add(delete_confirmation);
 
         //格式
         format.add(wrap);

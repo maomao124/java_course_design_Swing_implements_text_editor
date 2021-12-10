@@ -157,14 +157,15 @@ public class Configuration
         int result;
         Toolkit.getDefaultToolkit().beep();
         result = JOptionPane.showConfirmDialog(null, "确认删除配置文件？这将删除所有已保存的个性化信息\n" +
-                "包括窗口大小、字体、各颜色信息和换行策略\n是否继续？", "数据丢失警告！", 0);
+                "包括窗口大小、字体、各颜色信息和换行策略\n是否继续？"
+                , "数据丢失警告！", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
         if (result == 0)
         {
             File file = new java.io.File("Configuration.ini");
             if (!file.exists())                     //不存在
             {
                 Toolkit.getDefaultToolkit().beep();
-                JOptionPane.showMessageDialog(null, "配置文件不存在！", "删除失败", 1);
+                JOptionPane.showMessageDialog(null, "配置文件不存在！", "删除失败", JOptionPane.ERROR_MESSAGE);
             }
             else
             {
@@ -172,12 +173,14 @@ public class Configuration
                 result1 = file.delete();
                 if (result1)
                 {
-                    JOptionPane.showMessageDialog(null, "删除成功！ 重启软件生效", "提示", 0);
+                    Configuration.config_is_not_null = false;
+                    JOptionPane.showMessageDialog(null, "删除成功！重启软件生效",
+                            "提示", JOptionPane.INFORMATION_MESSAGE);
                 }
                 else
                 {
                     Toolkit.getDefaultToolkit().beep();
-                    JOptionPane.showMessageDialog(null, "删除失败！", "提示", 0);
+                    JOptionPane.showMessageDialog(null, "删除失败！", "提示", JOptionPane.ERROR_MESSAGE);
                 }
             }
         }
