@@ -47,6 +47,7 @@ public class MainPanel
     private static File file;                                       //关联的文件
     private final JLabel label_Information = new JLabel("欢迎使用文件编辑器", JLabel.CENTER);      //状态位
     private final UI.FontSetting fontSetting;
+    private final UI.JTextArea_Border jTextArea_border;
     private UI.About about_software;
     private Timer timer_autoSave;
     private int auto_save_mode = 0;
@@ -85,6 +86,7 @@ public class MainPanel
     JMenuItem background_color;
     JMenuItem selected_color;
     JMenuItem rendering_color;
+    JMenuItem border;
     JMenuItem delete_confirmation;
     JMenuItem wrap;
     private static JMenuItem errorLog;
@@ -304,6 +306,7 @@ public class MainPanel
         edit_mode.setBackground(Color.green);
 
         font_setting = new JMenuItem("字体设置");
+        border = new JMenuItem("边框设置");
         font_color = new JMenuItem("字体颜色");
         cursor_color = new JMenuItem("光标颜色");
         background_color = new JMenuItem("背景颜色");
@@ -311,6 +314,7 @@ public class MainPanel
         rendering_color = new JMenuItem("渲染颜色");
         delete_confirmation = new JMenuItem("清除配置");
         font_setting.setBackground(Color.green);
+        border.setBackground(Color.green);
         font_color.setBackground(Color.green);
         cursor_color.setBackground(Color.green);
         background_color.setBackground(Color.green);
@@ -349,6 +353,7 @@ public class MainPanel
 
         //个性化
         individualization.add(font_setting);
+        individualization.add(border);
         individualization.add(font_color);
         individualization.add(cursor_color);
         individualization.add(background_color);
@@ -461,6 +466,7 @@ public class MainPanel
         UI.Search.init_search(jTextArea, label_Information);              //初始化查找面板
         UI.Replace.init_replace(jTextArea, label_Information);            //初始化替换面板
         about_software = new UI.About();                                    //初始化关于面板
+        jTextArea_border = new JTextArea_Border(jTextArea);                   //初始化边框设置模板
         this.init_timer_auto_save();                                        //初始化自动保存
         fontSetting = new UI.FontSetting(jTextArea);                      //初始化字体设置面板
         this.init_configuration();                                        //初始化配置
@@ -733,6 +739,15 @@ public class MainPanel
             public void actionPerformed(ActionEvent e)
             {
                 io.Configuration.delete();
+            }
+        });
+
+        border.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                jTextArea_border.setVisible(true);
             }
         });
     }
