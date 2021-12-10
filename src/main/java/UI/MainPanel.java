@@ -85,6 +85,7 @@ public class MainPanel
     JMenuItem background_color;
     JMenuItem selected_color;
     JMenuItem rendering_color;
+    JMenuItem delete_confirmation;
     JMenuItem wrap;
     private static JMenuItem errorLog;
     JMenuItem instructions_for_use;
@@ -308,12 +309,14 @@ public class MainPanel
         background_color = new JMenuItem("背景颜色");
         selected_color = new JMenuItem("选中颜色");
         rendering_color = new JMenuItem("渲染颜色");
+        delete_confirmation = new JMenuItem("清除配置");
         font_setting.setBackground(Color.green);
         font_color.setBackground(Color.green);
         cursor_color.setBackground(Color.green);
         background_color.setBackground(Color.green);
         selected_color.setBackground(Color.green);
         rendering_color.setBackground(Color.green);
+        delete_confirmation.setBackground(Color.red);
 
         wrap = new JMenuItem("不自动换行");
         wrap.setBackground(Color.cyan);
@@ -720,6 +723,15 @@ public class MainPanel
             public void actionPerformed(ActionEvent e)
             {
                 MainPanel.this.change_auto_save_mode();
+            }
+        });
+
+        delete_confirmation.addActionListener(new ActionListener()
+        {                                                               //清除配置文件
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                io.Configuration.delete();
             }
         });
     }
