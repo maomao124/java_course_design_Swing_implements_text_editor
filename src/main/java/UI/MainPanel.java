@@ -379,6 +379,12 @@ public class MainPanel
             public void actionPerformed(ActionEvent e)
             {
                 //Toolkit.getDefaultToolkit().beep();
+                if (Configuration.config_is_not_null)                   //保存配置文件
+                {
+                    Configuration.config.setWidth(jFrame.getWidth());
+                    Configuration.config.setHeight(jFrame.getHeight());
+                    io.Configuration.write();
+                }
                 if (file != null)
                 {
                     MainPanel.this.save();
@@ -407,12 +413,36 @@ public class MainPanel
                 y = 0;
             }
             jFrame.setLocation(x, y);
-
+            Font font = new Font(Configuration.config.getFontName(),
+                    Configuration.config.getFontStyle(), Configuration.config.getFontSize());
+            jTextArea.setFont(font);
+            Color font_color = new Color(Configuration.config.getFont_color_r(),
+                    Configuration.config.getFont_color_g(), Configuration.config.getFont_color_b());
+            jTextArea.setForeground(font_color);
+            Color cursor_color = new Color(Configuration.config.getCursor_color_r()
+                    , Configuration.config.getCursor_color_g(), Configuration.config.getCursor_color_b());
+            jTextArea.setCaretColor(cursor_color);
+            Color background_color = new Color(Configuration.config.getBackground_color_r()
+                    , Configuration.config.getBackground_color_g(), Configuration.config.getBackground_color_b());
+            jTextArea.setBackground(background_color);
+            Color selected_color = new Color(Configuration.config.getSelected_color_r()
+                    , Configuration.config.getSelected_color_g(), Configuration.config.getSelected_color_b());
+            jTextArea.setSelectedTextColor(selected_color);
+            Color rendering_color = new Color(Configuration.config.getRendering_color_r()
+                    , Configuration.config.getRendering_color_g(), Configuration.config.getRendering_color_b());
+            jTextArea.setSelectionColor(rendering_color);
+            if (!Configuration.config.isWrap())
+            {
+                wrap.setBackground(Color.yellow);
+                wrap.setText("自动换行");
+                jTextArea.setLineWrap(false);
+            }
         }
     }
 
     public MainPanel()                                                   //构造方法
     {
+        io.Configuration.read();                                         //读配置文件
         jFrame = new JFrame("文本编辑器");                            //初始化顶层面板
         jFrame.setSize(1280, 720);
         int screenWidth = ((int) java.awt.Toolkit.getDefaultToolkit().getScreenSize().width);
@@ -490,6 +520,12 @@ public class MainPanel
             @Override
             public void actionPerformed(ActionEvent e)
             {
+                if (Configuration.config_is_not_null)                   //保存配置文件
+                {
+                    Configuration.config.setWidth(jFrame.getWidth());
+                    Configuration.config.setHeight(jFrame.getHeight());
+                    io.Configuration.write();
+                }
                 MainPanel.this.close();
             }
         });
@@ -702,6 +738,12 @@ public class MainPanel
             @Override
             public void windowClosing(WindowEvent e)
             {
+                if (Configuration.config_is_not_null)                   //保存配置文件
+                {
+                    Configuration.config.setWidth(jFrame.getWidth());
+                    Configuration.config.setHeight(jFrame.getHeight());
+                    io.Configuration.write();
+                }
                 MainPanel.this.close();
             }
 

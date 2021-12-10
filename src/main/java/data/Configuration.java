@@ -17,8 +17,8 @@ import java.io.Serializable;
 
 public class Configuration implements Serializable
 {
-    private int width;                            //窗口大小
-    private int height;
+    private int width=1280;                       //窗口大小
+    private int height=720;
 
     private String fontName = "宋体";              //字体设置
     private int fontStyle = 0;
