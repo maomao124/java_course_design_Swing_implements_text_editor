@@ -1,7 +1,9 @@
 package io;
 
+import javax.swing.*;
 import java.awt.*;
 import java.io.*;
+import java.io.File;
 
 /**
  * Project name(项目名称)：java课程设计 Swing实现文本编辑器
@@ -148,5 +150,37 @@ public class Configuration
                 io.ErrorLog.write(stackTraceStr);
             }
         }
+    }
+
+    public static void delete()
+    {
+        int result;
+        Toolkit.getDefaultToolkit().beep();
+        result = JOptionPane.showConfirmDialog(null, "确认删除配置文件？这将删除所有已保存的个性化信息\n" +
+                "包括窗口大小、字体、各颜色信息和换行策略\n是否继续？", "数据丢失警告！", 0);
+        if (result == 0)
+        {
+            File file = new java.io.File("Configuration.ini");
+            if (!file.exists())                     //不存在
+            {
+                Toolkit.getDefaultToolkit().beep();
+                JOptionPane.showMessageDialog(null, "配置文件不存在！", "删除失败", 1);
+            }
+            else
+            {
+                boolean result1;
+                result1 = file.delete();
+                if (result1)
+                {
+                    JOptionPane.showMessageDialog(null, "删除成功！ 重启软件生效", "提示", 0);
+                }
+                else
+                {
+                    Toolkit.getDefaultToolkit().beep();
+                    JOptionPane.showMessageDialog(null, "删除失败！", "提示", 0);
+                }
+            }
+        }
+
     }
 }
