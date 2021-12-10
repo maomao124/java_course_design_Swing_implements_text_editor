@@ -46,7 +46,7 @@ public class JTextArea_Border extends JFrame
         this.textArea = textArea;
         this.jScrollPane = jScrollPane;
 
-        this.setTitle("边框设置-左边为左右边框设置，右边为上下边框设置");
+        this.setTitle("边框设置-从左到右依次是左、右、上、下边框设置");
         this.setSize(470, 300);
         this.setLocationRelativeTo(null);
 
@@ -72,7 +72,7 @@ public class JTextArea_Border extends JFrame
         jScrollPane3 = new JScrollPane(list3);
         jScrollPane4 = new JScrollPane(list4);
 
-        defaultListModel1.addElement("0");
+        defaultListModel1.addElement("0");                              //左
         defaultListModel1.addElement("5");
         defaultListModel1.addElement("10");
         defaultListModel1.addElement("15");
@@ -127,7 +127,7 @@ public class JTextArea_Border extends JFrame
         defaultListModel1.addElement("725");
         defaultListModel1.addElement("750");
 
-        defaultListModel2.addElement("0");
+        defaultListModel2.addElement("0");                              //右
         defaultListModel2.addElement("5");
         defaultListModel2.addElement("10");
         defaultListModel2.addElement("15");
@@ -171,13 +171,116 @@ public class JTextArea_Border extends JFrame
         defaultListModel2.addElement("450");
         defaultListModel2.addElement("475");
         defaultListModel2.addElement("500");
+        defaultListModel2.addElement("525");
+        defaultListModel2.addElement("550");
+        defaultListModel2.addElement("575");
+        defaultListModel2.addElement("600");
+        defaultListModel2.addElement("625");
+        defaultListModel2.addElement("650");
+        defaultListModel2.addElement("675");
+        defaultListModel2.addElement("700");
+        defaultListModel2.addElement("725");
+        defaultListModel2.addElement("750");
 
+        defaultListModel3.addElement("0");                              //上
+        defaultListModel3.addElement("5");
+        defaultListModel3.addElement("10");
+        defaultListModel3.addElement("15");
+        defaultListModel3.addElement("20");
+        defaultListModel3.addElement("25");
+        defaultListModel3.addElement("30");
+        defaultListModel3.addElement("35");
+        defaultListModel3.addElement("40");
+        defaultListModel3.addElement("45");
+        defaultListModel3.addElement("50");
+        defaultListModel3.addElement("55");
+        defaultListModel3.addElement("60");
+        defaultListModel3.addElement("65");
+        defaultListModel3.addElement("70");
+        defaultListModel3.addElement("75");
+        defaultListModel3.addElement("80");
+        defaultListModel3.addElement("85");
+        defaultListModel3.addElement("90");
+        defaultListModel3.addElement("95");
+        defaultListModel3.addElement("100");
+        defaultListModel3.addElement("110");
+        defaultListModel3.addElement("120");
+        defaultListModel3.addElement("130");
+        defaultListModel3.addElement("140");
+        defaultListModel3.addElement("150");
+        defaultListModel3.addElement("160");
+        defaultListModel3.addElement("170");
+        defaultListModel3.addElement("180");
+        defaultListModel3.addElement("190");
+        defaultListModel3.addElement("200");
+        defaultListModel3.addElement("220");
+        defaultListModel3.addElement("240");
+        defaultListModel3.addElement("260");
+        defaultListModel3.addElement("280");
+        defaultListModel3.addElement("300");
+        defaultListModel3.addElement("325");
+        defaultListModel3.addElement("350");
+        defaultListModel3.addElement("375");
+        defaultListModel3.addElement("400");
+        defaultListModel3.addElement("425");
+        defaultListModel3.addElement("450");
+        defaultListModel3.addElement("475");
+        defaultListModel3.addElement("500");
+
+        defaultListModel4.addElement("0");                              //下
+        defaultListModel4.addElement("5");
+        defaultListModel4.addElement("10");
+        defaultListModel4.addElement("15");
+        defaultListModel4.addElement("20");
+        defaultListModel4.addElement("25");
+        defaultListModel4.addElement("30");
+        defaultListModel4.addElement("35");
+        defaultListModel4.addElement("40");
+        defaultListModel4.addElement("45");
+        defaultListModel4.addElement("50");
+        defaultListModel4.addElement("55");
+        defaultListModel4.addElement("60");
+        defaultListModel4.addElement("65");
+        defaultListModel4.addElement("70");
+        defaultListModel4.addElement("75");
+        defaultListModel4.addElement("80");
+        defaultListModel4.addElement("85");
+        defaultListModel4.addElement("90");
+        defaultListModel4.addElement("95");
+        defaultListModel4.addElement("100");
+        defaultListModel4.addElement("110");
+        defaultListModel4.addElement("120");
+        defaultListModel4.addElement("130");
+        defaultListModel4.addElement("140");
+        defaultListModel4.addElement("150");
+        defaultListModel4.addElement("160");
+        defaultListModel4.addElement("170");
+        defaultListModel4.addElement("180");
+        defaultListModel4.addElement("190");
+        defaultListModel4.addElement("200");
+        defaultListModel4.addElement("220");
+        defaultListModel4.addElement("240");
+        defaultListModel4.addElement("260");
+        defaultListModel4.addElement("280");
+        defaultListModel4.addElement("300");
+        defaultListModel4.addElement("325");
+        defaultListModel4.addElement("350");
+        defaultListModel4.addElement("375");
+        defaultListModel4.addElement("400");
+        defaultListModel4.addElement("425");
+        defaultListModel4.addElement("450");
+        defaultListModel4.addElement("475");
+        defaultListModel4.addElement("500");
 
         list1.setSelectedIndex(0);
         list2.setSelectedIndex(0);
+        list3.setSelectedIndex(0);
+        list4.setSelectedIndex(0);
 
         this.add(jScrollPane1);
         this.add(jScrollPane2);
+        this.add(jScrollPane3);
+        this.add(jScrollPane4);
     }
 
     public void addListener()
@@ -187,11 +290,12 @@ public class JTextArea_Border extends JFrame
             @Override
             public void valueChanged(ListSelectionEvent e)
             {
-                int Layout_left_and_right = Integer.parseInt(defaultListModel1.get(list1.getSelectedIndex()));
-                int Layout_up_and_down = Integer.parseInt(defaultListModel2.get(list2.getSelectedIndex()));
-                System.out.println(Layout_left_and_right);
-                System.out.println(Layout_up_and_down);
-                jScrollPane.setBorder(new EmptyBorder(Layout_up_and_down, Layout_left_and_right, Layout_up_and_down, Layout_left_and_right));
+                int Layout_left = Integer.parseInt(defaultListModel1.get(list1.getSelectedIndex()));
+                int Layout_right=Integer.parseInt(defaultListModel2.get(list2.getSelectedIndex()));
+                int Layout_up = Integer.parseInt(defaultListModel3.get(list3.getSelectedIndex()));
+                int Layout_down=Integer.parseInt(defaultListModel4.get(list4.getSelectedIndex()));
+
+                jScrollPane.setBorder(new EmptyBorder(Layout_up, Layout_left, Layout_down, Layout_right));
                 MainPanel.getjFrame().repaint();
             }
         });
@@ -201,13 +305,43 @@ public class JTextArea_Border extends JFrame
             @Override
             public void valueChanged(ListSelectionEvent e)
             {
-                int Layout_left_and_right = Integer.parseInt(defaultListModel1.get(list1.getSelectedIndex()));
-                int Layout_up_and_down = Integer.parseInt(defaultListModel2.get(list2.getSelectedIndex()));
-                System.out.println(Layout_left_and_right);
-                System.out.println(Layout_up_and_down);
-                jScrollPane.setBorder(new EmptyBorder(Layout_up_and_down, Layout_left_and_right, Layout_up_and_down, Layout_left_and_right));
-                MainPanel.getjFrame().repaint();
+                int Layout_left = Integer.parseInt(defaultListModel1.get(list1.getSelectedIndex()));
+                int Layout_right=Integer.parseInt(defaultListModel2.get(list2.getSelectedIndex()));
+                int Layout_up = Integer.parseInt(defaultListModel3.get(list3.getSelectedIndex()));
+                int Layout_down=Integer.parseInt(defaultListModel4.get(list4.getSelectedIndex()));
 
+                jScrollPane.setBorder(new EmptyBorder(Layout_up, Layout_left, Layout_down, Layout_right));
+                MainPanel.getjFrame().repaint();
+            }
+        });
+
+        list3.addListSelectionListener(new ListSelectionListener()
+        {
+            @Override
+            public void valueChanged(ListSelectionEvent e)
+            {
+                int Layout_left = Integer.parseInt(defaultListModel1.get(list1.getSelectedIndex()));
+                int Layout_right=Integer.parseInt(defaultListModel2.get(list2.getSelectedIndex()));
+                int Layout_up = Integer.parseInt(defaultListModel3.get(list3.getSelectedIndex()));
+                int Layout_down=Integer.parseInt(defaultListModel4.get(list4.getSelectedIndex()));
+
+                jScrollPane.setBorder(new EmptyBorder(Layout_up, Layout_left, Layout_down, Layout_right));
+                MainPanel.getjFrame().repaint();
+            }
+        });
+
+        list4.addListSelectionListener(new ListSelectionListener()
+        {
+            @Override
+            public void valueChanged(ListSelectionEvent e)
+            {
+                int Layout_left = Integer.parseInt(defaultListModel1.get(list1.getSelectedIndex()));
+                int Layout_right=Integer.parseInt(defaultListModel2.get(list2.getSelectedIndex()));
+                int Layout_up = Integer.parseInt(defaultListModel3.get(list3.getSelectedIndex()));
+                int Layout_down=Integer.parseInt(defaultListModel4.get(list4.getSelectedIndex()));
+
+                jScrollPane.setBorder(new EmptyBorder(Layout_up, Layout_left, Layout_down, Layout_right));
+                MainPanel.getjFrame().repaint();
             }
         });
     }
