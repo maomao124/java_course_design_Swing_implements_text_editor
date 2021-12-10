@@ -22,7 +22,7 @@ public class Configuration implements Serializable
 
     private String fontName = "宋体";              //字体设置
     private int fontStyle = 0;
-    private int fontSize = 20;
+    private int fontSize = 19;
 
     private int font_color_r = 0;                //字体颜色
     private int font_color_g = 0;

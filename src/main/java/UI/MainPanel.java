@@ -389,11 +389,35 @@ public class MainPanel
         timer_autoSave = new Timer(5000, taskPerformer);
     }
 
+    private void init_configuration()
+    {
+        if (Configuration.config_is_not_null)
+        {
+            jFrame.setSize(Configuration.config.getWidth(), Configuration.config.getHeight());
+            int screenWidth = ((int) java.awt.Toolkit.getDefaultToolkit().getScreenSize().width);
+            int screenHeight = ((int) java.awt.Toolkit.getDefaultToolkit().getScreenSize().height);
+            int x = screenWidth / 2 - Configuration.config.getWidth() / 2;
+            int y = screenHeight / 2 - Configuration.config.getHeight() / 2;
+            if (x < 0)
+            {
+                x = 0;
+            }
+            if (y < 0)
+            {
+                y = 0;
+            }
+            jFrame.setLocation(x, y);
+
+        }
+    }
+
     public MainPanel()                                                   //构造方法
     {
         jFrame = new JFrame("文本编辑器");                            //初始化顶层面板
         jFrame.setSize(1280, 720);
-        jFrame.setLocation(1920 / 2 - 640, 1080 / 2 - 360);
+        int screenWidth = ((int) java.awt.Toolkit.getDefaultToolkit().getScreenSize().width);
+        int screenHeight = ((int) java.awt.Toolkit.getDefaultToolkit().getScreenSize().height);
+        jFrame.setLocation(screenWidth / 2 - 640, screenHeight / 2 - 360);
         jFrame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 
         this.init_mainPanel();                                           //初始化主面板
@@ -405,6 +429,7 @@ public class MainPanel
         about_software = new UI.About();                                    //初始化关于面板
         this.init_timer_auto_save();                                        //初始化自动保存
         fontSetting = new UI.FontSetting(jTextArea);                      //初始化字体设置面板
+        this.init_configuration();                                        //初始化配置
         Color_JTextArea.init_Color_JTextArea                              //初始化文本域颜色选择
                 (jTextArea, font_color, cursor_color, background_color, selected_color, rendering_color);
 
