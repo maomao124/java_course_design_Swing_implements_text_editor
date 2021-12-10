@@ -10,7 +10,7 @@ package UI;
  * Date(创建日期)： 2021/12/9
  * Time(创建时间)： 13:03
  * Version(版本): 1.0
- * Description(描述)： 无
+ * Description(描述)： 使用说明
  */
 
 public class InstructionsForUse

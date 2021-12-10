@@ -15,7 +15,7 @@ import java.io.File;
  * Date(创建日期)： 2021/12/9
  * Time(创建时间)： 13:04
  * Version(版本): 1.0
- * Description(描述)： 无
+ * Description(描述)： 配置文件的输入和输出
  */
 
 public class Configuration
