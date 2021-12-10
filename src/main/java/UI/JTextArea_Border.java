@@ -18,7 +18,7 @@ import java.awt.*;
  * Date(创建日期)： 2021/12/10
  * Time(创建时间)： 20:49
  * Version(版本): 1.0
- * Description(描述)： 无
+ * Description(描述)： 边框设置的界面
  */
 
 public class JTextArea_Border extends JFrame
