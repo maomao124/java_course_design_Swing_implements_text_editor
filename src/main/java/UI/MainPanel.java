@@ -236,7 +236,7 @@ public class MainPanel
         button_FileInformation.setBackground(Color.cyan);
         label_Information.setForeground(Color.black);
 
-        label_Information.setPreferredSize(new Dimension(800, 30));
+        //label_Information.setPreferredSize(new Dimension(800, 30));
 
         jPanel1.add(label_FilePath);                                      //加入到主面板中
         jPanel1.add(jTextField_FilePath);
