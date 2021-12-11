@@ -52,6 +52,7 @@ public class MainPanel
     private final UI.FontSetting fontSetting;
     private final UI.JTextArea_Border jTextArea_border;
     private final UI.About about_software;
+    private final InstructionsForUse instructionsForUse;
     private Timer timer_autoSave;
     private int auto_save_mode = 0;
 
@@ -213,9 +214,9 @@ public class MainPanel
         JPanel jPanel2 = new JPanel();                                 //下面的状态字体
         jPanel1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
         jPanel2.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-        Font font = new Font("宋体", Font.PLAIN, 19);         //设置字体
+        Font font = new Font("宋体", Font.PLAIN, 20);         //设置字体
 
-        jTextArea = new JTextArea(720 / 30, 1280 / 12);     //初始化文本域
+        jTextArea = new JTextArea(720 / 35, 1280 / 12);     //初始化文本域
         jTextArea.setLineWrap(true);
         jTextArea.setFont(font);
         jTextArea.setEditable(isEditable);
@@ -488,6 +489,7 @@ public class MainPanel
         UI.Search.init_search(jTextArea, label_Information);              //初始化查找面板
         UI.Replace.init_replace(jTextArea, label_Information);            //初始化替换面板
         about_software = new UI.About();                                    //初始化关于面板
+        instructionsForUse = new InstructionsForUse();                        //初始化使用说明面板
         jTextArea_border = new JTextArea_Border(jTextArea, jScrollPane);     //初始化边框设置模板
         this.init_timer_auto_save();                                        //初始化自动保存
         fontSetting = new UI.FontSetting(jTextArea);                      //初始化字体设置面板
@@ -769,7 +771,30 @@ public class MainPanel
             @Override
             public void actionPerformed(ActionEvent e)
             {
+                int x = MainPanel.getjFrame().getX();
+                int y = MainPanel.getjFrame().getY();
+                int width = MainPanel.getjFrame().getWidth();
+                int height = MainPanel.getjFrame().getHeight();
+                int search_x = x + width / 2 - jTextArea_border.getWidth() / 2;
+                int search_y = y + height / 2 - jTextArea_border.getHeight() / 2;
+                jTextArea_border.setLocation(search_x, search_y);
                 jTextArea_border.setVisible(true);
+            }
+        });
+
+        instructions_for_use.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                int x = MainPanel.getjFrame().getX();
+                int y = MainPanel.getjFrame().getY();
+                int width = MainPanel.getjFrame().getWidth();
+                int height = MainPanel.getjFrame().getHeight();
+                int search_x = x + width / 2 - instructionsForUse.getWidth() / 2;
+                int search_y = y + height / 2 - instructionsForUse.getHeight() / 2;
+                instructionsForUse.setLocation(search_x, search_y);
+                instructionsForUse.setVisible(true);
             }
         });
     }

@@ -20,9 +20,11 @@ public class InstructionsForUse extends JFrame
 {
     public InstructionsForUse()
     {
-        this.setSize(300, 300);
+        this.setTitle("使用说明");
+        this.setSize(950, 550);
         JPanel jPanel = new JPanel();
         JTextArea jTextArea = new JTextArea();
+        jTextArea.setEditable(false);
         JScrollPane jScrollPane = new JScrollPane(jTextArea);
 
         String str = """
@@ -34,8 +36,8 @@ public class InstructionsForUse extends JFrame
                 替换功能使用说明：两种方式
                 第一种：先在文本域选中要替换的文字，再打开替换窗口，窗口的查找栏会自动显示你选中的文字，这时只要在
                 替换栏输入你要替换的文字再点击右边的替换按钮就行了。
-                第二种：先打开替换窗口，在搜索栏输入你想要要替换的文字，再点击右边的搜索按钮，搜索到你想要替换的内容的正确位置后，
-                再在下面的替换栏里输入你要替换的内容，输入完成后再点击右边的替换按钮。
+                第二种：先打开替换窗口，在搜索栏输入你想要要替换的文字，再点击右边的搜索按钮，搜索到你想要
+                替换的内容的正确位置后，再在下面的替换栏里输入你要替换的内容，输入完成后再点击右边的替换按钮。
                 字体颜色、光标颜色、背景颜色、选择颜色和渲染颜色都支持自定义色彩（8位色深 RGB）
                                 
                 快捷键说明：
@@ -56,11 +58,13 @@ public class InstructionsForUse extends JFrame
                 f3：改变自动保存模式
                 """;
 
-        Font font = new Font("宋体", 0, 20);
+        Font font = new Font("宋体", Font.BOLD, 18);
         jTextArea.setFont(font);
         jTextArea.setForeground(Color.PINK);
+        //jTextArea.setBackground(new Color(0,244,125));
         jTextArea.setText(str);
-        jPanel.add(jScrollPane);
+        jPanel.setLayout(new BorderLayout());
+        jPanel.add(jScrollPane,BorderLayout.CENTER);
         this.add(jPanel);
     }
 }

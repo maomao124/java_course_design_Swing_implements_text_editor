@@ -83,7 +83,7 @@ public class FontSetting extends JFrame
         defaultListModel3.addElement("楷体");
         defaultListModel3.addElement("黑体");
 
-        list1.setSelectedIndex(0);
+        list1.setSelectedIndex(4);
         list2.setSelectedIndex(0);
         list3.setSelectedIndex(0);
 
