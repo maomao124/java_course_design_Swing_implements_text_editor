@@ -939,7 +939,7 @@ public class MainPanel
                 }
 
                 else if ((e.getKeyCode() == KeyEvent.VK_X) && (e.isControlDown()))
-                {                                                   //ctrl+v 粘贴
+                {                                                   //ctrl+x 剪切
                     label_Information.setText("剪切成功");
                 }
 
@@ -952,6 +952,10 @@ public class MainPanel
                 {                                                   //f4 清理内存
                     System.gc();
                     label_Information.setText("已清理软件内存");
+                }
+                else if ((e.getKeyCode() == KeyEvent.VK_F3))
+                {                                                   //f3 改变自动保存模式
+                    MainPanel.this.change_auto_save_mode();
                 }
 
             }

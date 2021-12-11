@@ -40,9 +40,9 @@ public class Configuration implements Serializable
     private int selected_color_g = 0;
     private int selected_color_b = 0;
 
-    private int rendering_color_r = 0;           //渲染颜色 默认蓝色
-    private int rendering_color_g = 0;
-    private int rendering_color_b = 255;
+    private int rendering_color_r = 0;           //渲染颜色 默认天蓝色
+    private int rendering_color_g = 160;
+    private int rendering_color_b = 200;
 
     private int Layout_left = 30;                //边框大小
     private int Layout_right = 30;
