@@ -160,7 +160,7 @@ public class Configuration
         //调出一个对话框，其中选择的数量由optionType参数确定，其中messageType参数确定要显示的图标。 messageType参数主要用于提供外观的默认图标。
         result = JOptionPane.showConfirmDialog(null, """
                         确认删除配置文件？这将删除所有已保存的个性化信息
-                        包括窗口大小、字体、各颜色信息、边框信息和换行策略
+                        包括窗口大小、字体、各颜色信息、边框信息、换行策略和自动清理
                         是否继续？"""
                 , "数据丢失警告！", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
         if (result == 0)
