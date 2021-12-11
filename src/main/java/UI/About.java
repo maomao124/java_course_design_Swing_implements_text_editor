@@ -36,7 +36,7 @@ public class About extends JFrame
 
     public About()
     {
-        this.setSize(320, 420);
+        this.setSize(335, 460);
         int x = MainPanel.getjFrame().getX();
         int y = MainPanel.getjFrame().getY();
         int width = MainPanel.getjFrame().getWidth();
@@ -50,20 +50,33 @@ public class About extends JFrame
         panel.setBorder(new EmptyBorder(10, 5, 10, 5));
         JPanel panel1 = new JPanel();
         panel1.setBorder(new EmptyBorder(10, 5, 10, 5));
-        panel.setLayout(new GridLayout(3, 1));
-        panel1.setLayout(new FlowLayout());
+        panel.setLayout(new GridLayout(6, 1));
+        panel1.setLayout(new FlowLayout(FlowLayout.CENTER,5000,0));
         JLabel label1 = new JLabel("作者：mao");
         label1.setHorizontalAlignment(0);
         JLabel label2 = new JLabel("完成时间：2021-12-08");
         label2.setHorizontalAlignment(0);
+        JLabel label5 = new JLabel("最近更新：2021-12-11");
+        label5.setHorizontalAlignment(0);
         JLabel label3 = new JLabel("GitHub：https://github.com/maomao124/");
+        JLabel label6 = new JLabel("远程仓库名：");
+        JLabel label7 = new JLabel("java_course_design_Swing_implements_text_editor");
+        JLabel label8 = new JLabel("GitHub网址二维码");
+
+        label6.setHorizontalAlignment(0);
+        label7.setHorizontalAlignment(0);
         label3.setHorizontalAlignment(0);
+        label8.setHorizontalAlignment(0);
         ImageIcon icon = createImageIcon("二维码.png");            //获得图片资源
         JLabel label4 = new JLabel(icon);
         panel.add(label1);
         panel.add(label2);
+        panel.add(label5);
         panel.add(label3);
+        panel.add(label6);
+        panel.add(label7);
         panel1.add(label4);
+        panel1.add(label8);
         JPanel panel2 = new JPanel();
         panel2.setLayout(new BorderLayout());
         panel2.add(panel, BorderLayout.NORTH);
