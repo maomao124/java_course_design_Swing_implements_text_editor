@@ -15,7 +15,7 @@ import java.net.URL;
  * Date(创建日期)： 2021/12/8
  * Time(创建时间)： 20:52
  * Version(版本): 1.0
- * Description(描述)： 关于
+ * Description(描述)： 关于面板
  */
 
 public class About extends JFrame
@@ -43,7 +43,7 @@ public class About extends JFrame
         int height = MainPanel.getjFrame().getHeight();
         int search_x = x + width / 2 - 500 / 2;
         int search_y = y + height / 2 - 150 / 2;
-        this.setLocation(search_x, search_y);
+        this.setLocation(search_x, search_y);                       //确保位于主面板的中央
         this.setTitle("关于");
         this.setLocationRelativeTo(null);
         JPanel panel = new JPanel();
@@ -58,7 +58,7 @@ public class About extends JFrame
         label2.setHorizontalAlignment(0);
         JLabel label3 = new JLabel("GitHub：https://github.com/maomao124/");
         label3.setHorizontalAlignment(0);
-        ImageIcon icon = createImageIcon("二维码.png");
+        ImageIcon icon = createImageIcon("二维码.png");            //获得图片资源
         JLabel label4 = new JLabel(icon);
         panel.add(label1);
         panel.add(label2);

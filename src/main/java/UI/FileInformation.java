@@ -30,7 +30,7 @@ public class FileInformation
     private static JTextArea jTextArea_FileInformation;
     private static JScrollPane jScrollPane;
 
-    public static void init()
+    public static void init()                                           //初始化
     {
         jTextArea_FileInformation = new JTextArea(15, 55);
         jTextArea_FileInformation.setLineWrap(true);
@@ -57,7 +57,7 @@ public class FileInformation
         jPanel.add(jPanel3, BorderLayout.WEST);
         button.setBackground(Color.cyan);
         button.addActionListener(new ActionListener()
-        {
+        {                                                           //设置监听
             @Override
             public void actionPerformed(ActionEvent e)
             {
@@ -117,7 +117,7 @@ public class FileInformation
         });
     }
 
-    public static void display()
+    public static void display()                                            //显示面板
     {
         if (MainPanel.getFile() == null)
         {
@@ -126,7 +126,7 @@ public class FileInformation
                     "还未指定文件目录！！！", "提示", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        jTextArea_FileInformation.setText("\t\t文件信息：\n\n");
+        jTextArea_FileInformation.setText("\t\t文件信息：\n\n");                     //输出文件的信息
         File file = MainPanel.getFile();
         DecimalFormat decimalFormat = new DecimalFormat("###.##");
         jTextArea_FileInformation.append("\t文件名称：" + file.getName());

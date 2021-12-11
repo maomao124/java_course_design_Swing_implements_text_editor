@@ -30,7 +30,7 @@ public class Color_JTextArea
         Color_JTextArea.jTextArea = jTextArea;
 
         font_color.addActionListener(new ActionListener()
-        {
+        {                                                           //设置监听器 字体颜色
             @Override
             public void actionPerformed(ActionEvent e)
             {
@@ -39,7 +39,7 @@ public class Color_JTextArea
         });
 
         cursor_color.addActionListener(new ActionListener()
-        {
+        {                                                           //设置监听器 光标颜色
             @Override
             public void actionPerformed(ActionEvent e)
             {
@@ -48,7 +48,7 @@ public class Color_JTextArea
         });
 
         background_color.addActionListener(new ActionListener()
-        {
+        {                                                           //设置监听器 背景颜色
             @Override
             public void actionPerformed(ActionEvent e)
             {
@@ -57,7 +57,7 @@ public class Color_JTextArea
         });
 
         selected_color.addActionListener(new ActionListener()
-        {
+        {                                                           //设置监听器 选择颜色
             @Override
             public void actionPerformed(ActionEvent e)
             {
@@ -66,7 +66,7 @@ public class Color_JTextArea
         });
 
         rendering_color.addActionListener(new ActionListener()
-        {
+        {                                                           //设置监听器 渲染颜色
             @Override
             public void actionPerformed(ActionEvent e)
             {
@@ -83,12 +83,12 @@ public class Color_JTextArea
         if (color != null)
         {
             jTextArea.setForeground(color);
-            if (io.Configuration.config == null)
+            if (io.Configuration.config == null)                        //如果对象不存在就创建对象
             {
                 io.Configuration.config = new data.Configuration();
                 Configuration.config_is_not_null = true;
             }
-            io.Configuration.config.setFont_color_r(color.getRed());
+            io.Configuration.config.setFont_color_r(color.getRed());      //写入配置
             io.Configuration.config.setFont_color_g(color.getGreen());
             io.Configuration.config.setFont_color_b(color.getBlue());
         }
@@ -101,12 +101,12 @@ public class Color_JTextArea
         if (color != null)
         {
             jTextArea.setCaretColor(color);
-            if (io.Configuration.config == null)
+            if (io.Configuration.config == null)                        //如果对象不存在就创建对象
             {
                 io.Configuration.config = new data.Configuration();
                 Configuration.config_is_not_null = true;
             }
-            io.Configuration.config.setCursor_color_r(color.getRed());
+            io.Configuration.config.setCursor_color_r(color.getRed());      //写入配置
             io.Configuration.config.setCursor_color_g(color.getGreen());
             io.Configuration.config.setCursor_color_b(color.getBlue());
         }
@@ -120,12 +120,12 @@ public class Color_JTextArea
         if (color != null)
         {
             jTextArea.setBackground(color);
-            if (io.Configuration.config == null)
+            if (io.Configuration.config == null)                        //如果对象不存在就创建对象
             {
                 io.Configuration.config = new data.Configuration();
                 Configuration.config_is_not_null = true;
             }
-            io.Configuration.config.setBackground_color_r(color.getRed());
+            io.Configuration.config.setBackground_color_r(color.getRed());      //写入配置
             io.Configuration.config.setBackground_color_g(color.getGreen());
             io.Configuration.config.setBackground_color_b(color.getBlue());
         }
@@ -138,12 +138,12 @@ public class Color_JTextArea
         if (color != null)
         {
             jTextArea.setSelectedTextColor(color);
-            if (io.Configuration.config == null)
+            if (io.Configuration.config == null)                        //如果对象不存在就创建对象
             {
                 io.Configuration.config = new data.Configuration();
                 Configuration.config_is_not_null = true;
             }
-            io.Configuration.config.setSelected_color_r(color.getRed());
+            io.Configuration.config.setSelected_color_r(color.getRed());      //写入配置
             io.Configuration.config.setSelected_color_g(color.getGreen());
             io.Configuration.config.setSelected_color_b(color.getBlue());
         }
@@ -156,12 +156,12 @@ public class Color_JTextArea
         if (color != null)
         {
             jTextArea.setSelectionColor(color);
-            if (io.Configuration.config == null)
+            if (io.Configuration.config == null)                        //如果对象不存在就创建对象
             {
                 io.Configuration.config = new data.Configuration();
                 Configuration.config_is_not_null = true;
             }
-            io.Configuration.config.setRendering_color_r(color.getRed());
+            io.Configuration.config.setRendering_color_r(color.getRed());      //写入配置
             io.Configuration.config.setRendering_color_g(color.getGreen());
             io.Configuration.config.setRendering_color_b(color.getBlue());
         }

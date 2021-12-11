@@ -48,51 +48,59 @@ public class MainPanel
     private final JLabel label_Information = new JLabel("欢迎使用文件编辑器", JLabel.CENTER);      //状态位
     private final UI.FontSetting fontSetting;
     private final UI.JTextArea_Border jTextArea_border;
-    private UI.About about_software;
+    private final UI.About about_software;
     private Timer timer_autoSave;
     private int auto_save_mode = 0;
 
-    JMenuBar jMenuBar;        //菜单栏
-    JPopupMenu jPopupMenu;      //弹出菜单
-    JMenuItem copy_pop;
-    JMenuItem cut_pop;
-    JMenuItem paste_pop;
-    JMenuItem delete_pop;
-    JMenuItem deleteAll_pop;
-    JMenuItem selectAll_pop;
-    JMenu menu_file;            //菜单
-    JMenu menu_edit;
-    JMenu individualization;
-    JMenu format;
-    JMenu help;
-    JMenuItem open;         // 子菜单
-    JMenuItem save;
-    JMenuItem save_as;
-    JMenuItem auto_save;
+    @SuppressWarnings("all")
+    private JMenuBar jMenuBar;        //菜单栏
+    private JPopupMenu jPopupMenu;      //弹出菜单
+    private JMenuItem copy_pop;
+    private JMenuItem cut_pop;
+    private JMenuItem paste_pop;
+    private JMenuItem delete_pop;
+    private JMenuItem deleteAll_pop;
+    private JMenuItem selectAll_pop;
+    @SuppressWarnings("all")
+    private JMenu menu_file;            //菜单
+    @SuppressWarnings("all")
+    private JMenu menu_edit;
+    @SuppressWarnings("all")
+    private JMenu individualization;
+    @SuppressWarnings("all")
+    private JMenu format;
+    @SuppressWarnings("all")
+    private JMenu help;
+    private JMenuItem open;         // 子菜单
+    private JMenuItem save;
+    private JMenuItem save_as;
+    private JMenuItem auto_save;
     private static JMenuItem file_information;
-    JMenuItem exit;
-    JMenuItem selectAll;
-    JMenuItem copy;
-    JMenuItem cut;
-    JMenuItem paste;
-    JMenuItem delete;
-    JMenuItem deleteAll;
+    private JMenuItem exit;
+    private JMenuItem selectAll;
+    private JMenuItem copy;
+    private JMenuItem cut;
+    private JMenuItem paste;
+    private JMenuItem delete;
+    private  JMenuItem deleteAll;
     private static JMenuItem search;
     private static JMenuItem replace;
-    JMenuItem edit_mode;
-    JMenuItem font_setting;
-    JMenuItem font_color;
-    JMenuItem cursor_color;
-    JMenuItem background_color;
-    JMenuItem selected_color;
-    JMenuItem rendering_color;
-    JMenuItem border;
-    JMenuItem delete_confirmation;
-    JMenuItem wrap;
+    private JMenuItem edit_mode;
+    private JMenuItem font_setting;
+    private JMenuItem font_color;
+    private JMenuItem cursor_color;
+    private JMenuItem background_color;
+    private JMenuItem selected_color;
+    private JMenuItem rendering_color;
+    private JMenuItem border;
+    private JMenuItem delete_confirmation;
+    private JMenuItem wrap;
     private static JMenuItem errorLog;
-    JMenuItem instructions_for_use;
-    JMenuItem about;
+    private JMenuItem instructions_for_use;
+    private JMenuItem about;
 
+
+                                                                    //各种get和set方法
     public static JButton getButton_FileInformation()
     {
         return button_FileInformation;

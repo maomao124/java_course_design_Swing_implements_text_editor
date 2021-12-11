@@ -110,7 +110,7 @@ public class ErrorLog
         });
     }
 
-    public static void display()
+    public static void display()                                    //显示面板
     {
         jTextArea_ErrorLog.setText("");             //清空
         io.ErrorLog.read();                                   //读取日志
@@ -121,7 +121,7 @@ public class ErrorLog
         jFrame.repaint();
     }
 
-    private static void back()
+    private static void back()                                      //返回到主面板
     {
         JFrame jFrame = MainPanel.getjFrame();
         jFrame.remove(MainPanel.getjPanel_ErrorLog());

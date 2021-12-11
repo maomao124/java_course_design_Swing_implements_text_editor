@@ -132,12 +132,14 @@ public class Search
                     Toolkit.getDefaultToolkit().beep();
                     JOptionPane.showMessageDialog(null,
                             "已经到达文档尾部", "提示", JOptionPane.WARNING_MESSAGE);
+                    //选择指定开始和结束位置之间的文本。
                     jTextArea.select(start, end);
-                    start = 0;
+                    start = 0;                                      //清0
                     end = 0;
                 }
                 else                                                //找到了
                 {
+                    //选择指定开始和结束位置之间的文本。
                     jTextArea.select(start, end);
                     label_information.setText("查找成功  当前位置：" + start + "-" + end);
                 }

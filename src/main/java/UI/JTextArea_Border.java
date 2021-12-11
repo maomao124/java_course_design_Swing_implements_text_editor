@@ -290,13 +290,13 @@ public class JTextArea_Border extends JFrame
             @Override
             public void valueChanged(ListSelectionEvent e)
             {
-                int Layout_left = Integer.parseInt(defaultListModel1.get(list1.getSelectedIndex()));
+                int Layout_left = Integer.parseInt(defaultListModel1.get(list1.getSelectedIndex()));      //获得int型的边框信息
                 int Layout_right=Integer.parseInt(defaultListModel2.get(list2.getSelectedIndex()));
                 int Layout_up = Integer.parseInt(defaultListModel3.get(list3.getSelectedIndex()));
                 int Layout_down=Integer.parseInt(defaultListModel4.get(list4.getSelectedIndex()));
 
                 jScrollPane.setBorder(new EmptyBorder(Layout_up, Layout_left, Layout_down, Layout_right));
-                MainPanel.getjFrame().repaint();
+                MainPanel.getjFrame().repaint();                                //重新绘制此组件
             }
         });
 
@@ -305,13 +305,13 @@ public class JTextArea_Border extends JFrame
             @Override
             public void valueChanged(ListSelectionEvent e)
             {
-                int Layout_left = Integer.parseInt(defaultListModel1.get(list1.getSelectedIndex()));
+                int Layout_left = Integer.parseInt(defaultListModel1.get(list1.getSelectedIndex()));      //获得int型的边框信息
                 int Layout_right=Integer.parseInt(defaultListModel2.get(list2.getSelectedIndex()));
                 int Layout_up = Integer.parseInt(defaultListModel3.get(list3.getSelectedIndex()));
                 int Layout_down=Integer.parseInt(defaultListModel4.get(list4.getSelectedIndex()));
 
                 jScrollPane.setBorder(new EmptyBorder(Layout_up, Layout_left, Layout_down, Layout_right));
-                MainPanel.getjFrame().repaint();
+                MainPanel.getjFrame().repaint();                                //重新绘制此组件
             }
         });
 
@@ -320,13 +320,13 @@ public class JTextArea_Border extends JFrame
             @Override
             public void valueChanged(ListSelectionEvent e)
             {
-                int Layout_left = Integer.parseInt(defaultListModel1.get(list1.getSelectedIndex()));
+                int Layout_left = Integer.parseInt(defaultListModel1.get(list1.getSelectedIndex()));      //获得int型的边框信息
                 int Layout_right=Integer.parseInt(defaultListModel2.get(list2.getSelectedIndex()));
                 int Layout_up = Integer.parseInt(defaultListModel3.get(list3.getSelectedIndex()));
                 int Layout_down=Integer.parseInt(defaultListModel4.get(list4.getSelectedIndex()));
 
                 jScrollPane.setBorder(new EmptyBorder(Layout_up, Layout_left, Layout_down, Layout_right));
-                MainPanel.getjFrame().repaint();
+                MainPanel.getjFrame().repaint();                                //重新绘制此组件
             }
         });
 
@@ -335,13 +335,13 @@ public class JTextArea_Border extends JFrame
             @Override
             public void valueChanged(ListSelectionEvent e)
             {
-                int Layout_left = Integer.parseInt(defaultListModel1.get(list1.getSelectedIndex()));
+                int Layout_left = Integer.parseInt(defaultListModel1.get(list1.getSelectedIndex()));      //获得int型的边框信息
                 int Layout_right=Integer.parseInt(defaultListModel2.get(list2.getSelectedIndex()));
                 int Layout_up = Integer.parseInt(defaultListModel3.get(list3.getSelectedIndex()));
                 int Layout_down=Integer.parseInt(defaultListModel4.get(list4.getSelectedIndex()));
 
                 jScrollPane.setBorder(new EmptyBorder(Layout_up, Layout_left, Layout_down, Layout_right));
-                MainPanel.getjFrame().repaint();
+                MainPanel.getjFrame().repaint();                                //重新绘制此组件
             }
         });
     }
