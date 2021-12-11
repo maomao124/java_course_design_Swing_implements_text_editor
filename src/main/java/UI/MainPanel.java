@@ -837,11 +837,38 @@ public class MainPanel
         });
 
         undo.addActionListener(new ActionListener()
-        {
+        {                                                                 //撤销监听器
             @Override
             public void actionPerformed(ActionEvent e)
             {
                 MainPanel.this.undo();
+            }
+        });
+
+        undo_pop.addActionListener(new ActionListener()
+        {                                                                 //撤销监听器
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                MainPanel.this.undo();
+            }
+        });
+
+        redo.addActionListener(new ActionListener()
+        {                                                                  //重做监听器
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                MainPanel.this.redo();
+            }
+        });
+
+        redo_pop.addActionListener(new ActionListener()
+        {                                                                  //重做监听器
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                MainPanel.this.redo();
             }
         });
     }
