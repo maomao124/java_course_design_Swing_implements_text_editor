@@ -50,6 +50,7 @@ public class Configuration implements Serializable
     private int Layout_down = 15;
 
     boolean wrap = true;                         //文本域是否换行
+    boolean isAutoClear = false;                   //是否自动清理
 
 
     public Configuration()                       //无参构造方法
@@ -528,6 +529,15 @@ public class Configuration implements Serializable
         this.wrap = wrap;
     }
 
+    public boolean isAutoClear()
+    {
+        return isAutoClear;
+    }
+
+    public void setAutoClear(boolean autoClear)
+    {
+        isAutoClear = autoClear;
+    }
 
     @Override
     public boolean equals(Object o)
@@ -645,6 +655,10 @@ public class Configuration implements Serializable
         {
             return false;
         }
+        if (isAutoClear != that.isAutoClear)
+        {
+            return false;
+        }
         return fontName.equals(that.fontName);
     }
 
@@ -676,6 +690,7 @@ public class Configuration implements Serializable
         result = 31 * result + Layout_up;
         result = 31 * result + Layout_down;
         result = 31 * result + (wrap ? 1 : 0);
+        result = 31 * result + (isAutoClear ? 1 : 0);
         return result;
     }
 
@@ -709,6 +724,7 @@ public class Configuration implements Serializable
         stringbuilder.append("Layout_up：").append(Layout_up).append('\n');
         stringbuilder.append("Layout_down：").append(Layout_down).append('\n');
         stringbuilder.append("wrap：").append(wrap).append('\n');
+        stringbuilder.append("isAutoClear：").append(isAutoClear).append('\n');
         return stringbuilder.toString();
     }
 }

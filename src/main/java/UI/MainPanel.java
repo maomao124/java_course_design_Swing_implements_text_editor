@@ -48,6 +48,7 @@ public class MainPanel
     private final JButton button_autoSave = new JButton("不自动保存");             //自动保存按钮
     private static JButton button_Back = new JButton("<-返回");           //返回按钮
     boolean isEditable = true;                                      //文本域是否可以编辑
+    boolean isAutoClear = false;                                       //是否自动清理软件内存
     private static File file;                                       //关联的文件
     private final JLabel label_Information = new JLabel("欢迎使用文件编辑器", JLabel.CENTER);      //状态位
     public static final JLabel label_time_and_memory = new JLabel("", JLabel.RIGHT);
@@ -56,6 +57,7 @@ public class MainPanel
     private final UI.About about_software;
     private final InstructionsForUse instructionsForUse;
     private Timer timer_autoSave;
+    private Timer timer_autoClear;
     private int auto_save_mode = 0;
 
     private UndoManager undoManager;                                //撤销
@@ -86,6 +88,7 @@ public class MainPanel
     private JMenuItem save_as;
     private JMenuItem auto_save;
     private static JMenuItem file_information;
+    private JMenuItem auto_clear;
     private JMenuItem exit;
     private JMenuItem selectAll;
     private JMenuItem copy;
@@ -324,12 +327,14 @@ public class MainPanel
         save_as = new JMenuItem("另存为");
         auto_save = new JMenuItem("不自动保存");
         file_information = new JMenuItem("文件信息");
+        auto_clear = new JMenuItem("自动清理");
         exit = new JMenuItem("退出");
         open.setBackground(Color.cyan);
         save.setBackground(Color.cyan);
         save_as.setBackground(Color.cyan);
         auto_save.setBackground(Color.cyan);
         file_information.setBackground(Color.cyan);
+        auto_clear.setBackground(Color.green);
         exit.setBackground(Color.red);
 
         selectAll = new JMenuItem("全选");
@@ -388,6 +393,7 @@ public class MainPanel
         menu_file.add(save_as);
         menu_file.add(auto_save);
         menu_file.add(file_information);
+        menu_file.add(auto_clear);
         menu_file.add(exit);
 
         //编辑
@@ -530,6 +536,7 @@ public class MainPanel
         instructionsForUse = new InstructionsForUse();                      //初始化使用说明面板
         jTextArea_border = new JTextArea_Border(jTextArea, jScrollPane);    //初始化边框设置模板
         this.init_timer_auto_save();                                        //初始化自动保存
+        this.init_auto_clear();                                             //初始化自动清理
         fontSetting = new UI.FontSetting(jTextArea);                      //初始化字体设置面板
         this.init_configuration();                                        //初始化配置
         Color_JTextArea.init_Color_JTextArea                              //初始化文本域颜色选择
@@ -1518,6 +1525,51 @@ public class MainPanel
         else
         {
             label_Information.setText("重做失败");
+        }
+    }
+
+    private void init_auto_clear()                                      //初始化自动清理
+    {
+        ActionListener taskPerformer = new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+
+            }
+        };
+        timer_autoClear = new Timer(10000, taskPerformer);
+    }
+
+    private void change_auto_clear_mode()                               //改变自动清理模式
+    {
+        if (isAutoClear)                                //当前为自动清理模式
+        {
+            isAutoClear = false;
+            timer_autoClear.stop();                      //停止
+            if (io.Configuration.config == null)                        //如果对象不存在就创建对象
+            {
+                io.Configuration.config = new data.Configuration();
+                Configuration.config_is_not_null = true;
+            }
+            Configuration.config.setAutoClear(false);
+            auto_clear.setBackground(Color.green);
+            auto_clear.setText("自动清理");
+            label_Information.setText("已取消自动清理内存");
+        }
+        else                                            //当前为不自动清理模式
+        {
+            isAutoClear = true;
+            timer_autoClear.start();                    //启动
+            if (io.Configuration.config == null)                        //如果对象不存在就创建对象
+            {
+                io.Configuration.config = new data.Configuration();
+                Configuration.config_is_not_null = true;
+            }
+            Configuration.config.setAutoClear(true);
+            auto_clear.setBackground(Color.yellow);
+            auto_clear.setText("不自动清理");
+            label_Information.setText("开始自动清理内存");
         }
     }
 }

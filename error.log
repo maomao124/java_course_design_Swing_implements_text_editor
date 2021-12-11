@@ -124,3 +124,18 @@ java.io.InvalidClassException: data.Configuration; local class incompatible: str
 
 
 
+日期：2021/12/11    时间：20:55:39        主机：mao        错误堆栈：
+java.io.InvalidClassException: data.Configuration; local class incompatible: stream classdesc serialVersionUID = -5540204515121031828, local class serialVersionUID = 7815150707186272069
+	at java.base/java.io.ObjectStreamClass.initNonProxy(ObjectStreamClass.java:722)
+	at java.base/java.io.ObjectInputStream.readNonProxyDesc(ObjectInputStream.java:2022)
+	at java.base/java.io.ObjectInputStream.readClassDesc(ObjectInputStream.java:1872)
+	at java.base/java.io.ObjectInputStream.readOrdinaryObject(ObjectInputStream.java:2179)
+	at java.base/java.io.ObjectInputStream.readObject0(ObjectInputStream.java:1689)
+	at java.base/java.io.ObjectInputStream.readObject(ObjectInputStream.java:495)
+	at java.base/java.io.ObjectInputStream.readObject(ObjectInputStream.java:453)
+	at io.Configuration.read(Configuration.java:100)
+	at UI.MainPanel.<init>(MainPanel.java:517)
+	at Run.main(Run.java:68)
+
+
+
