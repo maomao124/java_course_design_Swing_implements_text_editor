@@ -47,7 +47,7 @@ public class Run
                 System.out.print("运行时长：" + runTime / 60 + "分" + decimalFormat.format(runTime % 60) + "秒  ");
                 System.out.printf("已使用的内存：%8.4fMB\n", memory);
                 MainPanel.label_time_and_memory.setText("时间："+runTime / 60 + "分" +
-                        decimalFormat.format(runTime % 60) + "秒  "+String.format(" 内存：%8.4fMB", memory));
+                        decimalFormat.format(runTime % 60) + "秒  "+String.format(" 内存：%8.3fMB", memory));
                 /*
                 if (Configuration.config_is_not_null)
                 {

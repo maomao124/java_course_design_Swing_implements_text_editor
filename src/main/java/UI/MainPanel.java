@@ -11,6 +11,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
 import javax.swing.text.BadLocationException;
+import javax.swing.undo.UndoManager;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
@@ -57,12 +58,16 @@ public class MainPanel
     private Timer timer_autoSave;
     private int auto_save_mode = 0;
 
+    private UndoManager undoManager;                                //撤销
+
     @SuppressWarnings("all")
     private JMenuBar jMenuBar;        //菜单栏
     private JPopupMenu jPopupMenu;      //弹出菜单
     private JMenuItem copy_pop;
     private JMenuItem cut_pop;
     private JMenuItem paste_pop;
+    private JMenuItem undo_pop;
+    private JMenuItem redo_pop;
     private JMenuItem delete_pop;
     private JMenuItem deleteAll_pop;
     private JMenuItem selectAll_pop;
@@ -86,6 +91,8 @@ public class MainPanel
     private JMenuItem copy;
     private JMenuItem cut;
     private JMenuItem paste;
+    private JMenuItem undo;
+    private JMenuItem redo;
     private JMenuItem delete;
     private JMenuItem deleteAll;
     private static JMenuItem search;
@@ -209,18 +216,31 @@ public class MainPanel
     private void init_mainPanel()                                    //初始化主面板
     {
         jTextField_FilePath.setEditable(false);
+
         jPanel = new JPanel();                                       //初始化主面板
-        jPanel.setLayout(new BorderLayout());
         JPanel jPanel1 = new JPanel();                               //上面的按钮
         JPanel jPanel2 = new JPanel();                                 //下面的状态字体
-        jPanel1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-        jPanel2.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+        JPanel jPanel_left = new JPanel();                              //左
+        JPanel jPanel_center = new JPanel();                              //中
+        JPanel jPanel_right = new JPanel();                             //右
+
         Font font = new Font("宋体", Font.PLAIN, 20);         //设置字体
 
         jTextArea = new JTextArea(720 / 35, 1280 / 12);     //初始化文本域
         jTextArea.setLineWrap(true);
         jTextArea.setFont(font);
         jTextArea.setEditable(isEditable);
+
+        undoManager = new UndoManager();                                     //撤销功能
+        jTextArea.getDocument().addUndoableEditListener(undoManager);
+
+        jPanel.setLayout(new BorderLayout());                              //设置布局
+        jPanel1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+        jPanel2.setLayout(new GridLayout(1, 3));
+        jPanel_left.setLayout(new FlowLayout(FlowLayout.LEFT));
+        jPanel_center.setLayout(new FlowLayout(FlowLayout.CENTER));
+        jPanel_right.setLayout(new FlowLayout(FlowLayout.RIGHT, 30, 0));
+
 
         jScrollPane = new JScrollPane();
         jScrollPane.setViewportView(jTextArea);
@@ -238,6 +258,7 @@ public class MainPanel
 
         //label_Information.setPreferredSize(new Dimension(800, 30));
 
+
         jPanel1.add(label_FilePath);                                      //加入到主面板中
         jPanel1.add(jTextField_FilePath);
         jPanel1.add(button_Open);
@@ -248,8 +269,11 @@ public class MainPanel
         jPanel1.add(button_FileInformation);
         jPanel.add(jPanel1, BorderLayout.NORTH);
         jPanel.add(jScrollPane, BorderLayout.CENTER);
-        jPanel2.add(label_Information);
-        jPanel2.add(label_time_and_memory);
+        jPanel_center.add(label_Information);
+        jPanel_right.add(label_time_and_memory);
+        jPanel2.add(jPanel_left);
+        jPanel2.add(jPanel_center);
+        jPanel2.add(jPanel_right);
         jPanel.add(jPanel2, BorderLayout.SOUTH);
     }
 
@@ -263,6 +287,8 @@ public class MainPanel
         copy_pop = new JMenuItem("复制");
         cut_pop = new JMenuItem("剪切");
         paste_pop = new JMenuItem("粘贴");
+        undo_pop = new JMenuItem("撤销");
+        redo_pop = new JMenuItem("重做");
         delete_pop = new JMenuItem("删除");
         deleteAll_pop = new JMenuItem("清空");
         selectAll_pop = new JMenuItem("全选");
@@ -270,6 +296,8 @@ public class MainPanel
         copy_pop.setBackground(Color.cyan);
         cut_pop.setBackground(Color.cyan);
         paste_pop.setBackground(Color.cyan);
+        undo_pop.setBackground(Color.cyan);
+        redo_pop.setBackground(Color.cyan);
         delete_pop.setBackground(Color.yellow);
         deleteAll_pop.setBackground(Color.red);
         selectAll_pop.setBackground(Color.cyan);
@@ -277,6 +305,8 @@ public class MainPanel
         jPopupMenu.add(copy_pop);
         jPopupMenu.add(cut_pop);
         jPopupMenu.add(paste_pop);
+        jPopupMenu.add(undo_pop);
+        jPopupMenu.add(redo_pop);
         jPopupMenu.add(delete_pop);
         jPopupMenu.add(deleteAll_pop);
         jPopupMenu.add(selectAll_pop);
@@ -306,6 +336,8 @@ public class MainPanel
         copy = new JMenuItem("复制");
         cut = new JMenuItem("剪切");
         paste = new JMenuItem("粘贴");
+        undo = new JMenuItem("撤销");
+        redo = new JMenuItem("重做");
         delete = new JMenuItem("删除");
         deleteAll = new JMenuItem("清空");
         search = new JMenuItem("查找");
@@ -315,6 +347,8 @@ public class MainPanel
         copy.setBackground(Color.cyan);
         cut.setBackground(Color.cyan);
         paste.setBackground(Color.cyan);
+        undo.setBackground(Color.cyan);
+        redo.setBackground(Color.cyan);
         delete.setBackground(Color.yellow);
         deleteAll.setBackground(Color.red);
         search.setBackground(Color.cyan);
@@ -361,6 +395,8 @@ public class MainPanel
         menu_edit.add(copy);
         menu_edit.add(cut);
         menu_edit.add(paste);
+        menu_edit.add(undo);
+        menu_edit.add(redo);
         menu_edit.add(delete);
         menu_edit.add(deleteAll);
         menu_edit.add(search);
@@ -491,8 +527,8 @@ public class MainPanel
         UI.Search.init_search(jTextArea, label_Information);              //初始化查找面板
         UI.Replace.init_replace(jTextArea, label_Information);            //初始化替换面板
         about_software = new UI.About();                                    //初始化关于面板
-        instructionsForUse = new InstructionsForUse();                        //初始化使用说明面板
-        jTextArea_border = new JTextArea_Border(jTextArea, jScrollPane);     //初始化边框设置模板
+        instructionsForUse = new InstructionsForUse();                      //初始化使用说明面板
+        jTextArea_border = new JTextArea_Border(jTextArea, jScrollPane);    //初始化边框设置模板
         this.init_timer_auto_save();                                        //初始化自动保存
         fontSetting = new UI.FontSetting(jTextArea);                      //初始化字体设置面板
         this.init_configuration();                                        //初始化配置
@@ -797,6 +833,15 @@ public class MainPanel
                 int search_y = y + height / 2 - instructionsForUse.getHeight() / 2;
                 instructionsForUse.setLocation(search_x, search_y);
                 instructionsForUse.setVisible(true);
+            }
+        });
+
+        undo.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                MainPanel.this.undo();
             }
         });
     }
@@ -1412,6 +1457,32 @@ public class MainPanel
             auto_save.setText("不自动保存");
             auto_save.setBackground(Color.cyan);
             label_Information.setText("已关闭自动保存");
+        }
+    }
+
+    private void undo()                                                 //撤销
+    {
+        if (undoManager.canUndo())
+        {
+            undoManager.undo();
+            label_Information.setText("已撤销");
+        }
+        else
+        {
+            label_Information.setText("撤销失败！");
+        }
+    }
+
+    private void redo()                                                 //重做
+    {
+        if (undoManager.canRedo())
+        {
+            undoManager.redo();
+            label_Information.setText("已重做");
+        }
+        else
+        {
+            label_Information.setText("重做失败");
         }
     }
 }
