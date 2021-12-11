@@ -45,7 +45,7 @@ public class Configuration implements Serializable
     private int rendering_color_b = 255;
 
     private int Layout_left = 30;                //边框大小
-    private int Layout_right = 300;
+    private int Layout_right = 30;
     private int Layout_up = 0;
     private int Layout_down = 15;
 

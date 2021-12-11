@@ -297,6 +297,15 @@ public class JTextArea_Border extends JFrame
 
                 jScrollPane.setBorder(new EmptyBorder(Layout_up, Layout_left, Layout_down, Layout_right));
                 MainPanel.getjFrame().repaint();                                //重新绘制此组件
+                if (io.Configuration.config == null)                            //如果对象不存在就创建对象
+                {
+                    io.Configuration.config = new data.Configuration();
+                    Configuration.config_is_not_null = true;
+                }
+                Configuration.config.setLayout_left(Layout_left);               //写入配置
+                Configuration.config.setLayout_right(Layout_right);
+                Configuration.config.setLayout_up(Layout_up);
+                Configuration.config.setLayout_down(Layout_down);
             }
         });
 
@@ -312,6 +321,15 @@ public class JTextArea_Border extends JFrame
 
                 jScrollPane.setBorder(new EmptyBorder(Layout_up, Layout_left, Layout_down, Layout_right));
                 MainPanel.getjFrame().repaint();                                //重新绘制此组件
+                if (io.Configuration.config == null)                            //如果对象不存在就创建对象
+                {
+                    io.Configuration.config = new data.Configuration();
+                    Configuration.config_is_not_null = true;
+                }
+                Configuration.config.setLayout_left(Layout_left);               //写入配置
+                Configuration.config.setLayout_right(Layout_right);
+                Configuration.config.setLayout_up(Layout_up);
+                Configuration.config.setLayout_down(Layout_down);
             }
         });
 
@@ -327,6 +345,15 @@ public class JTextArea_Border extends JFrame
 
                 jScrollPane.setBorder(new EmptyBorder(Layout_up, Layout_left, Layout_down, Layout_right));
                 MainPanel.getjFrame().repaint();                                //重新绘制此组件
+                if (io.Configuration.config == null)                            //如果对象不存在就创建对象
+                {
+                    io.Configuration.config = new data.Configuration();
+                    Configuration.config_is_not_null = true;
+                }
+                Configuration.config.setLayout_left(Layout_left);               //写入配置
+                Configuration.config.setLayout_right(Layout_right);
+                Configuration.config.setLayout_up(Layout_up);
+                Configuration.config.setLayout_down(Layout_down);
             }
         });
 
@@ -342,6 +369,15 @@ public class JTextArea_Border extends JFrame
 
                 jScrollPane.setBorder(new EmptyBorder(Layout_up, Layout_left, Layout_down, Layout_right));
                 MainPanel.getjFrame().repaint();                                //重新绘制此组件
+                if (io.Configuration.config == null)                            //如果对象不存在就创建对象
+                {
+                    io.Configuration.config = new data.Configuration();
+                    Configuration.config_is_not_null = true;
+                }
+                Configuration.config.setLayout_left(Layout_left);               //写入配置
+                Configuration.config.setLayout_right(Layout_right);
+                Configuration.config.setLayout_up(Layout_up);
+                Configuration.config.setLayout_down(Layout_down);
             }
         });
     }

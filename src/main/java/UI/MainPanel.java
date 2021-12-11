@@ -4,7 +4,10 @@ import io.Configuration;
 import io.SHA.MD5;
 
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.LineBorder;
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
 import javax.swing.text.BadLocationException;
@@ -220,6 +223,8 @@ public class MainPanel
         jScrollPane = new JScrollPane();
         jScrollPane.setViewportView(jTextArea);
         jScrollPane.setBorder(new EmptyBorder(0, 30, 15, 30));
+        //jScrollPane.setBorder(new BevelBorder(0, Color.cyan, Color.green, Color.cyan, Color.red));
+        //jScrollPane.setBorder(new LineBorder(Color.cyan,50,true));
 
         button_Open.setBackground(Color.cyan);                          //设置颜色
         button_Save.setBackground(Color.cyan);
@@ -454,6 +459,15 @@ public class MainPanel
                 wrap.setText("自动换行");
                 jTextArea.setLineWrap(false);
             }
+            int Layout_left = 30;                //边框大小
+            int Layout_right = 300;
+            int Layout_up = 0;
+            int Layout_down = 15;
+            Layout_left = Configuration.config.getLayout_left();
+            Layout_right = Configuration.config.getLayout_right();
+            Layout_up = Configuration.config.getLayout_up();
+            Layout_down = Configuration.config.getLayout_down();
+            jScrollPane.setBorder(new EmptyBorder(Layout_up, Layout_left, Layout_down, Layout_right));
         }
     }
 
