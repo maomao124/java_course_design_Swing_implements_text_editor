@@ -17,42 +17,47 @@ import java.io.Serializable;
 
 public class Configuration implements Serializable
 {
-    private int width=1280;                       //窗口大小
-    private int height=720;
+    private int width = 1280;                       //窗口大小 默认1280*720
+    private int height = 720;
 
     private String fontName = "宋体";              //字体设置
     private int fontStyle = 0;
     private int fontSize = 19;
 
-    private int font_color_r = 0;                //字体颜色
+    private int font_color_r = 0;                //字体颜色 默认黑色
     private int font_color_g = 0;
     private int font_color_b = 0;
 
-    private int cursor_color_r = 0;              //光标颜色
+    private int cursor_color_r = 0;              //光标颜色 默认黑色
     private int cursor_color_g = 0;
     private int cursor_color_b = 0;
 
-    private int background_color_r = 255;         //背景颜色
+    private int background_color_r = 255;         //背景颜色 默认白色
     private int background_color_g = 255;
     private int background_color_b = 255;
 
-    private int selected_color_r = 0;             //选择颜色
+    private int selected_color_r = 0;             //选择颜色 默认白色
     private int selected_color_g = 0;
     private int selected_color_b = 0;
 
-    private int rendering_color_r = 0;           //渲染颜色
+    private int rendering_color_r = 0;           //渲染颜色 默认蓝色
     private int rendering_color_g = 0;
     private int rendering_color_b = 255;
+
+    private int Layout_left;                      //边框大小
+    private int Layout_right;
+    private int Layout_up;
+    private int Layout_down;
 
     boolean wrap = true;                         //文本域是否换行
 
 
-    public Configuration()                       //get和set方法
+    public Configuration()                       //无参构造方法
     {
 
     }
 
-    public int getWidth()
+    public int getWidth()                          //get和set方法
     {
         return width;
     }
@@ -445,6 +450,74 @@ public class Configuration implements Serializable
         }
     }
 
+    public int getLayout_left()
+    {
+        return Layout_left;
+    }
+
+    public void setLayout_left(int layout_left)
+    {
+        if (layout_left >= 0)
+        {
+            this.Layout_left = layout_left;
+        }
+        else
+        {
+            this.Layout_left = 0;
+        }
+    }
+
+    public int getLayout_right()
+    {
+        return Layout_right;
+    }
+
+    public void setLayout_right(int layout_right)
+    {
+        if (layout_right >= 0)
+        {
+            this.Layout_right = layout_right;
+        }
+        else
+        {
+            this.Layout_right = 0;
+        }
+    }
+
+    public int getLayout_up()
+    {
+        return Layout_up;
+    }
+
+    public void setLayout_up(int layout_up)
+    {
+        if (layout_up >= 0)
+        {
+            this.Layout_up = layout_up;
+        }
+        else
+        {
+            this.Layout_up = 0;
+        }
+    }
+
+    public int getLayout_down()
+    {
+        return Layout_down;
+    }
+
+    public void setLayout_down(int layout_down)
+    {
+        if (layout_down >= 0)
+        {
+            this.Layout_down = layout_down;
+        }
+        else
+        {
+            this.Layout_down = 0;
+        }
+    }
+
     public boolean isWrap()
     {
         return wrap;
@@ -455,14 +528,15 @@ public class Configuration implements Serializable
         this.wrap = wrap;
     }
 
+
     @Override
     public boolean equals(Object o)
     {
-        if (this == o)    //引用同一个对象
+        if (this == o)      //引用同一个对象
         {
             return true;
         }
-        if (o == null)    //检测obj是否为null
+        if (o == null)      //检测obj是否为null
         {
             return false;
         }
@@ -551,6 +625,22 @@ public class Configuration implements Serializable
         {
             return false;
         }
+        if (Layout_left != that.Layout_left)
+        {
+            return false;
+        }
+        if (Layout_right != that.Layout_right)
+        {
+            return false;
+        }
+        if (Layout_up != that.Layout_up)
+        {
+            return false;
+        }
+        if (Layout_down != that.Layout_down)
+        {
+            return false;
+        }
         if (wrap != that.wrap)
         {
             return false;
@@ -581,6 +671,10 @@ public class Configuration implements Serializable
         result = 31 * result + rendering_color_r;
         result = 31 * result + rendering_color_g;
         result = 31 * result + rendering_color_b;
+        result = 31 * result + Layout_left;
+        result = 31 * result + Layout_right;
+        result = 31 * result + Layout_up;
+        result = 31 * result + Layout_down;
         result = 31 * result + (wrap ? 1 : 0);
         return result;
     }
