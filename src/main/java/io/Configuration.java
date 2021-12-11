@@ -158,8 +158,10 @@ public class Configuration
         //根据本机系统设置和硬件功能发出音频哔声
         Toolkit.getDefaultToolkit().beep();
         //调出一个对话框，其中选择的数量由optionType参数确定，其中messageType参数确定要显示的图标。 messageType参数主要用于提供外观的默认图标。
-        result = JOptionPane.showConfirmDialog(null, "确认删除配置文件？这将删除所有已保存的个性化信息\n" +
-                        "包括窗口大小、字体、各颜色信息、边框信息和换行策略\n是否继续？"
+        result = JOptionPane.showConfirmDialog(null, """
+                        确认删除配置文件？这将删除所有已保存的个性化信息
+                        包括窗口大小、字体、各颜色信息、边框信息和换行策略
+                        是否继续？"""
                 , "数据丢失警告！", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
         if (result == 0)
         {
