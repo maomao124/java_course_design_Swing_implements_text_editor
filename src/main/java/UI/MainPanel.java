@@ -1056,6 +1056,14 @@ public class MainPanel
                 {                                                   //f3 改变自动保存模式
                     MainPanel.this.change_auto_save_mode();
                 }
+                else if ((e.getKeyCode() == KeyEvent.VK_Z) && (e.isControlDown()))
+                {                                                   //ctrl+z 撤销
+                    MainPanel.this.undo();
+                }
+                else if ((e.getKeyCode() == KeyEvent.VK_W) && (e.isControlDown()))
+                {                                                   //ctrl+w 重做
+                    MainPanel.this.redo();
+                }
 
             }
         });

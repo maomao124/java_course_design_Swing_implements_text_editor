@@ -54,6 +54,8 @@ public class InstructionsForUse extends JFrame
                 ctrl+c：复制
                 ctrl+v：粘贴
                 ctrl+x：剪切
+                ctrl+z：撤销
+                ctrl+w：重做
                 ctrl+r：编辑模式和只读模式的切换
                 f3：改变自动保存模式
                 """;
@@ -64,7 +66,7 @@ public class InstructionsForUse extends JFrame
         //jTextArea.setBackground(new Color(0,244,125));
         jTextArea.setText(str);
         jPanel.setLayout(new BorderLayout());
-        jPanel.add(jScrollPane,BorderLayout.CENTER);
+        jPanel.add(jScrollPane, BorderLayout.CENTER);
         this.add(jPanel);
     }
 }
