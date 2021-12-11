@@ -462,9 +462,9 @@ public class MainPanel
         io.Configuration.read();                                         //读配置文件
         jFrame = new JFrame("文本编辑器");                            //初始化顶层面板
         jFrame.setSize(1280, 720);
-        int screenWidth = ((int) java.awt.Toolkit.getDefaultToolkit().getScreenSize().width);
-        int screenHeight = ((int) java.awt.Toolkit.getDefaultToolkit().getScreenSize().height);
-        jFrame.setLocation(screenWidth / 2 - 640, screenHeight / 2 - 360);
+        int screenWidth = ((int) java.awt.Toolkit.getDefaultToolkit().getScreenSize().width);       //获取屏幕宽度
+        int screenHeight = ((int) java.awt.Toolkit.getDefaultToolkit().getScreenSize().height);     //获取屏幕高度
+        jFrame.setLocation(screenWidth / 2 - 640, screenHeight / 2 - 360);  //位于屏幕中央
         jFrame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 
         this.init_mainPanel();                                           //初始化主面板

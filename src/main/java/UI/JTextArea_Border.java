@@ -272,10 +272,10 @@ public class JTextArea_Border extends JFrame
         defaultListModel4.addElement("475");
         defaultListModel4.addElement("500");
 
-        list1.setSelectedIndex(0);
-        list2.setSelectedIndex(0);
+        list1.setSelectedIndex(6);
+        list2.setSelectedIndex(6);
         list3.setSelectedIndex(0);
-        list4.setSelectedIndex(0);
+        list4.setSelectedIndex(3);
 
         this.add(jScrollPane1);
         this.add(jScrollPane2);
