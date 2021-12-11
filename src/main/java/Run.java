@@ -1,5 +1,6 @@
 import UI.About;
 import UI.MainPanel;
+import io.Configuration;
 import org.w3c.dom.css.RGBColor;
 
 import javax.swing.*;
@@ -44,6 +45,12 @@ public class Run
                 memory = r.totalMemory() - r.freeMemory();
                 memory = memory / 1024 / 1024;
                 System.out.printf("已使用的内存：%.4fMB\n", memory);
+                /*
+                if (Configuration.config_is_not_null)
+                {
+                    System.out.println(Configuration.config);
+                }
+                 */
             }
         };
         Timer timer = new Timer(2000, taskPerformer);

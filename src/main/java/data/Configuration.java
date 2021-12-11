@@ -44,10 +44,10 @@ public class Configuration implements Serializable
     private int rendering_color_g = 0;
     private int rendering_color_b = 255;
 
-    private int Layout_left;                      //边框大小
-    private int Layout_right;
-    private int Layout_up;
-    private int Layout_down;
+    private int Layout_left = 30;                //边框大小
+    private int Layout_right = 300;
+    private int Layout_up = 0;
+    private int Layout_down = 15;
 
     boolean wrap = true;                         //文本域是否换行
 
@@ -677,5 +677,38 @@ public class Configuration implements Serializable
         result = 31 * result + Layout_down;
         result = 31 * result + (wrap ? 1 : 0);
         return result;
+    }
+
+    @Override
+    @SuppressWarnings("all")
+    public String toString()
+    {
+        final StringBuilder stringbuilder = new StringBuilder();
+        stringbuilder.append("width：").append(width).append('\n');
+        stringbuilder.append("height：").append(height).append('\n');
+        stringbuilder.append("fontName：").append(fontName).append('\n');
+        stringbuilder.append("fontStyle：").append(fontStyle).append('\n');
+        stringbuilder.append("fontSize：").append(fontSize).append('\n');
+        stringbuilder.append("font_color_r：").append(font_color_r).append('\n');
+        stringbuilder.append("font_color_g：").append(font_color_g).append('\n');
+        stringbuilder.append("font_color_b：").append(font_color_b).append('\n');
+        stringbuilder.append("cursor_color_r：").append(cursor_color_r).append('\n');
+        stringbuilder.append("cursor_color_g：").append(cursor_color_g).append('\n');
+        stringbuilder.append("cursor_color_b：").append(cursor_color_b).append('\n');
+        stringbuilder.append("background_color_r：").append(background_color_r).append('\n');
+        stringbuilder.append("background_color_g：").append(background_color_g).append('\n');
+        stringbuilder.append("background_color_b：").append(background_color_b).append('\n');
+        stringbuilder.append("selected_color_r：").append(selected_color_r).append('\n');
+        stringbuilder.append("selected_color_g：").append(selected_color_g).append('\n');
+        stringbuilder.append("selected_color_b：").append(selected_color_b).append('\n');
+        stringbuilder.append("rendering_color_r：").append(rendering_color_r).append('\n');
+        stringbuilder.append("rendering_color_g：").append(rendering_color_g).append('\n');
+        stringbuilder.append("rendering_color_b：").append(rendering_color_b).append('\n');
+        stringbuilder.append("Layout_left：").append(Layout_left).append('\n');
+        stringbuilder.append("Layout_right：").append(Layout_right).append('\n');
+        stringbuilder.append("Layout_up：").append(Layout_up).append('\n');
+        stringbuilder.append("Layout_down：").append(Layout_down).append('\n');
+        stringbuilder.append("wrap：").append(wrap).append('\n');
+        return stringbuilder.toString();
     }
 }
