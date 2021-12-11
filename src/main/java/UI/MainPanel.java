@@ -82,7 +82,7 @@ public class MainPanel
     private JMenuItem cut;
     private JMenuItem paste;
     private JMenuItem delete;
-    private  JMenuItem deleteAll;
+    private JMenuItem deleteAll;
     private static JMenuItem search;
     private static JMenuItem replace;
     private JMenuItem edit_mode;
@@ -100,7 +100,7 @@ public class MainPanel
     private JMenuItem about;
 
 
-                                                                    //各种get和set方法
+    //各种get和set方法
     public static JButton getButton_FileInformation()
     {
         return button_FileInformation;
@@ -474,7 +474,7 @@ public class MainPanel
         UI.Search.init_search(jTextArea, label_Information);              //初始化查找面板
         UI.Replace.init_replace(jTextArea, label_Information);            //初始化替换面板
         about_software = new UI.About();                                    //初始化关于面板
-        jTextArea_border = new JTextArea_Border(jTextArea,jScrollPane);     //初始化边框设置模板
+        jTextArea_border = new JTextArea_Border(jTextArea, jScrollPane);     //初始化边框设置模板
         this.init_timer_auto_save();                                        //初始化自动保存
         fontSetting = new UI.FontSetting(jTextArea);                      //初始化字体设置面板
         this.init_configuration();                                        //初始化配置

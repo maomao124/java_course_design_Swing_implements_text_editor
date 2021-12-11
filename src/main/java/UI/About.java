@@ -47,9 +47,9 @@ public class About extends JFrame
         this.setTitle("关于");
         this.setLocationRelativeTo(null);
         JPanel panel = new JPanel();
-        panel.setBorder(new EmptyBorder(10,5,10,5));
+        panel.setBorder(new EmptyBorder(10, 5, 10, 5));
         JPanel panel1 = new JPanel();
-        panel1.setBorder(new EmptyBorder(10,5,10,5));
+        panel1.setBorder(new EmptyBorder(10, 5, 10, 5));
         panel.setLayout(new GridLayout(3, 1));
         panel1.setLayout(new FlowLayout());
         JLabel label1 = new JLabel("作者：mao");
@@ -64,10 +64,10 @@ public class About extends JFrame
         panel.add(label2);
         panel.add(label3);
         panel1.add(label4);
-        JPanel panel2=new JPanel();
+        JPanel panel2 = new JPanel();
         panel2.setLayout(new BorderLayout());
-        panel2.add(panel,BorderLayout.NORTH);
-        panel2.add(panel1,BorderLayout.CENTER);
+        panel2.add(panel, BorderLayout.NORTH);
+        panel2.add(panel1, BorderLayout.CENTER);
         this.add(panel2);
     }
 }

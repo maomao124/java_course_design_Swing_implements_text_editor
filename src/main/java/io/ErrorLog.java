@@ -99,7 +99,7 @@ public class ErrorLog
             fileReader = new FileReader("error.log");
             bufferedReader = new BufferedReader(fileReader);
             String str;
-            JTextArea jTextArea=UI.ErrorLog.getjTextArea_ErrorLog();
+            JTextArea jTextArea = UI.ErrorLog.getjTextArea_ErrorLog();
             while ((str = bufferedReader.readLine()) != null)
             {
                 jTextArea.append(str + "\n");

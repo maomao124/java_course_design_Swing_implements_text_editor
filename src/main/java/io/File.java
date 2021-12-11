@@ -151,7 +151,8 @@ public class File
             }
         }
     }
-    public static void write(JTextArea jTextArea,JLabel label_Information)
+
+    public static void write(JTextArea jTextArea, JLabel label_Information)
     {
         FileWriter fileWriter = null;
         try                                  //文件流打开，文件读写
