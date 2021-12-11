@@ -49,6 +49,7 @@ public class MainPanel
     boolean isEditable = true;                                      //文本域是否可以编辑
     private static File file;                                       //关联的文件
     private final JLabel label_Information = new JLabel("欢迎使用文件编辑器", JLabel.CENTER);      //状态位
+    public static final JLabel label_time_and_memory = new JLabel("", JLabel.RIGHT);
     private final UI.FontSetting fontSetting;
     private final UI.JTextArea_Border jTextArea_border;
     private final UI.About about_software;
@@ -248,6 +249,7 @@ public class MainPanel
         jPanel.add(jPanel1, BorderLayout.NORTH);
         jPanel.add(jScrollPane, BorderLayout.CENTER);
         jPanel2.add(label_Information);
+        jPanel2.add(label_time_and_memory);
         jPanel.add(jPanel2, BorderLayout.SOUTH);
     }
 

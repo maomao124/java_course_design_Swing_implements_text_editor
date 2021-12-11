@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.text.DecimalFormat;
 
 /**
  * Project name(项目名称)：java课程设计 Swing实现文本编辑器
@@ -22,6 +23,9 @@ import java.io.Writer;
 
 public class Run
 {
+    private static long runTime = 0;
+    static DecimalFormat decimalFormat = new DecimalFormat("00");
+
     private static void init_MemoryComputing()
     {
         ActionListener taskPerformer = new ActionListener()
@@ -39,7 +43,11 @@ public class Run
                 //System.out.printf(" 空闲内存：%.3fMB\n", memory);
                 memory = r.totalMemory() - r.freeMemory();
                 memory = memory / 1024 / 1024;
-                System.out.printf("已使用的内存：%.4fMB\n", memory);
+                runTime = runTime + 1;
+                System.out.print("运行时长：" + runTime / 60 + "分" + decimalFormat.format(runTime % 60) + "秒  ");
+                System.out.printf("已使用的内存：%8.4fMB\n", memory);
+                MainPanel.label_time_and_memory.setText("时间："+runTime / 60 + "分" +
+                        decimalFormat.format(runTime % 60) + "秒  "+String.format(" 内存：%8.4fMB", memory));
                 /*
                 if (Configuration.config_is_not_null)
                 {
@@ -48,7 +56,7 @@ public class Run
                  */
             }
         };
-        Timer timer = new Timer(2000, taskPerformer);
+        Timer timer = new Timer(1000, taskPerformer);
         timer.start();
     }
 
