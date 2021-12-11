@@ -1,5 +1,8 @@
 package UI;
 
+import javax.swing.*;
+import java.awt.*;
+
 /**
  * Project name(项目名称)：java课程设计 Swing实现文本编辑器
  * Package(包名): UI
@@ -13,7 +16,10 @@ package UI;
  * Description(描述)： 使用说明
  */
 
-public class InstructionsForUse
+public class InstructionsForUse extends JFrame
 {
+    public InstructionsForUse()
+    {
 
+    }
 }
