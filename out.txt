@@ -18,42 +18,47 @@ import java.io.Serializable;
 
 public class Configuration implements Serializable
 {
-    private int width=1280;                       //窗口大小
-    private int height=720;
+    private int width = 1280;                       //窗口大小 默认1280*720
+    private int height = 720;
 
     private String fontName = "宋体";              //字体设置
     private int fontStyle = 0;
-    private int fontSize = 19;
+    private int fontSize = 20;
 
-    private int font_color_r = 0;                //字体颜色
+    private int font_color_r = 0;                //字体颜色 默认黑色
     private int font_color_g = 0;
     private int font_color_b = 0;
 
-    private int cursor_color_r = 0;              //光标颜色
+    private int cursor_color_r = 0;              //光标颜色 默认黑色
     private int cursor_color_g = 0;
     private int cursor_color_b = 0;
 
-    private int background_color_r = 255;         //背景颜色
+    private int background_color_r = 255;         //背景颜色 默认白色
     private int background_color_g = 255;
     private int background_color_b = 255;
 
-    private int selected_color_r = 0;             //选择颜色
+    private int selected_color_r = 0;             //选择颜色 默认白色
     private int selected_color_g = 0;
     private int selected_color_b = 0;
 
-    private int rendering_color_r = 0;           //渲染颜色
-    private int rendering_color_g = 0;
-    private int rendering_color_b = 255;
+    private int rendering_color_r = 0;           //渲染颜色 默认天蓝色
+    private int rendering_color_g = 160;
+    private int rendering_color_b = 200;
+
+    private int Layout_left = 30;                //边框大小
+    private int Layout_right = 30;
+    private int Layout_up = 0;
+    private int Layout_down = 15;
 
     boolean wrap = true;                         //文本域是否换行
 
 
-    public Configuration()                       //get和set方法
+    public Configuration()                       //无参构造方法
     {
 
     }
 
-    public int getWidth()
+    public int getWidth()                          //get和set方法
     {
         return width;
     }
@@ -446,6 +451,74 @@ public class Configuration implements Serializable
         }
     }
 
+    public int getLayout_left()
+    {
+        return Layout_left;
+    }
+
+    public void setLayout_left(int layout_left)
+    {
+        if (layout_left >= 0)
+        {
+            this.Layout_left = layout_left;
+        }
+        else
+        {
+            this.Layout_left = 0;
+        }
+    }
+
+    public int getLayout_right()
+    {
+        return Layout_right;
+    }
+
+    public void setLayout_right(int layout_right)
+    {
+        if (layout_right >= 0)
+        {
+            this.Layout_right = layout_right;
+        }
+        else
+        {
+            this.Layout_right = 0;
+        }
+    }
+
+    public int getLayout_up()
+    {
+        return Layout_up;
+    }
+
+    public void setLayout_up(int layout_up)
+    {
+        if (layout_up >= 0)
+        {
+            this.Layout_up = layout_up;
+        }
+        else
+        {
+            this.Layout_up = 0;
+        }
+    }
+
+    public int getLayout_down()
+    {
+        return Layout_down;
+    }
+
+    public void setLayout_down(int layout_down)
+    {
+        if (layout_down >= 0)
+        {
+            this.Layout_down = layout_down;
+        }
+        else
+        {
+            this.Layout_down = 0;
+        }
+    }
+
     public boolean isWrap()
     {
         return wrap;
@@ -456,14 +529,15 @@ public class Configuration implements Serializable
         this.wrap = wrap;
     }
 
+
     @Override
     public boolean equals(Object o)
     {
-        if (this == o)    //引用同一个对象
+        if (this == o)      //引用同一个对象
         {
             return true;
         }
-        if (o == null)    //检测obj是否为null
+        if (o == null)      //检测obj是否为null
         {
             return false;
         }
@@ -552,6 +626,22 @@ public class Configuration implements Serializable
         {
             return false;
         }
+        if (Layout_left != that.Layout_left)
+        {
+            return false;
+        }
+        if (Layout_right != that.Layout_right)
+        {
+            return false;
+        }
+        if (Layout_up != that.Layout_up)
+        {
+            return false;
+        }
+        if (Layout_down != that.Layout_down)
+        {
+            return false;
+        }
         if (wrap != that.wrap)
         {
             return false;
@@ -582,8 +672,45 @@ public class Configuration implements Serializable
         result = 31 * result + rendering_color_r;
         result = 31 * result + rendering_color_g;
         result = 31 * result + rendering_color_b;
+        result = 31 * result + Layout_left;
+        result = 31 * result + Layout_right;
+        result = 31 * result + Layout_up;
+        result = 31 * result + Layout_down;
         result = 31 * result + (wrap ? 1 : 0);
         return result;
+    }
+
+    @Override
+    @SuppressWarnings("all")
+    public String toString()
+    {
+        final StringBuilder stringbuilder = new StringBuilder();
+        stringbuilder.append("width：").append(width).append('\n');
+        stringbuilder.append("height：").append(height).append('\n');
+        stringbuilder.append("fontName：").append(fontName).append('\n');
+        stringbuilder.append("fontStyle：").append(fontStyle).append('\n');
+        stringbuilder.append("fontSize：").append(fontSize).append('\n');
+        stringbuilder.append("font_color_r：").append(font_color_r).append('\n');
+        stringbuilder.append("font_color_g：").append(font_color_g).append('\n');
+        stringbuilder.append("font_color_b：").append(font_color_b).append('\n');
+        stringbuilder.append("cursor_color_r：").append(cursor_color_r).append('\n');
+        stringbuilder.append("cursor_color_g：").append(cursor_color_g).append('\n');
+        stringbuilder.append("cursor_color_b：").append(cursor_color_b).append('\n');
+        stringbuilder.append("background_color_r：").append(background_color_r).append('\n');
+        stringbuilder.append("background_color_g：").append(background_color_g).append('\n');
+        stringbuilder.append("background_color_b：").append(background_color_b).append('\n');
+        stringbuilder.append("selected_color_r：").append(selected_color_r).append('\n');
+        stringbuilder.append("selected_color_g：").append(selected_color_g).append('\n');
+        stringbuilder.append("selected_color_b：").append(selected_color_b).append('\n');
+        stringbuilder.append("rendering_color_r：").append(rendering_color_r).append('\n');
+        stringbuilder.append("rendering_color_g：").append(rendering_color_g).append('\n');
+        stringbuilder.append("rendering_color_b：").append(rendering_color_b).append('\n');
+        stringbuilder.append("Layout_left：").append(Layout_left).append('\n');
+        stringbuilder.append("Layout_right：").append(Layout_right).append('\n');
+        stringbuilder.append("Layout_up：").append(Layout_up).append('\n');
+        stringbuilder.append("Layout_down：").append(Layout_down).append('\n');
+        stringbuilder.append("wrap：").append(wrap).append('\n');
+        return stringbuilder.toString();
     }
 }
 �
@@ -742,34 +869,41 @@ public class Configuration
         }
     }
 
-    public static void delete()
+    public static void delete()                             //删除此抽象路径名表示的文件或目录
     {
         int result;
+        //根据本机系统设置和硬件功能发出音频哔声
         Toolkit.getDefaultToolkit().beep();
+        //调出一个对话框，其中选择的数量由optionType参数确定，其中messageType参数确定要显示的图标。 messageType参数主要用于提供外观的默认图标。
         result = JOptionPane.showConfirmDialog(null, "确认删除配置文件？这将删除所有已保存的个性化信息\n" +
-                "包括窗口大小、字体、各颜色信息和换行策略\n是否继续？"
+                        "包括窗口大小、字体、各颜色信息、边框信息和换行策略\n是否继续？"
                 , "数据丢失警告！", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
         if (result == 0)
         {
             File file = new java.io.File("Configuration.ini");
             if (!file.exists())                     //不存在
             {
+                //根据本机系统设置和硬件功能发出音频哔声
                 Toolkit.getDefaultToolkit().beep();
+                //调出一个对话框，其中选择的数量由optionType参数确定，其中messageType参数确定要显示的图标。 messageType参数主要用于提供外观的默认图标。
                 JOptionPane.showMessageDialog(null, "配置文件不存在！", "删除失败", JOptionPane.ERROR_MESSAGE);
             }
             else
             {
                 boolean result1;
-                result1 = file.delete();
+                result1 = file.delete();                    //删除此抽象路径名表示的文件或目录
                 if (result1)
                 {
                     Configuration.config_is_not_null = false;
+                    //调出一个对话框，该对话框使用由messageType参数确定的默认图标显示消息
                     JOptionPane.showMessageDialog(null, "删除成功！重启软件生效",
                             "提示", JOptionPane.INFORMATION_MESSAGE);
                 }
                 else
                 {
+                    //根据本机系统设置和硬件功能发出音频哔声。
                     Toolkit.getDefaultToolkit().beep();
+                    //调出一个对话框，该对话框使用由messageType参数确定的默认图标显示消息
                     JOptionPane.showMessageDialog(null, "删除失败！", "提示", JOptionPane.ERROR_MESSAGE);
                 }
             }
@@ -880,7 +1014,7 @@ public class ErrorLog
             fileReader = new FileReader("error.log");
             bufferedReader = new BufferedReader(fileReader);
             String str;
-            JTextArea jTextArea=UI.ErrorLog.getjTextArea_ErrorLog();
+            JTextArea jTextArea = UI.ErrorLog.getjTextArea_ErrorLog();
             while ((str = bufferedReader.readLine()) != null)
             {
                 jTextArea.append(str + "\n");
@@ -1097,7 +1231,8 @@ public class File
             }
         }
     }
-    public static void write(JTextArea jTextArea,JLabel label_Information)
+
+    public static void write(JTextArea jTextArea, JLabel label_Information)
     {
         FileWriter fileWriter = null;
         try                                  //文件流打开，文件读写
@@ -1463,6 +1598,7 @@ public class MD5
 H:\����\��������\java�γ���� Swingʵ���ı��༭��\\src\\main\\java\\Run.java
 import UI.About;
 import UI.MainPanel;
+import io.Configuration;
 import org.w3c.dom.css.RGBColor;
 
 import javax.swing.*;
@@ -1507,6 +1643,12 @@ public class Run
                 memory = r.totalMemory() - r.freeMemory();
                 memory = memory / 1024 / 1024;
                 System.out.printf("已使用的内存：%.4fMB\n", memory);
+                /*
+                if (Configuration.config_is_not_null)
+                {
+                    System.out.println(Configuration.config);
+                }
+                 */
             }
         };
         Timer timer = new Timer(2000, taskPerformer);
@@ -1550,7 +1692,7 @@ import java.net.URL;
  * Date(创建日期)： 2021/12/8
  * Time(创建时间)： 20:52
  * Version(版本): 1.0
- * Description(描述)： 关于
+ * Description(描述)： 关于面板
  */
 
 public class About extends JFrame
@@ -1571,38 +1713,51 @@ public class About extends JFrame
 
     public About()
     {
-        this.setSize(320, 420);
+        this.setSize(335, 460);
         int x = MainPanel.getjFrame().getX();
         int y = MainPanel.getjFrame().getY();
         int width = MainPanel.getjFrame().getWidth();
         int height = MainPanel.getjFrame().getHeight();
         int search_x = x + width / 2 - 500 / 2;
         int search_y = y + height / 2 - 150 / 2;
-        this.setLocation(search_x, search_y);
+        this.setLocation(search_x, search_y);                       //确保位于主面板的中央
         this.setTitle("关于");
         this.setLocationRelativeTo(null);
         JPanel panel = new JPanel();
-        panel.setBorder(new EmptyBorder(10,5,10,5));
+        panel.setBorder(new EmptyBorder(10, 5, 10, 5));
         JPanel panel1 = new JPanel();
-        panel1.setBorder(new EmptyBorder(10,5,10,5));
-        panel.setLayout(new GridLayout(3, 1));
-        panel1.setLayout(new FlowLayout());
+        panel1.setBorder(new EmptyBorder(10, 5, 10, 5));
+        panel.setLayout(new GridLayout(6, 1));
+        panel1.setLayout(new FlowLayout(FlowLayout.CENTER,5000,0));
         JLabel label1 = new JLabel("作者：mao");
         label1.setHorizontalAlignment(0);
         JLabel label2 = new JLabel("完成时间：2021-12-08");
         label2.setHorizontalAlignment(0);
+        JLabel label5 = new JLabel("最近更新：2021-12-11");
+        label5.setHorizontalAlignment(0);
         JLabel label3 = new JLabel("GitHub：https://github.com/maomao124/");
+        JLabel label6 = new JLabel("远程仓库名：");
+        JLabel label7 = new JLabel("java_course_design_Swing_implements_text_editor");
+        JLabel label8 = new JLabel("GitHub网址二维码");
+
+        label6.setHorizontalAlignment(0);
+        label7.setHorizontalAlignment(0);
         label3.setHorizontalAlignment(0);
-        ImageIcon icon = createImageIcon("二维码.png");
+        label8.setHorizontalAlignment(0);
+        ImageIcon icon = createImageIcon("二维码.png");            //获得图片资源
         JLabel label4 = new JLabel(icon);
         panel.add(label1);
         panel.add(label2);
+        panel.add(label5);
         panel.add(label3);
+        panel.add(label6);
+        panel.add(label7);
         panel1.add(label4);
-        JPanel panel2=new JPanel();
+        panel1.add(label8);
+        JPanel panel2 = new JPanel();
         panel2.setLayout(new BorderLayout());
-        panel2.add(panel,BorderLayout.NORTH);
-        panel2.add(panel1,BorderLayout.CENTER);
+        panel2.add(panel, BorderLayout.NORTH);
+        panel2.add(panel1, BorderLayout.CENTER);
         this.add(panel2);
     }
 }
@@ -1640,7 +1795,7 @@ public class Color_JTextArea
         Color_JTextArea.jTextArea = jTextArea;
 
         font_color.addActionListener(new ActionListener()
-        {
+        {                                                           //设置监听器 字体颜色
             @Override
             public void actionPerformed(ActionEvent e)
             {
@@ -1649,7 +1804,7 @@ public class Color_JTextArea
         });
 
         cursor_color.addActionListener(new ActionListener()
-        {
+        {                                                           //设置监听器 光标颜色
             @Override
             public void actionPerformed(ActionEvent e)
             {
@@ -1658,7 +1813,7 @@ public class Color_JTextArea
         });
 
         background_color.addActionListener(new ActionListener()
-        {
+        {                                                           //设置监听器 背景颜色
             @Override
             public void actionPerformed(ActionEvent e)
             {
@@ -1667,7 +1822,7 @@ public class Color_JTextArea
         });
 
         selected_color.addActionListener(new ActionListener()
-        {
+        {                                                           //设置监听器 选择颜色
             @Override
             public void actionPerformed(ActionEvent e)
             {
@@ -1676,7 +1831,7 @@ public class Color_JTextArea
         });
 
         rendering_color.addActionListener(new ActionListener()
-        {
+        {                                                           //设置监听器 渲染颜色
             @Override
             public void actionPerformed(ActionEvent e)
             {
@@ -1693,12 +1848,12 @@ public class Color_JTextArea
         if (color != null)
         {
             jTextArea.setForeground(color);
-            if (io.Configuration.config == null)
+            if (io.Configuration.config == null)                        //如果对象不存在就创建对象
             {
                 io.Configuration.config = new data.Configuration();
                 Configuration.config_is_not_null = true;
             }
-            io.Configuration.config.setFont_color_r(color.getRed());
+            io.Configuration.config.setFont_color_r(color.getRed());      //写入配置
             io.Configuration.config.setFont_color_g(color.getGreen());
             io.Configuration.config.setFont_color_b(color.getBlue());
         }
@@ -1711,12 +1866,12 @@ public class Color_JTextArea
         if (color != null)
         {
             jTextArea.setCaretColor(color);
-            if (io.Configuration.config == null)
+            if (io.Configuration.config == null)                        //如果对象不存在就创建对象
             {
                 io.Configuration.config = new data.Configuration();
                 Configuration.config_is_not_null = true;
             }
-            io.Configuration.config.setCursor_color_r(color.getRed());
+            io.Configuration.config.setCursor_color_r(color.getRed());      //写入配置
             io.Configuration.config.setCursor_color_g(color.getGreen());
             io.Configuration.config.setCursor_color_b(color.getBlue());
         }
@@ -1730,12 +1885,12 @@ public class Color_JTextArea
         if (color != null)
         {
             jTextArea.setBackground(color);
-            if (io.Configuration.config == null)
+            if (io.Configuration.config == null)                        //如果对象不存在就创建对象
             {
                 io.Configuration.config = new data.Configuration();
                 Configuration.config_is_not_null = true;
             }
-            io.Configuration.config.setBackground_color_r(color.getRed());
+            io.Configuration.config.setBackground_color_r(color.getRed());      //写入配置
             io.Configuration.config.setBackground_color_g(color.getGreen());
             io.Configuration.config.setBackground_color_b(color.getBlue());
         }
@@ -1748,12 +1903,12 @@ public class Color_JTextArea
         if (color != null)
         {
             jTextArea.setSelectedTextColor(color);
-            if (io.Configuration.config == null)
+            if (io.Configuration.config == null)                        //如果对象不存在就创建对象
             {
                 io.Configuration.config = new data.Configuration();
                 Configuration.config_is_not_null = true;
             }
-            io.Configuration.config.setSelected_color_r(color.getRed());
+            io.Configuration.config.setSelected_color_r(color.getRed());      //写入配置
             io.Configuration.config.setSelected_color_g(color.getGreen());
             io.Configuration.config.setSelected_color_b(color.getBlue());
         }
@@ -1766,12 +1921,12 @@ public class Color_JTextArea
         if (color != null)
         {
             jTextArea.setSelectionColor(color);
-            if (io.Configuration.config == null)
+            if (io.Configuration.config == null)                        //如果对象不存在就创建对象
             {
                 io.Configuration.config = new data.Configuration();
                 Configuration.config_is_not_null = true;
             }
-            io.Configuration.config.setRendering_color_r(color.getRed());
+            io.Configuration.config.setRendering_color_r(color.getRed());      //写入配置
             io.Configuration.config.setRendering_color_g(color.getGreen());
             io.Configuration.config.setRendering_color_b(color.getBlue());
         }
@@ -1891,7 +2046,7 @@ public class ErrorLog
         });
     }
 
-    public static void display()
+    public static void display()                                    //显示面板
     {
         jTextArea_ErrorLog.setText("");             //清空
         io.ErrorLog.read();                                   //读取日志
@@ -1902,7 +2057,7 @@ public class ErrorLog
         jFrame.repaint();
     }
 
-    private static void back()
+    private static void back()                                      //返回到主面板
     {
         JFrame jFrame = MainPanel.getjFrame();
         jFrame.remove(MainPanel.getjPanel_ErrorLog());
@@ -1944,7 +2099,7 @@ public class FileInformation
     private static JTextArea jTextArea_FileInformation;
     private static JScrollPane jScrollPane;
 
-    public static void init()
+    public static void init()                                           //初始化
     {
         jTextArea_FileInformation = new JTextArea(15, 55);
         jTextArea_FileInformation.setLineWrap(true);
@@ -1971,7 +2126,7 @@ public class FileInformation
         jPanel.add(jPanel3, BorderLayout.WEST);
         button.setBackground(Color.cyan);
         button.addActionListener(new ActionListener()
-        {
+        {                                                           //设置监听
             @Override
             public void actionPerformed(ActionEvent e)
             {
@@ -2031,7 +2186,7 @@ public class FileInformation
         });
     }
 
-    public static void display()
+    public static void display()                                            //显示面板
     {
         if (MainPanel.getFile() == null)
         {
@@ -2040,7 +2195,7 @@ public class FileInformation
                     "还未指定文件目录！！！", "提示", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        jTextArea_FileInformation.setText("\t\t文件信息：\n\n");
+        jTextArea_FileInformation.setText("\t\t文件信息：\n\n");                     //输出文件的信息
         File file = MainPanel.getFile();
         DecimalFormat decimalFormat = new DecimalFormat("###.##");
         jTextArea_FileInformation.append("\t文件名称：" + file.getName());
@@ -2178,7 +2333,7 @@ public class FontSetting extends JFrame
         defaultListModel3.addElement("楷体");
         defaultListModel3.addElement("黑体");
 
-        list1.setSelectedIndex(0);
+        list1.setSelectedIndex(4);
         list2.setSelectedIndex(0);
         list3.setSelectedIndex(0);
 
@@ -2197,12 +2352,12 @@ public class FontSetting extends JFrame
                 Font font = new java.awt.Font(defaultListModel3.get(list3.getSelectedIndex()),
                         list2.getSelectedIndex(), Integer.parseInt(defaultListModel1.get(list1.getSelectedIndex())));
                 textArea.setFont(font);
-                if (io.Configuration.config == null)
+                if (io.Configuration.config == null)                        //如果对象不存在就创建对象
                 {
                     io.Configuration.config = new data.Configuration();
                     Configuration.config_is_not_null = true;
                 }
-                io.Configuration.config.setFontName(font.getName());
+                io.Configuration.config.setFontName(font.getName());      //写入配置
                 io.Configuration.config.setFontStyle(font.getStyle());
                 io.Configuration.config.setFontSize(font.getSize());
             }
@@ -2216,12 +2371,12 @@ public class FontSetting extends JFrame
                 Font font = new java.awt.Font(defaultListModel3.get(list3.getSelectedIndex()),
                         list2.getSelectedIndex(), Integer.parseInt(defaultListModel1.get(list1.getSelectedIndex())));
                 textArea.setFont(font);
-                if (io.Configuration.config == null)
+                if (io.Configuration.config == null)                        //如果对象不存在就创建对象
                 {
                     io.Configuration.config = new data.Configuration();
                     Configuration.config_is_not_null = true;
                 }
-                io.Configuration.config.setFontName(font.getName());
+                io.Configuration.config.setFontName(font.getName());      //写入配置
                 io.Configuration.config.setFontStyle(font.getStyle());
                 io.Configuration.config.setFontSize(font.getSize());
             }
@@ -2235,12 +2390,12 @@ public class FontSetting extends JFrame
                 Font font = new java.awt.Font(defaultListModel3.get(list3.getSelectedIndex()),
                         list2.getSelectedIndex(), Integer.parseInt(defaultListModel1.get(list1.getSelectedIndex())));
                 textArea.setFont(font);
-                if (io.Configuration.config == null)
+                if (io.Configuration.config == null)                        //如果对象不存在就创建对象
                 {
                     io.Configuration.config = new data.Configuration();
                     Configuration.config_is_not_null = true;
                 }
-                io.Configuration.config.setFontName(font.getName());
+                io.Configuration.config.setFontName(font.getName());      //写入配置
                 io.Configuration.config.setFontStyle(font.getStyle());
                 io.Configuration.config.setFontSize(font.getSize());
             }
@@ -2250,6 +2405,9 @@ public class FontSetting extends JFrame
 �
 H:\����\��������\java�γ���� Swingʵ���ı��༭��\\src\\main\\java\\UI\\InstructionsForUse.java
 package UI;
+
+import javax.swing.*;
+import java.awt.*;
 
 /**
  * Project name(项目名称)：java课程设计 Swing实现文本编辑器
@@ -2264,9 +2422,57 @@ package UI;
  * Description(描述)： 使用说明
  */
 
-public class InstructionsForUse
+public class InstructionsForUse extends JFrame
 {
+    public InstructionsForUse()
+    {
+        this.setTitle("使用说明");
+        this.setSize(950, 550);
+        JPanel jPanel = new JPanel();
+        JTextArea jTextArea = new JTextArea();
+        jTextArea.setEditable(false);
+        JScrollPane jScrollPane = new JScrollPane(jTextArea);
 
+        String str = """
+                使用说明：
+                功能：
+                程序除了支持基本的文字编辑外，还支持自动保存、文本边框设置、文件信息查看、设置文字大小、设置字体、
+                设置字体颜色、设置光标颜色、设置背景颜色、设置选择颜色、设置渲染颜色、可以设置换行策略、
+                设置编辑模式或者只读模式、支持查找和替换等。
+                替换功能使用说明：两种方式
+                第一种：先在文本域选中要替换的文字，再打开替换窗口，窗口的查找栏会自动显示你选中的文字，这时只要在
+                替换栏输入你要替换的文字再点击右边的替换按钮就行了。
+                第二种：先打开替换窗口，在搜索栏输入你想要要替换的文字，再点击右边的搜索按钮，搜索到你想要
+                替换的内容的正确位置后，再在下面的替换栏里输入你要替换的内容，输入完成后再点击右边的替换按钮。
+                字体颜色、光标颜色、背景颜色、选择颜色和渲染颜色都支持自定义色彩（8位色深 RGB）
+                                
+                快捷键说明：
+                当打开错误日志和文件信息界面时，按鼠标退回键快速返回到主面板；
+                F4：清理软件内存
+                ctrl+f：打开搜索面板
+                ctrl+g：打开查找面板
+                ctrl+s：保存
+                ctrl+shift+s：另存为
+                ctrl+o：浏览
+                ctrl+i：打开文件信息面板
+                ctrl+e：打开错误日志面板
+                ctrl+a：全选
+                ctrl+c：复制
+                ctrl+v：粘贴
+                ctrl+x：剪切
+                ctrl+r：编辑模式和只读模式的切换
+                f3：改变自动保存模式
+                """;
+
+        Font font = new Font("宋体", Font.BOLD, 18);
+        jTextArea.setFont(font);
+        jTextArea.setForeground(Color.PINK);
+        //jTextArea.setBackground(new Color(0,244,125));
+        jTextArea.setText(str);
+        jPanel.setLayout(new BorderLayout());
+        jPanel.add(jScrollPane,BorderLayout.CENTER);
+        this.add(jPanel);
+    }
 }
 �
 H:\����\��������\java�γ���� Swingʵ���ı��༭��\\src\\main\\java\\UI\\JTextArea_Border.java
@@ -2290,7 +2496,7 @@ import java.awt.*;
  * Date(创建日期)： 2021/12/10
  * Time(创建时间)： 20:49
  * Version(版本): 1.0
- * Description(描述)： 无
+ * Description(描述)： 边框设置的界面
  */
 
 public class JTextArea_Border extends JFrame
@@ -2544,10 +2750,10 @@ public class JTextArea_Border extends JFrame
         defaultListModel4.addElement("475");
         defaultListModel4.addElement("500");
 
-        list1.setSelectedIndex(0);
-        list2.setSelectedIndex(0);
+        list1.setSelectedIndex(6);
+        list2.setSelectedIndex(6);
         list3.setSelectedIndex(0);
-        list4.setSelectedIndex(0);
+        list4.setSelectedIndex(3);
 
         this.add(jScrollPane1);
         this.add(jScrollPane2);
@@ -2562,13 +2768,22 @@ public class JTextArea_Border extends JFrame
             @Override
             public void valueChanged(ListSelectionEvent e)
             {
-                int Layout_left = Integer.parseInt(defaultListModel1.get(list1.getSelectedIndex()));
-                int Layout_right=Integer.parseInt(defaultListModel2.get(list2.getSelectedIndex()));
+                int Layout_left = Integer.parseInt(defaultListModel1.get(list1.getSelectedIndex()));      //获得int型的边框信息
+                int Layout_right = Integer.parseInt(defaultListModel2.get(list2.getSelectedIndex()));
                 int Layout_up = Integer.parseInt(defaultListModel3.get(list3.getSelectedIndex()));
-                int Layout_down=Integer.parseInt(defaultListModel4.get(list4.getSelectedIndex()));
+                int Layout_down = Integer.parseInt(defaultListModel4.get(list4.getSelectedIndex()));
 
                 jScrollPane.setBorder(new EmptyBorder(Layout_up, Layout_left, Layout_down, Layout_right));
-                MainPanel.getjFrame().repaint();
+                MainPanel.getjFrame().repaint();                                //重新绘制此组件
+                if (io.Configuration.config == null)                            //如果对象不存在就创建对象
+                {
+                    io.Configuration.config = new data.Configuration();
+                    Configuration.config_is_not_null = true;
+                }
+                Configuration.config.setLayout_left(Layout_left);               //写入配置
+                Configuration.config.setLayout_right(Layout_right);
+                Configuration.config.setLayout_up(Layout_up);
+                Configuration.config.setLayout_down(Layout_down);
             }
         });
 
@@ -2577,13 +2792,22 @@ public class JTextArea_Border extends JFrame
             @Override
             public void valueChanged(ListSelectionEvent e)
             {
-                int Layout_left = Integer.parseInt(defaultListModel1.get(list1.getSelectedIndex()));
-                int Layout_right=Integer.parseInt(defaultListModel2.get(list2.getSelectedIndex()));
+                int Layout_left = Integer.parseInt(defaultListModel1.get(list1.getSelectedIndex()));      //获得int型的边框信息
+                int Layout_right = Integer.parseInt(defaultListModel2.get(list2.getSelectedIndex()));
                 int Layout_up = Integer.parseInt(defaultListModel3.get(list3.getSelectedIndex()));
-                int Layout_down=Integer.parseInt(defaultListModel4.get(list4.getSelectedIndex()));
+                int Layout_down = Integer.parseInt(defaultListModel4.get(list4.getSelectedIndex()));
 
                 jScrollPane.setBorder(new EmptyBorder(Layout_up, Layout_left, Layout_down, Layout_right));
-                MainPanel.getjFrame().repaint();
+                MainPanel.getjFrame().repaint();                                //重新绘制此组件
+                if (io.Configuration.config == null)                            //如果对象不存在就创建对象
+                {
+                    io.Configuration.config = new data.Configuration();
+                    Configuration.config_is_not_null = true;
+                }
+                Configuration.config.setLayout_left(Layout_left);               //写入配置
+                Configuration.config.setLayout_right(Layout_right);
+                Configuration.config.setLayout_up(Layout_up);
+                Configuration.config.setLayout_down(Layout_down);
             }
         });
 
@@ -2592,13 +2816,22 @@ public class JTextArea_Border extends JFrame
             @Override
             public void valueChanged(ListSelectionEvent e)
             {
-                int Layout_left = Integer.parseInt(defaultListModel1.get(list1.getSelectedIndex()));
-                int Layout_right=Integer.parseInt(defaultListModel2.get(list2.getSelectedIndex()));
+                int Layout_left = Integer.parseInt(defaultListModel1.get(list1.getSelectedIndex()));      //获得int型的边框信息
+                int Layout_right = Integer.parseInt(defaultListModel2.get(list2.getSelectedIndex()));
                 int Layout_up = Integer.parseInt(defaultListModel3.get(list3.getSelectedIndex()));
-                int Layout_down=Integer.parseInt(defaultListModel4.get(list4.getSelectedIndex()));
+                int Layout_down = Integer.parseInt(defaultListModel4.get(list4.getSelectedIndex()));
 
                 jScrollPane.setBorder(new EmptyBorder(Layout_up, Layout_left, Layout_down, Layout_right));
-                MainPanel.getjFrame().repaint();
+                MainPanel.getjFrame().repaint();                                //重新绘制此组件
+                if (io.Configuration.config == null)                            //如果对象不存在就创建对象
+                {
+                    io.Configuration.config = new data.Configuration();
+                    Configuration.config_is_not_null = true;
+                }
+                Configuration.config.setLayout_left(Layout_left);               //写入配置
+                Configuration.config.setLayout_right(Layout_right);
+                Configuration.config.setLayout_up(Layout_up);
+                Configuration.config.setLayout_down(Layout_down);
             }
         });
 
@@ -2607,13 +2840,22 @@ public class JTextArea_Border extends JFrame
             @Override
             public void valueChanged(ListSelectionEvent e)
             {
-                int Layout_left = Integer.parseInt(defaultListModel1.get(list1.getSelectedIndex()));
-                int Layout_right=Integer.parseInt(defaultListModel2.get(list2.getSelectedIndex()));
+                int Layout_left = Integer.parseInt(defaultListModel1.get(list1.getSelectedIndex()));      //获得int型的边框信息
+                int Layout_right = Integer.parseInt(defaultListModel2.get(list2.getSelectedIndex()));
                 int Layout_up = Integer.parseInt(defaultListModel3.get(list3.getSelectedIndex()));
-                int Layout_down=Integer.parseInt(defaultListModel4.get(list4.getSelectedIndex()));
+                int Layout_down = Integer.parseInt(defaultListModel4.get(list4.getSelectedIndex()));
 
                 jScrollPane.setBorder(new EmptyBorder(Layout_up, Layout_left, Layout_down, Layout_right));
-                MainPanel.getjFrame().repaint();
+                MainPanel.getjFrame().repaint();                                //重新绘制此组件
+                if (io.Configuration.config == null)                            //如果对象不存在就创建对象
+                {
+                    io.Configuration.config = new data.Configuration();
+                    Configuration.config_is_not_null = true;
+                }
+                Configuration.config.setLayout_left(Layout_left);               //写入配置
+                Configuration.config.setLayout_right(Layout_right);
+                Configuration.config.setLayout_up(Layout_up);
+                Configuration.config.setLayout_down(Layout_down);
             }
         });
     }
@@ -2626,7 +2868,10 @@ import io.Configuration;
 import io.SHA.MD5;
 
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.LineBorder;
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
 import javax.swing.text.BadLocationException;
@@ -2670,51 +2915,60 @@ public class MainPanel
     private final JLabel label_Information = new JLabel("欢迎使用文件编辑器", JLabel.CENTER);      //状态位
     private final UI.FontSetting fontSetting;
     private final UI.JTextArea_Border jTextArea_border;
-    private UI.About about_software;
+    private final UI.About about_software;
+    private final InstructionsForUse instructionsForUse;
     private Timer timer_autoSave;
     private int auto_save_mode = 0;
 
-    JMenuBar jMenuBar;        //菜单栏
-    JPopupMenu jPopupMenu;      //弹出菜单
-    JMenuItem copy_pop;
-    JMenuItem cut_pop;
-    JMenuItem paste_pop;
-    JMenuItem delete_pop;
-    JMenuItem deleteAll_pop;
-    JMenuItem selectAll_pop;
-    JMenu menu_file;            //菜单
-    JMenu menu_edit;
-    JMenu individualization;
-    JMenu format;
-    JMenu help;
-    JMenuItem open;         // 子菜单
-    JMenuItem save;
-    JMenuItem save_as;
-    JMenuItem auto_save;
+    @SuppressWarnings("all")
+    private JMenuBar jMenuBar;        //菜单栏
+    private JPopupMenu jPopupMenu;      //弹出菜单
+    private JMenuItem copy_pop;
+    private JMenuItem cut_pop;
+    private JMenuItem paste_pop;
+    private JMenuItem delete_pop;
+    private JMenuItem deleteAll_pop;
+    private JMenuItem selectAll_pop;
+    @SuppressWarnings("all")
+    private JMenu menu_file;            //菜单
+    @SuppressWarnings("all")
+    private JMenu menu_edit;
+    @SuppressWarnings("all")
+    private JMenu individualization;
+    @SuppressWarnings("all")
+    private JMenu format;
+    @SuppressWarnings("all")
+    private JMenu help;
+    private JMenuItem open;         // 子菜单
+    private JMenuItem save;
+    private JMenuItem save_as;
+    private JMenuItem auto_save;
     private static JMenuItem file_information;
-    JMenuItem exit;
-    JMenuItem selectAll;
-    JMenuItem copy;
-    JMenuItem cut;
-    JMenuItem paste;
-    JMenuItem delete;
-    JMenuItem deleteAll;
+    private JMenuItem exit;
+    private JMenuItem selectAll;
+    private JMenuItem copy;
+    private JMenuItem cut;
+    private JMenuItem paste;
+    private JMenuItem delete;
+    private JMenuItem deleteAll;
     private static JMenuItem search;
     private static JMenuItem replace;
-    JMenuItem edit_mode;
-    JMenuItem font_setting;
-    JMenuItem font_color;
-    JMenuItem cursor_color;
-    JMenuItem background_color;
-    JMenuItem selected_color;
-    JMenuItem rendering_color;
-    JMenuItem border;
-    JMenuItem delete_confirmation;
-    JMenuItem wrap;
+    private JMenuItem edit_mode;
+    private JMenuItem font_setting;
+    private JMenuItem font_color;
+    private JMenuItem cursor_color;
+    private JMenuItem background_color;
+    private JMenuItem selected_color;
+    private JMenuItem rendering_color;
+    private JMenuItem border;
+    private JMenuItem delete_confirmation;
+    private JMenuItem wrap;
     private static JMenuItem errorLog;
-    JMenuItem instructions_for_use;
-    JMenuItem about;
+    private JMenuItem instructions_for_use;
+    private JMenuItem about;
 
+
+    //各种get和set方法
     public static JButton getButton_FileInformation()
     {
         return button_FileInformation;
@@ -2824,9 +3078,9 @@ public class MainPanel
         JPanel jPanel2 = new JPanel();                                 //下面的状态字体
         jPanel1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
         jPanel2.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-        Font font = new Font("宋体", Font.PLAIN, 19);         //设置字体
+        Font font = new Font("宋体", Font.PLAIN, 20);         //设置字体
 
-        jTextArea = new JTextArea(720 / 30, 1280 / 12);     //初始化文本域
+        jTextArea = new JTextArea(720 / 35, 1280 / 12);     //初始化文本域
         jTextArea.setLineWrap(true);
         jTextArea.setFont(font);
         jTextArea.setEditable(isEditable);
@@ -2834,6 +3088,8 @@ public class MainPanel
         jScrollPane = new JScrollPane();
         jScrollPane.setViewportView(jTextArea);
         jScrollPane.setBorder(new EmptyBorder(0, 30, 15, 30));
+        //jScrollPane.setBorder(new BevelBorder(0, Color.cyan, Color.green, Color.cyan, Color.red));
+        //jScrollPane.setBorder(new LineBorder(Color.cyan,50,true));
 
         button_Open.setBackground(Color.cyan);                          //设置颜色
         button_Save.setBackground(Color.cyan);
@@ -3068,6 +3324,15 @@ public class MainPanel
                 wrap.setText("自动换行");
                 jTextArea.setLineWrap(false);
             }
+            int Layout_left = 30;                //边框大小
+            int Layout_right = 300;
+            int Layout_up = 0;
+            int Layout_down = 15;
+            Layout_left = Configuration.config.getLayout_left();
+            Layout_right = Configuration.config.getLayout_right();
+            Layout_up = Configuration.config.getLayout_up();
+            Layout_down = Configuration.config.getLayout_down();
+            jScrollPane.setBorder(new EmptyBorder(Layout_up, Layout_left, Layout_down, Layout_right));
         }
     }
 
@@ -3076,9 +3341,9 @@ public class MainPanel
         io.Configuration.read();                                         //读配置文件
         jFrame = new JFrame("文本编辑器");                            //初始化顶层面板
         jFrame.setSize(1280, 720);
-        int screenWidth = ((int) java.awt.Toolkit.getDefaultToolkit().getScreenSize().width);
-        int screenHeight = ((int) java.awt.Toolkit.getDefaultToolkit().getScreenSize().height);
-        jFrame.setLocation(screenWidth / 2 - 640, screenHeight / 2 - 360);
+        int screenWidth = ((int) java.awt.Toolkit.getDefaultToolkit().getScreenSize().width);       //获取屏幕宽度
+        int screenHeight = ((int) java.awt.Toolkit.getDefaultToolkit().getScreenSize().height);     //获取屏幕高度
+        jFrame.setLocation(screenWidth / 2 - 640, screenHeight / 2 - 360);  //位于屏幕中央
         jFrame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 
         this.init_mainPanel();                                           //初始化主面板
@@ -3088,7 +3353,8 @@ public class MainPanel
         UI.Search.init_search(jTextArea, label_Information);              //初始化查找面板
         UI.Replace.init_replace(jTextArea, label_Information);            //初始化替换面板
         about_software = new UI.About();                                    //初始化关于面板
-        jTextArea_border = new JTextArea_Border(jTextArea,jScrollPane);     //初始化边框设置模板
+        instructionsForUse = new InstructionsForUse();                        //初始化使用说明面板
+        jTextArea_border = new JTextArea_Border(jTextArea, jScrollPane);     //初始化边框设置模板
         this.init_timer_auto_save();                                        //初始化自动保存
         fontSetting = new UI.FontSetting(jTextArea);                      //初始化字体设置面板
         this.init_configuration();                                        //初始化配置
@@ -3369,7 +3635,30 @@ public class MainPanel
             @Override
             public void actionPerformed(ActionEvent e)
             {
+                int x = MainPanel.getjFrame().getX();
+                int y = MainPanel.getjFrame().getY();
+                int width = MainPanel.getjFrame().getWidth();
+                int height = MainPanel.getjFrame().getHeight();
+                int search_x = x + width / 2 - jTextArea_border.getWidth() / 2;
+                int search_y = y + height / 2 - jTextArea_border.getHeight() / 2;
+                jTextArea_border.setLocation(search_x, search_y);
                 jTextArea_border.setVisible(true);
+            }
+        });
+
+        instructions_for_use.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                int x = MainPanel.getjFrame().getX();
+                int y = MainPanel.getjFrame().getY();
+                int width = MainPanel.getjFrame().getWidth();
+                int height = MainPanel.getjFrame().getHeight();
+                int search_x = x + width / 2 - instructionsForUse.getWidth() / 2;
+                int search_y = y + height / 2 - instructionsForUse.getHeight() / 2;
+                instructionsForUse.setLocation(search_x, search_y);
+                instructionsForUse.setVisible(true);
             }
         });
     }
@@ -3539,7 +3828,7 @@ public class MainPanel
                 }
 
                 else if ((e.getKeyCode() == KeyEvent.VK_X) && (e.isControlDown()))
-                {                                                   //ctrl+v 粘贴
+                {                                                   //ctrl+x 剪切
                     label_Information.setText("剪切成功");
                 }
 
@@ -3552,6 +3841,10 @@ public class MainPanel
                 {                                                   //f4 清理内存
                     System.gc();
                     label_Information.setText("已清理软件内存");
+                }
+                else if ((e.getKeyCode() == KeyEvent.VK_F3))
+                {                                                   //f3 改变自动保存模式
+                    MainPanel.this.change_auto_save_mode();
                 }
 
             }
@@ -4008,8 +4301,8 @@ import java.awt.event.ActionListener;
 
 public class Replace
 {
-    private static int start = 0;// 查找开始位置
-    private static int end = 0;// 查找结束位置
+    private static int start = 0;                               // 查找开始位置
+    private static int end = 0;                                 // 查找结束位置
 
     public static void init_replace(JTextArea jTextArea, JLabel label_information)
     {
@@ -4020,6 +4313,7 @@ public class Replace
             {
                 // 替换对话框
                 JDialog jDialog_search = new JDialog(MainPanel.getjFrame(), "替换");
+                //JDialog:用于创建对话窗口的主类
                 jDialog_search.setSize(500, 150);
                 int x = MainPanel.getjFrame().getX();
                 int y = MainPanel.getjFrame().getY();
@@ -4027,7 +4321,7 @@ public class Replace
                 int height = MainPanel.getjFrame().getHeight();
                 int search_x = x + width / 2 - 500 / 2;
                 int search_y = y + height / 2 - 150 / 2;
-                jDialog_search.setLocation(search_x, search_y);
+                jDialog_search.setLocation(search_x, search_y);                 //位于中心
                 JLabel label_search = new JLabel("查找的内容");
                 label_search.setHorizontalAlignment(0);
                 JLabel label_Replace = new JLabel("替换为");
@@ -4065,9 +4359,11 @@ public class Replace
                         end = start + findText.length();
                         if (start == -1)                                            // 没有找到
                         {
+                            //根据本机系统设置和硬件功能发出音频哔声
                             Toolkit.getDefaultToolkit().beep();
                             JOptionPane.showMessageDialog(null,
                                     "已经到达文档尾部", "提示", JOptionPane.WARNING_MESSAGE);
+                            //选择指定开始和结束位置之间的文本。
                             jTextArea.select(start, end);
                             start = 0;
                             end = 0;
@@ -4128,8 +4424,8 @@ public class Replace
         if (jTextArea.getSelectedText() != null)                              //如果选中了文字
         {
             textField_search.setText(jTextArea.getSelectedText());            //从选中处开始
-            start = jTextArea.getSelectionStart();
-            end = jTextArea.getSelectionEnd();
+            start = jTextArea.getSelectionStart();      //返回选定文本的开始位置。 对于空文档返回 0，如果没有选择则返回 dot 的值。
+            end = jTextArea.getSelectionEnd();          //返回选定文本的结束位置。 如果文档为空，则返回 0，如果没有选择，则返回 dot 的值。
         }
         jDialog_search.setVisible(true);
 
@@ -4140,19 +4436,22 @@ public class Replace
             {
                 String findText = textField_search.getText();               // 查找的字符串
                 String textArea = jTextArea.getText();                      // 当前文本框的内容
-                start = textArea.indexOf(findText, end);
+                start = textArea.indexOf(findText, end);                    //返回此字符串中第一次出现指定子字符串的索引，从指定索引开始。
                 end = start + findText.length();
                 if (start == -1)                                            // 没有找到
                 {
+                    //根据本机系统设置和硬件功能发出音频哔声
                     Toolkit.getDefaultToolkit().beep();
                     JOptionPane.showMessageDialog(null,
                             "已经到达文档尾部", "提示", JOptionPane.WARNING_MESSAGE);
+                    //选择指定开始和结束位置之间的文本
                     jTextArea.select(start, end);
                     start = 0;
                     end = 0;
                 }
                 else
                 {
+                    //选择指定开始和结束位置之间的文本
                     jTextArea.select(start, end);
                 }
             }
@@ -4164,8 +4463,12 @@ public class Replace
             public void actionPerformed(ActionEvent e)
             {
                 String ReplaceText = textField_Replace.getText();
+                //选择指定开始和结束位置之间的文本。
+                //此方法设置所选文本的开始和结束位置
                 jTextArea.select(start, end);
+                //用给定字符串表示的新内容替换当前选择的内容
                 jTextArea.replaceSelection(ReplaceText);
+                //选择指定开始和结束位置之间的文本
                 jTextArea.select(start, end);
                 label_information.setText("替换成功    \"" + textField_search.getText() + "\"替换成\"" + ReplaceText + "\"");
             }
@@ -4308,12 +4611,14 @@ public class Search
                     Toolkit.getDefaultToolkit().beep();
                     JOptionPane.showMessageDialog(null,
                             "已经到达文档尾部", "提示", JOptionPane.WARNING_MESSAGE);
+                    //选择指定开始和结束位置之间的文本。
                     jTextArea.select(start, end);
-                    start = 0;
+                    start = 0;                                      //清0
                     end = 0;
                 }
                 else                                                //找到了
                 {
+                    //选择指定开始和结束位置之间的文本。
                     jTextArea.select(start, end);
                     label_information.setText("查找成功  当前位置：" + start + "-" + end);
                 }
