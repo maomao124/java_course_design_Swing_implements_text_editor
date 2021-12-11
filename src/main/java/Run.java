@@ -1,16 +1,11 @@
-import UI.About;
 import UI.MainPanel;
-import io.Configuration;
-import org.w3c.dom.css.RGBColor;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
-import java.net.URL;
 
 /**
  * Project name(项目名称)：java课程设计 Swing实现文本编辑器
