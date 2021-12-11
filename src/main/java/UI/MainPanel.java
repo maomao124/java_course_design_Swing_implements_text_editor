@@ -513,6 +513,13 @@ public class MainPanel
             Layout_up = Configuration.config.getLayout_up();
             Layout_down = Configuration.config.getLayout_down();
             jScrollPane.setBorder(new EmptyBorder(Layout_up, Layout_left, Layout_down, Layout_right));
+            if (Configuration.config.isAutoClear())                     //为真
+            {
+                isAutoClear = true;
+                timer_autoClear.start();                    //启动
+                auto_clear.setBackground(Color.yellow);
+                auto_clear.setText("不自动清理");
+            }
         }
     }
 
@@ -878,6 +885,15 @@ public class MainPanel
                 MainPanel.this.redo();
             }
         });
+
+        auto_clear.addActionListener(new ActionListener()
+        {                                                                   //自动清理监听器
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                MainPanel.this.change_auto_clear_mode();
+            }
+        });
     }
 
 
@@ -1054,24 +1070,31 @@ public class MainPanel
                     MainPanel.this.EditMode();
                 }
 
+                else if ((e.getKeyCode() == KeyEvent.VK_F4)&& (e.isControlDown()))
+                {                                                   //ctrl+f4 更改清理内存模式
+                    MainPanel.this.change_auto_clear_mode();
+                }
+
                 else if ((e.getKeyCode() == KeyEvent.VK_F4))
                 {                                                   //f4 清理内存
                     System.gc();
                     label_Information.setText("已清理软件内存");
                 }
+
                 else if ((e.getKeyCode() == KeyEvent.VK_F3))
                 {                                                   //f3 改变自动保存模式
                     MainPanel.this.change_auto_save_mode();
                 }
+
                 else if ((e.getKeyCode() == KeyEvent.VK_Z) && (e.isControlDown()))
                 {                                                   //ctrl+z 撤销
                     MainPanel.this.undo();
                 }
+
                 else if ((e.getKeyCode() == KeyEvent.VK_W) && (e.isControlDown()))
                 {                                                   //ctrl+w 重做
                     MainPanel.this.redo();
                 }
-
             }
         });
 
@@ -1535,7 +1558,7 @@ public class MainPanel
             @Override
             public void actionPerformed(ActionEvent e)
             {
-
+                System.gc();
             }
         };
         timer_autoClear = new Timer(10000, taskPerformer);
