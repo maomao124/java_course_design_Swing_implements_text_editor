@@ -72,6 +72,12 @@ public class Run
         else if (args.length == 1)                                       //第一个参数为操作系统传入的要打开的文件路径
         {
             java.io.File file = new java.io.File(args[0]);
+            if (!file.exists())
+            {
+                Toolkit.getDefaultToolkit().beep();
+                JOptionPane.showMessageDialog(null, "文件\"" + file.getName() + "\"不存在！");
+                return;
+            }
             if (!file.canRead())
             {
                 Toolkit.getDefaultToolkit().beep();
@@ -97,6 +103,13 @@ public class Run
         else if (args.length == 2)                                  //有些情况第二个才是传入的要打开的文件路径
         {                                                           //第一个参数是操作系统传入的程序文件本身所在的的路径，第二个才是，c/c++就是这样的
             java.io.File file = new java.io.File(args[1]);
+            if (!file.exists())
+            {
+                Toolkit.getDefaultToolkit().beep();
+                JOptionPane.showMessageDialog(null,
+                        "文件\"" + file.getName() + "\"不存在！", "参数传入错误", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
             if (!file.canRead())
             {
                 Toolkit.getDefaultToolkit().beep();
@@ -123,6 +136,12 @@ public class Run
         {
             JOptionPane.showMessageDialog(null, "因为传入了多个参数，所以只处理第二个传入的参数");
             java.io.File file = new java.io.File(args[1]);
+            if (!file.exists())
+            {
+                Toolkit.getDefaultToolkit().beep();
+                JOptionPane.showMessageDialog(null, "文件\"" + file.getName() + "\"不存在！");
+                return;
+            }
             if (!file.canRead())
             {
                 Toolkit.getDefaultToolkit().beep();
