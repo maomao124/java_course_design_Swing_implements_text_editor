@@ -213,4 +213,14 @@ public class File
             }
         }
     }
+
+    public static void args_read(java.io.File file, JTextArea jTextArea, JLabel label_Information, JTextField jTextField_FilePath)
+    {
+        if (file != null)                                 //不为空
+        {
+            label_Information.setText("开始加载...");
+            read(file, jTextArea, label_Information);
+            jTextField_FilePath.setText(file.getAbsolutePath());
+        }
+    }
 }

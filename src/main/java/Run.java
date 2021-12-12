@@ -1,6 +1,8 @@
 import UI.MainPanel;
+import io.File;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.PrintWriter;
@@ -24,6 +26,7 @@ import java.text.DecimalFormat;
 public class Run
 {
     private static long runTime = 0;
+    //public static boolean args_filePath = false;                              //匿名包里其它包里的类无法调用匿名包里的
     static DecimalFormat decimalFormat = new DecimalFormat("00");
 
     private static void init_MemoryComputing()
@@ -46,8 +49,8 @@ public class Run
                 runTime = runTime + 1;
                 System.out.print("运行时长：" + runTime / 60 + "分" + decimalFormat.format(runTime % 60) + "秒  ");
                 System.out.printf("已使用的内存：%8.4fMB\n", memory);
-                MainPanel.label_time_and_memory.setText("时间："+runTime / 60 + "分" +
-                        decimalFormat.format(runTime % 60) + "秒  "+String.format(" 内存：%8.3fMB", memory));
+                MainPanel.label_time_and_memory.setText("运行：" + runTime / 60 + "分" +
+                        decimalFormat.format(runTime % 60) + "秒  " + String.format(" 内存：%8.3fMB", memory));
                 /*
                 if (Configuration.config_is_not_null)
                 {
@@ -60,10 +63,95 @@ public class Run
         timer.start();
     }
 
+    private static void init_args(String[] args)                    //处理参数
+    {
+        if (args.length == 0)
+        {
+            return;
+        }
+        else if (args.length == 1)                                       //第一个参数为操作系统传入的要打开的文件路径
+        {
+            java.io.File file = new java.io.File(args[0]);
+            if (!file.canRead())
+            {
+                Toolkit.getDefaultToolkit().beep();
+                JOptionPane.showMessageDialog(null, "文件\"" + file.getName() + "\"不能读取！");
+                return;
+            }
+            if (!file.isFile())
+            {
+                Toolkit.getDefaultToolkit().beep();
+                JOptionPane.showMessageDialog(null, "传入的路径指向的不是一个文件！");
+                return;
+            }
+            if (file.length() > 1000000000)
+            {
+                Toolkit.getDefaultToolkit().beep();
+                JOptionPane.showMessageDialog(null, "传入的路径指向的文件过于庞大！");
+                return;
+            }
+            //通过验证，开始处理
+            MainPanel.setFile(file);
+            //args_filePath = true;
+        }
+        else if (args.length == 2)                                  //有些情况第二个才是传入的要打开的文件路径
+        {                                                           //第一个参数是操作系统传入的程序文件本身所在的的路径，第二个才是，c/c++就是这样的
+            java.io.File file = new java.io.File(args[1]);
+            if (!file.canRead())
+            {
+                Toolkit.getDefaultToolkit().beep();
+                JOptionPane.showMessageDialog(null, "文件\"" + file.getName() + "\"不能读取！");
+                return;
+            }
+            if (!file.isFile())
+            {
+                Toolkit.getDefaultToolkit().beep();
+                JOptionPane.showMessageDialog(null, "传入的路径指向的不是一个文件！");
+                return;
+            }
+            if (file.length() > 1000000000)
+            {
+                Toolkit.getDefaultToolkit().beep();
+                JOptionPane.showMessageDialog(null, "传入的路径指向的文件过于庞大！");
+                return;
+            }
+            //通过验证，开始处理
+            MainPanel.setFile(file);
+            //args_filePath = true;
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "因为传入了多个参数，所以只处理第二个传入的参数");
+            java.io.File file = new java.io.File(args[1]);
+            if (!file.canRead())
+            {
+                Toolkit.getDefaultToolkit().beep();
+                JOptionPane.showMessageDialog(null, "文件\"" + file.getName() + "\"不能读取！");
+                return;
+            }
+            if (!file.isFile())
+            {
+                Toolkit.getDefaultToolkit().beep();
+                JOptionPane.showMessageDialog(null, "传入的路径指向的不是一个文件！");
+                return;
+            }
+            if (file.length() > 1000000000)
+            {
+                Toolkit.getDefaultToolkit().beep();
+                JOptionPane.showMessageDialog(null, "传入的路径指向的文件过于庞大！");
+                return;
+            }
+            //通过验证，开始处理
+            MainPanel.setFile(file);
+            //args_filePath = true;
+        }
+    }
+
     public static void main(String[] args)
     {
         try
         {
+            init_args(args);
             init_MemoryComputing();
             new MainPanel();
         }
