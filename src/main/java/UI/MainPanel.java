@@ -52,6 +52,7 @@ public class MainPanel
     private static File file;                                       //关联的文件
     private final JLabel label_Information = new JLabel("欢迎使用文件编辑器", JLabel.CENTER);      //状态位
     public static final JLabel label_time_and_memory = new JLabel("", JLabel.RIGHT);
+    public static final JLabel label_localTime = new JLabel("", JLabel.LEFT);
     private final UI.FontSetting fontSetting;
     private final UI.JTextArea_Border jTextArea_border;
     private final UI.About about_software;
@@ -272,6 +273,7 @@ public class MainPanel
         jPanel1.add(button_FileInformation);
         jPanel.add(jPanel1, BorderLayout.NORTH);
         jPanel.add(jScrollPane, BorderLayout.CENTER);
+        jPanel_left.add(label_localTime);
         jPanel_center.add(label_Information);
         jPanel_right.add(label_time_and_memory);
         jPanel2.add(jPanel_left);
@@ -466,10 +468,11 @@ public class MainPanel
     {
         if (Configuration.config_is_not_null)
         {
-            jFrame.setSize(Configuration.config.getWidth(), Configuration.config.getHeight());
-            int screenWidth = ((int) java.awt.Toolkit.getDefaultToolkit().getScreenSize().width);
+            jFrame.setSize(Configuration.config.getWidth(), Configuration.config.getHeight());          //设置大小
+            int screenWidth = ((int) java.awt.Toolkit.getDefaultToolkit().getScreenSize().width);       //屏幕分辨率
             int screenHeight = ((int) java.awt.Toolkit.getDefaultToolkit().getScreenSize().height);
-            int x = screenWidth / 2 - Configuration.config.getWidth() / 2;
+
+            int x = screenWidth / 2 - Configuration.config.getWidth() / 2;                              //位于中心
             int y = screenHeight / 2 - Configuration.config.getHeight() / 2;
             if (x < 0)
             {
@@ -480,7 +483,7 @@ public class MainPanel
                 y = 0;
             }
             jFrame.setLocation(x, y);
-            Font font = new Font(Configuration.config.getFontName(),
+            Font font = new Font(Configuration.config.getFontName(),                              //设置字体和各颜色
                     Configuration.config.getFontStyle(), Configuration.config.getFontSize());
             jTextArea.setFont(font);
             Color font_color = new Color(Configuration.config.getFont_color_r(),
@@ -498,6 +501,21 @@ public class MainPanel
             Color rendering_color = new Color(Configuration.config.getRendering_color_r()
                     , Configuration.config.getRendering_color_g(), Configuration.config.getRendering_color_b());
             jTextArea.setSelectionColor(rendering_color);
+            /*
+            System.out.println(screenWidth);
+            System.out.println(screenHeight);
+            System.out.println(Configuration.config.getWidth());
+            System.out.println(Configuration.config.getHeight());
+             */
+            if (screenWidth <= Configuration.config.getWidth()+100 && screenHeight <= Configuration.config.getHeight()+100)
+            {                                                                               //任务栏会占用一部分屏幕空间
+                jFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);                                         //设置窗口最大化
+                jFrame.setSize(1280,720);
+                int x1 = screenWidth / 2 - 1280 / 2;                              //位于中心
+                int y1 = screenHeight / 2 - 720 / 2;
+
+                jFrame.setLocation(x1, y1);
+            }
             if (!Configuration.config.isWrap())
             {
                 wrap.setBackground(Color.yellow);
