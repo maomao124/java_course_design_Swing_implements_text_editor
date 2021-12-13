@@ -9,6 +9,8 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Project name(项目名称)：java课程设计 Swing实现文本编辑器
@@ -28,6 +30,7 @@ public class Run
     private static long runTime = 0;
     //public static boolean args_filePath = false;                              //匿名包里其它包里的类无法调用匿名包里的
     static DecimalFormat decimalFormat = new DecimalFormat("00");
+    private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd  HH:mm:ss");
 
     private static void init_MemoryComputing()
     {
@@ -51,6 +54,7 @@ public class Run
                 System.out.printf("已使用的内存：%8.4fMB\n", memory);
                 MainPanel.label_time_and_memory.setText("运行：" + runTime / 60 + "分" +
                         decimalFormat.format(runTime % 60) + "秒  " + String.format(" 内存：%8.3fMB", memory));
+                MainPanel.label_localTime.setText("时间："+simpleDateFormat.format(new Date()));
                 /*
                 if (Configuration.config_is_not_null)
                 {
@@ -83,21 +87,21 @@ public class Run
             {
                 Toolkit.getDefaultToolkit().beep();
                 JOptionPane.showMessageDialog(null,
-                        "传入的路径指向的不是一个文件！","提示", JOptionPane.ERROR_MESSAGE);
+                        "传入的路径指向的不是一个文件！", "提示", JOptionPane.ERROR_MESSAGE);
                 return;
             }
             if (!file.canRead())
             {
                 Toolkit.getDefaultToolkit().beep();
                 JOptionPane.showMessageDialog(null,
-                        "文件\"" + file.getName() + "\"不能读取！","提示", JOptionPane.ERROR_MESSAGE);
+                        "文件\"" + file.getName() + "\"不能读取！", "提示", JOptionPane.ERROR_MESSAGE);
                 return;
             }
             if (file.length() > 1000000000)
             {
                 Toolkit.getDefaultToolkit().beep();
                 JOptionPane.showMessageDialog(null,
-                        "传入的路径指向的文件过于庞大！","提示", JOptionPane.QUESTION_MESSAGE);
+                        "传入的路径指向的文件过于庞大！", "提示", JOptionPane.QUESTION_MESSAGE);
                 return;
             }
             //通过验证，开始处理
@@ -118,21 +122,21 @@ public class Run
             {
                 Toolkit.getDefaultToolkit().beep();
                 JOptionPane.showMessageDialog(null,
-                        "传入的路径指向的不是一个文件！","提示", JOptionPane.ERROR_MESSAGE);
+                        "传入的路径指向的不是一个文件！", "提示", JOptionPane.ERROR_MESSAGE);
                 return;
             }
             if (!file.canRead())
             {
                 Toolkit.getDefaultToolkit().beep();
                 JOptionPane.showMessageDialog(null,
-                        "文件\"" + file.getName() + "\"不能读取！","提示", JOptionPane.ERROR_MESSAGE);
+                        "文件\"" + file.getName() + "\"不能读取！", "提示", JOptionPane.ERROR_MESSAGE);
                 return;
             }
             if (file.length() > 1000000000)
             {
                 Toolkit.getDefaultToolkit().beep();
                 JOptionPane.showMessageDialog(null,
-                        "传入的路径指向的文件过于庞大！","提示", JOptionPane.QUESTION_MESSAGE);
+                        "传入的路径指向的文件过于庞大！", "提示", JOptionPane.QUESTION_MESSAGE);
                 return;
             }
             //通过验证，开始处理
@@ -154,21 +158,21 @@ public class Run
             {
                 Toolkit.getDefaultToolkit().beep();
                 JOptionPane.showMessageDialog(null,
-                        "传入的路径指向的不是一个文件！","提示", JOptionPane.ERROR_MESSAGE);
+                        "传入的路径指向的不是一个文件！", "提示", JOptionPane.ERROR_MESSAGE);
                 return;
             }
             if (!file.canRead())
             {
                 Toolkit.getDefaultToolkit().beep();
                 JOptionPane.showMessageDialog(null,
-                        "文件\"" + file.getName() + "\"不能读取！","提示", JOptionPane.ERROR_MESSAGE);
+                        "文件\"" + file.getName() + "\"不能读取！", "提示", JOptionPane.ERROR_MESSAGE);
                 return;
             }
             if (file.length() > 1000000000)
             {
                 Toolkit.getDefaultToolkit().beep();
                 JOptionPane.showMessageDialog(null,
-                        "传入的路径指向的文件过于庞大！","提示", JOptionPane.QUESTION_MESSAGE);
+                        "传入的路径指向的文件过于庞大！", "提示", JOptionPane.QUESTION_MESSAGE);
                 return;
             }
             //通过验证，开始处理

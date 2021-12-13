@@ -241,7 +241,7 @@ public class MainPanel
         jPanel.setLayout(new BorderLayout());                              //设置布局
         jPanel1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
         jPanel2.setLayout(new GridLayout(1, 3));
-        jPanel_left.setLayout(new FlowLayout(FlowLayout.LEFT));
+        jPanel_left.setLayout(new FlowLayout(FlowLayout.LEFT, 30, 0));
         jPanel_center.setLayout(new FlowLayout(FlowLayout.CENTER));
         jPanel_right.setLayout(new FlowLayout(FlowLayout.RIGHT, 30, 0));
 
@@ -507,10 +507,10 @@ public class MainPanel
             System.out.println(Configuration.config.getWidth());
             System.out.println(Configuration.config.getHeight());
              */
-            if (screenWidth <= Configuration.config.getWidth()+100 && screenHeight <= Configuration.config.getHeight()+100)
+            if (screenWidth <= Configuration.config.getWidth() + 100 && screenHeight <= Configuration.config.getHeight() + 100)
             {                                                                               //任务栏会占用一部分屏幕空间
                 jFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);                                         //设置窗口最大化
-                jFrame.setSize(1280,720);
+                jFrame.setSize(1280, 720);
                 int x1 = screenWidth / 2 - 1280 / 2;                              //位于中心
                 int y1 = screenHeight / 2 - 720 / 2;
 
