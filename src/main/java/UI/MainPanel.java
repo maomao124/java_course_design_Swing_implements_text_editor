@@ -546,13 +546,14 @@ public class MainPanel
         this.init_auto_clear();                                             //初始化自动清理
         fontSetting = new UI.FontSetting(jTextArea);                      //初始化字体设置面板
         this.init_configuration();                                        //初始化配置
-        io.File.args_read(file, jTextArea,
-                label_Information, jTextField_FilePath);                  //初始化参数
         Color_JTextArea.init_Color_JTextArea                              //初始化文本域颜色选择
                 (jTextArea, font_color, cursor_color, background_color, selected_color, rendering_color);
 
         jFrame.add(jPanel);                                              //主面板加入到顶层面板
         jFrame.setVisible(true);                                         //设置可见
+
+        io.File.args_read(file, jTextArea,
+                label_Information, jTextField_FilePath);                  //初始化参数
 
         this.init_Listener();                                            //初始化各种监听器
         this.init_menu_Listener();                                       //初始化菜单监听器

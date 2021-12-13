@@ -75,25 +75,29 @@ public class Run
             if (!file.exists())
             {
                 Toolkit.getDefaultToolkit().beep();
-                JOptionPane.showMessageDialog(null, "文件\"" + file.getName() + "\"不存在！");
-                return;
-            }
-            if (!file.canRead())
-            {
-                Toolkit.getDefaultToolkit().beep();
-                JOptionPane.showMessageDialog(null, "文件\"" + file.getName() + "\"不能读取！");
+                JOptionPane.showMessageDialog(null,
+                        "文件\"" + file.getName() + "\"不存在！", "参数传入错误", JOptionPane.ERROR_MESSAGE);
                 return;
             }
             if (!file.isFile())
             {
                 Toolkit.getDefaultToolkit().beep();
-                JOptionPane.showMessageDialog(null, "传入的路径指向的不是一个文件！");
+                JOptionPane.showMessageDialog(null,
+                        "传入的路径指向的不是一个文件！","提示", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (!file.canRead())
+            {
+                Toolkit.getDefaultToolkit().beep();
+                JOptionPane.showMessageDialog(null,
+                        "文件\"" + file.getName() + "\"不能读取！","提示", JOptionPane.ERROR_MESSAGE);
                 return;
             }
             if (file.length() > 1000000000)
             {
                 Toolkit.getDefaultToolkit().beep();
-                JOptionPane.showMessageDialog(null, "传入的路径指向的文件过于庞大！");
+                JOptionPane.showMessageDialog(null,
+                        "传入的路径指向的文件过于庞大！","提示", JOptionPane.QUESTION_MESSAGE);
                 return;
             }
             //通过验证，开始处理
@@ -110,22 +114,25 @@ public class Run
                         "文件\"" + file.getName() + "\"不存在！", "参数传入错误", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            if (!file.canRead())
-            {
-                Toolkit.getDefaultToolkit().beep();
-                JOptionPane.showMessageDialog(null, "文件\"" + file.getName() + "\"不能读取！");
-                return;
-            }
             if (!file.isFile())
             {
                 Toolkit.getDefaultToolkit().beep();
-                JOptionPane.showMessageDialog(null, "传入的路径指向的不是一个文件！");
+                JOptionPane.showMessageDialog(null,
+                        "传入的路径指向的不是一个文件！","提示", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (!file.canRead())
+            {
+                Toolkit.getDefaultToolkit().beep();
+                JOptionPane.showMessageDialog(null,
+                        "文件\"" + file.getName() + "\"不能读取！","提示", JOptionPane.ERROR_MESSAGE);
                 return;
             }
             if (file.length() > 1000000000)
             {
                 Toolkit.getDefaultToolkit().beep();
-                JOptionPane.showMessageDialog(null, "传入的路径指向的文件过于庞大！");
+                JOptionPane.showMessageDialog(null,
+                        "传入的路径指向的文件过于庞大！","提示", JOptionPane.QUESTION_MESSAGE);
                 return;
             }
             //通过验证，开始处理
@@ -139,25 +146,29 @@ public class Run
             if (!file.exists())
             {
                 Toolkit.getDefaultToolkit().beep();
-                JOptionPane.showMessageDialog(null, "文件\"" + file.getName() + "\"不存在！");
-                return;
-            }
-            if (!file.canRead())
-            {
-                Toolkit.getDefaultToolkit().beep();
-                JOptionPane.showMessageDialog(null, "文件\"" + file.getName() + "\"不能读取！");
+                JOptionPane.showMessageDialog(null,
+                        "文件\"" + file.getName() + "\"不存在！", "参数传入错误", JOptionPane.ERROR_MESSAGE);
                 return;
             }
             if (!file.isFile())
             {
                 Toolkit.getDefaultToolkit().beep();
-                JOptionPane.showMessageDialog(null, "传入的路径指向的不是一个文件！");
+                JOptionPane.showMessageDialog(null,
+                        "传入的路径指向的不是一个文件！","提示", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (!file.canRead())
+            {
+                Toolkit.getDefaultToolkit().beep();
+                JOptionPane.showMessageDialog(null,
+                        "文件\"" + file.getName() + "\"不能读取！","提示", JOptionPane.ERROR_MESSAGE);
                 return;
             }
             if (file.length() > 1000000000)
             {
                 Toolkit.getDefaultToolkit().beep();
-                JOptionPane.showMessageDialog(null, "传入的路径指向的文件过于庞大！");
+                JOptionPane.showMessageDialog(null,
+                        "传入的路径指向的文件过于庞大！","提示", JOptionPane.QUESTION_MESSAGE);
                 return;
             }
             //通过验证，开始处理
