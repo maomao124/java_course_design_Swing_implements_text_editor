@@ -36,7 +36,7 @@ public class About extends JFrame
 
     public About()
     {
-        this.setSize(335, 460);
+        this.setSize(335, 480);
         int x = MainPanel.getjFrame().getX();
         int y = MainPanel.getjFrame().getY();
         int width = MainPanel.getjFrame().getWidth();
@@ -50,7 +50,7 @@ public class About extends JFrame
         panel.setBorder(new EmptyBorder(10, 5, 10, 5));
         JPanel panel1 = new JPanel();
         panel1.setBorder(new EmptyBorder(10, 5, 10, 5));
-        panel.setLayout(new GridLayout(6, 1));
+        panel.setLayout(new GridLayout(7, 1));
         panel1.setLayout(new FlowLayout(FlowLayout.CENTER,5000,0));
         JLabel label1 = new JLabel("作者：mao");
         label1.setHorizontalAlignment(0);
@@ -58,6 +58,8 @@ public class About extends JFrame
         label2.setHorizontalAlignment(0);
         JLabel label5 = new JLabel("最近更新：2021-12-14");
         label5.setHorizontalAlignment(0);
+        JLabel label9 = new JLabel("git提交次数：143次");
+        label9.setHorizontalAlignment(0);
         JLabel label3 = new JLabel("GitHub：https://github.com/maomao124/");
         JLabel label6 = new JLabel("远程仓库名：");
         JLabel label7 = new JLabel("java_course_design_Swing_implements_text_editor");
@@ -72,6 +74,7 @@ public class About extends JFrame
         panel.add(label1);
         panel.add(label2);
         panel.add(label5);
+        panel.add(label9);
         panel.add(label3);
         panel.add(label6);
         panel.add(label7);
