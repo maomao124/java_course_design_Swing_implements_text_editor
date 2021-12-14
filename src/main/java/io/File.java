@@ -130,6 +130,82 @@ public class File
         }
     }
 
+    public static void read(java.io.File file, JTextArea jTextArea, JLabel label_Information, String encode)
+    {
+        FileInputStream fileInputStream = null;
+        InputStreamReader InputStreamReader = null;
+        try                                  //文件流打开，文件读写
+        {
+            jTextArea.setText("");
+            fileInputStream = new FileInputStream(file);        // test.autoDiscernEncoding(file)
+            encoding = encode;
+            InputStreamReader = new InputStreamReader(fileInputStream, encode);
+            char[] buffer = new char[1024];
+            int count = 0;
+            while ((count = InputStreamReader.read(buffer)) != -1)
+            {
+                jTextArea.append(new String(buffer, 0, count));
+                //System.out.println(new String(buffer, 0, count));
+            }
+            label_Information.setText("加载完成");
+            MainPanel.label_encoding.setText("编码: " + encoding);
+        }
+        catch (FileNotFoundException e1)      //文件未找到
+        {
+            Toolkit.getDefaultToolkit().beep();
+            System.err.println("文件未找到！！！  " + "\n错误内容：" + e1.toString());
+            final Writer result = new StringWriter();
+            final PrintWriter printWriter = new PrintWriter(result);
+            e1.printStackTrace(printWriter);
+            String stackTraceStr = result.toString();
+            io.ErrorLog.write(stackTraceStr);
+        }
+        catch (Exception e1)                  //其它异常
+        {
+            Toolkit.getDefaultToolkit().beep();
+            e1.printStackTrace();
+            final Writer result = new StringWriter();
+            final PrintWriter printWriter = new PrintWriter(result);
+            e1.printStackTrace(printWriter);
+            String stackTraceStr = result.toString();
+            io.ErrorLog.write(stackTraceStr);
+        }
+        finally
+        {
+            try                              //关闭流
+            {
+                if (fileInputStream != null)
+                {
+                    fileInputStream.close();
+                }
+                if (InputStreamReader != null)
+                {
+                    InputStreamReader.close();
+                }
+            }
+            catch (NullPointerException e1)    //空指针异常
+            {
+                Toolkit.getDefaultToolkit().beep();
+                System.err.println("文件已经被关闭，无法再次关闭！！！");
+                final Writer result = new StringWriter();
+                final PrintWriter printWriter = new PrintWriter(result);
+                e1.printStackTrace(printWriter);
+                String stackTraceStr = result.toString();
+                io.ErrorLog.write(stackTraceStr);
+            }
+            catch (Exception e1)              //其它异常
+            {
+                Toolkit.getDefaultToolkit().beep();
+                e1.printStackTrace();
+                final Writer result = new StringWriter();
+                final PrintWriter printWriter = new PrintWriter(result);
+                e1.printStackTrace(printWriter);
+                String stackTraceStr = result.toString();
+                io.ErrorLog.write(stackTraceStr);
+            }
+        }
+    }
+
     public static void write(java.io.File file, JTextArea jTextArea, JLabel label_Information)
     {
         FileOutputStream fileOutputStream = null;
@@ -219,7 +295,7 @@ public class File
             Toolkit.getDefaultToolkit().beep();
             System.out.println("编码\"" + encode + "\"无法识别！");
             JOptionPane.showMessageDialog(null,
-                    "编码\"" + encode + "\"无法识别！\n 编码输入错误，或者该编码不支持！","编码错误", JOptionPane.ERROR_MESSAGE);
+                    "编码\"" + encode + "\"无法识别！\n 编码输入错误，或者该编码不支持！", "编码错误", JOptionPane.ERROR_MESSAGE);
         }
         catch (Exception e1)                  //其它异常
         {

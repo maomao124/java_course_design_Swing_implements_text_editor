@@ -985,6 +985,199 @@ public class MainPanel
                 }
             }
         });
+
+        overload_UTF_8.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                if (file == null)
+                {
+                    Toolkit.getDefaultToolkit().beep();
+                    JOptionPane.showMessageDialog(null,
+                            "还未指定文件路径！", "提示", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                int result;
+                Toolkit.getDefaultToolkit().beep();
+                result = JOptionPane.showConfirmDialog(null,
+                        "此操作将会刷新文本域里的内容，是否继续？", "数据丢失警告！",
+                        JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                if (result == 0)
+                {
+                    io.File.read(file, jTextArea, label_Information, "UTF-8");
+                }
+            }
+        });
+
+        overload_UTF_16LE.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                if (file == null)
+                {
+                    Toolkit.getDefaultToolkit().beep();
+                    JOptionPane.showMessageDialog(null,
+                            "还未指定文件路径！", "提示", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                int result;
+                Toolkit.getDefaultToolkit().beep();
+                result = JOptionPane.showConfirmDialog(null,
+                        "此操作将会刷新文本域里的内容，是否继续？", "数据丢失警告！",
+                        JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                if (result == 0)
+                {
+                    io.File.read(file, jTextArea, label_Information, "UTF-16LE");
+                }
+            }
+        });
+
+        overload_UTF_16BE.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                if (file == null)
+                {
+                    Toolkit.getDefaultToolkit().beep();
+                    JOptionPane.showMessageDialog(null,
+                            "还未指定文件路径！", "提示", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                int result;
+                Toolkit.getDefaultToolkit().beep();
+                result = JOptionPane.showConfirmDialog(null,
+                        "此操作将会刷新文本域里的内容，是否继续？", "数据丢失警告！",
+                        JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                if (result == 0)
+                {
+                    io.File.read(file, jTextArea, label_Information, "UTF-16BE");
+                }
+            }
+        });
+
+        overload_GBK.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                if (file == null)
+                {
+                    Toolkit.getDefaultToolkit().beep();
+                    JOptionPane.showMessageDialog(null,
+                            "还未指定文件路径！", "提示", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                int result;
+                Toolkit.getDefaultToolkit().beep();
+                result = JOptionPane.showConfirmDialog(null,
+                        "此操作将会刷新文本域里的内容，是否继续？", "数据丢失警告！",
+                        JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                if (result == 0)
+                {
+                    io.File.read(file, jTextArea, label_Information, "GBK");
+                }
+            }
+        });
+
+        overload_GB2312.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                if (file == null)
+                {
+                    Toolkit.getDefaultToolkit().beep();
+                    JOptionPane.showMessageDialog(null,
+                            "还未指定文件路径！", "提示", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                int result;
+                Toolkit.getDefaultToolkit().beep();
+                result = JOptionPane.showConfirmDialog(null,
+                        "此操作将会刷新文本域里的内容，是否继续？", "数据丢失警告！",
+                        JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                if (result == 0)
+                {
+                    io.File.read(file, jTextArea, label_Information, "GB2312");
+                }
+            }
+        });
+
+        overload_GB18030.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                if (file == null)
+                {
+                    Toolkit.getDefaultToolkit().beep();
+                    JOptionPane.showMessageDialog(null,
+                            "还未指定文件路径！", "提示", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                int result;
+                Toolkit.getDefaultToolkit().beep();
+                result = JOptionPane.showConfirmDialog(null,
+                        "此操作将会刷新文本域里的内容，是否继续？", "数据丢失警告！",
+                        JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                if (result == 0)
+                {
+                    io.File.read(file, jTextArea, label_Information, "GB18030");
+                }
+            }
+        });
+
+        overload_ISO_8859_1.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                if (file == null)
+                {
+                    Toolkit.getDefaultToolkit().beep();
+                    JOptionPane.showMessageDialog(null,
+                            "还未指定文件路径！", "提示", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                int result;
+                Toolkit.getDefaultToolkit().beep();
+                result = JOptionPane.showConfirmDialog(null,
+                        "此操作将会刷新文本域里的内容，是否继续？", "数据丢失警告！",
+                        JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                if (result == 0)
+                {
+                    io.File.read(file, jTextArea, label_Information, "ISO-8859-1");
+                }
+            }
+        });
+
+        overload_US_ASCII.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                if (file == null)
+                {
+                    Toolkit.getDefaultToolkit().beep();
+                    JOptionPane.showMessageDialog(null,
+                            "还未指定文件路径！", "提示", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                int result;
+                Toolkit.getDefaultToolkit().beep();
+                result = JOptionPane.showConfirmDialog(null,
+                        "此操作将会刷新文本域里的内容，是否继续？", "数据丢失警告！",
+                        JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                if (result == 0)
+                {
+                    io.File.read(file, jTextArea, label_Information, "US-ASCII");
+                }
+            }
+        });
+
     }
 
 
