@@ -53,6 +53,7 @@ public class MainPanel
     private final JLabel label_Information = new JLabel("欢迎使用文件编辑器", JLabel.CENTER);      //状态位
     public static final JLabel label_time_and_memory = new JLabel("", JLabel.RIGHT);
     public static final JLabel label_localTime = new JLabel("", JLabel.LEFT);
+    public static final JLabel label_encoding = new JLabel("", JLabel.LEFT);
     private final UI.FontSetting fontSetting;
     private final UI.JTextArea_Border jTextArea_border;
     private final UI.About about_software;
@@ -274,6 +275,7 @@ public class MainPanel
         jPanel.add(jPanel1, BorderLayout.NORTH);
         jPanel.add(jScrollPane, BorderLayout.CENTER);
         jPanel_left.add(label_localTime);
+        jPanel_left.add(label_encoding);
         jPanel_center.add(label_Information);
         jPanel_right.add(label_time_and_memory);
         jPanel2.add(jPanel_left);
@@ -1133,7 +1135,7 @@ public class MainPanel
         {
             label_Information.setText("请稍后，正在计算MD5值...");
             fileMD5 = MD5.getFileMD5(file.getAbsolutePath());
-            testAreaMD5 = MD5.getMD5(jTextArea.getText());
+            testAreaMD5 = MD5.getMD5API(jTextArea.getText());
             label_Information.setText("MD5值计算完成");
         }
         if (file == null)

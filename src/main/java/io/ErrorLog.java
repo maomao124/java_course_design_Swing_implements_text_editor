@@ -3,6 +3,7 @@ package io;
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.text.DecimalFormat;
 import java.util.Calendar;
 
@@ -52,11 +53,11 @@ public class ErrorLog
         stringBuffer1.append("\n\n\n");
 
         //写入
-        FileWriter fileWriter = null;
+        FileOutputStream fileOutputStream = null;
         try                                  //文件流打开，文件读写
         {
-            fileWriter = new FileWriter("error.log", true);
-            fileWriter.write(stringBuffer1.toString());
+            fileOutputStream = new FileOutputStream("error.log", true);
+            fileOutputStream.write(stringBuffer1.toString().getBytes(StandardCharsets.UTF_8));
         }
         catch (FileNotFoundException e)      //文件未找到
         {
@@ -72,9 +73,9 @@ public class ErrorLog
         {
             try                              //关闭流
             {
-                if (fileWriter != null)
+                if (fileOutputStream != null)
                 {
-                    fileWriter.close();
+                    fileOutputStream.close();
                 }
             }
             catch (NullPointerException e)    //空指针异常
@@ -92,12 +93,14 @@ public class ErrorLog
 
     public static void read()
     {
-        FileReader fileReader = null;
+        FileInputStream fileInputStream = null;
+        InputStreamReader InputStreamReader = null;
         BufferedReader bufferedReader = null;
         try                                  //文件流打开，文件读写
         {
-            fileReader = new FileReader("error.log");
-            bufferedReader = new BufferedReader(fileReader);
+            fileInputStream = new FileInputStream("error.log");
+            InputStreamReader = new InputStreamReader(fileInputStream, StandardCharsets.UTF_8);
+            bufferedReader = new BufferedReader(InputStreamReader);
             String str;
             JTextArea jTextArea = UI.ErrorLog.getjTextArea_ErrorLog();
             while ((str = bufferedReader.readLine()) != null)
@@ -129,9 +132,13 @@ public class ErrorLog
         {
             try                              //关闭流
             {
-                if (fileReader != null)
+                if (fileInputStream != null)
                 {
-                    fileReader.close();
+                    fileInputStream.close();
+                }
+                if (InputStreamReader != null)
+                {
+                    InputStreamReader.close();
                 }
                 if (bufferedReader != null)
                 {

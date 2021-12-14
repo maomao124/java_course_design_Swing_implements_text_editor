@@ -22,22 +22,41 @@
         <maven.compiler.target>16</maven.compiler.target>
     </properties>
     <!--依赖包配置放入位置-->
-
+    <dependencies>
+        <!--此依赖用于识别文件编码-->
+        <dependency>
+            <groupId>com.ibm.icu</groupId>
+            <artifactId>icu4j</artifactId>
+            <version>58.1</version>
+        </dependency>
+    </dependencies>
     <build>
         <finalName>java课程设计_Swing实现文本编辑器</finalName>
         <!--更改项，也可以不改，打包的jar文件名称-->
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
+                <artifactId>maven-assembly-plugin</artifactId>
                 <configuration>
+                    <appendAssemblyId>false</appendAssemblyId>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
                     <archive>
                         <manifest>
+                            <!-- 此处指定main方法入口的class -->
                             <mainClass>Run</mainClass>
-                            <!--更改项，主类名-->
                         </manifest>
                     </archive>
                 </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>assembly</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <!--jar包依赖插件放入位置-->
 

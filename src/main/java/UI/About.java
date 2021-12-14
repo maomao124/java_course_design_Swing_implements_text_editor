@@ -56,7 +56,7 @@ public class About extends JFrame
         label1.setHorizontalAlignment(0);
         JLabel label2 = new JLabel("完成时间：2021-12-08");
         label2.setHorizontalAlignment(0);
-        JLabel label5 = new JLabel("最近更新：2021-12-11");
+        JLabel label5 = new JLabel("最近更新：2021-12-14");
         label5.setHorizontalAlignment(0);
         JLabel label3 = new JLabel("GitHub：https://github.com/maomao124/");
         JLabel label6 = new JLabel("远程仓库名：");

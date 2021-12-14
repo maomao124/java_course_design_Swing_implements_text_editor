@@ -1,10 +1,15 @@
 package io;
 
 import UI.MainPanel;
+import com.ibm.icu.text.CharsetDetector;
+import com.ibm.icu.text.CharsetMatch;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  * Project name(项目名称)：java课程设计 Swing实现文本编辑器
@@ -21,22 +26,54 @@ import java.io.*;
 
 public class File
 {
+    public static String encoding = "UTF-8";                          //文件编码
+
+    public static String autoDiscernEncoding(java.io.File file)
+    {
+        String encoding = "UTF-8";
+        try
+        {
+            Path path = Paths.get(file.getPath());
+            byte[] data = Files.readAllBytes(path);
+            CharsetDetector detector = new CharsetDetector();
+            detector.setText(data);
+            CharsetMatch match = detector.detect();
+            encoding = match.getName();
+            System.out.println("文件：" + file.getName() + "的编码为：" + encoding);
+            return encoding;
+        }
+        catch (IOException e)
+        {
+            System.out.println("识别失败");
+            e.printStackTrace();
+            final Writer result = new StringWriter();
+            final PrintWriter printWriter = new PrintWriter(result);
+            e.printStackTrace(printWriter);
+            String stackTraceStr = result.toString();
+            io.ErrorLog.write(stackTraceStr);
+            return encoding;
+        }
+    }
+
     public static void read(java.io.File file, JTextArea jTextArea, JLabel label_Information)
     {
-        FileReader fileReader = null;
+        FileInputStream fileInputStream = null;
+        InputStreamReader InputStreamReader = null;
         try                                  //文件流打开，文件读写
         {
 
-            fileReader = new FileReader(file);
+            fileInputStream = new FileInputStream(file);        // test.autoDiscernEncoding(file)
+            encoding = autoDiscernEncoding(file);
+            InputStreamReader = new InputStreamReader(fileInputStream, encoding);
             char[] buffer = new char[1024];
             int count = 0;
-            while ((count = fileReader.read(buffer)) != -1)
+            while ((count = InputStreamReader.read(buffer)) != -1)
             {
                 jTextArea.append(new String(buffer, 0, count));
                 //System.out.println(new String(buffer, 0, count));
             }
             label_Information.setText("加载完成");
-
+            MainPanel.label_encoding.setText("编码: " + encoding);
         }
         catch (FileNotFoundException e1)      //文件未找到
         {
@@ -62,9 +99,13 @@ public class File
         {
             try                              //关闭流
             {
-                if (fileReader != null)
+                if (fileInputStream != null)
                 {
-                    fileReader.close();
+                    fileInputStream.close();
+                }
+                if (InputStreamReader != null)
+                {
+                    InputStreamReader.close();
                 }
             }
             catch (NullPointerException e1)    //空指针异常
@@ -92,12 +133,12 @@ public class File
 
     public static void write(java.io.File file, JTextArea jTextArea, JLabel label_Information)
     {
-        FileWriter fileWriter = null;
+        FileOutputStream fileOutputStream = null;
         try                                  //文件流打开，文件读写
         {
             label_Information.setText("正在保存...");
-            fileWriter = new FileWriter(file);
-            fileWriter.write(jTextArea.getText());
+            fileOutputStream = new FileOutputStream(file);
+            fileOutputStream.write(jTextArea.getText().getBytes(encoding));
             label_Information.setText("保存成功");
         }
         catch (FileNotFoundException e1)      //文件未找到
@@ -124,9 +165,9 @@ public class File
         {
             try                              //关闭流
             {
-                if (fileWriter != null)
+                if (fileOutputStream != null)
                 {
-                    fileWriter.close();
+                    fileOutputStream.close();
                 }
             }
             catch (NullPointerException e1)    //空指针异常
@@ -154,12 +195,12 @@ public class File
 
     public static void write(JTextArea jTextArea, JLabel label_Information)
     {
-        FileWriter fileWriter = null;
+        FileOutputStream fileOutputStream = null;
         try                                  //文件流打开，文件读写
         {
             label_Information.setText("正在保存...");
-            fileWriter = new FileWriter(MainPanel.getFile());
-            fileWriter.write(jTextArea.getText());
+            fileOutputStream = new FileOutputStream(MainPanel.getFile());
+            fileOutputStream.write(jTextArea.getText().getBytes(encoding));
             label_Information.setText("保存成功");
         }
         catch (FileNotFoundException e1)      //文件未找到
@@ -186,9 +227,9 @@ public class File
         {
             try                              //关闭流
             {
-                if (fileWriter != null)
+                if (fileOutputStream != null)
                 {
-                    fileWriter.close();
+                    fileOutputStream.close();
                 }
             }
             catch (NullPointerException e1)    //空指针异常

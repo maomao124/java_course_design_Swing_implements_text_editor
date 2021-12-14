@@ -1,8 +1,11 @@
 package io.SHA;
 
+import io.File;
+
 import java.io.*;
 import java.math.BigInteger;
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 /**
  * Project name(项目名称)：java课程设计 Swing实现文本编辑器
@@ -294,5 +297,51 @@ public class MD5
             return "";
         }
     }
+
+    private static String SHA(final String strText)
+    {
+        String strResult = null;
+        if (strText != null && strText.length() > 0)
+        {
+            try
+            {
+                MessageDigest messageDigest = MessageDigest.getInstance("MD5");
+                messageDigest.update(strText.getBytes(File.encoding));
+                byte[] byteBuffer = messageDigest.digest();
+                StringBuilder strHexString = new StringBuilder();
+                for (int i = 0; i < byteBuffer.length; i++)
+                {
+                    String hex = Integer.toHexString(0xff & byteBuffer[i]);
+                    if (hex.length() == 1)
+                    {
+                        strHexString.append('0');
+                    }
+                    strHexString.append(hex);
+                }
+                strResult = strHexString.toString();
+            }
+            catch (NoSuchAlgorithmException | UnsupportedEncodingException e)
+            {
+                e.printStackTrace();
+                final Writer result = new StringWriter();
+                final PrintWriter printWriter = new PrintWriter(result);
+                e.printStackTrace(printWriter);
+                String stackTraceStr = result.toString();
+                io.ErrorLog.write(stackTraceStr);
+            }
+        }
+        return strResult;
+    }
+
+    public static String getMD5API(String strText)
+    {
+        return SHA(strText);
+    }
+
+    public static String getMD5APItoUpperCase(String strText)
+    {
+        return SHA(strText).toUpperCase();
+    }
+
 }
 

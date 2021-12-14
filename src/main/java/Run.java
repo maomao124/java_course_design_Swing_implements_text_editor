@@ -29,8 +29,8 @@ public class Run
 {
     private static long runTime = 0;
     //public static boolean args_filePath = false;                              //匿名包里其它包里的类无法调用匿名包里的
-    static DecimalFormat decimalFormat = new DecimalFormat("00");
-    private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd  HH:mm:ss");
+    static DecimalFormat decimalFormat = new DecimalFormat("00");                       //yyyy/MM/dd  HH:mm:ss
+    private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
 
     private static void init_MemoryComputing()
     {
