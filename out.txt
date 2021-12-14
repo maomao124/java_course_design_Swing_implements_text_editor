@@ -1149,7 +1149,7 @@ public class File
         }
         catch (IOException e)
         {
-            System.out.println("识别失败");
+            System.err.println("编码识别失败");
             e.printStackTrace();
             final Writer result = new StringWriter();
             final PrintWriter printWriter = new PrintWriter(result);
@@ -1166,10 +1166,85 @@ public class File
         InputStreamReader InputStreamReader = null;
         try                                  //文件流打开，文件读写
         {
-
             fileInputStream = new FileInputStream(file);        // test.autoDiscernEncoding(file)
             encoding = autoDiscernEncoding(file);
             InputStreamReader = new InputStreamReader(fileInputStream, encoding);
+            char[] buffer = new char[1024];
+            int count = 0;
+            while ((count = InputStreamReader.read(buffer)) != -1)
+            {
+                jTextArea.append(new String(buffer, 0, count));
+                //System.out.println(new String(buffer, 0, count));
+            }
+            label_Information.setText("加载完成");
+            MainPanel.label_encoding.setText("编码: " + encoding);
+        }
+        catch (FileNotFoundException e1)      //文件未找到
+        {
+            Toolkit.getDefaultToolkit().beep();
+            System.err.println("文件未找到！！！  " + "\n错误内容：" + e1.toString());
+            final Writer result = new StringWriter();
+            final PrintWriter printWriter = new PrintWriter(result);
+            e1.printStackTrace(printWriter);
+            String stackTraceStr = result.toString();
+            io.ErrorLog.write(stackTraceStr);
+        }
+        catch (Exception e1)                  //其它异常
+        {
+            Toolkit.getDefaultToolkit().beep();
+            e1.printStackTrace();
+            final Writer result = new StringWriter();
+            final PrintWriter printWriter = new PrintWriter(result);
+            e1.printStackTrace(printWriter);
+            String stackTraceStr = result.toString();
+            io.ErrorLog.write(stackTraceStr);
+        }
+        finally
+        {
+            try                              //关闭流
+            {
+                if (fileInputStream != null)
+                {
+                    fileInputStream.close();
+                }
+                if (InputStreamReader != null)
+                {
+                    InputStreamReader.close();
+                }
+            }
+            catch (NullPointerException e1)    //空指针异常
+            {
+                Toolkit.getDefaultToolkit().beep();
+                System.err.println("文件已经被关闭，无法再次关闭！！！");
+                final Writer result = new StringWriter();
+                final PrintWriter printWriter = new PrintWriter(result);
+                e1.printStackTrace(printWriter);
+                String stackTraceStr = result.toString();
+                io.ErrorLog.write(stackTraceStr);
+            }
+            catch (Exception e1)              //其它异常
+            {
+                Toolkit.getDefaultToolkit().beep();
+                e1.printStackTrace();
+                final Writer result = new StringWriter();
+                final PrintWriter printWriter = new PrintWriter(result);
+                e1.printStackTrace(printWriter);
+                String stackTraceStr = result.toString();
+                io.ErrorLog.write(stackTraceStr);
+            }
+        }
+    }
+
+    public static void read(java.io.File file, JTextArea jTextArea, JLabel label_Information, String encode)
+    {
+        FileInputStream fileInputStream = null;
+        InputStreamReader InputStreamReader = null;
+        try                                  //文件流打开，文件读写
+        {
+            jTextArea.setText("");
+            fileInputStream = new FileInputStream(file);        // test.autoDiscernEncoding(file)
+            encoding = encode;
+            InputStreamReader = new InputStreamReader(fileInputStream, encode);
             char[] buffer = new char[1024];
             int count = 0;
             while ((count = InputStreamReader.read(buffer)) != -1)
@@ -1255,6 +1330,77 @@ public class File
             e1.printStackTrace(printWriter);
             String stackTraceStr = result.toString();
             io.ErrorLog.write(stackTraceStr);
+        }
+        catch (Exception e1)                  //其它异常
+        {
+            Toolkit.getDefaultToolkit().beep();
+            e1.printStackTrace();
+            final Writer result = new StringWriter();
+            final PrintWriter printWriter = new PrintWriter(result);
+            e1.printStackTrace(printWriter);
+            String stackTraceStr = result.toString();
+            io.ErrorLog.write(stackTraceStr);
+        }
+        finally
+        {
+            try                              //关闭流
+            {
+                if (fileOutputStream != null)
+                {
+                    fileOutputStream.close();
+                }
+            }
+            catch (NullPointerException e1)    //空指针异常
+            {
+                Toolkit.getDefaultToolkit().beep();
+                System.err.println("文件已经被关闭，无法再次关闭！！！");
+                final Writer result = new StringWriter();
+                final PrintWriter printWriter = new PrintWriter(result);
+                e1.printStackTrace(printWriter);
+                String stackTraceStr = result.toString();
+                io.ErrorLog.write(stackTraceStr);
+            }
+            catch (Exception e1)              //其它异常
+            {
+                Toolkit.getDefaultToolkit().beep();
+                e1.printStackTrace();
+                final Writer result = new StringWriter();
+                final PrintWriter printWriter = new PrintWriter(result);
+                e1.printStackTrace(printWriter);
+                String stackTraceStr = result.toString();
+                io.ErrorLog.write(stackTraceStr);
+            }
+        }
+    }
+
+    public static void write(java.io.File file, JTextArea jTextArea, JLabel label_Information, String encode)
+    {
+        FileOutputStream fileOutputStream = null;
+        try                                  //文件流打开，文件读写
+        {
+            String s = "123";
+            s.getBytes(encode);                                         //测试编码，避免编码错误时创建文件
+            label_Information.setText("正在保存...");
+            fileOutputStream = new FileOutputStream(file);
+            fileOutputStream.write(jTextArea.getText().getBytes(encode));
+            label_Information.setText("保存成功");
+        }
+        catch (FileNotFoundException e1)      //文件未找到
+        {
+            Toolkit.getDefaultToolkit().beep();
+            System.err.println("文件未找到！！！  " + "\n错误内容：" + e1.toString());
+            final Writer result = new StringWriter();
+            final PrintWriter printWriter = new PrintWriter(result);
+            e1.printStackTrace(printWriter);
+            String stackTraceStr = result.toString();
+            io.ErrorLog.write(stackTraceStr);
+        }
+        catch (UnsupportedEncodingException e)
+        {
+            Toolkit.getDefaultToolkit().beep();
+            System.out.println("编码\"" + encode + "\"无法识别！");
+            JOptionPane.showMessageDialog(null,
+                    "编码\"" + encode + "\"无法识别！\n 编码输入错误，或者该编码不支持！", "编码错误", JOptionPane.ERROR_MESSAGE);
         }
         catch (Exception e1)                  //其它异常
         {
@@ -2702,6 +2848,7 @@ public class InstructionsForUse extends JFrame
                 软件会自动保存用户的个性化配置信息，
                 这些信息包括包括窗口大小、字体、各颜色信息、边框信息、换行策略和自动清理，
                 当用户重新打开软件时不需要再次配置。
+                支持自动识别编码和编码转换
                 
                 快捷键说明：
                 当打开错误日志和文件信息界面时，按鼠标退回键快速返回到主面板；
@@ -3128,10 +3275,7 @@ import io.Configuration;
 import io.SHA.MD5;
 
 import javax.swing.*;
-import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.EtchedBorder;
-import javax.swing.border.LineBorder;
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
 import javax.swing.text.BadLocationException;
@@ -3139,6 +3283,7 @@ import javax.swing.undo.UndoManager;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
+import java.io.UnsupportedEncodingException;
 
 
 /**
@@ -3236,6 +3381,16 @@ public class MainPanel
     private JMenuItem border;
     private JMenuItem delete_confirmation;
     private JMenuItem wrap;
+    private JMenuItem encoding_saveAs;
+    private JMenuItem overload_UTF_8;
+    private JMenuItem overload_UTF_16LE;
+    private JMenuItem overload_UTF_16BE;
+    private JMenuItem overload_GBK;
+    private JMenuItem overload_GB18030;
+    private JMenuItem overload_GB2312;
+    private JMenuItem overload_ISO_8859_1;
+    private JMenuItem overload_US_ASCII;
+    private JMenuItem overload_user_definition;
     private static JMenuItem errorLog;
     private JMenuItem instructions_for_use;
     private JMenuItem about;
@@ -3506,7 +3661,27 @@ public class MainPanel
         delete_confirmation.setBackground(Color.red);
 
         wrap = new JMenuItem("不自动换行");
+        encoding_saveAs = new JMenuItem("使用用户指定的编码格式另存文件");
+        overload_UTF_8 = new JMenuItem("使用UTF-8编码格式重新加载文件");
+        overload_UTF_16LE = new JMenuItem("使用UTF-16LE编码格式重新加载文件");
+        overload_UTF_16BE = new JMenuItem("使用UTF-16BE编码格式重新加载文件");
+        overload_GBK = new JMenuItem("使用GBK编码格式重新加载文件");
+        overload_GB2312 = new JMenuItem("使用GB2312编码格式重新加载文件");
+        overload_GB18030 = new JMenuItem("使用GB18030编码格式重新加载文件");
+        overload_ISO_8859_1 = new JMenuItem("使用ISO-8859-1编码格式重新加载文件");
+        overload_US_ASCII = new JMenuItem("使用US-ASCII编码格式重新加载文件");
+        overload_user_definition = new JMenuItem("使用用户输入的编码格式重新加载文件");
         wrap.setBackground(Color.cyan);
+        encoding_saveAs.setBackground(Color.green);
+        overload_UTF_8.setBackground(Color.yellow);
+        overload_UTF_16LE.setBackground(Color.yellow);
+        overload_UTF_16BE.setBackground(Color.yellow);
+        overload_GBK.setBackground(Color.yellow);
+        overload_GB2312.setBackground(Color.yellow);
+        overload_GB18030.setBackground(Color.yellow);
+        overload_ISO_8859_1.setBackground(Color.yellow);
+        overload_US_ASCII.setBackground(Color.yellow);
+        overload_user_definition.setBackground(Color.yellow);
 
         errorLog = new JMenuItem("错误日志");
         instructions_for_use = new JMenuItem("使用说明");
@@ -3549,6 +3724,16 @@ public class MainPanel
 
         //格式
         format.add(wrap);
+        format.add(encoding_saveAs);
+        format.add(overload_UTF_8);
+        format.add(overload_UTF_16LE);
+        format.add(overload_UTF_16BE);
+        format.add(overload_GBK);
+        format.add(overload_GB2312);
+        format.add(overload_GB18030);
+        format.add(overload_ISO_8859_1);
+        format.add(overload_US_ASCII);
+        format.add(overload_user_definition);
 
         //帮助
         help.add(errorLog);
@@ -4041,6 +4226,280 @@ public class MainPanel
                 MainPanel.this.change_auto_clear_mode();
             }
         });
+
+        encoding_saveAs.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                if (jTextArea.getText().length() == 0)
+                {
+                    label_Information.setText("文本域为空,没必要保存");
+                    return;
+                }
+                JFileChooser jFileChooser = new JFileChooser(".");
+                int result = jFileChooser.showSaveDialog(null);
+                if (result == JFileChooser.APPROVE_OPTION)
+                {
+                    String str;
+                    str = JOptionPane.showInputDialog(null,
+                            "请输入文件编码：", "", JOptionPane.QUESTION_MESSAGE);
+                    if (str == null || str.equals(""))
+                    {
+                        //Toolkit.getDefaultToolkit().beep();
+                        label_Information.setText("已取消输入编码，或者输入的编码为空！");
+                        return;
+                    }
+                    //System.out.println(str);
+                    File file = jFileChooser.getSelectedFile();
+                    io.File.write(file, jTextArea, label_Information, str);         //写入文件
+                }
+                else
+                {
+                    Toolkit.getDefaultToolkit().beep();
+                    label_Information.setText("已取消！！！");
+                }
+            }
+        });
+
+        overload_UTF_8.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                if (file == null)
+                {
+                    Toolkit.getDefaultToolkit().beep();
+                    JOptionPane.showMessageDialog(null,
+                            "还未指定文件路径！", "提示", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                int result;
+                Toolkit.getDefaultToolkit().beep();
+                result = JOptionPane.showConfirmDialog(null,
+                        "此操作将会刷新文本域里的内容，是否继续？", "数据丢失警告！",
+                        JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                if (result == 0)
+                {
+                    io.File.read(file, jTextArea, label_Information, "UTF-8");
+                }
+            }
+        });
+
+        overload_UTF_16LE.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                if (file == null)
+                {
+                    Toolkit.getDefaultToolkit().beep();
+                    JOptionPane.showMessageDialog(null,
+                            "还未指定文件路径！", "提示", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                int result;
+                Toolkit.getDefaultToolkit().beep();
+                result = JOptionPane.showConfirmDialog(null,
+                        "此操作将会刷新文本域里的内容，是否继续？", "数据丢失警告！",
+                        JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                if (result == 0)
+                {
+                    io.File.read(file, jTextArea, label_Information, "UTF-16LE");
+                }
+            }
+        });
+
+        overload_UTF_16BE.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                if (file == null)
+                {
+                    Toolkit.getDefaultToolkit().beep();
+                    JOptionPane.showMessageDialog(null,
+                            "还未指定文件路径！", "提示", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                int result;
+                Toolkit.getDefaultToolkit().beep();
+                result = JOptionPane.showConfirmDialog(null,
+                        "此操作将会刷新文本域里的内容，是否继续？", "数据丢失警告！",
+                        JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                if (result == 0)
+                {
+                    io.File.read(file, jTextArea, label_Information, "UTF-16BE");
+                }
+            }
+        });
+
+        overload_GBK.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                if (file == null)
+                {
+                    Toolkit.getDefaultToolkit().beep();
+                    JOptionPane.showMessageDialog(null,
+                            "还未指定文件路径！", "提示", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                int result;
+                Toolkit.getDefaultToolkit().beep();
+                result = JOptionPane.showConfirmDialog(null,
+                        "此操作将会刷新文本域里的内容，是否继续？", "数据丢失警告！",
+                        JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                if (result == 0)
+                {
+                    io.File.read(file, jTextArea, label_Information, "GBK");
+                }
+            }
+        });
+
+        overload_GB2312.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                if (file == null)
+                {
+                    Toolkit.getDefaultToolkit().beep();
+                    JOptionPane.showMessageDialog(null,
+                            "还未指定文件路径！", "提示", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                int result;
+                Toolkit.getDefaultToolkit().beep();
+                result = JOptionPane.showConfirmDialog(null,
+                        "此操作将会刷新文本域里的内容，是否继续？", "数据丢失警告！",
+                        JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                if (result == 0)
+                {
+                    io.File.read(file, jTextArea, label_Information, "GB2312");
+                }
+            }
+        });
+
+        overload_GB18030.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                if (file == null)
+                {
+                    Toolkit.getDefaultToolkit().beep();
+                    JOptionPane.showMessageDialog(null,
+                            "还未指定文件路径！", "提示", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                int result;
+                Toolkit.getDefaultToolkit().beep();
+                result = JOptionPane.showConfirmDialog(null,
+                        "此操作将会刷新文本域里的内容，是否继续？", "数据丢失警告！",
+                        JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                if (result == 0)
+                {
+                    io.File.read(file, jTextArea, label_Information, "GB18030");
+                }
+            }
+        });
+
+        overload_ISO_8859_1.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                if (file == null)
+                {
+                    Toolkit.getDefaultToolkit().beep();
+                    JOptionPane.showMessageDialog(null,
+                            "还未指定文件路径！", "提示", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                int result;
+                Toolkit.getDefaultToolkit().beep();
+                result = JOptionPane.showConfirmDialog(null,
+                        "此操作将会刷新文本域里的内容，是否继续？", "数据丢失警告！",
+                        JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                if (result == 0)
+                {
+                    io.File.read(file, jTextArea, label_Information, "ISO-8859-1");
+                }
+            }
+        });
+
+        overload_US_ASCII.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                if (file == null)
+                {
+                    Toolkit.getDefaultToolkit().beep();
+                    JOptionPane.showMessageDialog(null,
+                            "还未指定文件路径！", "提示", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                int result;
+                Toolkit.getDefaultToolkit().beep();
+                result = JOptionPane.showConfirmDialog(null,
+                        "此操作将会刷新文本域里的内容，是否继续？", "数据丢失警告！",
+                        JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                if (result == 0)
+                {
+                    io.File.read(file, jTextArea, label_Information, "US-ASCII");
+                }
+            }
+        });
+
+        overload_user_definition.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                if (file == null)
+                {
+                    Toolkit.getDefaultToolkit().beep();
+                    JOptionPane.showMessageDialog(null,
+                            "还未指定文件路径！", "提示", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                int result;
+                Toolkit.getDefaultToolkit().beep();
+                result = JOptionPane.showConfirmDialog(null,
+                        "此操作将会刷新文本域里的内容，是否继续？", "数据丢失警告！",
+                        JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                if (result == 0)
+                {
+                    String str;
+                    str = JOptionPane.showInputDialog(null,
+                            "请输入文件编码：", "", JOptionPane.QUESTION_MESSAGE);
+                    if (str == null || str.equals(""))
+                    {
+                        //Toolkit.getDefaultToolkit().beep();
+                        label_Information.setText("已取消输入编码，或者输入的编码为空！");
+                        return;
+                    }
+                    try
+                    {
+                        String s = "123";
+                        s.getBytes(str);                                 //测试编码是否正确
+                    }
+                    catch (UnsupportedEncodingException e1)
+                    {
+                        Toolkit.getDefaultToolkit().beep();
+                        System.out.println("编码\"" + str + "\"无法识别！");
+                        JOptionPane.showMessageDialog(null,
+                                "编码\"" + str + "\"无法识别！\n 编码输入错误，或者该编码不支持！", "编码错误", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                    io.File.read(file, jTextArea, label_Information, str);
+                }
+            }
+        });
+
     }
 
 
