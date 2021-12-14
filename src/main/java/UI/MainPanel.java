@@ -12,6 +12,7 @@ import javax.swing.undo.UndoManager;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
+import java.io.UnsupportedEncodingException;
 
 
 /**
@@ -118,6 +119,7 @@ public class MainPanel
     private JMenuItem overload_GB2312;
     private JMenuItem overload_ISO_8859_1;
     private JMenuItem overload_US_ASCII;
+    private JMenuItem overload_user_definition;
     private static JMenuItem errorLog;
     private JMenuItem instructions_for_use;
     private JMenuItem about;
@@ -397,6 +399,7 @@ public class MainPanel
         overload_GB18030 = new JMenuItem("使用GB18030编码格式重新加载文件");
         overload_ISO_8859_1 = new JMenuItem("使用ISO-8859-1编码格式重新加载文件");
         overload_US_ASCII = new JMenuItem("使用US-ASCII编码格式重新加载文件");
+        overload_user_definition = new JMenuItem("使用用户输入的编码格式重新加载文件");
         wrap.setBackground(Color.cyan);
         encoding_saveAs.setBackground(Color.green);
         overload_UTF_8.setBackground(Color.yellow);
@@ -407,6 +410,7 @@ public class MainPanel
         overload_GB18030.setBackground(Color.yellow);
         overload_ISO_8859_1.setBackground(Color.yellow);
         overload_US_ASCII.setBackground(Color.yellow);
+        overload_user_definition.setBackground(Color.yellow);
 
         errorLog = new JMenuItem("错误日志");
         instructions_for_use = new JMenuItem("使用说明");
@@ -458,6 +462,7 @@ public class MainPanel
         format.add(overload_GB18030);
         format.add(overload_ISO_8859_1);
         format.add(overload_US_ASCII);
+        format.add(overload_user_definition);
 
         //帮助
         help.add(errorLog);
@@ -1174,6 +1179,52 @@ public class MainPanel
                 if (result == 0)
                 {
                     io.File.read(file, jTextArea, label_Information, "US-ASCII");
+                }
+            }
+        });
+
+        overload_user_definition.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                if (file == null)
+                {
+                    Toolkit.getDefaultToolkit().beep();
+                    JOptionPane.showMessageDialog(null,
+                            "还未指定文件路径！", "提示", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                int result;
+                Toolkit.getDefaultToolkit().beep();
+                result = JOptionPane.showConfirmDialog(null,
+                        "此操作将会刷新文本域里的内容，是否继续？", "数据丢失警告！",
+                        JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                if (result == 0)
+                {
+                    String str;
+                    str = JOptionPane.showInputDialog(null,
+                            "请输入文件编码：", "", JOptionPane.QUESTION_MESSAGE);
+                    if (str == null || str.equals(""))
+                    {
+                        //Toolkit.getDefaultToolkit().beep();
+                        label_Information.setText("已取消输入编码，或者输入的编码为空！");
+                        return;
+                    }
+                    try
+                    {
+                        String s = "123";
+                        s.getBytes(str);                                 //测试编码是否正确
+                    }
+                    catch (UnsupportedEncodingException e1)
+                    {
+                        Toolkit.getDefaultToolkit().beep();
+                        System.out.println("编码\"" + str + "\"无法识别！");
+                        JOptionPane.showMessageDialog(null,
+                                "编码\"" + str + "\"无法识别！\n 编码输入错误，或者该编码不支持！", "编码错误", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                    io.File.read(file, jTextArea, label_Information, str);
                 }
             }
         });
