@@ -936,6 +936,7 @@ package io;
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.text.DecimalFormat;
 import java.util.Calendar;
 
@@ -985,11 +986,11 @@ public class ErrorLog
         stringBuffer1.append("\n\n\n");
 
         //写入
-        FileWriter fileWriter = null;
+        FileOutputStream fileOutputStream = null;
         try                                  //文件流打开，文件读写
         {
-            fileWriter = new FileWriter("error.log", true);
-            fileWriter.write(stringBuffer1.toString());
+            fileOutputStream = new FileOutputStream("error.log", true);
+            fileOutputStream.write(stringBuffer1.toString().getBytes(StandardCharsets.UTF_8));
         }
         catch (FileNotFoundException e)      //文件未找到
         {
@@ -1005,9 +1006,9 @@ public class ErrorLog
         {
             try                              //关闭流
             {
-                if (fileWriter != null)
+                if (fileOutputStream != null)
                 {
-                    fileWriter.close();
+                    fileOutputStream.close();
                 }
             }
             catch (NullPointerException e)    //空指针异常
@@ -1025,12 +1026,14 @@ public class ErrorLog
 
     public static void read()
     {
-        FileReader fileReader = null;
+        FileInputStream fileInputStream = null;
+        InputStreamReader InputStreamReader = null;
         BufferedReader bufferedReader = null;
         try                                  //文件流打开，文件读写
         {
-            fileReader = new FileReader("error.log");
-            bufferedReader = new BufferedReader(fileReader);
+            fileInputStream = new FileInputStream("error.log");
+            InputStreamReader = new InputStreamReader(fileInputStream, StandardCharsets.UTF_8);
+            bufferedReader = new BufferedReader(InputStreamReader);
             String str;
             JTextArea jTextArea = UI.ErrorLog.getjTextArea_ErrorLog();
             while ((str = bufferedReader.readLine()) != null)
@@ -1062,9 +1065,13 @@ public class ErrorLog
         {
             try                              //关闭流
             {
-                if (fileReader != null)
+                if (fileInputStream != null)
                 {
-                    fileReader.close();
+                    fileInputStream.close();
+                }
+                if (InputStreamReader != null)
+                {
+                    InputStreamReader.close();
                 }
                 if (bufferedReader != null)
                 {
@@ -1099,10 +1106,15 @@ H:\����\��������\java�γ���� Swingʵ���ı��༭��\\src\\main\\java\\io\\File.jav
 package io;
 
 import UI.MainPanel;
+import com.ibm.icu.text.CharsetDetector;
+import com.ibm.icu.text.CharsetMatch;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  * Project name(项目名称)：java课程设计 Swing实现文本编辑器
@@ -1119,22 +1131,54 @@ import java.io.*;
 
 public class File
 {
+    public static String encoding = "UTF-8";                          //文件编码
+
+    public static String autoDiscernEncoding(java.io.File file)
+    {
+        String encoding = "UTF-8";
+        try
+        {
+            Path path = Paths.get(file.getPath());
+            byte[] data = Files.readAllBytes(path);
+            CharsetDetector detector = new CharsetDetector();
+            detector.setText(data);
+            CharsetMatch match = detector.detect();
+            encoding = match.getName();
+            System.out.println("文件：" + file.getName() + "的编码为：" + encoding);
+            return encoding;
+        }
+        catch (IOException e)
+        {
+            System.out.println("识别失败");
+            e.printStackTrace();
+            final Writer result = new StringWriter();
+            final PrintWriter printWriter = new PrintWriter(result);
+            e.printStackTrace(printWriter);
+            String stackTraceStr = result.toString();
+            io.ErrorLog.write(stackTraceStr);
+            return encoding;
+        }
+    }
+
     public static void read(java.io.File file, JTextArea jTextArea, JLabel label_Information)
     {
-        FileReader fileReader = null;
+        FileInputStream fileInputStream = null;
+        InputStreamReader InputStreamReader = null;
         try                                  //文件流打开，文件读写
         {
 
-            fileReader = new FileReader(file);
+            fileInputStream = new FileInputStream(file);        // test.autoDiscernEncoding(file)
+            encoding = autoDiscernEncoding(file);
+            InputStreamReader = new InputStreamReader(fileInputStream, encoding);
             char[] buffer = new char[1024];
             int count = 0;
-            while ((count = fileReader.read(buffer)) != -1)
+            while ((count = InputStreamReader.read(buffer)) != -1)
             {
                 jTextArea.append(new String(buffer, 0, count));
                 //System.out.println(new String(buffer, 0, count));
             }
             label_Information.setText("加载完成");
-
+            MainPanel.label_encoding.setText("编码: " + encoding);
         }
         catch (FileNotFoundException e1)      //文件未找到
         {
@@ -1160,9 +1204,13 @@ public class File
         {
             try                              //关闭流
             {
-                if (fileReader != null)
+                if (fileInputStream != null)
                 {
-                    fileReader.close();
+                    fileInputStream.close();
+                }
+                if (InputStreamReader != null)
+                {
+                    InputStreamReader.close();
                 }
             }
             catch (NullPointerException e1)    //空指针异常
@@ -1190,12 +1238,12 @@ public class File
 
     public static void write(java.io.File file, JTextArea jTextArea, JLabel label_Information)
     {
-        FileWriter fileWriter = null;
+        FileOutputStream fileOutputStream = null;
         try                                  //文件流打开，文件读写
         {
             label_Information.setText("正在保存...");
-            fileWriter = new FileWriter(file);
-            fileWriter.write(jTextArea.getText());
+            fileOutputStream = new FileOutputStream(file);
+            fileOutputStream.write(jTextArea.getText().getBytes(encoding));
             label_Information.setText("保存成功");
         }
         catch (FileNotFoundException e1)      //文件未找到
@@ -1222,9 +1270,9 @@ public class File
         {
             try                              //关闭流
             {
-                if (fileWriter != null)
+                if (fileOutputStream != null)
                 {
-                    fileWriter.close();
+                    fileOutputStream.close();
                 }
             }
             catch (NullPointerException e1)    //空指针异常
@@ -1252,12 +1300,12 @@ public class File
 
     public static void write(JTextArea jTextArea, JLabel label_Information)
     {
-        FileWriter fileWriter = null;
+        FileOutputStream fileOutputStream = null;
         try                                  //文件流打开，文件读写
         {
             label_Information.setText("正在保存...");
-            fileWriter = new FileWriter(MainPanel.getFile());
-            fileWriter.write(jTextArea.getText());
+            fileOutputStream = new FileOutputStream(MainPanel.getFile());
+            fileOutputStream.write(jTextArea.getText().getBytes(encoding));
             label_Information.setText("保存成功");
         }
         catch (FileNotFoundException e1)      //文件未找到
@@ -1284,9 +1332,9 @@ public class File
         {
             try                              //关闭流
             {
-                if (fileWriter != null)
+                if (fileOutputStream != null)
                 {
-                    fileWriter.close();
+                    fileOutputStream.close();
                 }
             }
             catch (NullPointerException e1)    //空指针异常
@@ -1326,9 +1374,12 @@ public class File
 H:\����\��������\java�γ���� Swingʵ���ı��༭��\\src\\main\\java\\io\\SHA\\MD5.java
 package io.SHA;
 
+import io.File;
+
 import java.io.*;
 import java.math.BigInteger;
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 /**
  * Project name(项目名称)：java课程设计 Swing实现文本编辑器
@@ -1620,6 +1671,52 @@ public class MD5
             return "";
         }
     }
+
+    private static String SHA(final String strText)
+    {
+        String strResult = null;
+        if (strText != null && strText.length() > 0)
+        {
+            try
+            {
+                MessageDigest messageDigest = MessageDigest.getInstance("MD5");
+                messageDigest.update(strText.getBytes(File.encoding));
+                byte[] byteBuffer = messageDigest.digest();
+                StringBuilder strHexString = new StringBuilder();
+                for (int i = 0; i < byteBuffer.length; i++)
+                {
+                    String hex = Integer.toHexString(0xff & byteBuffer[i]);
+                    if (hex.length() == 1)
+                    {
+                        strHexString.append('0');
+                    }
+                    strHexString.append(hex);
+                }
+                strResult = strHexString.toString();
+            }
+            catch (NoSuchAlgorithmException | UnsupportedEncodingException e)
+            {
+                e.printStackTrace();
+                final Writer result = new StringWriter();
+                final PrintWriter printWriter = new PrintWriter(result);
+                e.printStackTrace(printWriter);
+                String stackTraceStr = result.toString();
+                io.ErrorLog.write(stackTraceStr);
+            }
+        }
+        return strResult;
+    }
+
+    public static String getMD5API(String strText)
+    {
+        return SHA(strText);
+    }
+
+    public static String getMD5APItoUpperCase(String strText)
+    {
+        return SHA(strText).toUpperCase();
+    }
+
 }
 
 �
@@ -1655,8 +1752,8 @@ public class Run
 {
     private static long runTime = 0;
     //public static boolean args_filePath = false;                              //匿名包里其它包里的类无法调用匿名包里的
-    static DecimalFormat decimalFormat = new DecimalFormat("00");
-    private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd  HH:mm:ss");
+    static DecimalFormat decimalFormat = new DecimalFormat("00");                       //yyyy/MM/dd  HH:mm:ss
+    private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
 
     private static void init_MemoryComputing()
     {
@@ -1886,7 +1983,7 @@ public class About extends JFrame
         label1.setHorizontalAlignment(0);
         JLabel label2 = new JLabel("完成时间：2021-12-08");
         label2.setHorizontalAlignment(0);
-        JLabel label5 = new JLabel("最近更新：2021-12-11");
+        JLabel label5 = new JLabel("最近更新：2021-12-14");
         label5.setHorizontalAlignment(0);
         JLabel label3 = new JLabel("GitHub：https://github.com/maomao124/");
         JLabel label6 = new JLabel("远程仓库名：");
@@ -3080,6 +3177,7 @@ public class MainPanel
     private final JLabel label_Information = new JLabel("欢迎使用文件编辑器", JLabel.CENTER);      //状态位
     public static final JLabel label_time_and_memory = new JLabel("", JLabel.RIGHT);
     public static final JLabel label_localTime = new JLabel("", JLabel.LEFT);
+    public static final JLabel label_encoding = new JLabel("", JLabel.LEFT);
     private final UI.FontSetting fontSetting;
     private final UI.JTextArea_Border jTextArea_border;
     private final UI.About about_software;
@@ -3301,6 +3399,7 @@ public class MainPanel
         jPanel.add(jPanel1, BorderLayout.NORTH);
         jPanel.add(jScrollPane, BorderLayout.CENTER);
         jPanel_left.add(label_localTime);
+        jPanel_left.add(label_encoding);
         jPanel_center.add(label_Information);
         jPanel_right.add(label_time_and_memory);
         jPanel2.add(jPanel_left);
@@ -4160,7 +4259,7 @@ public class MainPanel
         {
             label_Information.setText("请稍后，正在计算MD5值...");
             fileMD5 = MD5.getFileMD5(file.getAbsolutePath());
-            testAreaMD5 = MD5.getMD5(jTextArea.getText());
+            testAreaMD5 = MD5.getMD5API(jTextArea.getText());
             label_Information.setText("MD5值计算完成");
         }
         if (file == null)

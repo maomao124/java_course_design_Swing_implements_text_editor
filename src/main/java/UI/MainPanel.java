@@ -4,10 +4,7 @@ import io.Configuration;
 import io.SHA.MD5;
 
 import javax.swing.*;
-import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.EtchedBorder;
-import javax.swing.border.LineBorder;
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
 import javax.swing.text.BadLocationException;
@@ -112,6 +109,15 @@ public class MainPanel
     private JMenuItem border;
     private JMenuItem delete_confirmation;
     private JMenuItem wrap;
+    private JMenuItem encoding_saveAs;
+    private JMenuItem overload_UTF_8;
+    private JMenuItem overload_UTF_16LE;
+    private JMenuItem overload_UTF_16BE;
+    private JMenuItem overload_GBK;
+    private JMenuItem overload_GB18030;
+    private JMenuItem overload_GB2312;
+    private JMenuItem overload_ISO_8859_1;
+    private JMenuItem overload_US_ASCII;
     private static JMenuItem errorLog;
     private JMenuItem instructions_for_use;
     private JMenuItem about;
@@ -382,7 +388,25 @@ public class MainPanel
         delete_confirmation.setBackground(Color.red);
 
         wrap = new JMenuItem("不自动换行");
+        encoding_saveAs = new JMenuItem("使用用户指定的编码格式另存文件");
+        overload_UTF_8 = new JMenuItem("使用UTF-8编码格式重新加载文件");
+        overload_UTF_16LE = new JMenuItem("使用UTF-16LE编码格式重新加载文件");
+        overload_UTF_16BE = new JMenuItem("使用UTF-16BE编码格式重新加载文件");
+        overload_GBK = new JMenuItem("使用GBK编码格式重新加载文件");
+        overload_GB2312 = new JMenuItem("使用GB2312编码格式重新加载文件");
+        overload_GB18030 = new JMenuItem("使用GB18030编码格式重新加载文件");
+        overload_ISO_8859_1 = new JMenuItem("使用ISO-8859-1编码格式重新加载文件");
+        overload_US_ASCII = new JMenuItem("使用US-ASCII编码格式重新加载文件");
         wrap.setBackground(Color.cyan);
+        encoding_saveAs.setBackground(Color.green);
+        overload_UTF_8.setBackground(Color.yellow);
+        overload_UTF_16LE.setBackground(Color.yellow);
+        overload_UTF_16BE.setBackground(Color.yellow);
+        overload_GBK.setBackground(Color.yellow);
+        overload_GB2312.setBackground(Color.yellow);
+        overload_GB18030.setBackground(Color.yellow);
+        overload_ISO_8859_1.setBackground(Color.yellow);
+        overload_US_ASCII.setBackground(Color.yellow);
 
         errorLog = new JMenuItem("错误日志");
         instructions_for_use = new JMenuItem("使用说明");
@@ -425,6 +449,15 @@ public class MainPanel
 
         //格式
         format.add(wrap);
+        format.add(encoding_saveAs);
+        format.add(overload_UTF_8);
+        format.add(overload_UTF_16LE);
+        format.add(overload_UTF_16BE);
+        format.add(overload_GBK);
+        format.add(overload_GB2312);
+        format.add(overload_GB18030);
+        format.add(overload_ISO_8859_1);
+        format.add(overload_US_ASCII);
 
         //帮助
         help.add(errorLog);
@@ -915,6 +948,41 @@ public class MainPanel
             public void actionPerformed(ActionEvent e)
             {
                 MainPanel.this.change_auto_clear_mode();
+            }
+        });
+
+        encoding_saveAs.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                if (jTextArea.getText().length() == 0)
+                {
+                    label_Information.setText("文本域为空,没必要保存");
+                    return;
+                }
+                JFileChooser jFileChooser = new JFileChooser(".");
+                int result = jFileChooser.showSaveDialog(null);
+                if (result == JFileChooser.APPROVE_OPTION)
+                {
+                    String str;
+                    str = JOptionPane.showInputDialog(null,
+                            "请输入文件编码：", "", JOptionPane.QUESTION_MESSAGE);
+                    if (str == null || str.equals(""))
+                    {
+                        //Toolkit.getDefaultToolkit().beep();
+                        label_Information.setText("已取消输入编码，或者输入的编码为空！");
+                        return;
+                    }
+                    //System.out.println(str);
+                    File file = jFileChooser.getSelectedFile();
+                    io.File.write(file, jTextArea, label_Information, str);         //写入文件
+                }
+                else
+                {
+                    Toolkit.getDefaultToolkit().beep();
+                    label_Information.setText("已取消！！！");
+                }
             }
         });
     }

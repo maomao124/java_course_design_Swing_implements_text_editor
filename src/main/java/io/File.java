@@ -44,7 +44,7 @@ public class File
         }
         catch (IOException e)
         {
-            System.out.println("识别失败");
+            System.err.println("编码识别失败");
             e.printStackTrace();
             final Writer result = new StringWriter();
             final PrintWriter printWriter = new PrintWriter(result);
@@ -61,7 +61,6 @@ public class File
         InputStreamReader InputStreamReader = null;
         try                                  //文件流打开，文件读写
         {
-
             fileInputStream = new FileInputStream(file);        // test.autoDiscernEncoding(file)
             encoding = autoDiscernEncoding(file);
             InputStreamReader = new InputStreamReader(fileInputStream, encoding);
@@ -150,6 +149,77 @@ public class File
             e1.printStackTrace(printWriter);
             String stackTraceStr = result.toString();
             io.ErrorLog.write(stackTraceStr);
+        }
+        catch (Exception e1)                  //其它异常
+        {
+            Toolkit.getDefaultToolkit().beep();
+            e1.printStackTrace();
+            final Writer result = new StringWriter();
+            final PrintWriter printWriter = new PrintWriter(result);
+            e1.printStackTrace(printWriter);
+            String stackTraceStr = result.toString();
+            io.ErrorLog.write(stackTraceStr);
+        }
+        finally
+        {
+            try                              //关闭流
+            {
+                if (fileOutputStream != null)
+                {
+                    fileOutputStream.close();
+                }
+            }
+            catch (NullPointerException e1)    //空指针异常
+            {
+                Toolkit.getDefaultToolkit().beep();
+                System.err.println("文件已经被关闭，无法再次关闭！！！");
+                final Writer result = new StringWriter();
+                final PrintWriter printWriter = new PrintWriter(result);
+                e1.printStackTrace(printWriter);
+                String stackTraceStr = result.toString();
+                io.ErrorLog.write(stackTraceStr);
+            }
+            catch (Exception e1)              //其它异常
+            {
+                Toolkit.getDefaultToolkit().beep();
+                e1.printStackTrace();
+                final Writer result = new StringWriter();
+                final PrintWriter printWriter = new PrintWriter(result);
+                e1.printStackTrace(printWriter);
+                String stackTraceStr = result.toString();
+                io.ErrorLog.write(stackTraceStr);
+            }
+        }
+    }
+
+    public static void write(java.io.File file, JTextArea jTextArea, JLabel label_Information, String encode)
+    {
+        FileOutputStream fileOutputStream = null;
+        try                                  //文件流打开，文件读写
+        {
+            String s = "123";
+            s.getBytes(encode);                                         //测试编码，避免编码错误时创建文件
+            label_Information.setText("正在保存...");
+            fileOutputStream = new FileOutputStream(file);
+            fileOutputStream.write(jTextArea.getText().getBytes(encode));
+            label_Information.setText("保存成功");
+        }
+        catch (FileNotFoundException e1)      //文件未找到
+        {
+            Toolkit.getDefaultToolkit().beep();
+            System.err.println("文件未找到！！！  " + "\n错误内容：" + e1.toString());
+            final Writer result = new StringWriter();
+            final PrintWriter printWriter = new PrintWriter(result);
+            e1.printStackTrace(printWriter);
+            String stackTraceStr = result.toString();
+            io.ErrorLog.write(stackTraceStr);
+        }
+        catch (UnsupportedEncodingException e)
+        {
+            Toolkit.getDefaultToolkit().beep();
+            System.out.println("编码\"" + encode + "\"无法识别！");
+            JOptionPane.showMessageDialog(null,
+                    "编码\"" + encode + "\"无法识别！\n 编码输入错误，或者该编码不支持！","编码错误", JOptionPane.ERROR_MESSAGE);
         }
         catch (Exception e1)                  //其它异常
         {
