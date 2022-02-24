@@ -15,7 +15,6 @@ import java.io.Serializable;
  * Version(版本): 1.0
  * Description(描述)： 配置文件的数据类 可序列化
  */
-
 public class Configuration implements Serializable
 {
     private int width = 1280;                       //窗口大小 默认1280*720
@@ -50,20 +49,39 @@ public class Configuration implements Serializable
     private int Layout_up = 0;
     private int Layout_down = 15;
 
+    /**
+     * The Wrap.
+     */
     boolean wrap = true;                         //文本域是否换行
+    /**
+     * The Is auto clear.
+     */
     boolean isAutoClear = false;                   //是否自动清理
 
 
+    /**
+     * Instantiates a new Configuration.
+     */
     public Configuration()                       //无参构造方法
     {
 
     }
 
+    /**
+     * Gets width.
+     *
+     * @return the width
+     */
     public int getWidth()                          //get和set方法
     {
         return width;
     }
 
+    /**
+     * Sets width.
+     *
+     * @param width the width
+     */
     public void setWidth(int width)
     {
         if (width >= 0)
@@ -76,11 +94,21 @@ public class Configuration implements Serializable
         }
     }
 
+    /**
+     * Gets height.
+     *
+     * @return the height
+     */
     public int getHeight()
     {
         return height;
     }
 
+    /**
+     * Sets height.
+     *
+     * @param height the height
+     */
     public void setHeight(int height)
     {
         if (height >= 0)
@@ -93,21 +121,41 @@ public class Configuration implements Serializable
         }
     }
 
+    /**
+     * Gets font name.
+     *
+     * @return the font name
+     */
     public String getFontName()
     {
         return fontName;
     }
 
+    /**
+     * Sets font name.
+     *
+     * @param fontName the font name
+     */
     public void setFontName(String fontName)
     {
         this.fontName = fontName;
     }
 
+    /**
+     * Gets font style.
+     *
+     * @return the font style
+     */
     public int getFontStyle()
     {
         return fontStyle;
     }
 
+    /**
+     * Sets font style.
+     *
+     * @param fontStyle the font style
+     */
     public void setFontStyle(int fontStyle)
     {
         if (fontStyle >= 0)
@@ -120,11 +168,21 @@ public class Configuration implements Serializable
         }
     }
 
+    /**
+     * Gets font size.
+     *
+     * @return the font size
+     */
     public int getFontSize()
     {
         return fontSize;
     }
 
+    /**
+     * Sets font size.
+     *
+     * @param fontSize the font size
+     */
     public void setFontSize(int fontSize)
     {
         if (fontSize >= 0)
@@ -137,11 +195,21 @@ public class Configuration implements Serializable
         }
     }
 
+    /**
+     * Gets font color r.
+     *
+     * @return the font color r
+     */
     public int getFont_color_r()
     {
         return font_color_r;
     }
 
+    /**
+     * Sets font color r.
+     *
+     * @param font_color_r the font color r
+     */
     public void setFont_color_r(int font_color_r)
     {
         if (font_color_r > 255)
@@ -158,11 +226,21 @@ public class Configuration implements Serializable
         }
     }
 
+    /**
+     * Gets font color g.
+     *
+     * @return the font color g
+     */
     public int getFont_color_g()
     {
         return font_color_g;
     }
 
+    /**
+     * Sets font color g.
+     *
+     * @param font_color_g the font color g
+     */
     public void setFont_color_g(int font_color_g)
     {
         if (font_color_g > 255)
@@ -179,11 +257,21 @@ public class Configuration implements Serializable
         }
     }
 
+    /**
+     * Gets font color b.
+     *
+     * @return the font color b
+     */
     public int getFont_color_b()
     {
         return font_color_b;
     }
 
+    /**
+     * Sets font color b.
+     *
+     * @param font_color_b the font color b
+     */
     public void setFont_color_b(int font_color_b)
     {
         if (font_color_b > 255)
@@ -200,11 +288,21 @@ public class Configuration implements Serializable
         }
     }
 
+    /**
+     * Gets cursor color r.
+     *
+     * @return the cursor color r
+     */
     public int getCursor_color_r()
     {
         return cursor_color_r;
     }
 
+    /**
+     * Sets cursor color r.
+     *
+     * @param cursor_color_r the cursor color r
+     */
     public void setCursor_color_r(int cursor_color_r)
     {
         if (cursor_color_r > 255)
@@ -221,11 +319,21 @@ public class Configuration implements Serializable
         }
     }
 
+    /**
+     * Gets cursor color g.
+     *
+     * @return the cursor color g
+     */
     public int getCursor_color_g()
     {
         return cursor_color_g;
     }
 
+    /**
+     * Sets cursor color g.
+     *
+     * @param cursor_color_g the cursor color g
+     */
     public void setCursor_color_g(int cursor_color_g)
     {
         if (cursor_color_g > 255)
@@ -242,11 +350,21 @@ public class Configuration implements Serializable
         }
     }
 
+    /**
+     * Gets cursor color b.
+     *
+     * @return the cursor color b
+     */
     public int getCursor_color_b()
     {
         return cursor_color_b;
     }
 
+    /**
+     * Sets cursor color b.
+     *
+     * @param cursor_color_b the cursor color b
+     */
     public void setCursor_color_b(int cursor_color_b)
     {
         if (cursor_color_b > 255)
@@ -263,11 +381,21 @@ public class Configuration implements Serializable
         }
     }
 
+    /**
+     * Gets background color r.
+     *
+     * @return the background color r
+     */
     public int getBackground_color_r()
     {
         return background_color_r;
     }
 
+    /**
+     * Sets background color r.
+     *
+     * @param background_color_r the background color r
+     */
     public void setBackground_color_r(int background_color_r)
     {
         if (background_color_r > 255)
@@ -284,11 +412,21 @@ public class Configuration implements Serializable
         }
     }
 
+    /**
+     * Gets background color g.
+     *
+     * @return the background color g
+     */
     public int getBackground_color_g()
     {
         return background_color_g;
     }
 
+    /**
+     * Sets background color g.
+     *
+     * @param background_color_g the background color g
+     */
     public void setBackground_color_g(int background_color_g)
     {
         if (background_color_g > 255)
@@ -305,11 +443,21 @@ public class Configuration implements Serializable
         }
     }
 
+    /**
+     * Gets background color b.
+     *
+     * @return the background color b
+     */
     public int getBackground_color_b()
     {
         return background_color_b;
     }
 
+    /**
+     * Sets background color b.
+     *
+     * @param background_color_b the background color b
+     */
     public void setBackground_color_b(int background_color_b)
     {
         if (background_color_b > 255)
@@ -326,11 +474,21 @@ public class Configuration implements Serializable
         }
     }
 
+    /**
+     * Gets selected color r.
+     *
+     * @return the selected color r
+     */
     public int getSelected_color_r()
     {
         return selected_color_r;
     }
 
+    /**
+     * Sets selected color r.
+     *
+     * @param selected_color_r the selected color r
+     */
     public void setSelected_color_r(int selected_color_r)
     {
         if (selected_color_r > 255)
@@ -347,11 +505,21 @@ public class Configuration implements Serializable
         }
     }
 
+    /**
+     * Gets selected color g.
+     *
+     * @return the selected color g
+     */
     public int getSelected_color_g()
     {
         return selected_color_g;
     }
 
+    /**
+     * Sets selected color g.
+     *
+     * @param selected_color_g the selected color g
+     */
     public void setSelected_color_g(int selected_color_g)
     {
         if (selected_color_g > 255)
@@ -368,11 +536,21 @@ public class Configuration implements Serializable
         }
     }
 
+    /**
+     * Gets selected color b.
+     *
+     * @return the selected color b
+     */
     public int getSelected_color_b()
     {
         return selected_color_b;
     }
 
+    /**
+     * Sets selected color b.
+     *
+     * @param selected_color_b the selected color b
+     */
     public void setSelected_color_b(int selected_color_b)
     {
         if (selected_color_b > 255)
@@ -389,11 +567,21 @@ public class Configuration implements Serializable
         }
     }
 
+    /**
+     * Gets rendering color r.
+     *
+     * @return the rendering color r
+     */
     public int getRendering_color_r()
     {
         return rendering_color_r;
     }
 
+    /**
+     * Sets rendering color r.
+     *
+     * @param rendering_color_r the rendering color r
+     */
     public void setRendering_color_r(int rendering_color_r)
     {
         if (rendering_color_r > 255)
@@ -410,11 +598,21 @@ public class Configuration implements Serializable
         }
     }
 
+    /**
+     * Gets rendering color g.
+     *
+     * @return the rendering color g
+     */
     public int getRendering_color_g()
     {
         return rendering_color_g;
     }
 
+    /**
+     * Sets rendering color g.
+     *
+     * @param rendering_color_g the rendering color g
+     */
     public void setRendering_color_g(int rendering_color_g)
     {
         if (rendering_color_g > 255)
@@ -431,11 +629,21 @@ public class Configuration implements Serializable
         }
     }
 
+    /**
+     * Gets rendering color b.
+     *
+     * @return the rendering color b
+     */
     public int getRendering_color_b()
     {
         return rendering_color_b;
     }
 
+    /**
+     * Sets rendering color b.
+     *
+     * @param rendering_color_b the rendering color b
+     */
     public void setRendering_color_b(int rendering_color_b)
     {
         if (rendering_color_b > 255)
@@ -452,11 +660,21 @@ public class Configuration implements Serializable
         }
     }
 
+    /**
+     * Gets layout left.
+     *
+     * @return the layout left
+     */
     public int getLayout_left()
     {
         return Layout_left;
     }
 
+    /**
+     * Sets layout left.
+     *
+     * @param layout_left the layout left
+     */
     public void setLayout_left(int layout_left)
     {
         if (layout_left >= 0)
@@ -469,11 +687,21 @@ public class Configuration implements Serializable
         }
     }
 
+    /**
+     * Gets layout right.
+     *
+     * @return the layout right
+     */
     public int getLayout_right()
     {
         return Layout_right;
     }
 
+    /**
+     * Sets layout right.
+     *
+     * @param layout_right the layout right
+     */
     public void setLayout_right(int layout_right)
     {
         if (layout_right >= 0)
@@ -486,11 +714,21 @@ public class Configuration implements Serializable
         }
     }
 
+    /**
+     * Gets layout up.
+     *
+     * @return the layout up
+     */
     public int getLayout_up()
     {
         return Layout_up;
     }
 
+    /**
+     * Sets layout up.
+     *
+     * @param layout_up the layout up
+     */
     public void setLayout_up(int layout_up)
     {
         if (layout_up >= 0)
@@ -503,11 +741,21 @@ public class Configuration implements Serializable
         }
     }
 
+    /**
+     * Gets layout down.
+     *
+     * @return the layout down
+     */
     public int getLayout_down()
     {
         return Layout_down;
     }
 
+    /**
+     * Sets layout down.
+     *
+     * @param layout_down the layout down
+     */
     public void setLayout_down(int layout_down)
     {
         if (layout_down >= 0)
@@ -520,21 +768,41 @@ public class Configuration implements Serializable
         }
     }
 
+    /**
+     * Is wrap boolean.
+     *
+     * @return the boolean
+     */
     public boolean isWrap()
     {
         return wrap;
     }
 
+    /**
+     * Sets wrap.
+     *
+     * @param wrap the wrap
+     */
     public void setWrap(boolean wrap)
     {
         this.wrap = wrap;
     }
 
+    /**
+     * Is auto clear boolean.
+     *
+     * @return the boolean
+     */
     public boolean isAutoClear()
     {
         return isAutoClear;
     }
 
+    /**
+     * Sets auto clear.
+     *
+     * @param autoClear the auto clear
+     */
     public void setAutoClear(boolean autoClear)
     {
         isAutoClear = autoClear;
@@ -750,12 +1018,20 @@ import java.io.File;
  * Version(版本): 1.0
  * Description(描述)： 配置文件的输入和输出
  */
-
 public class Configuration
 {
+    /**
+     * The constant config.
+     */
     public static data.Configuration config;                //配置文件对象
+    /**
+     * The constant config_is_not_null.
+     */
     public static boolean config_is_not_null;               //配置文件的对象是否为空
 
+    /**
+     * Write.
+     */
     public static void write()                              //将配置写入内存
     {
         FileOutputStream fileOutputStream = null;
@@ -822,6 +1098,9 @@ public class Configuration
         }
     }
 
+    /**
+     * Read.
+     */
     public static void read()
     {
         FileInputStream fileInputStream = null;
@@ -885,6 +1164,9 @@ public class Configuration
         }
     }
 
+    /**
+     * Delete.
+     */
     public static void delete()                             //删除此抽象路径名表示的文件或目录
     {
         int result;
@@ -952,9 +1234,13 @@ import java.util.Calendar;
  * Version(版本): 1.0
  * Description(描述)： 错误日志类 读写
  */
-
 public class ErrorLog
 {
+    /**
+     * Write.
+     *
+     * @param message the message
+     */
     public static void write(String message)
     {
         Calendar calendar = Calendar.getInstance();// 获取当前时间
@@ -1024,6 +1310,9 @@ public class ErrorLog
         }
     }
 
+    /**
+     * Read.
+     */
     public static void read()
     {
         FileInputStream fileInputStream = null;
@@ -1128,11 +1417,19 @@ import java.nio.file.Paths;
  * Version(版本): 1.0
  * Description(描述)： 文件读写类
  */
-
 public class File
 {
+    /**
+     * The constant encoding.
+     */
     public static String encoding = "UTF-8";                          //文件编码
 
+    /**
+     * Auto discern encoding string.
+     *
+     * @param file the file
+     * @return the string
+     */
     public static String autoDiscernEncoding(java.io.File file)
     {
         String encoding = "UTF-8";
@@ -1160,6 +1457,13 @@ public class File
         }
     }
 
+    /**
+     * Read.
+     *
+     * @param file              the file
+     * @param jTextArea         the j text area
+     * @param label_Information the label information
+     */
     public static void read(java.io.File file, JTextArea jTextArea, JLabel label_Information)
     {
         FileInputStream fileInputStream = null;
@@ -1235,6 +1539,14 @@ public class File
         }
     }
 
+    /**
+     * Read.
+     *
+     * @param file              the file
+     * @param jTextArea         the j text area
+     * @param label_Information the label information
+     * @param encode            the encode
+     */
     public static void read(java.io.File file, JTextArea jTextArea, JLabel label_Information, String encode)
     {
         FileInputStream fileInputStream = null;
@@ -1311,6 +1623,13 @@ public class File
         }
     }
 
+    /**
+     * Write.
+     *
+     * @param file              the file
+     * @param jTextArea         the j text area
+     * @param label_Information the label information
+     */
     public static void write(java.io.File file, JTextArea jTextArea, JLabel label_Information)
     {
         FileOutputStream fileOutputStream = null;
@@ -1373,6 +1692,14 @@ public class File
         }
     }
 
+    /**
+     * Write.
+     *
+     * @param file              the file
+     * @param jTextArea         the j text area
+     * @param label_Information the label information
+     * @param encode            the encode
+     */
     public static void write(java.io.File file, JTextArea jTextArea, JLabel label_Information, String encode)
     {
         FileOutputStream fileOutputStream = null;
@@ -1444,6 +1771,12 @@ public class File
         }
     }
 
+    /**
+     * Write.
+     *
+     * @param jTextArea         the j text area
+     * @param label_Information the label information
+     */
     public static void write(JTextArea jTextArea, JLabel label_Information)
     {
         FileOutputStream fileOutputStream = null;
@@ -1506,6 +1839,14 @@ public class File
         }
     }
 
+    /**
+     * Args read.
+     *
+     * @param file                the file
+     * @param jTextArea           the j text area
+     * @param label_Information   the label information
+     * @param jTextField_FilePath the j text field file path
+     */
     public static void args_read(java.io.File file, JTextArea jTextArea, JLabel label_Information, JTextField jTextField_FilePath)
     {
         if (file != null)                                 //不为空
@@ -1893,11 +2234,13 @@ import java.util.Date;
  * Version(版本): 1.0
  * Description(描述)： 从这里启动整个程序
  */
-
 public class Run
 {
     private static long runTime = 0;
-    //public static boolean args_filePath = false;                              //匿名包里其它包里的类无法调用匿名包里的
+    /**
+     * The constant decimalFormat.
+     */
+//public static boolean args_filePath = false;                              //匿名包里其它包里的类无法调用匿名包里的
     static DecimalFormat decimalFormat = new DecimalFormat("00");                       //yyyy/MM/dd  HH:mm:ss
     private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
 
@@ -1923,7 +2266,7 @@ public class Run
                 System.out.printf("已使用的内存：%8.4fMB\n", memory);
                 MainPanel.label_time_and_memory.setText("运行：" + runTime / 60 + "分" +
                         decimalFormat.format(runTime % 60) + "秒  " + String.format(" 内存：%8.3fMB", memory));
-                MainPanel.label_localTime.setText("时间："+simpleDateFormat.format(new Date()));
+                MainPanel.label_localTime.setText("时间：" + simpleDateFormat.format(new Date()));
                 /*
                 if (Configuration.config_is_not_null)
                 {
@@ -2050,6 +2393,11 @@ public class Run
         }
     }
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args)
     {
         try
@@ -2090,9 +2438,14 @@ import java.net.URL;
  * Version(版本): 1.0
  * Description(描述)： 关于面板
  */
-
 public class About extends JFrame
 {
+    /**
+     * Create image icon image icon.
+     *
+     * @param path the path
+     * @return the image icon
+     */
     public static ImageIcon createImageIcon(String path)
     {
         URL imgURL = MainPanel.class.getResource(path);
@@ -2107,9 +2460,12 @@ public class About extends JFrame
         }
     }
 
+    /**
+     * Instantiates a new About.
+     */
     public About()
     {
-        this.setSize(335, 460);
+        this.setSize(335, 480);
         int x = MainPanel.getjFrame().getX();
         int y = MainPanel.getjFrame().getY();
         int width = MainPanel.getjFrame().getWidth();
@@ -2123,7 +2479,7 @@ public class About extends JFrame
         panel.setBorder(new EmptyBorder(10, 5, 10, 5));
         JPanel panel1 = new JPanel();
         panel1.setBorder(new EmptyBorder(10, 5, 10, 5));
-        panel.setLayout(new GridLayout(6, 1));
+        panel.setLayout(new GridLayout(7, 1));
         panel1.setLayout(new FlowLayout(FlowLayout.CENTER,5000,0));
         JLabel label1 = new JLabel("作者：mao");
         label1.setHorizontalAlignment(0);
@@ -2131,6 +2487,8 @@ public class About extends JFrame
         label2.setHorizontalAlignment(0);
         JLabel label5 = new JLabel("最近更新：2021-12-14");
         label5.setHorizontalAlignment(0);
+        JLabel label9 = new JLabel("git提交次数：143次");
+        label9.setHorizontalAlignment(0);
         JLabel label3 = new JLabel("GitHub：https://github.com/maomao124/");
         JLabel label6 = new JLabel("远程仓库名：");
         JLabel label7 = new JLabel("java_course_design_Swing_implements_text_editor");
@@ -2145,6 +2503,7 @@ public class About extends JFrame
         panel.add(label1);
         panel.add(label2);
         panel.add(label5);
+        panel.add(label9);
         panel.add(label3);
         panel.add(label6);
         panel.add(label7);
@@ -2180,11 +2539,20 @@ import java.awt.event.ActionListener;
  * Version(版本): 1.0
  * Description(描述)： 设置文本域颜色
  */
-
 public class Color_JTextArea
 {
     private static JTextArea jTextArea;
 
+    /**
+     * Init color j text area.
+     *
+     * @param jTextArea        the j text area
+     * @param font_color       the font color
+     * @param cursor_color     the cursor color
+     * @param background_color the background color
+     * @param selected_color   the selected color
+     * @param rendering_color  the rendering color
+     */
     public static void init_Color_JTextArea(JTextArea jTextArea, JMenuItem
             font_color, JMenuItem cursor_color, JMenuItem background_color, JMenuItem selected_color, JMenuItem rendering_color)
     {
@@ -2352,7 +2720,6 @@ import java.awt.event.MouseEvent;
  * Version(版本): 1.0
  * Description(描述)： 错误日志类的GUI界面
  */
-
 public class ErrorLog
 {
     private static JTextArea jTextArea_ErrorLog;
@@ -2360,11 +2727,19 @@ public class ErrorLog
     private static JButton button_back;
     private static JButton button_back_pop;
 
+    /**
+     * Gets text area error log.
+     *
+     * @return the text area error log
+     */
     public static JTextArea getjTextArea_ErrorLog()
     {
         return jTextArea_ErrorLog;
     }
 
+    /**
+     * Init error log j panel.
+     */
     public static void init_error_log_jPanel()                  //初始化错误日志面板
     {
         jTextArea_ErrorLog = new JTextArea(15, 55);
@@ -2442,6 +2817,9 @@ public class ErrorLog
         });
     }
 
+    /**
+     * Display.
+     */
     public static void display()                                    //显示面板
     {
         jTextArea_ErrorLog.setText("");             //清空
@@ -2489,12 +2867,14 @@ import java.util.Date;
  * Version(版本): 1.0
  * Description(描述)： 文件信息面板
  */
-
 public class FileInformation
 {
     private static JTextArea jTextArea_FileInformation;
     private static JScrollPane jScrollPane;
 
+    /**
+     * Init.
+     */
     public static void init()                                           //初始化
     {
         jTextArea_FileInformation = new JTextArea(15, 55);
@@ -2582,6 +2962,9 @@ public class FileInformation
         });
     }
 
+    /**
+     * Display.
+     */
     public static void display()                                            //显示面板
     {
         if (MainPanel.getFile() == null)
@@ -2634,6 +3017,9 @@ public class FileInformation
         jFrame.repaint();
     }
 
+    /**
+     * Back.
+     */
     public static void back()               //返回到原来的面板
     {
         JFrame jFrame = MainPanel.getjFrame();
@@ -2665,7 +3051,6 @@ import java.awt.*;
  * Version(版本): 1.0
  * Description(描述)： 字体设置
  */
-
 public class FontSetting extends JFrame
 {
     private JTextArea textArea;
@@ -2679,6 +3064,11 @@ public class FontSetting extends JFrame
     private JScrollPane jScrollPane2;
     private JScrollPane jScrollPane3;
 
+    /**
+     * Instantiates a new Font setting.
+     *
+     * @param textArea the text area
+     */
     public FontSetting(JTextArea textArea)
     {
 
@@ -2738,6 +3128,9 @@ public class FontSetting extends JFrame
         this.add(jScrollPane3);
     }
 
+    /**
+     * Add listener.
+     */
     public void addListener()
     {
         list1.addListSelectionListener(new ListSelectionListener()
@@ -2817,9 +3210,11 @@ import java.awt.*;
  * Version(版本): 1.0
  * Description(描述)： 使用说明
  */
-
 public class InstructionsForUse extends JFrame
 {
+    /**
+     * Instantiates a new Instructions for use.
+     */
     public InstructionsForUse()
     {
         this.setTitle("使用说明");
@@ -2905,7 +3300,6 @@ import java.awt.*;
  * Version(版本): 1.0
  * Description(描述)： 边框设置的界面
  */
-
 public class JTextArea_Border extends JFrame
 {
     private JTextArea textArea;
@@ -2925,6 +3319,12 @@ public class JTextArea_Border extends JFrame
     private JScrollPane jScrollPane3;
     private JScrollPane jScrollPane4;
 
+    /**
+     * Instantiates a new J text area border.
+     *
+     * @param textArea    the text area
+     * @param jScrollPane the j scroll pane
+     */
     public JTextArea_Border(JTextArea textArea, JScrollPane jScrollPane)
     {
 
@@ -3168,6 +3568,9 @@ public class JTextArea_Border extends JFrame
         this.add(jScrollPane4);
     }
 
+    /**
+     * Add listener.
+     */
     public void addListener()
     {
         list1.addListSelectionListener(new ListSelectionListener()
@@ -3298,7 +3701,6 @@ import java.io.UnsupportedEncodingException;
  * Version(版本): 1.0
  * Description(描述)： 主面板类
  */
-
 public class MainPanel
 {
     private static JFrame jFrame;                         //顶层面板
@@ -3316,12 +3718,27 @@ public class MainPanel
     private static JButton button_FileInformation = new JButton("文件信息");       //文件信息按钮
     private final JButton button_autoSave = new JButton("不自动保存");             //自动保存按钮
     private static JButton button_Back = new JButton("<-返回");           //返回按钮
+    /**
+     * The Is editable.
+     */
     boolean isEditable = true;                                      //文本域是否可以编辑
+    /**
+     * The Is auto clear.
+     */
     boolean isAutoClear = false;                                       //是否自动清理软件内存
     private static File file;                                       //关联的文件
     private final JLabel label_Information = new JLabel("欢迎使用文件编辑器", JLabel.CENTER);      //状态位
+    /**
+     * The constant label_time_and_memory.
+     */
     public static final JLabel label_time_and_memory = new JLabel("", JLabel.RIGHT);
+    /**
+     * The constant label_localTime.
+     */
     public static final JLabel label_localTime = new JLabel("", JLabel.LEFT);
+    /**
+     * The constant label_encoding.
+     */
     public static final JLabel label_encoding = new JLabel("", JLabel.LEFT);
     private final UI.FontSetting fontSetting;
     private final UI.JTextArea_Border jTextArea_border;
@@ -3396,102 +3813,202 @@ public class MainPanel
     private JMenuItem about;
 
 
-    //各种get和set方法
+    /**
+     * Gets button file information.
+     *
+     * @return the button file information
+     */
+//各种get和set方法
     public static JButton getButton_FileInformation()
     {
         return button_FileInformation;
     }
 
+    /**
+     * Sets button file information.
+     *
+     * @param button_FileInformation the button file information
+     */
     public static void setButton_FileInformation(JButton button_FileInformation)
     {
         MainPanel.button_FileInformation = button_FileInformation;
     }
 
+    /**
+     * Gets replace.
+     *
+     * @return the replace
+     */
     public static JMenuItem getReplace()
     {
         return replace;
     }
 
+    /**
+     * Gets panel error log.
+     *
+     * @return the panel error log
+     */
     public static JPanel getjPanel_ErrorLog()
     {
         return jPanel_ErrorLog;
     }
 
+    /**
+     * Gets error log.
+     *
+     * @return the error log
+     */
     public static JMenuItem getErrorLog()
     {
         return errorLog;
     }
 
+    /**
+     * Sets error log.
+     *
+     * @param errorLog the error log
+     */
     public static void setErrorLog(JMenuItem errorLog)
     {
         MainPanel.errorLog = errorLog;
     }
 
+    /**
+     * Gets file information.
+     *
+     * @return the file information
+     */
     public static JMenuItem getFile_information()
     {
         return file_information;
     }
 
+    /**
+     * Sets file information.
+     *
+     * @param file_information the file information
+     */
     public static void setFile_information(JMenuItem file_information)
     {
         MainPanel.file_information = file_information;
     }
 
+    /**
+     * Gets search.
+     *
+     * @return the search
+     */
     public static JMenuItem getSearch()
     {
         return search;
     }
 
+    /**
+     * Sets panel error log.
+     *
+     * @param jPanel_ErrorLog the j panel error log
+     */
     public static void setjPanel_ErrorLog(JPanel jPanel_ErrorLog)
     {
         MainPanel.jPanel_ErrorLog = jPanel_ErrorLog;
     }
 
+    /**
+     * Gets frame.
+     *
+     * @return the frame
+     */
     public static JFrame getjFrame()
     {
         return jFrame;
     }
 
+    /**
+     * Sets frame.
+     *
+     * @param jFrame the j frame
+     */
     public static void setjFrame(JFrame jFrame)
     {
         MainPanel.jFrame = jFrame;
     }
 
+    /**
+     * Gets panel.
+     *
+     * @return the panel
+     */
     public static JPanel getjPanel()
     {
         return jPanel;
     }
 
+    /**
+     * Sets panel.
+     *
+     * @param jPanel the j panel
+     */
     public static void setjPanel(JPanel jPanel)
     {
         MainPanel.jPanel = jPanel;
     }
 
+    /**
+     * Gets panel file information.
+     *
+     * @return the panel file information
+     */
     public static JPanel getjPanel_FileInformation()
     {
         return jPanel_FileInformation;
     }
 
+    /**
+     * Sets panel file information.
+     *
+     * @param jPanel_FileInformation the j panel file information
+     */
     public static void setjPanel_FileInformation(JPanel jPanel_FileInformation)
     {
         MainPanel.jPanel_FileInformation = jPanel_FileInformation;
     }
 
+    /**
+     * Gets button back.
+     *
+     * @return the button back
+     */
     public static JButton getButton_Back()
     {
         return button_Back;
     }
 
+    /**
+     * Sets button back.
+     *
+     * @param button_Back the button back
+     */
     public static void setButton_Back(JButton button_Back)
     {
         MainPanel.button_Back = button_Back;
     }
 
+    /**
+     * Gets file.
+     *
+     * @return the file
+     */
     public static File getFile()
     {
         return file;
     }
 
+    /**
+     * Sets file.
+     *
+     * @param file the file
+     */
     public static void setFile(File file)
     {
         MainPanel.file = file;
@@ -3852,6 +4369,9 @@ public class MainPanel
         }
     }
 
+    /**
+     * Instantiates a new Main panel.
+     */
     public MainPanel()                                                   //构造方法
     {
         io.Configuration.read();                                         //读配置文件
@@ -5223,12 +5743,17 @@ import java.awt.event.ActionListener;
  * Version(版本): 1.0
  * Description(描述)： 替换
  */
-
 public class Replace
 {
     private static int start = 0;                               // 查找开始位置
     private static int end = 0;                                 // 查找结束位置
 
+    /**
+     * Init replace.
+     *
+     * @param jTextArea         the j text area
+     * @param label_information the label information
+     */
     public static void init_replace(JTextArea jTextArea, JLabel label_information)
     {
         MainPanel.getReplace().addActionListener(new ActionListener()
@@ -5316,6 +5841,12 @@ public class Replace
         });
     }
 
+    /**
+     * Replace.
+     *
+     * @param jTextArea         the j text area
+     * @param label_information the label information
+     */
     public static void replace(JTextArea jTextArea, JLabel label_information)
     {
         // 替换对话框
@@ -5420,12 +5951,17 @@ import java.awt.event.*;
  * Version(版本): 1.0
  * Description(描述)： 查找面板
  */
-
 public class Search
 {
     private static int start = 0;                                            // 查找开始位置
     private static int end = 0;                                              // 查找结束位置
 
+    /**
+     * Init search.
+     *
+     * @param jTextArea         the j text area
+     * @param label_information the label information
+     */
     public static void init_search(JTextArea jTextArea, JLabel label_information)
     {
         MainPanel.getSearch().addActionListener(new ActionListener()
@@ -5491,6 +6027,12 @@ public class Search
         });
     }
 
+    /**
+     * Search.
+     *
+     * @param jTextArea         the j text area
+     * @param label_information the label information
+     */
     public static void search(JTextArea jTextArea, JLabel label_information)
     {
         // 查找对话框
