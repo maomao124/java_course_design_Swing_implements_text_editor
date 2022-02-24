@@ -16,12 +16,17 @@ import java.awt.event.*;
  * Version(版本): 1.0
  * Description(描述)： 查找面板
  */
-
 public class Search
 {
     private static int start = 0;                                            // 查找开始位置
     private static int end = 0;                                              // 查找结束位置
 
+    /**
+     * Init search.
+     *
+     * @param jTextArea         the j text area
+     * @param label_information the label information
+     */
     public static void init_search(JTextArea jTextArea, JLabel label_information)
     {
         MainPanel.getSearch().addActionListener(new ActionListener()
@@ -87,6 +92,12 @@ public class Search
         });
     }
 
+    /**
+     * Search.
+     *
+     * @param jTextArea         the j text area
+     * @param label_information the label information
+     */
     public static void search(JTextArea jTextArea, JLabel label_information)
     {
         // 查找对话框

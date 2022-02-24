@@ -15,9 +15,11 @@ import java.awt.*;
  * Version(版本): 1.0
  * Description(描述)： 使用说明
  */
-
 public class InstructionsForUse extends JFrame
 {
+    /**
+     * Instantiates a new Instructions for use.
+     */
     public InstructionsForUse()
     {
         this.setTitle("使用说明");

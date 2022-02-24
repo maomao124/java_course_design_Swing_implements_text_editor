@@ -24,12 +24,14 @@ import java.util.Date;
  * Version(版本): 1.0
  * Description(描述)： 文件信息面板
  */
-
 public class FileInformation
 {
     private static JTextArea jTextArea_FileInformation;
     private static JScrollPane jScrollPane;
 
+    /**
+     * Init.
+     */
     public static void init()                                           //初始化
     {
         jTextArea_FileInformation = new JTextArea(15, 55);
@@ -117,6 +119,9 @@ public class FileInformation
         });
     }
 
+    /**
+     * Display.
+     */
     public static void display()                                            //显示面板
     {
         if (MainPanel.getFile() == null)
@@ -169,6 +174,9 @@ public class FileInformation
         jFrame.repaint();
     }
 
+    /**
+     * Back.
+     */
     public static void back()               //返回到原来的面板
     {
         JFrame jFrame = MainPanel.getjFrame();

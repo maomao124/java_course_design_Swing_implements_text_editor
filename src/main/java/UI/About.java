@@ -17,9 +17,14 @@ import java.net.URL;
  * Version(版本): 1.0
  * Description(描述)： 关于面板
  */
-
 public class About extends JFrame
 {
+    /**
+     * Create image icon image icon.
+     *
+     * @param path the path
+     * @return the image icon
+     */
     public static ImageIcon createImageIcon(String path)
     {
         URL imgURL = MainPanel.class.getResource(path);
@@ -34,6 +39,9 @@ public class About extends JFrame
         }
     }
 
+    /**
+     * Instantiates a new About.
+     */
     public About()
     {
         this.setSize(335, 480);

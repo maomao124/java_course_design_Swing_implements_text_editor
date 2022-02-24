@@ -19,7 +19,6 @@ import java.awt.*;
  * Version(版本): 1.0
  * Description(描述)： 字体设置
  */
-
 public class FontSetting extends JFrame
 {
     private JTextArea textArea;
@@ -33,6 +32,11 @@ public class FontSetting extends JFrame
     private JScrollPane jScrollPane2;
     private JScrollPane jScrollPane3;
 
+    /**
+     * Instantiates a new Font setting.
+     *
+     * @param textArea the text area
+     */
     public FontSetting(JTextArea textArea)
     {
 
@@ -92,6 +96,9 @@ public class FontSetting extends JFrame
         this.add(jScrollPane3);
     }
 
+    /**
+     * Add listener.
+     */
     public void addListener()
     {
         list1.addListSelectionListener(new ListSelectionListener()

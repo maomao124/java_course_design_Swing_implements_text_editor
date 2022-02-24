@@ -17,12 +17,20 @@ import java.io.File;
  * Version(版本): 1.0
  * Description(描述)： 配置文件的输入和输出
  */
-
 public class Configuration
 {
+    /**
+     * The constant config.
+     */
     public static data.Configuration config;                //配置文件对象
+    /**
+     * The constant config_is_not_null.
+     */
     public static boolean config_is_not_null;               //配置文件的对象是否为空
 
+    /**
+     * Write.
+     */
     public static void write()                              //将配置写入内存
     {
         FileOutputStream fileOutputStream = null;
@@ -89,6 +97,9 @@ public class Configuration
         }
     }
 
+    /**
+     * Read.
+     */
     public static void read()
     {
         FileInputStream fileInputStream = null;
@@ -152,6 +163,9 @@ public class Configuration
         }
     }
 
+    /**
+     * Delete.
+     */
     public static void delete()                             //删除此抽象路径名表示的文件或目录
     {
         int result;

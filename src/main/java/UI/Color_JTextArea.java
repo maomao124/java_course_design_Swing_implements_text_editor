@@ -19,11 +19,20 @@ import java.awt.event.ActionListener;
  * Version(版本): 1.0
  * Description(描述)： 设置文本域颜色
  */
-
 public class Color_JTextArea
 {
     private static JTextArea jTextArea;
 
+    /**
+     * Init color j text area.
+     *
+     * @param jTextArea        the j text area
+     * @param font_color       the font color
+     * @param cursor_color     the cursor color
+     * @param background_color the background color
+     * @param selected_color   the selected color
+     * @param rendering_color  the rendering color
+     */
     public static void init_Color_JTextArea(JTextArea jTextArea, JMenuItem
             font_color, JMenuItem cursor_color, JMenuItem background_color, JMenuItem selected_color, JMenuItem rendering_color)
     {

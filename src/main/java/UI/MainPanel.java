@@ -27,7 +27,6 @@ import java.io.UnsupportedEncodingException;
  * Version(版本): 1.0
  * Description(描述)： 主面板类
  */
-
 public class MainPanel
 {
     private static JFrame jFrame;                         //顶层面板
@@ -45,12 +44,27 @@ public class MainPanel
     private static JButton button_FileInformation = new JButton("文件信息");       //文件信息按钮
     private final JButton button_autoSave = new JButton("不自动保存");             //自动保存按钮
     private static JButton button_Back = new JButton("<-返回");           //返回按钮
+    /**
+     * The Is editable.
+     */
     boolean isEditable = true;                                      //文本域是否可以编辑
+    /**
+     * The Is auto clear.
+     */
     boolean isAutoClear = false;                                       //是否自动清理软件内存
     private static File file;                                       //关联的文件
     private final JLabel label_Information = new JLabel("欢迎使用文件编辑器", JLabel.CENTER);      //状态位
+    /**
+     * The constant label_time_and_memory.
+     */
     public static final JLabel label_time_and_memory = new JLabel("", JLabel.RIGHT);
+    /**
+     * The constant label_localTime.
+     */
     public static final JLabel label_localTime = new JLabel("", JLabel.LEFT);
+    /**
+     * The constant label_encoding.
+     */
     public static final JLabel label_encoding = new JLabel("", JLabel.LEFT);
     private final UI.FontSetting fontSetting;
     private final UI.JTextArea_Border jTextArea_border;
@@ -125,102 +139,202 @@ public class MainPanel
     private JMenuItem about;
 
 
-    //各种get和set方法
+    /**
+     * Gets button file information.
+     *
+     * @return the button file information
+     */
+//各种get和set方法
     public static JButton getButton_FileInformation()
     {
         return button_FileInformation;
     }
 
+    /**
+     * Sets button file information.
+     *
+     * @param button_FileInformation the button file information
+     */
     public static void setButton_FileInformation(JButton button_FileInformation)
     {
         MainPanel.button_FileInformation = button_FileInformation;
     }
 
+    /**
+     * Gets replace.
+     *
+     * @return the replace
+     */
     public static JMenuItem getReplace()
     {
         return replace;
     }
 
+    /**
+     * Gets panel error log.
+     *
+     * @return the panel error log
+     */
     public static JPanel getjPanel_ErrorLog()
     {
         return jPanel_ErrorLog;
     }
 
+    /**
+     * Gets error log.
+     *
+     * @return the error log
+     */
     public static JMenuItem getErrorLog()
     {
         return errorLog;
     }
 
+    /**
+     * Sets error log.
+     *
+     * @param errorLog the error log
+     */
     public static void setErrorLog(JMenuItem errorLog)
     {
         MainPanel.errorLog = errorLog;
     }
 
+    /**
+     * Gets file information.
+     *
+     * @return the file information
+     */
     public static JMenuItem getFile_information()
     {
         return file_information;
     }
 
+    /**
+     * Sets file information.
+     *
+     * @param file_information the file information
+     */
     public static void setFile_information(JMenuItem file_information)
     {
         MainPanel.file_information = file_information;
     }
 
+    /**
+     * Gets search.
+     *
+     * @return the search
+     */
     public static JMenuItem getSearch()
     {
         return search;
     }
 
+    /**
+     * Sets panel error log.
+     *
+     * @param jPanel_ErrorLog the j panel error log
+     */
     public static void setjPanel_ErrorLog(JPanel jPanel_ErrorLog)
     {
         MainPanel.jPanel_ErrorLog = jPanel_ErrorLog;
     }
 
+    /**
+     * Gets frame.
+     *
+     * @return the frame
+     */
     public static JFrame getjFrame()
     {
         return jFrame;
     }
 
+    /**
+     * Sets frame.
+     *
+     * @param jFrame the j frame
+     */
     public static void setjFrame(JFrame jFrame)
     {
         MainPanel.jFrame = jFrame;
     }
 
+    /**
+     * Gets panel.
+     *
+     * @return the panel
+     */
     public static JPanel getjPanel()
     {
         return jPanel;
     }
 
+    /**
+     * Sets panel.
+     *
+     * @param jPanel the j panel
+     */
     public static void setjPanel(JPanel jPanel)
     {
         MainPanel.jPanel = jPanel;
     }
 
+    /**
+     * Gets panel file information.
+     *
+     * @return the panel file information
+     */
     public static JPanel getjPanel_FileInformation()
     {
         return jPanel_FileInformation;
     }
 
+    /**
+     * Sets panel file information.
+     *
+     * @param jPanel_FileInformation the j panel file information
+     */
     public static void setjPanel_FileInformation(JPanel jPanel_FileInformation)
     {
         MainPanel.jPanel_FileInformation = jPanel_FileInformation;
     }
 
+    /**
+     * Gets button back.
+     *
+     * @return the button back
+     */
     public static JButton getButton_Back()
     {
         return button_Back;
     }
 
+    /**
+     * Sets button back.
+     *
+     * @param button_Back the button back
+     */
     public static void setButton_Back(JButton button_Back)
     {
         MainPanel.button_Back = button_Back;
     }
 
+    /**
+     * Gets file.
+     *
+     * @return the file
+     */
     public static File getFile()
     {
         return file;
     }
 
+    /**
+     * Sets file.
+     *
+     * @param file the file
+     */
     public static void setFile(File file)
     {
         MainPanel.file = file;
@@ -581,6 +695,9 @@ public class MainPanel
         }
     }
 
+    /**
+     * Instantiates a new Main panel.
+     */
     public MainPanel()                                                   //构造方法
     {
         io.Configuration.read();                                         //读配置文件

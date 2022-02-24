@@ -20,7 +20,6 @@ import java.awt.*;
  * Version(版本): 1.0
  * Description(描述)： 边框设置的界面
  */
-
 public class JTextArea_Border extends JFrame
 {
     private JTextArea textArea;
@@ -40,6 +39,12 @@ public class JTextArea_Border extends JFrame
     private JScrollPane jScrollPane3;
     private JScrollPane jScrollPane4;
 
+    /**
+     * Instantiates a new J text area border.
+     *
+     * @param textArea    the text area
+     * @param jScrollPane the j scroll pane
+     */
     public JTextArea_Border(JTextArea textArea, JScrollPane jScrollPane)
     {
 
@@ -283,6 +288,9 @@ public class JTextArea_Border extends JFrame
         this.add(jScrollPane4);
     }
 
+    /**
+     * Add listener.
+     */
     public void addListener()
     {
         list1.addListSelectionListener(new ListSelectionListener()

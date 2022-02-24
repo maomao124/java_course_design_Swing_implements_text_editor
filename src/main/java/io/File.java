@@ -23,11 +23,19 @@ import java.nio.file.Paths;
  * Version(版本): 1.0
  * Description(描述)： 文件读写类
  */
-
 public class File
 {
+    /**
+     * The constant encoding.
+     */
     public static String encoding = "UTF-8";                          //文件编码
 
+    /**
+     * Auto discern encoding string.
+     *
+     * @param file the file
+     * @return the string
+     */
     public static String autoDiscernEncoding(java.io.File file)
     {
         String encoding = "UTF-8";
@@ -55,6 +63,13 @@ public class File
         }
     }
 
+    /**
+     * Read.
+     *
+     * @param file              the file
+     * @param jTextArea         the j text area
+     * @param label_Information the label information
+     */
     public static void read(java.io.File file, JTextArea jTextArea, JLabel label_Information)
     {
         FileInputStream fileInputStream = null;
@@ -130,6 +145,14 @@ public class File
         }
     }
 
+    /**
+     * Read.
+     *
+     * @param file              the file
+     * @param jTextArea         the j text area
+     * @param label_Information the label information
+     * @param encode            the encode
+     */
     public static void read(java.io.File file, JTextArea jTextArea, JLabel label_Information, String encode)
     {
         FileInputStream fileInputStream = null;
@@ -206,6 +229,13 @@ public class File
         }
     }
 
+    /**
+     * Write.
+     *
+     * @param file              the file
+     * @param jTextArea         the j text area
+     * @param label_Information the label information
+     */
     public static void write(java.io.File file, JTextArea jTextArea, JLabel label_Information)
     {
         FileOutputStream fileOutputStream = null;
@@ -268,6 +298,14 @@ public class File
         }
     }
 
+    /**
+     * Write.
+     *
+     * @param file              the file
+     * @param jTextArea         the j text area
+     * @param label_Information the label information
+     * @param encode            the encode
+     */
     public static void write(java.io.File file, JTextArea jTextArea, JLabel label_Information, String encode)
     {
         FileOutputStream fileOutputStream = null;
@@ -339,6 +377,12 @@ public class File
         }
     }
 
+    /**
+     * Write.
+     *
+     * @param jTextArea         the j text area
+     * @param label_Information the label information
+     */
     public static void write(JTextArea jTextArea, JLabel label_Information)
     {
         FileOutputStream fileOutputStream = null;
@@ -401,6 +445,14 @@ public class File
         }
     }
 
+    /**
+     * Args read.
+     *
+     * @param file                the file
+     * @param jTextArea           the j text area
+     * @param label_Information   the label information
+     * @param jTextField_FilePath the j text field file path
+     */
     public static void args_read(java.io.File file, JTextArea jTextArea, JLabel label_Information, JTextField jTextField_FilePath)
     {
         if (file != null)                                 //不为空

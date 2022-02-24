@@ -19,9 +19,13 @@ import java.util.Calendar;
  * Version(版本): 1.0
  * Description(描述)： 错误日志类 读写
  */
-
 public class ErrorLog
 {
+    /**
+     * Write.
+     *
+     * @param message the message
+     */
     public static void write(String message)
     {
         Calendar calendar = Calendar.getInstance();// 获取当前时间
@@ -91,6 +95,9 @@ public class ErrorLog
         }
     }
 
+    /**
+     * Read.
+     */
     public static void read()
     {
         FileInputStream fileInputStream = null;

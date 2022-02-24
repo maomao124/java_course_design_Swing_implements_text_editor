@@ -14,7 +14,6 @@ import java.io.Serializable;
  * Version(版本): 1.0
  * Description(描述)： 配置文件的数据类 可序列化
  */
-
 public class Configuration implements Serializable
 {
     private int width = 1280;                       //窗口大小 默认1280*720
@@ -49,20 +48,39 @@ public class Configuration implements Serializable
     private int Layout_up = 0;
     private int Layout_down = 15;
 
+    /**
+     * The Wrap.
+     */
     boolean wrap = true;                         //文本域是否换行
+    /**
+     * The Is auto clear.
+     */
     boolean isAutoClear = false;                   //是否自动清理
 
 
+    /**
+     * Instantiates a new Configuration.
+     */
     public Configuration()                       //无参构造方法
     {
 
     }
 
+    /**
+     * Gets width.
+     *
+     * @return the width
+     */
     public int getWidth()                          //get和set方法
     {
         return width;
     }
 
+    /**
+     * Sets width.
+     *
+     * @param width the width
+     */
     public void setWidth(int width)
     {
         if (width >= 0)
@@ -75,11 +93,21 @@ public class Configuration implements Serializable
         }
     }
 
+    /**
+     * Gets height.
+     *
+     * @return the height
+     */
     public int getHeight()
     {
         return height;
     }
 
+    /**
+     * Sets height.
+     *
+     * @param height the height
+     */
     public void setHeight(int height)
     {
         if (height >= 0)
@@ -92,21 +120,41 @@ public class Configuration implements Serializable
         }
     }
 
+    /**
+     * Gets font name.
+     *
+     * @return the font name
+     */
     public String getFontName()
     {
         return fontName;
     }
 
+    /**
+     * Sets font name.
+     *
+     * @param fontName the font name
+     */
     public void setFontName(String fontName)
     {
         this.fontName = fontName;
     }
 
+    /**
+     * Gets font style.
+     *
+     * @return the font style
+     */
     public int getFontStyle()
     {
         return fontStyle;
     }
 
+    /**
+     * Sets font style.
+     *
+     * @param fontStyle the font style
+     */
     public void setFontStyle(int fontStyle)
     {
         if (fontStyle >= 0)
@@ -119,11 +167,21 @@ public class Configuration implements Serializable
         }
     }
 
+    /**
+     * Gets font size.
+     *
+     * @return the font size
+     */
     public int getFontSize()
     {
         return fontSize;
     }
 
+    /**
+     * Sets font size.
+     *
+     * @param fontSize the font size
+     */
     public void setFontSize(int fontSize)
     {
         if (fontSize >= 0)
@@ -136,11 +194,21 @@ public class Configuration implements Serializable
         }
     }
 
+    /**
+     * Gets font color r.
+     *
+     * @return the font color r
+     */
     public int getFont_color_r()
     {
         return font_color_r;
     }
 
+    /**
+     * Sets font color r.
+     *
+     * @param font_color_r the font color r
+     */
     public void setFont_color_r(int font_color_r)
     {
         if (font_color_r > 255)
@@ -157,11 +225,21 @@ public class Configuration implements Serializable
         }
     }
 
+    /**
+     * Gets font color g.
+     *
+     * @return the font color g
+     */
     public int getFont_color_g()
     {
         return font_color_g;
     }
 
+    /**
+     * Sets font color g.
+     *
+     * @param font_color_g the font color g
+     */
     public void setFont_color_g(int font_color_g)
     {
         if (font_color_g > 255)
@@ -178,11 +256,21 @@ public class Configuration implements Serializable
         }
     }
 
+    /**
+     * Gets font color b.
+     *
+     * @return the font color b
+     */
     public int getFont_color_b()
     {
         return font_color_b;
     }
 
+    /**
+     * Sets font color b.
+     *
+     * @param font_color_b the font color b
+     */
     public void setFont_color_b(int font_color_b)
     {
         if (font_color_b > 255)
@@ -199,11 +287,21 @@ public class Configuration implements Serializable
         }
     }
 
+    /**
+     * Gets cursor color r.
+     *
+     * @return the cursor color r
+     */
     public int getCursor_color_r()
     {
         return cursor_color_r;
     }
 
+    /**
+     * Sets cursor color r.
+     *
+     * @param cursor_color_r the cursor color r
+     */
     public void setCursor_color_r(int cursor_color_r)
     {
         if (cursor_color_r > 255)
@@ -220,11 +318,21 @@ public class Configuration implements Serializable
         }
     }
 
+    /**
+     * Gets cursor color g.
+     *
+     * @return the cursor color g
+     */
     public int getCursor_color_g()
     {
         return cursor_color_g;
     }
 
+    /**
+     * Sets cursor color g.
+     *
+     * @param cursor_color_g the cursor color g
+     */
     public void setCursor_color_g(int cursor_color_g)
     {
         if (cursor_color_g > 255)
@@ -241,11 +349,21 @@ public class Configuration implements Serializable
         }
     }
 
+    /**
+     * Gets cursor color b.
+     *
+     * @return the cursor color b
+     */
     public int getCursor_color_b()
     {
         return cursor_color_b;
     }
 
+    /**
+     * Sets cursor color b.
+     *
+     * @param cursor_color_b the cursor color b
+     */
     public void setCursor_color_b(int cursor_color_b)
     {
         if (cursor_color_b > 255)
@@ -262,11 +380,21 @@ public class Configuration implements Serializable
         }
     }
 
+    /**
+     * Gets background color r.
+     *
+     * @return the background color r
+     */
     public int getBackground_color_r()
     {
         return background_color_r;
     }
 
+    /**
+     * Sets background color r.
+     *
+     * @param background_color_r the background color r
+     */
     public void setBackground_color_r(int background_color_r)
     {
         if (background_color_r > 255)
@@ -283,11 +411,21 @@ public class Configuration implements Serializable
         }
     }
 
+    /**
+     * Gets background color g.
+     *
+     * @return the background color g
+     */
     public int getBackground_color_g()
     {
         return background_color_g;
     }
 
+    /**
+     * Sets background color g.
+     *
+     * @param background_color_g the background color g
+     */
     public void setBackground_color_g(int background_color_g)
     {
         if (background_color_g > 255)
@@ -304,11 +442,21 @@ public class Configuration implements Serializable
         }
     }
 
+    /**
+     * Gets background color b.
+     *
+     * @return the background color b
+     */
     public int getBackground_color_b()
     {
         return background_color_b;
     }
 
+    /**
+     * Sets background color b.
+     *
+     * @param background_color_b the background color b
+     */
     public void setBackground_color_b(int background_color_b)
     {
         if (background_color_b > 255)
@@ -325,11 +473,21 @@ public class Configuration implements Serializable
         }
     }
 
+    /**
+     * Gets selected color r.
+     *
+     * @return the selected color r
+     */
     public int getSelected_color_r()
     {
         return selected_color_r;
     }
 
+    /**
+     * Sets selected color r.
+     *
+     * @param selected_color_r the selected color r
+     */
     public void setSelected_color_r(int selected_color_r)
     {
         if (selected_color_r > 255)
@@ -346,11 +504,21 @@ public class Configuration implements Serializable
         }
     }
 
+    /**
+     * Gets selected color g.
+     *
+     * @return the selected color g
+     */
     public int getSelected_color_g()
     {
         return selected_color_g;
     }
 
+    /**
+     * Sets selected color g.
+     *
+     * @param selected_color_g the selected color g
+     */
     public void setSelected_color_g(int selected_color_g)
     {
         if (selected_color_g > 255)
@@ -367,11 +535,21 @@ public class Configuration implements Serializable
         }
     }
 
+    /**
+     * Gets selected color b.
+     *
+     * @return the selected color b
+     */
     public int getSelected_color_b()
     {
         return selected_color_b;
     }
 
+    /**
+     * Sets selected color b.
+     *
+     * @param selected_color_b the selected color b
+     */
     public void setSelected_color_b(int selected_color_b)
     {
         if (selected_color_b > 255)
@@ -388,11 +566,21 @@ public class Configuration implements Serializable
         }
     }
 
+    /**
+     * Gets rendering color r.
+     *
+     * @return the rendering color r
+     */
     public int getRendering_color_r()
     {
         return rendering_color_r;
     }
 
+    /**
+     * Sets rendering color r.
+     *
+     * @param rendering_color_r the rendering color r
+     */
     public void setRendering_color_r(int rendering_color_r)
     {
         if (rendering_color_r > 255)
@@ -409,11 +597,21 @@ public class Configuration implements Serializable
         }
     }
 
+    /**
+     * Gets rendering color g.
+     *
+     * @return the rendering color g
+     */
     public int getRendering_color_g()
     {
         return rendering_color_g;
     }
 
+    /**
+     * Sets rendering color g.
+     *
+     * @param rendering_color_g the rendering color g
+     */
     public void setRendering_color_g(int rendering_color_g)
     {
         if (rendering_color_g > 255)
@@ -430,11 +628,21 @@ public class Configuration implements Serializable
         }
     }
 
+    /**
+     * Gets rendering color b.
+     *
+     * @return the rendering color b
+     */
     public int getRendering_color_b()
     {
         return rendering_color_b;
     }
 
+    /**
+     * Sets rendering color b.
+     *
+     * @param rendering_color_b the rendering color b
+     */
     public void setRendering_color_b(int rendering_color_b)
     {
         if (rendering_color_b > 255)
@@ -451,11 +659,21 @@ public class Configuration implements Serializable
         }
     }
 
+    /**
+     * Gets layout left.
+     *
+     * @return the layout left
+     */
     public int getLayout_left()
     {
         return Layout_left;
     }
 
+    /**
+     * Sets layout left.
+     *
+     * @param layout_left the layout left
+     */
     public void setLayout_left(int layout_left)
     {
         if (layout_left >= 0)
@@ -468,11 +686,21 @@ public class Configuration implements Serializable
         }
     }
 
+    /**
+     * Gets layout right.
+     *
+     * @return the layout right
+     */
     public int getLayout_right()
     {
         return Layout_right;
     }
 
+    /**
+     * Sets layout right.
+     *
+     * @param layout_right the layout right
+     */
     public void setLayout_right(int layout_right)
     {
         if (layout_right >= 0)
@@ -485,11 +713,21 @@ public class Configuration implements Serializable
         }
     }
 
+    /**
+     * Gets layout up.
+     *
+     * @return the layout up
+     */
     public int getLayout_up()
     {
         return Layout_up;
     }
 
+    /**
+     * Sets layout up.
+     *
+     * @param layout_up the layout up
+     */
     public void setLayout_up(int layout_up)
     {
         if (layout_up >= 0)
@@ -502,11 +740,21 @@ public class Configuration implements Serializable
         }
     }
 
+    /**
+     * Gets layout down.
+     *
+     * @return the layout down
+     */
     public int getLayout_down()
     {
         return Layout_down;
     }
 
+    /**
+     * Sets layout down.
+     *
+     * @param layout_down the layout down
+     */
     public void setLayout_down(int layout_down)
     {
         if (layout_down >= 0)
@@ -519,21 +767,41 @@ public class Configuration implements Serializable
         }
     }
 
+    /**
+     * Is wrap boolean.
+     *
+     * @return the boolean
+     */
     public boolean isWrap()
     {
         return wrap;
     }
 
+    /**
+     * Sets wrap.
+     *
+     * @param wrap the wrap
+     */
     public void setWrap(boolean wrap)
     {
         this.wrap = wrap;
     }
 
+    /**
+     * Is auto clear boolean.
+     *
+     * @return the boolean
+     */
     public boolean isAutoClear()
     {
         return isAutoClear;
     }
 
+    /**
+     * Sets auto clear.
+     *
+     * @param autoClear the auto clear
+     */
     public void setAutoClear(boolean autoClear)
     {
         isAutoClear = autoClear;

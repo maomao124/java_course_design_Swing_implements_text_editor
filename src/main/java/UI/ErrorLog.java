@@ -20,7 +20,6 @@ import java.awt.event.MouseEvent;
  * Version(版本): 1.0
  * Description(描述)： 错误日志类的GUI界面
  */
-
 public class ErrorLog
 {
     private static JTextArea jTextArea_ErrorLog;
@@ -28,11 +27,19 @@ public class ErrorLog
     private static JButton button_back;
     private static JButton button_back_pop;
 
+    /**
+     * Gets text area error log.
+     *
+     * @return the text area error log
+     */
     public static JTextArea getjTextArea_ErrorLog()
     {
         return jTextArea_ErrorLog;
     }
 
+    /**
+     * Init error log j panel.
+     */
     public static void init_error_log_jPanel()                  //初始化错误日志面板
     {
         jTextArea_ErrorLog = new JTextArea(15, 55);
@@ -110,6 +117,9 @@ public class ErrorLog
         });
     }
 
+    /**
+     * Display.
+     */
     public static void display()                                    //显示面板
     {
         jTextArea_ErrorLog.setText("");             //清空

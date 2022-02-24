@@ -24,11 +24,13 @@ import java.util.Date;
  * Version(版本): 1.0
  * Description(描述)： 从这里启动整个程序
  */
-
 public class Run
 {
     private static long runTime = 0;
-    //public static boolean args_filePath = false;                              //匿名包里其它包里的类无法调用匿名包里的
+    /**
+     * The constant decimalFormat.
+     */
+//public static boolean args_filePath = false;                              //匿名包里其它包里的类无法调用匿名包里的
     static DecimalFormat decimalFormat = new DecimalFormat("00");                       //yyyy/MM/dd  HH:mm:ss
     private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
 
@@ -54,7 +56,7 @@ public class Run
                 System.out.printf("已使用的内存：%8.4fMB\n", memory);
                 MainPanel.label_time_and_memory.setText("运行：" + runTime / 60 + "分" +
                         decimalFormat.format(runTime % 60) + "秒  " + String.format(" 内存：%8.3fMB", memory));
-                MainPanel.label_localTime.setText("时间："+simpleDateFormat.format(new Date()));
+                MainPanel.label_localTime.setText("时间：" + simpleDateFormat.format(new Date()));
                 /*
                 if (Configuration.config_is_not_null)
                 {
@@ -181,6 +183,11 @@ public class Run
         }
     }
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args)
     {
         try

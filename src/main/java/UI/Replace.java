@@ -17,12 +17,17 @@ import java.awt.event.ActionListener;
  * Version(版本): 1.0
  * Description(描述)： 替换
  */
-
 public class Replace
 {
     private static int start = 0;                               // 查找开始位置
     private static int end = 0;                                 // 查找结束位置
 
+    /**
+     * Init replace.
+     *
+     * @param jTextArea         the j text area
+     * @param label_information the label information
+     */
     public static void init_replace(JTextArea jTextArea, JLabel label_information)
     {
         MainPanel.getReplace().addActionListener(new ActionListener()
@@ -110,6 +115,12 @@ public class Replace
         });
     }
 
+    /**
+     * Replace.
+     *
+     * @param jTextArea         the j text area
+     * @param label_information the label information
+     */
     public static void replace(JTextArea jTextArea, JLabel label_information)
     {
         // 替换对话框
